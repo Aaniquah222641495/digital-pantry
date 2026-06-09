@@ -227,7 +227,8 @@
   pointer-events: none;
   z-index: 1;
 }
-.grain-section > * { position: relative; z-index: 2; }
+.grain-section > *:not(.grain-deco) { position: relative; z-index: 2; }
+.grain-deco { position: absolute !important; z-index: 1; }
 
 /* ── Ticker ──────────────────────────────────────── */
 @keyframes ticker-scroll {

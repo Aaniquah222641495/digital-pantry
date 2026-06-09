@@ -2,6 +2,7 @@ import { Switch, Route, Router as WouterRouter } from "wouter";
 import { Toaster } from "@/components/ui/toaster";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
+import { ThemeProvider } from "./lib/ThemeContext";
 import { lazy, Suspense } from "react";
 
 const Home = lazy(() => import("./pages/Home"));
@@ -12,7 +13,7 @@ const NotFound = lazy(() => import("./pages/not-found"));
 
 function PageLoader() {
   return (
-    <div className="min-h-screen bg-[#0A0A0A] flex items-center justify-center">
+    <div className="min-h-screen bg-[#FFF8FB] dark:bg-[#0A0A0A] flex items-center justify-center">
       <div className="text-[#FF2D87] font-bebas text-3xl tracking-widest animate-pulse">
         Loading ★
       </div>
@@ -34,18 +35,20 @@ function Router() {
 
 function App() {
   return (
-    <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-      <div className="min-h-screen bg-[#0A0A0A] flex flex-col">
-        <Navbar />
-        <div className="flex-1">
-          <Suspense fallback={<PageLoader />}>
-            <Router />
-          </Suspense>
+    <ThemeProvider>
+      <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+        <div className="min-h-screen bg-[#FFF8FB] dark:bg-[#0A0A0A] flex flex-col transition-colors duration-300">
+          <Navbar />
+          <div className="flex-1">
+            <Suspense fallback={<PageLoader />}>
+              <Router />
+            </Suspense>
+          </div>
+          <Footer />
         </div>
-        <Footer />
-      </div>
+      </WouterRouter>
       <Toaster />
-    </WouterRouter>
+    </ThemeProvider>
   );
 }
 
