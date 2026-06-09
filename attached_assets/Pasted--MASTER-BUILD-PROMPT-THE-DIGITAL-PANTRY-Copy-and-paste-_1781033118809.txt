@@ -1,0 +1,819 @@
+# MASTER BUILD PROMPT — THE DIGITAL PANTRY
+
+Copy and paste this into Claude Code, Cursor, Lovable, Bolt, Windsurf, Replit Agent, or ChatGPT to generate the application.
+
+---
+
+# ROLE
+
+You are a Senior Staff Frontend Engineer, Senior Product Designer, Brand Strategist, UX Designer, React Architect, and Conversion Rate Optimization specialist.
+
+Your task is to build a production-ready portfolio and business website called **The Digital Pantry** based on the PRD below.
+
+You are not creating a generic portfolio.
+
+You are creating a highly memorable personal brand website that feels:
+
+* Feminine
+* Technical
+* Premium
+* Playful
+* Confident
+* Fast
+* Conversion focused
+
+The website should immediately communicate:
+
+> "She knows how to build websites and she isn't afraid to be herself."
+
+Every design decision must reinforce that message.
+
+---
+
+# PROJECT OVERVIEW
+
+Brand Name:
+
+**The Digital Pantry ★**
+
+Tagline:
+
+**Coded in Pink. Built to Perform.**
+
+Audience:
+
+South African small business owners currently relying on:
+
+* WhatsApp
+* Instagram
+* Facebook
+
+for sales and customer communication.
+
+The website's primary goal is:
+
+### Generate leads.
+
+Success means:
+
+A visitor lands on the website and contacts the owner within 60 seconds.
+
+---
+
+# TECH STACK
+
+Build using:
+
+* React 18+
+* TypeScript
+* Vite
+* Tailwind CSS
+* Framer Motion
+* React Router
+* Lucide React Icons
+
+Deployment target:
+
+* Netlify
+
+Code requirements:
+
+* Clean architecture
+* Reusable components
+* Mobile first
+* Fully responsive
+* Type-safe
+* Accessibility compliant
+* SEO optimized
+
+---
+
+# DESIGN SYSTEM
+
+## Color Tokens
+
+```css
+--pink-hot: #FF2D87;
+--pink-soft: #FFB3D1;
+--black-deep: #0A0A0A;
+--white-pure: #FFFFFF;
+--star-gold: #FFD700;
+```
+
+---
+
+## Typography
+
+Import:
+
+### Display
+
+Playfair Display
+
+Usage:
+
+* Hero headings
+* Page titles
+* Major sections
+
+### Body
+
+DM Sans
+
+Usage:
+
+* Paragraphs
+* Navigation
+* UI text
+
+### Utility
+
+Space Mono
+
+Usage:
+
+* Stack tags
+* Labels
+* Technical references
+
+### Cutout Fonts
+
+* Bebas Neue
+* Permanent Marker
+
+Used for:
+
+* Ransom note lettering effect
+
+---
+
+# BRAND LANGUAGE
+
+The site should sound:
+
+* Human
+* Confident
+* Warm
+* Cape Town local
+* Direct
+
+Avoid:
+
+❌ Corporate language
+
+❌ Startup jargon
+
+❌ Agency clichés
+
+Never write:
+
+* "Leveraging innovative solutions"
+* "Digital transformation"
+* "Passionate about technology"
+
+Instead use:
+
+* Built from scratch.
+* Your business, beautifully built.
+* No code knowledge needed. That's literally my job.
+* Small business energy. Professional web presence.
+* Engineering Diva.
+* Coded in Pink. Built to Perform.
+
+---
+
+# VISUAL STYLE
+
+The visual identity is:
+
+### "Girlie Meets STEM"
+
+Imagine:
+
+A software engineer wearing a pink hard hat.
+
+Not trying to fit in.
+
+Not trying to look corporate.
+
+Owning her identity.
+
+The website should feel:
+
+* Editorial
+* Premium
+* Playful
+* Memorable
+
+without becoming childish.
+
+---
+
+# SIGNATURE VISUAL SYSTEM
+
+The ★ star is a core brand element.
+
+Use stars as:
+
+* Section dividers
+* Bullets
+* Labels
+* Decorative accents
+* Badges
+* Hover effects
+
+Stars should appear throughout the experience.
+
+Color:
+
+```css
+#FFD700
+```
+
+---
+
+# CUT-OUT LETTER SYSTEM
+
+This is a defining visual feature.
+
+Create a reusable React component:
+
+```tsx
+<CutoutWord word="PINK" />
+```
+
+Each letter must:
+
+* Have a different font
+* Slightly different size
+* Slight rotation
+* Alternate colors
+
+Colors rotate between:
+
+* Hot pink
+* Gold
+* White
+* Soft pink
+
+Fonts rotate between:
+
+* Bebas Neue
+* Permanent Marker
+* Playfair Display
+
+The effect should resemble magazine cut-out letters.
+
+Use this component for:
+
+* PINK
+* SCRATCH
+* WORK
+* PRICING
+* Engineering Diva
+
+---
+
+# GLOBAL EXPERIENCE
+
+Add:
+
+### Grain Overlay
+
+Subtle noise texture on dark sections.
+
+### Smooth Scrolling
+
+### Framer Motion Animations
+
+Use tasteful animations:
+
+* Fade in
+* Slide up
+* Scale on hover
+
+Avoid:
+
+* Excessive parallax
+* Overly flashy effects
+
+---
+
+# SITE STRUCTURE
+
+Create:
+
+```txt
+/
+├─ Home
+├─ Portfolio
+├─ Pricing
+└─ Contact
+```
+
+---
+
+# NAVIGATION
+
+Desktop:
+
+* Sticky top navigation
+* Transparent on load
+* Blur background after scrolling
+
+Logo:
+
+THE DIGITAL PANTRY ★
+
+Typography:
+
+Playfair Display
+
+Navigation links:
+
+* Home
+* Portfolio
+* Pricing
+* Contact
+
+Hover:
+
+Hot pink transition
+
+Mobile:
+
+* Hamburger menu
+* Full-screen overlay navigation
+
+---
+
+# HOME PAGE
+
+## Hero Section
+
+Full viewport height.
+
+Layout:
+
+Desktop:
+
+```txt
+Text Left
+Mascot Right
+```
+
+Mobile:
+
+```txt
+Mascot
+Text
+CTA
+```
+
+Headline:
+
+"Coded in [PINK]
+Built to Perform."
+
+Use CutoutWord component for PINK.
+
+Subheading:
+
+Web development for South African small businesses that mean business.
+
+Primary CTA:
+
+```txt
+Let's Build Something ★
+```
+
+CTA Style:
+
+* Hot pink
+* Rounded
+* Bold
+* Hover animation
+
+Mascot:
+
+Pixel-art coding girl image.
+
+Add gentle floating animation.
+
+---
+
+## Scrolling Ticker
+
+Auto scrolling marquee.
+
+Background:
+
+Hot pink
+
+Text:
+
+```txt
+CAPE TOWN ★ WEB DEVELOPER ★ WOMEN IN STEM ★ SMALL BUSINESS SPECIALIST ★ BUILT FROM SCRATCH ★ ENGINEERING DIVA ★
+```
+
+Infinite loop.
+
+---
+
+## What I Do Section
+
+Three cards.
+
+Card 1:
+
+★ Design
+
+Beautiful, mobile-first websites your customers will actually use.
+
+Card 2:
+
+★ Build
+
+Clean code, fast loads, zero corporate fluff.
+
+Card 3:
+
+★ Launch
+
+Deployed, live, and ready to take orders from day one.
+
+Requirements:
+
+* Hover animations
+* Equal height cards
+* Responsive grid
+
+---
+
+## Portfolio Preview
+
+Show:
+
+### STUFF'D Bagels ★
+
+Display:
+
+* Project image
+* Category
+* Problem
+* Solution
+* Tech stack
+
+Second card:
+
+Coming Soon
+
+CTA:
+
+See All Work ★ →
+
+---
+
+## Pricing Preview
+
+Display:
+
+Starter
+
+R1500
+
+Standard
+
+R2500
+
+Premium
+
+R4000
+
+CTA:
+
+See Full Packages →
+
+---
+
+## About Strip
+
+Layout:
+
+Desktop:
+
+```txt
+Photo | Content
+```
+
+Mobile:
+
+```txt
+Photo
+Content
+```
+
+Photo:
+
+Pink hard hat image
+
+Heading:
+
+Engineering Diva
+
+Render with CutoutWord styling.
+
+Copy:
+
+Cape Town born.
+
+Building websites for businesses that don't have time to wait.
+
+---
+
+# PORTFOLIO PAGE
+
+Page Header:
+
+WORK ★
+
+Using CutoutWord styling.
+
+---
+
+## Featured Case Study
+
+STUFF'D Bagels ★
+
+Category:
+
+Food & Beverage / Pop-Up
+
+Problem:
+
+Customers had to hunt for a WhatsApp number and scroll social media to place orders.
+
+Solution:
+
+Single-page ordering site with menu, schedule and one-tap WhatsApp ordering.
+
+Live Link:
+
+stuffdbagels.netlify.app
+
+Tech Stack Tags:
+
+* React
+* TypeScript
+* Tailwind
+* Netlify
+
+---
+
+## Coming Soon Grid
+
+Cards:
+
+* Snaccidents ZA
+* Sweet Sisters CPT
+* Kremco CPT
+
+Badge:
+
+★ Coming Soon
+
+Greyed-out appearance.
+
+---
+
+# PRICING PAGE
+
+Page Header:
+
+PRICING ★
+
+Use CutoutWord.
+
+---
+
+## Pricing Cards
+
+Starter
+
+R1500
+
+Includes:
+
+* Single page
+* Menu section
+* WhatsApp button
+* Mobile responsive
+
+---
+
+Standard
+
+R2500
+
+Most Popular
+
+Includes:
+
+* Everything in Starter
+* Locations section
+* About section
+* Social links
+
+Add:
+
+Gold badge
+
+```txt
+Most Popular ★
+```
+
+---
+
+Premium
+
+R4000
+
+Includes:
+
+* Everything in Standard
+* Custom domain setup
+* Google Business setup
+* Basic SEO setup
+* 1 month updates
+
+---
+
+## Monthly Retainer Section
+
+Highlight card:
+
+R300/month
+
+Includes:
+
+* Menu updates
+* Schedule updates
+* Small edits
+
+---
+
+# FAQ SECTION
+
+Build an iMessage-style FAQ component.
+
+Questions:
+
+* Do I need to know how to code?
+* Do I keep my WhatsApp number?
+* How long does it take?
+* What if I need changes later?
+
+Conversation bubbles should alternate.
+
+---
+
+# CONTACT PAGE
+
+Page Header:
+
+LET'S BUILD SOMETHING ★
+
+---
+
+## Quick Contact Buttons
+
+Primary:
+
+WhatsApp
+
+Largest button.
+
+Secondary:
+
+Email
+
+Instagram
+
+---
+
+## Contact Form
+
+Fields:
+
+* Name
+* Business Name
+* Package
+* Message
+
+Package options:
+
+* Starter
+* Standard
+* Premium
+
+Submit:
+
+Send It ★
+
+No backend required.
+
+Use:
+
+mailto fallback.
+
+---
+
+# COMPONENT ARCHITECTURE
+
+Create reusable components:
+
+```txt
+components/
+├─ Navbar
+├─ Footer
+├─ CutoutWord
+├─ Hero
+├─ Ticker
+├─ SectionHeader
+├─ PortfolioCard
+├─ PricingCard
+├─ FAQBubble
+├─ ContactButtons
+├─ CTAButton
+├─ GrainOverlay
+└─ AnimatedSection
+```
+
+---
+
+# SEO
+
+Implement:
+
+* React Helmet
+* Open Graph tags
+* Meta descriptions
+* Structured data
+* Sitemap generation
+
+Target keywords:
+
+* Web Developer Cape Town
+* Small Business Websites South Africa
+* React Developer Cape Town
+* Website Design Cape Town
+
+---
+
+# PERFORMANCE
+
+Target:
+
+Lighthouse 95+
+
+Requirements:
+
+* Lazy loaded images
+* Route-based code splitting
+* Optimized assets
+* Minimal bundle size
+
+---
+
+# ACCESSIBILITY
+
+Must include:
+
+* Semantic HTML
+* Keyboard navigation
+* Focus states
+* Proper ARIA labels
+* WCAG AA compliance
+
+---
+
+# DELIVERABLES
+
+Generate:
+
+1. Full project structure
+2. Folder architecture
+3. Component architecture
+4. React + TypeScript code
+5. Tailwind configuration
+6. Routing setup
+7. Animation implementation
+8. Responsive design implementation
+9. SEO setup
+10. Production-ready code
+
+Output all code in implementation order and explain where every file belongs.
+
+Do not provide pseudocode.
+
+Generate real production-ready code.

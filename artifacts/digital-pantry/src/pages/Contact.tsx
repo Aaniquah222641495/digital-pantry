@@ -1,0 +1,252 @@
+import { motion } from "framer-motion";
+import { MessageCircle, Mail, Instagram } from "lucide-react";
+import { CutoutWord } from "../components/CutoutWord";
+import { AnimatedSection } from "../components/AnimatedSection";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+
+const contactSchema = z.object({
+  name: z.string().min(2, "Name must be at least 2 characters"),
+  businessName: z.string().min(1, "Business name is required"),
+  package: z.enum(["Starter", "Standard", "Premium"], { required_error: "Please select a package" }),
+  message: z.string().min(10, "Message must be at least 10 characters"),
+});
+
+type ContactFormData = z.infer<typeof contactSchema>;
+
+const QUICK_CONTACTS = [
+  {
+    icon: MessageCircle,
+    label: "WhatsApp",
+    sub: "Fastest response",
+    href: "https://wa.me/27000000000",
+    color: "#25D366",
+    size: "large",
+    testId: "button-contact-whatsapp",
+  },
+  {
+    icon: Mail,
+    label: "Email",
+    sub: "hello@thedigitalpantry.co.za",
+    href: "mailto:hello@thedigitalpantry.co.za",
+    color: "#FF2D87",
+    size: "normal",
+    testId: "button-contact-email",
+  },
+  {
+    icon: Instagram,
+    label: "Instagram",
+    sub: "@thedigitalpantry",
+    href: "https://instagram.com/thedigitalpantry",
+    color: "#E1306C",
+    size: "normal",
+    testId: "button-contact-instagram",
+  },
+];
+
+export default function Contact() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting, isSubmitSuccessful },
+    reset,
+  } = useForm<ContactFormData>({
+    resolver: zodResolver(contactSchema),
+  });
+
+  const onSubmit = (data: ContactFormData) => {
+    const subject = encodeURIComponent(`Website Enquiry — ${data.package} Package`);
+    const body = encodeURIComponent(
+      `Hi!\n\nName: ${data.name}\nBusiness: ${data.businessName}\nPackage: ${data.package}\n\nMessage:\n${data.message}\n\nLooking forward to hearing from you!`
+    );
+    window.location.href = `mailto:hello@thedigitalpantry.co.za?subject=${subject}&body=${body}`;
+    reset();
+  };
+
+  const inputCls =
+    "w-full bg-[#0A0A0A] border border-white/10 focus:border-[#FF2D87] rounded-xl px-4 py-3.5 font-body text-white text-sm outline-none transition-colors placeholder:text-white/25";
+
+  const labelCls = "block font-mono-brand text-white/40 text-xs tracking-widest uppercase mb-2";
+
+  return (
+    <main className="pt-20">
+      {/* ── Header ──────────────────────────────────── */}
+      <section className="bg-[#0A0A0A] grain-section py-20 relative overflow-hidden">
+        <span className="absolute top-10 right-10 text-[#FFD700]/8 text-[10rem] font-bebas leading-none select-none pointer-events-none">★</span>
+        <div className="max-w-6xl mx-auto px-6">
+          <AnimatedSection>
+            <p className="font-mono-brand text-[#FF2D87] text-xs tracking-[0.25em] uppercase mb-4">
+              Get in Touch
+            </p>
+            <h1 className="font-display font-black text-white leading-tight" style={{ fontSize: "clamp(2rem, 5vw, 4rem)" }}>
+              Let's <CutoutWord word="BUILD" baseSize="0.95em" />{" "}
+              <br />
+              Something <span className="text-[#FFD700]">★</span>
+            </h1>
+            <p className="font-body text-white/50 text-lg mt-4 max-w-lg">
+              No code knowledge needed. That's literally my job.
+            </p>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* ── Quick Contact ────────────────────────────── */}
+      <section className="bg-[#0f0a0d] py-16">
+        <div className="max-w-6xl mx-auto px-6">
+          <AnimatedSection className="mb-8">
+            <p className="font-mono-brand text-white/40 text-xs tracking-[0.2em] uppercase">
+              Reach Me On
+            </p>
+          </AnimatedSection>
+          <div className="flex flex-wrap gap-4">
+            {QUICK_CONTACTS.map((contact) => (
+              <AnimatedSection key={contact.label} delay={0.05}>
+                <motion.a
+                  href={contact.href}
+                  target={contact.href.startsWith("http") ? "_blank" : undefined}
+                  rel={contact.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  data-testid={contact.testId}
+                  whileHover={{ y: -4, scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  className={`flex items-center gap-3 rounded-2xl border transition-all duration-200 ${
+                    contact.size === "large"
+                      ? "px-8 py-5 text-lg border-2"
+                      : "px-6 py-4 text-base border"
+                  }`}
+                  style={{
+                    borderColor: `${contact.color}40`,
+                    backgroundColor: `${contact.color}10`,
+                  }}
+                >
+                  <contact.icon
+                    size={contact.size === "large" ? 22 : 18}
+                    style={{ color: contact.color }}
+                  />
+                  <div>
+                    <p className="font-body font-semibold text-white">{contact.label}</p>
+                    {contact.size === "large" && (
+                      <p className="font-mono-brand text-white/40 text-xs">{contact.sub}</p>
+                    )}
+                  </div>
+                </motion.a>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Contact Form ─────────────────────────────── */}
+      <section className="bg-[#0A0A0A] py-20">
+        <div className="max-w-2xl mx-auto px-6">
+          <AnimatedSection className="mb-10">
+            <h2 className="font-display font-bold text-white text-3xl md:text-4xl">
+              Send a Message <span className="text-[#FFD700]">★</span>
+            </h2>
+            <p className="font-body text-white/40 mt-2 text-sm">
+              Fill this in and it'll open your email client — quick and easy.
+            </p>
+          </AnimatedSection>
+
+          {isSubmitSuccessful ? (
+            <AnimatedSection>
+              <div className="bg-[#0f0a0d] border border-[#FF2D87]/30 rounded-2xl p-10 text-center">
+                <div className="text-5xl mb-4">★</div>
+                <h3 className="font-display font-bold text-white text-2xl mb-2">Email ready!</h3>
+                <p className="font-body text-white/50">
+                  Your email client should have opened. Send it when you're ready!
+                </p>
+              </div>
+            </AnimatedSection>
+          ) : (
+            <AnimatedSection delay={0.1}>
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-5" noValidate>
+                <div className="grid sm:grid-cols-2 gap-5">
+                  <div>
+                    <label htmlFor="name" className={labelCls}>Name</label>
+                    <input
+                      id="name"
+                      type="text"
+                      placeholder="Your name"
+                      className={inputCls}
+                      data-testid="input-name"
+                      {...register("name")}
+                    />
+                    {errors.name && (
+                      <p className="font-body text-[#FF2D87] text-xs mt-1.5">{errors.name.message}</p>
+                    )}
+                  </div>
+                  <div>
+                    <label htmlFor="businessName" className={labelCls}>Business Name</label>
+                    <input
+                      id="businessName"
+                      type="text"
+                      placeholder="Your business"
+                      className={inputCls}
+                      data-testid="input-business-name"
+                      {...register("businessName")}
+                    />
+                    {errors.businessName && (
+                      <p className="font-body text-[#FF2D87] text-xs mt-1.5">{errors.businessName.message}</p>
+                    )}
+                  </div>
+                </div>
+
+                <div>
+                  <label htmlFor="package" className={labelCls}>Package</label>
+                  <select
+                    id="package"
+                    className={`${inputCls} appearance-none cursor-pointer`}
+                    data-testid="select-package"
+                    {...register("package")}
+                  >
+                    <option value="" disabled>Select a package</option>
+                    <option value="Starter">Starter — R1 500</option>
+                    <option value="Standard">Standard — R2 500</option>
+                    <option value="Premium">Premium — R4 000</option>
+                  </select>
+                  {errors.package && (
+                    <p className="font-body text-[#FF2D87] text-xs mt-1.5">{errors.package.message}</p>
+                  )}
+                </div>
+
+                <div>
+                  <label htmlFor="message" className={labelCls}>Message</label>
+                  <textarea
+                    id="message"
+                    rows={5}
+                    placeholder="Tell me about your business and what you need..."
+                    className={`${inputCls} resize-none`}
+                    data-testid="textarea-message"
+                    {...register("message")}
+                  />
+                  {errors.message && (
+                    <p className="font-body text-[#FF2D87] text-xs mt-1.5">{errors.message.message}</p>
+                  )}
+                </div>
+
+                <motion.button
+                  type="submit"
+                  disabled={isSubmitting}
+                  data-testid="button-submit"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="w-full bg-[#FF2D87] hover:bg-[#e0006e] text-white font-body font-semibold rounded-full py-4 text-base transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                >
+                  Send It ★
+                </motion.button>
+              </form>
+            </AnimatedSection>
+          )}
+        </div>
+      </section>
+
+      {/* ── Bottom strip ─────────────────────────────── */}
+      <section className="bg-[#FF2D87] py-10 text-center">
+        <p className="font-bebas text-white text-2xl tracking-widest">
+          CODED IN PINK ★ BUILT TO PERFORM ★ CAPE TOWN
+        </p>
+      </section>
+    </main>
+  );
+}
