@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import logoImg from "@assets/dp-logo_1781033371942.png";
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
@@ -47,9 +46,9 @@ export function Navbar() {
               className="flex items-center gap-2.5 cursor-pointer"
             >
               <img
-                src={logoImg}
+                src="/images/logo-nobg.webp"
                 alt="The Digital Pantry logo"
-                className="h-9 w-auto object-contain"
+                className="h-16 w-auto object-contain"
               />
             </motion.div>
           </Link>

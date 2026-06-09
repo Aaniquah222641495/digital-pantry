@@ -5,8 +5,8 @@ import { CTAButton } from "../components/CTAButton";
 import { AnimatedSection } from "../components/AnimatedSection";
 import { Ticker } from "../components/Ticker";
 import { ExternalLink, Code2, Rocket, Palette } from "lucide-react";
-import mascotImg from "@assets/mascot_1781033383689.png";
-import aboutImg from "@assets/about_1781033356766.png";
+const mascotImg = "/images/mascot.webp";
+const aboutImg = "/images/about.webp";
 
 const STACK_TAGS = ["React", "TypeScript", "Tailwind", "Netlify"];
 
