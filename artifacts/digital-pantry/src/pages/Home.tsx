@@ -5,6 +5,8 @@ import { CTAButton } from "../components/CTAButton";
 import { AnimatedSection } from "../components/AnimatedSection";
 import { Ticker } from "../components/Ticker";
 import { ExternalLink, Code2, Rocket, Palette } from "lucide-react";
+import mascotImg from "@assets/mascot_1781033383689.png";
+import aboutImg from "@assets/about_1781033356766.png";
 
 const STACK_TAGS = ["React", "TypeScript", "Tailwind", "Netlify"];
 
@@ -121,44 +123,17 @@ export default function Home() {
               className="relative"
             >
               <div className="float-bob">
-                <div className="relative w-72 h-72 md:w-80 md:h-80">
+                <div className="relative w-72 h-72 md:w-[22rem] md:h-[22rem]">
                   {/* Glow ring */}
-                  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#FF2D87]/30 to-[#FFD700]/20 blur-2xl" />
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#FF2D87]/25 to-[#FFD700]/15 blur-3xl" />
 
-                  {/* Pixel-art style coder illustration (SVG) */}
-                  <div className="relative w-full h-full rounded-2xl overflow-hidden border-2 border-[#FF2D87]/30 bg-gradient-to-br from-[#1a0a12] to-[#0A0A0A] pink-glow flex items-center justify-center">
-                    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" className="w-56 h-56">
-                      {/* Body */}
-                      <rect x="70" y="110" width="60" height="55" rx="6" fill="#FF2D87" />
-                      {/* Head */}
-                      <rect x="72" y="60" width="56" height="52" rx="12" fill="#FDBCB4" />
-                      {/* Pink hair */}
-                      <rect x="65" y="50" width="70" height="24" rx="10" fill="#FF2D87" />
-                      <rect x="65" y="60" width="12" height="35" rx="6" fill="#FF2D87" />
-                      <rect x="123" y="60" width="12" height="35" rx="6" fill="#FF2D87" />
-                      {/* Eyes */}
-                      <rect x="84" y="80" width="10" height="8" rx="4" fill="#0A0A0A" />
-                      <rect x="106" y="80" width="10" height="8" rx="4" fill="#0A0A0A" />
-                      {/* Eye shine */}
-                      <rect x="87" y="81" width="3" height="3" rx="1" fill="white" />
-                      <rect x="109" y="81" width="3" height="3" rx="1" fill="white" />
-                      {/* Smile */}
-                      <path d="M90 98 Q100 106 110 98" stroke="#0A0A0A" strokeWidth="2.5" fill="none" strokeLinecap="round" />
-                      {/* Laptop */}
-                      <rect x="48" y="155" width="104" height="16" rx="4" fill="#1E1E1E" />
-                      <rect x="55" y="135" width="90" height="22" rx="3" fill="#2a2a2a" />
-                      {/* Screen content */}
-                      <rect x="60" y="139" width="30" height="3" rx="1" fill="#FF2D87" />
-                      <rect x="60" y="145" width="45" height="3" rx="1" fill="#FFD700" />
-                      <rect x="60" y="151" width="20" height="3" rx="1" fill="#FFB3D1" />
-                      {/* Arms */}
-                      <rect x="50" y="118" width="20" height="10" rx="5" fill="#FDBCB4" />
-                      <rect x="130" y="118" width="20" height="10" rx="5" fill="#FDBCB4" />
-                      {/* Stars decorative */}
-                      <text x="28" y="75" fontSize="14" fill="#FFD700" opacity="0.7">★</text>
-                      <text x="155" y="85" fontSize="10" fill="#FF2D87" opacity="0.6">★</text>
-                      <text x="40" y="130" fontSize="8" fill="#FFB3D1" opacity="0.5">★</text>
-                    </svg>
+                  {/* Real mascot image */}
+                  <div className="relative w-full h-full flex items-center justify-center">
+                    <img
+                      src={mascotImg}
+                      alt="Digital Pantry mascot — pixel art girl coding at her desk"
+                      className="w-full h-full object-contain drop-shadow-[0_0_30px_rgba(255,45,135,0.4)]"
+                    />
                   </div>
 
                   {/* Badge */}
@@ -395,33 +370,13 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <AnimatedSection direction="left">
-              <div className="relative">
-                <div className="w-full aspect-square max-w-sm mx-auto rounded-2xl overflow-hidden border-2 border-[#FF2D87]/30 bg-gradient-to-br from-[#1a0512] to-[#0A0A0A] pink-glow flex items-center justify-center">
-                  <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" className="w-48 h-48">
-                    {/* Stylized portrait */}
-                    <circle cx="100" cy="80" r="42" fill="#FDBCB4" />
-                    <ellipse cx="100" cy="55" rx="44" ry="28" fill="#FF2D87" />
-                    <ellipse cx="72" cy="78" rx="12" ry="22" fill="#FF2D87" />
-                    <ellipse cx="128" cy="78" rx="12" ry="22" fill="#FF2D87" />
-                    <circle cx="88" cy="83" r="6" fill="#1a0a0a" />
-                    <circle cx="112" cy="83" r="6" fill="#1a0a0a" />
-                    <circle cx="90" cy="81" r="2" fill="white" />
-                    <circle cx="114" cy="81" r="2" fill="white" />
-                    <path d="M92 98 Q100 107 108 98" stroke="#1a0a0a" strokeWidth="2.5" fill="none" strokeLinecap="round"/>
-                    {/* Body / outfit */}
-                    <rect x="68" y="120" width="64" height="60" rx="10" fill="#FF2D87" />
-                    <text x="75" y="155" fontSize="13" fill="white" fontFamily="monospace">{"</>"}</text>
-                    {/* Hard hat */}
-                    <ellipse cx="100" cy="52" rx="50" ry="14" fill="#FF2D87" />
-                    <rect x="60" y="50" width="80" height="8" rx="2" fill="#FF2D87" />
-                    <rect x="56" y="56" width="88" height="6" rx="3" fill="#FFD700" />
-                    {/* Stars */}
-                    <text x="20" y="50" fontSize="16" fill="#FFD700" opacity="0.8">★</text>
-                    <text x="162" y="65" fontSize="12" fill="#FFB3D1" opacity="0.7">★</text>
-                    <text x="30" y="150" fontSize="10" fill="#FF2D87" opacity="0.5">★</text>
-                  </svg>
-                </div>
-                <div className="absolute -top-3 -right-3 bg-[#FFD700] text-[#0A0A0A] text-xs font-mono-brand font-bold px-3 py-1.5 rounded-full shadow-lg">
+              <div className="relative max-w-sm mx-auto">
+                <img
+                  src={aboutImg}
+                  alt="Pink hard hat with 'About us' ransom note lettering — Engineering Diva"
+                  className="w-full object-contain drop-shadow-[0_0_50px_rgba(255,45,135,0.45)]"
+                />
+                <div className="absolute top-4 right-4 bg-[#FFD700] text-[#0A0A0A] text-xs font-mono-brand font-bold px-3 py-1.5 rounded-full shadow-lg">
                   ★ Available for projects
                 </div>
               </div>

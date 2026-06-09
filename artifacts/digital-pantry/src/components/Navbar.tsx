@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import logoImg from "@assets/dp-logo_1781033371942.png";
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
@@ -41,9 +42,16 @@ export function Navbar() {
       >
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           <Link href="/" data-testid="nav-logo">
-            <span className="font-display font-bold text-white text-lg tracking-wide hover:text-[#FF2D87] transition-colors cursor-pointer">
-              THE DIGITAL PANTRY <span className="text-[#FFD700] star-pulse inline-block">★</span>
-            </span>
+            <motion.div
+              whileHover={{ scale: 1.04 }}
+              className="flex items-center gap-2.5 cursor-pointer"
+            >
+              <img
+                src={logoImg}
+                alt="The Digital Pantry logo"
+                className="h-9 w-auto object-contain"
+              />
+            </motion.div>
           </Link>
 
           <nav className="hidden md:flex items-center gap-8" role="navigation" aria-label="Main navigation">
