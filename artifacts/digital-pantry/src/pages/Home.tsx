@@ -12,9 +12,9 @@ const aboutImg = "/images/about.webp";
 const STACK_TAGS = ["React", "TypeScript", "Tailwind", "Netlify"];
 
 const SERVICES = [
-  { icon: Palette, title: "Design", desc: "Beautiful, mobile-first websites your customers will actually use." },
-  { icon: Code2,   title: "Build",  desc: "Clean code, fast loads, zero corporate fluff." },
-  { icon: Rocket,  title: "Launch", desc: "Deployed, live, and ready to take orders from day one." },
+  { icon: Palette, title: "The Recipe",      desc: "We start with your brand, your vibe, your customers. No generic templates." },
+  { icon: Code2,   title: "The Ingredients", desc: "Clean code, beautiful design, mobile-first. All the right stuff, nothing you don't need." },
+  { icon: Rocket,  title: "Served Fresh",    desc: "Deployed, live, and ready to take orders." },
 ];
 
 const PRICING_PREVIEW = [
@@ -290,6 +290,9 @@ export default function Home() {
                   </span>
                 ))}
               </div>
+              <p className="font-body text-gray-600 dark:text-white/50 text-sm leading-relaxed italic mb-7 border-l-2 border-[#FF2D87]/40 pl-4">
+                "At Digital Pantry, every website is made from scratch. No off-the-shelf ingredients. No boring templates. Just a site that tastes exactly like your brand."
+              </p>
               <CTAButton href="/contact" data-testid="button-about-cta">Work With Me ★</CTAButton>
             </AnimatedSection>
           </div>

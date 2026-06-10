@@ -56,7 +56,7 @@ export default function Contact() {
               Let's Get <CutoutWord word="COOKING" baseSize="0.95em" /> ★
             </h1>
             <p className="font-body text-gray-500 dark:text-white/50 text-base md:text-lg mt-4 max-w-lg">
-              Ready to get your business online? Let's build something beautiful. ★
+              Ready to get cooking? Let's build something delicious.
             </p>
           </AnimatedSection>
         </div>

@@ -28,7 +28,7 @@ export default function Portfolio() {
               <CutoutWord word="WORK" /> <span className="text-[#FFD700]">★</span>
             </h1>
             <p className="font-body text-gray-500 dark:text-white/50 text-base md:text-lg mt-4 max-w-lg">
-              Fresh out the kitchen. Here's what I've been cooking. ★
+              Fresh out the kitchen. Here's what I've been cooking. ✦
             </p>
           </AnimatedSection>
         </div>

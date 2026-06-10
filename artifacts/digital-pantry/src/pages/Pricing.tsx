@@ -42,7 +42,7 @@ export default function Pricing() {
               <CutoutWord word="PRICING" /> <span className="text-[#FFD700]">★</span>
             </h1>
             <p className="font-body text-gray-500 dark:text-white/50 text-base md:text-lg mt-4 max-w-xl">
-              Every great website starts with the right ingredients. Pick your package. I'll stock the shelves. ★
+              Pick your package. We'll stock the shelves.
             </p>
           </AnimatedSection>
         </div>
@@ -135,7 +135,7 @@ export default function Pricing() {
           <AnimatedSection className="text-center mb-10 md:mb-12">
             <p className="font-mono-brand text-[#FF2D87] text-xs tracking-[0.25em] uppercase mb-2">FAQ</p>
             <h2 className="font-display font-black text-gray-900 dark:text-white text-3xl sm:text-4xl md:text-5xl">
-              Got questions? <span className="text-[#FFD700]">★</span>
+              Got questions? Let me dish it out. <span className="text-[#FFD700]">★</span>
             </h2>
           </AnimatedSection>
 
