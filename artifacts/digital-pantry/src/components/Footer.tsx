@@ -15,9 +15,9 @@ export function Footer() {
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-10 mb-12">
           <div>
             <img
-              src="/images/logo-nobg.webp"
+              src="/images/logo-nobg.png"
               alt="The Digital Pantry"
-              className="h-14 w-auto object-contain mb-3"
+              className="h-40 w-auto object-contain mb-3"
             />
             <p className="font-body text-gray-500 dark:text-white/50 text-sm leading-relaxed">
               Coded in Pink. Built to Perform.

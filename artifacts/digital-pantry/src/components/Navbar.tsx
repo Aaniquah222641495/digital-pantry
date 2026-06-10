@@ -29,7 +29,9 @@ export function Navbar() {
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [menuOpen]);
 
   return (
@@ -51,15 +53,23 @@ export function Navbar() {
               <img
                 src="/images/logo-nobg.webp"
                 alt="The Digital Pantry logo"
-                className="h-14 w-auto object-contain"
+                className="h-30 w-auto object-contain"
               />
             </motion.div>
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-6 lg:gap-8" role="navigation" aria-label="Main navigation">
+          <nav
+            className="hidden md:flex items-center gap-6 lg:gap-8"
+            role="navigation"
+            aria-label="Main navigation"
+          >
             {NAV_LINKS.map((link) => (
-              <Link key={link.href} href={link.href} data-testid={`nav-link-${link.label.toLowerCase()}`}>
+              <Link
+                key={link.href}
+                href={link.href}
+                data-testid={`nav-link-${link.label.toLowerCase()}`}
+              >
                 <span
                   className={`font-body text-sm font-medium transition-colors cursor-pointer relative group ${
                     location === link.href
