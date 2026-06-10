@@ -27,7 +27,9 @@ export default function Portfolio() {
             <h1 className="font-display font-black text-gray-900 dark:text-white leading-tight" style={{ fontSize: "clamp(2.8rem, 8vw, 6rem)" }}>
               <CutoutWord word="WORK" /> <span className="text-[#FFD700]">★</span>
             </h1>
-            <p className="font-body text-gray-500 dark:text-white/50 text-base md:text-lg mt-4 max-w-lg">Built from scratch. Every. Single. Time.</p>
+            <p className="font-body text-gray-500 dark:text-white/50 text-base md:text-lg mt-4 max-w-lg">
+              Fresh out the kitchen. Here's what I've been cooking. ★
+            </p>
           </AnimatedSection>
         </div>
       </section>
@@ -36,7 +38,7 @@ export default function Portfolio() {
       <section className="bg-[#FFF0F5] dark:bg-[#0f0a0d] py-16 md:py-20 transition-colors duration-300">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <AnimatedSection className="mb-8 md:mb-10">
-            <p className="font-mono-brand text-[#FF2D87] text-xs tracking-[0.25em] uppercase mb-2">Featured Project</p>
+            <p className="font-mono-brand text-[#FF2D87] text-xs tracking-[0.25em] uppercase mb-2">Fresh Out The Kitchen</p>
             <h2 className="font-display font-bold text-gray-900 dark:text-white text-2xl md:text-3xl">Case Study</h2>
           </AnimatedSection>
 

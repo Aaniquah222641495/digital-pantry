@@ -1,0 +1,552 @@
+
+
+---
+
+
+
+# DIGITAL PANTRY V2.1 REFINEMENT UPDATE (KEEP THE STARS)
+
+
+
+You are updating an existing Digital Pantry codebase.
+
+
+
+IMPORTANT:
+
+
+
+* Do NOT rebuild the application.
+
+* Do NOT change the architecture.
+
+* Do NOT recreate components.
+
+* Do NOT remove existing functionality.
+
+* Do NOT replace stars with sparkle icons.
+
+
+
+This is a refinement update only.
+
+
+
+---
+
+
+
+## KEEP THE EXISTING BRAND FOUNDATION
+
+
+
+Retain:
+
+
+
+* ★ stars throughout the website
+
+* Cut-out typography system
+
+* Pink hard hat identity
+
+* Pixel mascot
+
+* Feminine STEM aesthetic
+
+* "Engineering Diva" personality
+
+* Existing navigation and page structure
+
+
+
+Stars remain the primary visual language.
+
+
+
+Use them for:
+
+
+
+* headings
+
+* dividers
+
+* badges
+
+* section labels
+
+* CTA accents
+
+* pricing highlights
+
+
+
+Do not replace them with ✦ symbols.
+
+
+
+---
+
+
+
+## ADD THE DIGITAL PANTRY THEME
+
+
+
+The current website feels like a developer portfolio.
+
+
+
+It should now feel like a developer portfolio with a memorable Digital Pantry personality.
+
+
+
+Introduce food and pantry language carefully.
+
+
+
+The brand should feel:
+
+
+
+* clever
+
+* memorable
+
+* professional
+
+* feminine
+
+
+
+Never:
+
+
+
+* childish
+
+* cheesy
+
+* overly cutesy
+
+
+
+---
+
+
+
+## HERO UPDATE
+
+
+
+Keep:
+
+
+
+* mascot
+
+* layout
+
+* animations
+
+* responsiveness
+
+
+
+Replace headline:
+
+
+
+"Coded in PINK. Built to Perform."
+
+
+
+With:
+
+
+
+"Your website,
+
+freshly COOKED ★"
+
+
+
+Use the existing CutoutWord component for:
+
+
+
+COOKED
+
+
+
+Replace CTA:
+
+
+
+"Let's Build Something ★"
+
+
+
+With:
+
+
+
+"Let's Get Cooking ★"
+
+
+
+---
+
+
+
+## KEEP THE STAR TICKER
+
+
+
+Update ticker copy to:
+
+
+
+CAPE TOWN ★ WEB DEVELOPER ★ WOMEN IN STEM ★ BUILT FROM SCRATCH ★ GIRL POWER ★ WEBSITES MADE SIMPLE ★ ENGINEERING DIVA ★
+
+
+
+---
+
+
+
+## LIGHTEN THE BRAND
+
+
+
+Add:
+
+
+
+```css
+
+--pink-pale: #FFF0F7;
+
+```
+
+
+
+Use it for:
+
+
+
+* alternating sections
+
+* card backgrounds
+
+* About section
+
+* Pricing highlights
+
+
+
+Reduce excessive black backgrounds.
+
+
+
+The site should feel brighter and closer to the logo aesthetic.
+
+
+
+---
+
+
+
+## ABOUT SECTION ENHANCEMENT
+
+
+
+Keep the existing structure.
+
+
+
+Replace copy with:
+
+
+
+"Cape Town girl. ICT graduate, Cum Laude. 1st place Vodacom Hackathon. Everything you see on this site? Self-taught, built from scratch, and done in pink. ★"
+
+
+
+Expand the full About section to include:
+
+
+
+* ICT Graduate
+
+* Cum Laude
+
+* Vodacom Hackathon Winner
+
+* Golden Key Honour Society
+
+* Self-taught frontend developer
+
+* Woman in STEM
+
+
+
+The goal is to establish credibility faster.
+
+
+
+---
+
+
+
+## PORTFOLIO PAGE UPDATE
+
+
+
+Keep all existing projects.
+
+
+
+Add a pantry-themed introduction:
+
+
+
+"Fresh out the kitchen. Here's what I've been cooking. ★"
+
+
+
+Rename supporting sections where appropriate:
+
+
+
+Portfolio Preview → Fresh Out The Kitchen
+
+
+
+without changing routes or architecture.
+
+
+
+---
+
+
+
+## PRICING PAGE UPDATE
+
+
+
+Keep package cards.
+
+
+
+Keep pricing.
+
+
+
+Add intro:
+
+
+
+"Every great website starts with the right ingredients. Pick your package. I'll stock the shelves. ★"
+
+
+
+Keep:
+
+
+
+Starter
+
+
+
+Standard
+
+
+
+Premium
+
+
+
+unchanged.
+
+
+
+---
+
+
+
+## MONTHLY RETAINER UPDATE
+
+
+
+Rename section:
+
+
+
+Monthly Retainer
+
+
+
+To:
+
+
+
+Keep Your Pantry Stocked ★
+
+
+
+Copy:
+
+
+
+Menu updates.
+
+Schedule changes.
+
+Small edits.
+
+Always fresh.
+
+
+
+---
+
+
+
+## CONTACT PAGE UPDATE
+
+
+
+Replace:
+
+
+
+LET'S BUILD SOMETHING
+
+
+
+With:
+
+
+
+LET'S GET COOKING ★
+
+
+
+Replace introductory copy with:
+
+
+
+"Ready to get your business online? Let's build something beautiful. ★"
+
+
+
+Keep all existing functionality.
+
+
+
+---
+
+
+
+## CUTOUT WORD EXPANSION
+
+
+
+Keep current implementation.
+
+
+
+Add support for:
+
+
+
+* COOKED
+
+* SCRATCH
+
+* DIVA
+
+* FRESH
+
+
+
+while preserving:
+
+
+
+* random rotations
+
+* mixed fonts
+
+* mixed colours
+
+
+
+---
+
+
+
+## VISUAL POLISH PASS
+
+
+
+Review all pages and improve:
+
+
+
+* spacing consistency
+
+* card alignment
+
+* typography hierarchy
+
+* mobile responsiveness
+
+* hover animations
+
+* CTA visibility
+
+
+
+The website should feel like a premium boutique studio rather than a student portfolio.
+
+
+
+---
+
+
+
+## FINAL REQUIREMENT
+
+
+
+Provide a migration summary showing:
+
+
+
+* Components updated
+
+* Styling updates
+
+* Copy updates
+
+* New design tokens
+
+* New sections introduced
+
+
+
+Only modify what is necessary.
+
+
+
+Preserve the existing codebase and functionality.
+
+
+
+---
+
+
+

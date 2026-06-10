@@ -53,10 +53,11 @@ export default function Contact() {
           <AnimatedSection>
             <p className="font-mono-brand text-[#FF2D87] text-xs tracking-[0.25em] uppercase mb-4">Get in Touch</p>
             <h1 className="font-display font-black text-gray-900 dark:text-white leading-tight" style={{ fontSize: "clamp(2rem, 5vw, 4rem)" }}>
-              Let's <CutoutWord word="BUILD" baseSize="0.95em" />{" "}
-              <br />Something <span className="text-[#FFD700]">★</span>
+              Let's Get <CutoutWord word="COOKING" baseSize="0.95em" /> ★
             </h1>
-            <p className="font-body text-gray-500 dark:text-white/50 text-base md:text-lg mt-4 max-w-lg">No code knowledge needed. That's literally my job.</p>
+            <p className="font-body text-gray-500 dark:text-white/50 text-base md:text-lg mt-4 max-w-lg">
+              Ready to get your business online? Let's build something beautiful. ★
+            </p>
           </AnimatedSection>
         </div>
       </section>

@@ -6,6 +6,10 @@
 
 @custom-variant dark (&:is(.dark *));
 
+:root {
+  --pink-pale: #FFF0F7;
+}
+
 @theme inline {
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));

@@ -41,7 +41,9 @@ export default function Pricing() {
             <h1 className="font-display font-black text-gray-900 dark:text-white leading-tight" style={{ fontSize: "clamp(2.8rem, 8vw, 6rem)" }}>
               <CutoutWord word="PRICING" /> <span className="text-[#FFD700]">★</span>
             </h1>
-            <p className="font-body text-gray-500 dark:text-white/50 text-base md:text-lg mt-4 max-w-lg">Straightforward. No hidden fees. No corporate fluff.</p>
+            <p className="font-body text-gray-500 dark:text-white/50 text-base md:text-lg mt-4 max-w-xl">
+              Every great website starts with the right ingredients. Pick your package. I'll stock the shelves. ★
+            </p>
           </AnimatedSection>
         </div>
       </section>
@@ -104,16 +106,16 @@ export default function Pricing() {
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-3">
                   <span className="text-[#FFD700] text-2xl">★</span>
-                  <p className="font-mono-brand text-[#FFD700] text-xs tracking-[0.2em] uppercase">Monthly Retainer</p>
+                  <p className="font-mono-brand text-[#FFD700] text-xs tracking-[0.2em] uppercase">Keep Your Pantry Stocked ★</p>
                 </div>
                 <p className="font-display font-black text-gray-900 dark:text-white text-4xl mb-2">
                   R300<span className="font-body font-normal text-gray-400 dark:text-white/40 text-lg">/month</span>
                 </p>
-                <p className="font-body text-gray-500 dark:text-white/50 text-sm leading-relaxed">Keep your site fresh without lifting a finger.</p>
+                <p className="font-body text-gray-500 dark:text-white/50 text-sm leading-relaxed">Menu updates. Schedule changes. Small edits. Always fresh.</p>
               </div>
               <div className="flex-1 w-full">
                 <ul className="space-y-2.5 mb-5">
-                  {["Menu updates","Schedule updates","Small edits"].map((item) => (
+                  {["Menu updates","Schedule changes","Small edits","Always fresh"].map((item) => (
                     <li key={item} className="flex items-center gap-2.5">
                       <span className="text-[#FFD700] text-xs">★</span>
                       <span className="font-body text-gray-600 dark:text-white/65 text-sm">{item}</span>

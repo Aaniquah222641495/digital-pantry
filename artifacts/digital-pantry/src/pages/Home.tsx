@@ -47,8 +47,8 @@ export default function Home() {
               className="font-display font-black text-gray-900 dark:text-white leading-[1.05] mb-4"
               style={{ fontSize: "clamp(2.2rem, 6vw, 4.8rem)" }}
             >
-              Coded in <CutoutWord word="PINK" baseSize="1em" />
-              <br />Built to Perform.
+              Your website,
+              <br />freshly <CutoutWord word="COOKED" baseSize="1em" /> ★
             </motion.h1>
 
             <motion.p variants={fadeUp} className="font-body text-gray-600 dark:text-white/60 text-base md:text-lg leading-relaxed mb-8 max-w-md">
@@ -56,7 +56,7 @@ export default function Home() {
             </motion.p>
 
             <motion.div variants={fadeUp} className="flex flex-wrap gap-3 md:gap-4">
-              <CTAButton href="/contact" data-testid="button-hero-cta">Let's Build Something ★</CTAButton>
+              <CTAButton href="/contact" data-testid="button-hero-cta">Let's Get Cooking ★</CTAButton>
               <CTAButton href="/portfolio" variant="outline" data-testid="button-hero-portfolio">See My Work</CTAButton>
             </motion.div>
 
@@ -280,10 +280,16 @@ export default function Home() {
                 <CutoutWord word="Engineering" baseSize="0.85em" />
                 <br /><CutoutWord word="Diva" baseSize="0.85em" />
               </h2>
-              <p className="font-body text-gray-700 dark:text-white/60 text-lg leading-relaxed mb-3">Cape Town born.</p>
-              <p className="font-body text-gray-600 dark:text-white/60 leading-relaxed mb-8 text-sm md:text-base">
-                Building websites for businesses that don't have time to wait. No code knowledge needed — that's literally my job.
+              <p className="font-body text-gray-700 dark:text-white/60 text-base leading-relaxed mb-5">
+                Cape Town girl. ICT graduate, Cum Laude. 1st place Vodacom Hackathon. Everything you see on this site? Self-taught, built from scratch, and done in pink. ★
               </p>
+              <div className="flex flex-wrap gap-2 mb-7">
+                {["ICT Graduate","Cum Laude","Vodacom Hackathon Winner","Golden Key Honour Society","Woman in STEM"].map((badge) => (
+                  <span key={badge} className="font-mono-brand text-xs text-[#FF2D87] bg-[#FF2D87]/10 border border-[#FF2D87]/20 px-3 py-1 rounded-full">
+                    ★ {badge}
+                  </span>
+                ))}
+              </div>
               <CTAButton href="/contact" data-testid="button-about-cta">Work With Me ★</CTAButton>
             </AnimatedSection>
           </div>
