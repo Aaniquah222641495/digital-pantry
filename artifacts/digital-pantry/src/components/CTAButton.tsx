@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ReactNode } from "react";
+import { useLocation } from "wouter";
 
 interface CTAButtonProps {
   children: ReactNode;
@@ -20,6 +21,8 @@ export function CTAButton({
   "data-testid": testId,
   type = "button",
 }: CTAButtonProps) {
+  const [, navigate] = useLocation();
+
   const base =
     "inline-flex items-center gap-2 font-body font-semibold rounded-full px-7 py-3.5 text-base transition-all cursor-pointer select-none";
 
@@ -40,8 +43,17 @@ export function CTAButton({
   };
 
   if (href) {
+    const isExternal = /^(https?:|mailto:|tel:)/.test(href);
     return (
-      <motion.a href={href} className={cls} data-testid={testId} {...motionProps}>
+      <motion.a
+        href={href}
+        onClick={isExternal ? undefined : (e) => { e.preventDefault(); navigate(href); }}
+        target={isExternal ? "_blank" : undefined}
+        rel={isExternal ? "noopener noreferrer" : undefined}
+        className={cls}
+        data-testid={testId}
+        {...motionProps}
+      >
         {children}
       </motion.a>
     );
