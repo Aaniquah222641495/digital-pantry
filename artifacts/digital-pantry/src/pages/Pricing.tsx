@@ -7,14 +7,17 @@ import { CTAButton } from "../components/CTAButton";
 const PLANS = [
   {
     name: "Starter", price: "R1 500", popular: false, cta: "Get Started ★",
+    img: "/images/starter.png",
     features: ["Single page","Menu section","WhatsApp button","Mobile responsive"],
   },
   {
     name: "Standard", price: "R2 500", popular: true, cta: "Most Popular ★",
+    img: "/images/standard.png",
     features: ["Everything in Starter","Locations section","About section","Social links"],
   },
   {
     name: "Premium", price: "R4 000", popular: false, cta: "Go Premium ★",
+    img: "/images/premium.png",
     features: ["Everything in Standard","Custom domain setup","Google Business setup","Basic SEO setup","1 month of updates"],
   },
 ];
@@ -69,6 +72,17 @@ export default function Pricing() {
                     Most Popular ★
                   </div>
                 )}
+
+                {/* Tier image */}
+                <div className={`w-full h-36 rounded-xl mb-5 overflow-hidden flex items-center justify-center ${plan.popular ? "bg-white/10" : "bg-gray-50 dark:bg-white/5"}`}>
+                  <img
+                    src={plan.img}
+                    alt={`${plan.name} package`}
+                    className="h-full w-full object-contain p-3"
+                    onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
+                  />
+                </div>
+
                 <div className="mb-6">
                   <p className={`font-mono-brand text-xs tracking-[0.2em] uppercase mb-3 ${plan.popular ? "text-white/70" : "text-gray-400 dark:text-white/40"}`}>{plan.name}</p>
                   <p className={`font-display font-black leading-none ${plan.popular ? "text-white" : "text-gray-900 dark:text-white"}`} style={{ fontSize: "clamp(2rem, 5vw, 3rem)" }}>

@@ -52,7 +52,7 @@ export default function Home() {
             </motion.h1>
 
             <motion.p variants={fadeUp} className="font-body text-gray-600 dark:text-white/60 text-base md:text-lg leading-relaxed mb-8 max-w-md">
-              Web development for South African small businesses that mean business.
+              At Digital Pantry, every website is made from scratch. No off-the-shelf ingredients. No boring templates. Just a site that tastes exactly like your brand.
             </motion.p>
 
             <motion.div variants={fadeUp} className="flex flex-wrap gap-3 md:gap-4">
@@ -257,43 +257,83 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── About Strip ─────────────────────────────── */}
-      <section className="bg-[#FFF8FB] dark:bg-[#0A0A0A] py-20 md:py-24 transition-colors duration-300">
+      {/* ── About ───────────────────────────────────── */}
+      <section className="bg-[#FFF8FB] dark:bg-[#0A0A0A] py-20 md:py-28 transition-colors duration-300">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="grid md:grid-cols-2 gap-10 md:gap-12 items-center">
+
+          {/* Section heading */}
+          <AnimatedSection className="mb-12 md:mb-16">
+            <p className="font-mono-brand text-[#FF2D87] text-xs tracking-[0.25em] uppercase mb-3">About</p>
+            <h2 className="font-display font-black text-gray-900 dark:text-white leading-tight mb-4" style={{ fontSize: "clamp(2.8rem, 7vw, 5.5rem)" }}>
+              About <span className="text-[#FFD700]">★</span>
+            </h2>
+            <p className="font-body text-gray-500 dark:text-white/50 text-base md:text-xl max-w-lg">
+              The girl behind the{" "}
+              <CutoutWord word="PANTRY" baseSize="1em" />
+            </p>
+          </AnimatedSection>
+
+          {/* Two-col layout */}
+          <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-start">
+
+            {/* Left — image + badges */}
             <AnimatedSection direction="left">
-              <div className="relative max-w-xs sm:max-w-sm mx-auto md:mx-0">
+              <div className="relative max-w-xs sm:max-w-sm mx-auto md:mx-0 mb-8">
                 <img
                   src={aboutImg}
-                  alt="Pink hard hat with 'About us' ransom note lettering — Engineering Diva"
+                  alt="Pink hard hat — Engineering Diva"
                   className="w-full object-contain drop-shadow-[0_0_50px_rgba(255,45,135,0.35)]"
                 />
                 <div className="absolute top-4 right-4 bg-[#FFD700] text-[#0A0A0A] text-xs font-mono-brand font-bold px-3 py-1.5 rounded-full shadow-lg">
                   ★ Available for projects
                 </div>
               </div>
-            </AnimatedSection>
 
-            <AnimatedSection direction="right">
-              <p className="font-mono-brand text-[#FF2D87] text-xs tracking-[0.25em] uppercase mb-4">About</p>
-              <h2 className="font-display font-black text-gray-900 dark:text-white leading-tight mb-5" style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)" }}>
-                <CutoutWord word="Engineering" baseSize="0.85em" />
-                <br /><CutoutWord word="Diva" baseSize="0.85em" />
-              </h2>
-              <p className="font-body text-gray-700 dark:text-white/60 text-base leading-relaxed mb-5">
-                Cape Town girl. ICT graduate, Cum Laude. 1st place Vodacom Hackathon. Everything you see on this site? Self-taught, built from scratch, and done in pink. ★
-              </p>
-              <div className="flex flex-wrap gap-2 mb-7">
-                {["ICT Graduate","Cum Laude","Vodacom Hackathon Winner","Golden Key Honour Society","Woman in STEM"].map((badge) => (
-                  <span key={badge} className="font-mono-brand text-xs text-[#FF2D87] bg-[#FF2D87]/10 border border-[#FF2D87]/20 px-3 py-1 rounded-full">
+              {/* Achievement badges */}
+              <div className="flex flex-wrap gap-2">
+                {[
+                  "Cum Laude Graduate",
+                  "1st Place Vodacom Hackathon",
+                  "GirlCode Top 3",
+                  "Golden Key Member",
+                  "Cell C Mentee",
+                  "Self-Taught Frontend Dev",
+                ].map((badge) => (
+                  <span
+                    key={badge}
+                    className="font-mono-brand text-xs text-[#FF2D87] bg-[#FF2D87]/10 border border-[#FF2D87]/20 px-3 py-1.5 rounded-full"
+                  >
                     ★ {badge}
                   </span>
                 ))}
               </div>
-              <p className="font-body text-gray-600 dark:text-white/50 text-sm leading-relaxed italic mb-7 border-l-2 border-[#FF2D87]/40 pl-4">
-                "At Digital Pantry, every website is made from scratch. No off-the-shelf ingredients. No boring templates. Just a site that tastes exactly like your brand."
+            </AnimatedSection>
+
+            {/* Right — bio */}
+            <AnimatedSection direction="right" className="space-y-5">
+              <p className="font-display font-bold text-gray-900 dark:text-white text-xl md:text-2xl leading-snug">
+                I'm Aaniquah, a Cape Town-based software developer, hackathon winner, and the one-woman team behind Digital Pantry.
               </p>
-              <CTAButton href="/contact" data-testid="button-about-cta">Work With Me ★</CTAButton>
+
+              <p className="font-body text-gray-600 dark:text-white/60 leading-relaxed text-sm md:text-base">
+                I started coding in high school and never looked back. While my degree from CPUT covered the backend, the databases, and the theory, everything you see on the frontend — the layouts, the colours, the websites that actually look good — that's all self-taught. Built from scratch. Just like every site I make for you.
+              </p>
+
+              <p className="font-body text-gray-600 dark:text-white/60 leading-relaxed text-sm md:text-base">
+                I graduated Cum Laude, won 1st place at the Vodacom Bursar Hackathon, placed 3rd at GirlCode, completed the Cell C Mentorship Programme, and I'm a Golden Key International Honour Society member. I've also done it all while running Bellobeauty on the side, because apparently I don't do things by halves.
+              </p>
+
+              <p className="font-body text-gray-600 dark:text-white/60 leading-relaxed text-sm md:text-base">
+                But here's what really drives me. Girlies work too hard to have a boring website. Your brand is beautiful, your product is amazing, and your online presence should match. I build websites that actually look like <em>you</em>, not some generic template that could belong to anyone.
+              </p>
+
+              <p className="font-display font-bold text-[#FF2D87] text-base md:text-lg">
+                Girl power isn't just a vibe here. It's the whole point. ★
+              </p>
+
+              <div className="pt-2">
+                <CTAButton href="/contact" data-testid="button-about-cta">Work With Me ★</CTAButton>
+              </div>
             </AnimatedSection>
           </div>
         </div>
