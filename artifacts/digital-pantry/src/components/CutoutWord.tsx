@@ -11,7 +11,7 @@ interface LetterStyle {
 const FONTS = ["font-bebas", "font-marker", "font-display"];
 
 const DARK_COLORS  = ["#FF2D87", "#FFD700", "#FFFFFF", "#FFB3D1"];
-const LIGHT_COLORS = ["#FF2D87", "#C89000", "#1A0A14", "#C2185B"];
+const LIGHT_COLORS = ["#FF2D87", "#FFD700", "#1A0A14", "#FFB3D1"];
 
 const ROTATIONS = [-4, 3, -2, 5, -3, 2, -5, 4];
 const SIZES     = ["1em", "1.08em", "0.94em", "1.12em", "1.02em", "0.96em"];
