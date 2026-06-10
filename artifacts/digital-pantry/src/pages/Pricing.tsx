@@ -7,17 +7,17 @@ import { CTAButton } from "../components/CTAButton";
 const PLANS = [
   {
     name: "Starter", price: "R1 500", popular: false, cta: "Get Started ★",
-    img: "/images/starter.png",
+    img: "/images/starter.webp",
     features: ["Single page","Menu section","WhatsApp button","Mobile responsive"],
   },
   {
     name: "Standard", price: "R2 500", popular: true, cta: "Most Popular ★",
-    img: "/images/standard.png",
+    img: "/images/standard.webp",
     features: ["Everything in Starter","Locations section","About section","Social links"],
   },
   {
     name: "Premium", price: "R4 000", popular: false, cta: "Go Premium ★",
-    img: "/images/premium.png",
+    img: "/images/premium.webp",
     features: ["Everything in Standard","Custom domain setup","Google Business setup","Basic SEO setup","1 month of updates"],
   },
 ];
@@ -79,6 +79,7 @@ export default function Pricing() {
                     src={plan.img}
                     alt={`${plan.name} package`}
                     className="h-full w-auto object-contain drop-shadow-[0_4px_16px_rgba(255,45,135,0.25)]"
+                    loading="lazy"
                     onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
                   />
                 </div>
@@ -157,22 +158,20 @@ export default function Pricing() {
             {FAQ_ITEMS.map((item, i) => (
               <AnimatedSection key={i} delay={i * 0.1}>
                 <div className={`flex flex-col gap-2 ${item.side === "right" ? "items-end" : "items-start"}`}>
+                  {/* Customer question — always grey/white bubble */}
                   <motion.div
                     whileHover={{ scale: 1.01 }}
-                    className={`max-w-[85%] rounded-2xl px-4 md:px-5 py-3 md:py-3.5 text-sm ${
-                      item.side === "right"
-                        ? "rounded-tr-sm bg-[#FF2D87] text-white"
-                        : "rounded-tl-sm bg-white dark:bg-[#1c1c1e] text-gray-800 dark:text-white border border-gray-200 dark:border-white/8 shadow-sm dark:shadow-none"
+                    className={`max-w-[85%] rounded-2xl px-4 md:px-5 py-3 md:py-3.5 text-sm bg-white dark:bg-[#1c1c1e] text-gray-800 dark:text-white border border-gray-200 dark:border-white/8 shadow-sm dark:shadow-none ${
+                      item.side === "right" ? "rounded-tr-sm" : "rounded-tl-sm"
                     }`}
                   >
                     <p className="font-body leading-relaxed">{item.question}</p>
                   </motion.div>
+                  {/* Aaniquah's answer — always pink bubble, opposite side */}
                   <motion.div
                     whileHover={{ scale: 1.01 }}
-                    className={`max-w-[85%] rounded-2xl px-4 md:px-5 py-3 md:py-3.5 text-sm ${
-                      item.side === "right"
-                        ? "rounded-tl-sm bg-white dark:bg-[#1c1c1e] text-gray-800 dark:text-white border border-gray-200 dark:border-white/8 self-start shadow-sm dark:shadow-none"
-                        : "rounded-tr-sm bg-[#FF2D87] text-white self-end"
+                    className={`max-w-[85%] rounded-2xl px-4 md:px-5 py-3 md:py-3.5 text-sm bg-[#FF2D87] text-white ${
+                      item.side === "right" ? "rounded-tl-sm self-start" : "rounded-tr-sm self-end"
                     }`}
                   >
                     <p className="font-body leading-relaxed">{item.answer}</p>

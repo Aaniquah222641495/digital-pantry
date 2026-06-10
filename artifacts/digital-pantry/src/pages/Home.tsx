@@ -43,6 +43,8 @@ export default function Home() {
                 src="/images/logo-nobg.webp"
                 alt="The Digital Pantry"
                 className="h-20 w-auto object-contain"
+                loading="eager"
+                fetchPriority="high"
               />
             </motion.div>
             <motion.p variants={fadeUp} className="font-mono-brand text-[#FF2D87] text-xs tracking-[0.25em] uppercase mb-5">
@@ -93,6 +95,8 @@ export default function Home() {
                       src={mascotImg}
                       alt="Digital Pantry mascot — pixel art girl coding at her desk"
                       className="w-full h-full object-contain drop-shadow-[0_0_30px_rgba(255,45,135,0.35)]"
+                      loading="eager"
+                      fetchPriority="high"
                     />
                   </div>
                   <div className="absolute -top-3 -right-3 bg-[#FFD700] text-[#0A0A0A] text-xs font-mono-brand font-bold px-3 py-1 rounded-full shadow-lg whitespace-nowrap">
@@ -290,6 +294,7 @@ export default function Home() {
                   src={aboutImg}
                   alt="Pink hard hat — Engineering Diva"
                   className="w-full object-contain drop-shadow-[0_0_50px_rgba(255,45,135,0.35)]"
+                  loading="lazy"
                 />
                 <div className="absolute top-4 right-4 bg-[#FFD700] text-[#0A0A0A] text-xs font-mono-brand font-bold px-3 py-1.5 rounded-full shadow-lg">
                   ★ Available for projects
