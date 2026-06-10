@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { MessageCircle, Mail, Instagram } from "lucide-react";
+import { MessageCircle, Mail } from "lucide-react";
 import { CutoutWord } from "../components/CutoutWord";
 import { AnimatedSection } from "../components/AnimatedSection";
 import { useForm } from "react-hook-form";
@@ -16,9 +16,8 @@ const contactSchema = z.object({
 type ContactFormData = z.infer<typeof contactSchema>;
 
 const QUICK_CONTACTS = [
-  { icon: MessageCircle, label: "WhatsApp",  sub: "Fastest response",              href: "https://wa.me/27000000000",               color: "#25D366", testId: "button-contact-whatsapp"  },
-  { icon: Mail,          label: "Email",     sub: "hello@thedigitalpantry.co.za",   href: "mailto:hello@thedigitalpantry.co.za",     color: "#FF2D87", testId: "button-contact-email"     },
-  { icon: Instagram,     label: "Instagram", sub: "@thedigitalpantry",              href: "https://instagram.com/thedigitalpantry", color: "#E1306C", testId: "button-contact-instagram" },
+  { icon: MessageCircle, label: "WhatsApp", sub: "Fastest response",           href: "https://wa.me/27724111011",           color: "#25D366", testId: "button-contact-whatsapp" },
+  { icon: Mail,          label: "Email",    sub: "thedigitalpantryza@gmail.com", href: "mailto:thedigitalpantryza@gmail.com", color: "#FF2D87", testId: "button-contact-email"    },
 ];
 
 export default function Contact() {
@@ -35,7 +34,7 @@ export default function Contact() {
   const onSubmit = (data: ContactFormData) => {
     const subject = encodeURIComponent(`Website Enquiry — ${data.package} Package`);
     const body    = encodeURIComponent(`Hi!\n\nName: ${data.name}\nBusiness: ${data.businessName}\nPackage: ${data.package}\n\nMessage:\n${data.message}`);
-    window.location.href = `mailto:hello@thedigitalpantry.co.za?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:thedigitalpantryza@gmail.com?subject=${subject}&body=${body}`;
     reset();
   };
 

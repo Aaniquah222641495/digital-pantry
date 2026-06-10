@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { Instagram, Mail, MessageCircle } from "lucide-react";
+import { Mail, MessageCircle } from "lucide-react";
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
@@ -48,7 +48,7 @@ export function Footer() {
             </p>
             <div className="flex flex-col gap-3">
               <a
-                href="https://wa.me/27000000000"
+                href="https://wa.me/27724111011"
                 className="flex items-center gap-2 font-body text-gray-600 dark:text-white/60 hover:text-[#FF2D87] dark:hover:text-[#FF2D87] transition-colors text-sm"
                 data-testid="footer-link-whatsapp"
               >
@@ -56,22 +56,12 @@ export function Footer() {
                 WhatsApp
               </a>
               <a
-                href="mailto:hello@thedigitalpantry.co.za"
+                href="mailto:thedigitalpantryza@gmail.com"
                 className="flex items-center gap-2 font-body text-gray-600 dark:text-white/60 hover:text-[#FF2D87] dark:hover:text-[#FF2D87] transition-colors text-sm"
                 data-testid="footer-link-email"
               >
                 <Mail size={15} className="shrink-0" />
-                hello@thedigitalpantry.co.za
-              </a>
-              <a
-                href="https://instagram.com/thedigitalpantry"
-                className="flex items-center gap-2 font-body text-gray-600 dark:text-white/60 hover:text-[#FF2D87] dark:hover:text-[#FF2D87] transition-colors text-sm"
-                data-testid="footer-link-instagram"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Instagram size={15} className="shrink-0" />
-                @thedigitalpantry
+                thedigitalpantryza@gmail.com
               </a>
             </div>
           </div>
