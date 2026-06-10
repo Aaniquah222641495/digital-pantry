@@ -38,6 +38,13 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 w-full grid md:grid-cols-2 gap-10 md:gap-12 items-center py-12 md:py-16">
           {/* Text */}
           <motion.div variants={stagger} initial="hidden" animate="show" className="order-2 md:order-1">
+            <motion.div variants={fadeUp} className="mb-5">
+              <img
+                src="/images/logo-nobg.webp"
+                alt="The Digital Pantry"
+                className="h-20 w-auto object-contain"
+              />
+            </motion.div>
             <motion.p variants={fadeUp} className="font-mono-brand text-[#FF2D87] text-xs tracking-[0.25em] uppercase mb-5">
               Cape Town Web Developer
             </motion.p>

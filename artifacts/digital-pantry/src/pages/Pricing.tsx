@@ -74,11 +74,11 @@ export default function Pricing() {
                 )}
 
                 {/* Tier image */}
-                <div className={`w-full h-36 rounded-xl mb-5 overflow-hidden flex items-center justify-center ${plan.popular ? "bg-white/10" : "bg-gray-50 dark:bg-white/5"}`}>
+                <div className="w-full h-36 mb-5 flex items-center justify-center">
                   <img
                     src={plan.img}
                     alt={`${plan.name} package`}
-                    className="h-full w-full object-contain p-3"
+                    className="h-full w-auto object-contain drop-shadow-[0_4px_16px_rgba(255,45,135,0.25)]"
                     onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
                   />
                 </div>
