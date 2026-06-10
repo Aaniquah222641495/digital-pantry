@@ -7,18 +7,18 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
 const contactSchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters"),
+  name:         z.string().min(2, "Name must be at least 2 characters"),
   businessName: z.string().min(1, "Business name is required"),
-  package: z.enum(["Starter", "Standard", "Premium"], { required_error: "Please select a package" }),
-  message: z.string().min(10, "Message must be at least 10 characters"),
+  package:      z.enum(["Starter", "Standard", "Premium"], { required_error: "Please select a package" }),
+  message:      z.string().min(10, "Message must be at least 10 characters"),
 });
 
 type ContactFormData = z.infer<typeof contactSchema>;
 
 const QUICK_CONTACTS = [
-  { icon: MessageCircle, label: "WhatsApp",  sub: "Fastest response",                href: "https://wa.me/27000000000",                      color: "#25D366", size: "large", testId: "button-contact-whatsapp"  },
-  { icon: Mail,          label: "Email",     sub: "hello@thedigitalpantry.co.za",     href: "mailto:hello@thedigitalpantry.co.za",            color: "#FF2D87", size: "normal", testId: "button-contact-email"    },
-  { icon: Instagram,     label: "Instagram", sub: "@thedigitalpantry",                href: "https://instagram.com/thedigitalpantry",         color: "#E1306C", size: "normal", testId: "button-contact-instagram"},
+  { icon: MessageCircle, label: "WhatsApp",  sub: "Fastest response",              href: "https://wa.me/27000000000",               color: "#25D366", testId: "button-contact-whatsapp"  },
+  { icon: Mail,          label: "Email",     sub: "hello@thedigitalpantry.co.za",   href: "mailto:hello@thedigitalpantry.co.za",     color: "#FF2D87", testId: "button-contact-email"     },
+  { icon: Instagram,     label: "Instagram", sub: "@thedigitalpantry",              href: "https://instagram.com/thedigitalpantry", color: "#E1306C", testId: "button-contact-instagram" },
 ];
 
 export default function Contact() {
@@ -34,14 +34,15 @@ export default function Contact() {
 
   const onSubmit = (data: ContactFormData) => {
     const subject = encodeURIComponent(`Website Enquiry — ${data.package} Package`);
-    const body = encodeURIComponent(`Hi!\n\nName: ${data.name}\nBusiness: ${data.businessName}\nPackage: ${data.package}\n\nMessage:\n${data.message}`);
+    const body    = encodeURIComponent(`Hi!\n\nName: ${data.name}\nBusiness: ${data.businessName}\nPackage: ${data.package}\n\nMessage:\n${data.message}`);
     window.location.href = `mailto:hello@thedigitalpantry.co.za?subject=${subject}&body=${body}`;
     reset();
   };
 
   const inputCls =
     "w-full bg-gray-50 dark:bg-[#0A0A0A] border border-gray-200 dark:border-white/10 focus:border-[#FF2D87] rounded-xl px-4 py-3.5 font-body text-gray-900 dark:text-white text-sm outline-none transition-colors placeholder:text-gray-400 dark:placeholder:text-white/25";
-  const labelCls = "block font-mono-brand text-gray-400 dark:text-white/40 text-xs tracking-widest uppercase mb-2";
+  const labelCls =
+    "block font-mono-brand text-gray-400 dark:text-white/40 text-xs tracking-widest uppercase mb-2";
 
   return (
     <main className="pt-20">
@@ -66,6 +67,7 @@ export default function Contact() {
           <AnimatedSection className="mb-6 md:mb-8">
             <p className="font-mono-brand text-gray-400 dark:text-white/40 text-xs tracking-[0.2em] uppercase">Reach Me On</p>
           </AnimatedSection>
+
           <div className="flex flex-wrap gap-3 md:gap-4">
             {QUICK_CONTACTS.map((contact, i) => (
               <AnimatedSection key={contact.label} delay={i * 0.05}>
@@ -76,17 +78,13 @@ export default function Contact() {
                   data-testid={contact.testId}
                   whileHover={{ y: -4, scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
-                  className={`flex items-center gap-3 rounded-2xl border transition-all duration-200 bg-white dark:bg-transparent ${
-                    contact.size === "large" ? "px-6 md:px-8 py-4 md:py-5 text-base border-2" : "px-5 md:px-6 py-3.5 md:py-4 text-sm border"
-                  } shadow-sm dark:shadow-none`}
-                  style={{ borderColor: `${contact.color}40`, backgroundColor: `color-mix(in srgb, ${contact.color} 6%, transparent)` }}
+                  className="flex items-center gap-3 rounded-2xl border-2 px-6 py-4 bg-white dark:bg-transparent transition-all duration-200 shadow-sm dark:shadow-none"
+                  style={{ borderColor: `${contact.color}40` }}
                 >
-                  <contact.icon size={contact.size === "large" ? 20 : 17} style={{ color: contact.color }} />
+                  <contact.icon size={20} style={{ color: contact.color }} className="shrink-0" />
                   <div>
-                    <p className="font-body font-semibold text-gray-900 dark:text-white">{contact.label}</p>
-                    {contact.size === "large" && (
-                      <p className="font-mono-brand text-gray-500 dark:text-white/40 text-xs">{contact.sub}</p>
-                    )}
+                    <p className="font-body font-semibold text-gray-900 dark:text-white text-sm">{contact.label}</p>
+                    <p className="font-mono-brand text-gray-500 dark:text-white/40 text-xs">{contact.sub}</p>
                   </div>
                 </motion.a>
               </AnimatedSection>
@@ -115,7 +113,11 @@ export default function Contact() {
             </AnimatedSection>
           ) : (
             <AnimatedSection delay={0.1}>
-              <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 bg-white dark:bg-transparent p-6 md:p-8 rounded-2xl border border-gray-200 dark:border-transparent shadow-sm dark:shadow-none" noValidate>
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+                className="space-y-5 bg-white dark:bg-transparent p-6 md:p-8 rounded-2xl border border-gray-200 dark:border-transparent shadow-sm dark:shadow-none"
+                noValidate
+              >
                 <div className="grid sm:grid-cols-2 gap-5">
                   <div>
                     <label htmlFor="name" className={labelCls}>Name</label>

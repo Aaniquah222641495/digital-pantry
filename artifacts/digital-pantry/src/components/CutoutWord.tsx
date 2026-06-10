@@ -1,14 +1,20 @@
+import { useTheme } from "../lib/ThemeContext";
+
 interface LetterStyle {
   font: string;
-  color: string;
+  darkColor: string;
+  lightColor: string;
   rotate: number;
   size: string;
 }
 
 const FONTS = ["font-bebas", "font-marker", "font-display"];
-const COLORS = ["#FF2D87", "#FFD700", "#FFFFFF", "#FFB3D1"];
+
+const DARK_COLORS  = ["#FF2D87", "#FFD700", "#FFFFFF", "#FFB3D1"];
+const LIGHT_COLORS = ["#FF2D87", "#C89000", "#1A0A14", "#C2185B"];
+
 const ROTATIONS = [-4, 3, -2, 5, -3, 2, -5, 4];
-const SIZES = ["1em", "1.08em", "0.94em", "1.12em", "1.02em", "0.96em"];
+const SIZES     = ["1em", "1.08em", "0.94em", "1.12em", "1.02em", "0.96em"];
 
 interface CutoutWordProps {
   word: string;
@@ -17,11 +23,14 @@ interface CutoutWordProps {
 }
 
 export function CutoutWord({ word, className = "", baseSize }: CutoutWordProps) {
+  const { theme } = useTheme();
+
   const letters: LetterStyle[] = word.split("").map((_, i) => ({
-    font: FONTS[i % FONTS.length],
-    color: COLORS[i % COLORS.length],
-    rotate: ROTATIONS[i % ROTATIONS.length],
-    size: SIZES[i % SIZES.length],
+    font:       FONTS[i % FONTS.length],
+    darkColor:  DARK_COLORS[i % DARK_COLORS.length],
+    lightColor: LIGHT_COLORS[i % LIGHT_COLORS.length],
+    rotate:     ROTATIONS[i % ROTATIONS.length],
+    size:       SIZES[i % SIZES.length],
   }));
 
   return (
@@ -35,11 +44,11 @@ export function CutoutWord({ word, className = "", baseSize }: CutoutWordProps) 
           key={i}
           className={letters[i].font}
           style={{
-            color: letters[i].color,
-            fontSize: letters[i].size,
-            display: "inline-block",
-            transform: `rotate(${letters[i].rotate}deg)`,
-            lineHeight: 1,
+            color:       theme === "dark" ? letters[i].darkColor : letters[i].lightColor,
+            fontSize:    letters[i].size,
+            display:     "inline-block",
+            transform:   `rotate(${letters[i].rotate}deg)`,
+            lineHeight:  1,
             letterSpacing: "0.02em",
           }}
         >
