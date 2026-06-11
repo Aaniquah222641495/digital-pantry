@@ -216,14 +216,22 @@ export default function Home() {
       {/* ── Portfolio Preview ───────────────────────── */}
       <section className="bg-[#FFF8FB] dark:bg-[#0A0A0A] py-20 md:py-24 transition-colors duration-300">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <AnimatedSection className="flex items-end justify-between mb-10 md:mb-12 flex-wrap gap-4">
-            <div>
-              <p className="font-mono-brand text-[#FF2D87] text-xs tracking-[0.25em] uppercase mb-2">
-                Portfolio
-              </p>
-              <h2 className="font-display font-black text-gray-900 dark:text-white text-3xl sm:text-4xl md:text-5xl">
-                Recent <CutoutWord word="WORK" baseSize="0.9em" />
-              </h2>
+          <AnimatedSection className="flex items-center justify-between mb-10 md:mb-12 flex-wrap gap-4">
+            <div className="flex items-center gap-6 md:gap-10">
+              <div>
+                <p className="font-mono-brand text-[#FF2D87] text-xs tracking-[0.25em] uppercase mb-2">
+                  Portfolio
+                </p>
+                <h2 className="font-display font-black text-gray-900 dark:text-white text-3xl sm:text-4xl md:text-5xl">
+                  Recent <CutoutWord word="WORK" baseSize="0.9em" />
+                </h2>
+              </div>
+              <img
+                src="/images/work.webp"
+                alt=""
+                className="w-24 md:w-36 object-contain drop-shadow-[0_0_20px_rgba(255,45,135,0.25)] hidden sm:block"
+                loading="lazy"
+              />
             </div>
             <Link href="/portfolio">
               <span className="font-body text-[#FF2D87] hover:text-[#FFD700] transition-colors font-semibold cursor-pointer text-sm md:text-base">
@@ -326,16 +334,24 @@ export default function Home() {
       {/* ── Pricing Preview ─────────────────────────── */}
       <section className="bg-[#FFF0F5] dark:bg-[#0f0a0d] grain-section py-20 md:py-24 transition-colors duration-300">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <AnimatedSection className="text-center mb-10 md:mb-12">
-            <p className="font-mono-brand text-[#FF2D87] text-xs tracking-[0.25em] uppercase mb-2">
-              Investment
-            </p>
-            <h2 className="font-display font-black text-gray-900 dark:text-white text-3xl sm:text-4xl md:text-5xl mb-2">
-              <CutoutWord word="PRICING" baseSize="0.85em" />
-            </h2>
-            <p className="font-body text-gray-500 dark:text-white/50 text-sm md:text-base">
-              Straightforward. No hidden fees. Built from scratch.
-            </p>
+          <AnimatedSection className="flex items-center justify-between mb-10 md:mb-12 flex-wrap gap-4">
+            <div>
+              <p className="font-mono-brand text-[#FF2D87] text-xs tracking-[0.25em] uppercase mb-2">
+                Investment
+              </p>
+              <h2 className="font-display font-black text-gray-900 dark:text-white text-3xl sm:text-4xl md:text-5xl mb-2">
+                <CutoutWord word="PRICING" baseSize="0.85em" />
+              </h2>
+              <p className="font-body text-gray-500 dark:text-white/50 text-sm md:text-base">
+                Straightforward. No hidden fees. Built from scratch.
+              </p>
+            </div>
+            <img
+              src="/images/pricing.webp"
+              alt=""
+              className="w-24 md:w-36 object-contain drop-shadow-[0_0_20px_rgba(255,45,135,0.25)] hidden sm:block"
+              loading="lazy"
+            />
           </AnimatedSection>
 
           <motion.div

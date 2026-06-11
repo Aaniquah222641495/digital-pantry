@@ -53,7 +53,7 @@ export default function Pricing() {
               <img
                 src="/images/pricing.webp"
                 alt=""
-                className="w-44 md:w-60 object-contain drop-shadow-[0_0_30px_rgba(255,45,135,0.25)]"
+                className="w-56 md:w-72 mr-4 md:mr-16 object-contain drop-shadow-[0_0_30px_rgba(255,45,135,0.25)]"
                 loading="eager"
               />
             </AnimatedSection>
