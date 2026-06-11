@@ -6,8 +6,8 @@ import { AnimatedSection } from "../components/AnimatedSection";
 import { Ticker } from "../components/Ticker";
 import { ExternalLink, Code2, Rocket, Palette } from "lucide-react";
 
-const mascotImg = "/images/mascot.webp";
-const aboutImg = "/images/about.webp";
+const mascotImg = "/images/logo.webp";
+const aboutImg = "/images/mascot.webp";
 
 const STACK_TAGS = ["React", "TypeScript", "Tailwind", "Netlify"];
 
