@@ -136,19 +136,16 @@ export default function Home() {
               className="relative"
             >
               <div className="float-bob">
-                <div className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-[22rem] md:h-[22rem]">
+                <div className="relative w-80 h-80 sm:w-[22rem] sm:h-[22rem] md:w-[28rem] md:h-[28rem]">
                   <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#FF2D87]/20 to-[#FFD700]/10 blur-3xl" />
                   <div className="relative w-full h-full flex items-center justify-center">
                     <img
                       src={mascotImg}
-                      alt="Digital Pantry mascot — pixel art girl coding at her desk"
+                      alt="The Digital Pantry logo"
                       className="w-full h-full object-contain drop-shadow-[0_0_30px_rgba(255,45,135,0.35)]"
                       loading="eager"
                       fetchPriority="high"
                     />
-                  </div>
-                  <div className="absolute -top-3 -right-3 bg-[#FFD700] text-[#0A0A0A] text-xs font-mono-brand font-bold px-3 py-1 rounded-full shadow-lg whitespace-nowrap">
-                    Engineering Diva ★
                   </div>
                   <motion.div
                     animate={{ y: [0, -6, 0] }}
@@ -418,12 +415,15 @@ export default function Home() {
               <div className="relative max-w-xs sm:max-w-sm mx-auto md:mx-0 mb-8">
                 <img
                   src={aboutImg}
-                  alt="Pink hard hat — Engineering Diva"
+                  alt="Digital Pantry mascot"
                   className="w-full object-contain drop-shadow-[0_0_50px_rgba(255,45,135,0.35)]"
                   loading="lazy"
                 />
                 <div className="absolute top-4 right-4 bg-[#FFD700] text-[#0A0A0A] text-xs font-mono-brand font-bold px-3 py-1.5 rounded-full shadow-lg">
                   ★ Available for projects
+                </div>
+                <div className="absolute bottom-4 left-0 bg-[#FF2D87] text-white text-xs font-mono-brand font-bold px-3 py-1.5 rounded-full shadow-lg whitespace-nowrap">
+                  Engineering Diva ★
                 </div>
               </div>
 
