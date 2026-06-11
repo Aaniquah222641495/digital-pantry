@@ -2,6 +2,7 @@ import { Switch, Route, Router as WouterRouter } from "wouter";
 import { Toaster } from "@/components/ui/toaster";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
+import { WhatsAppBubble } from "./components/WhatsAppBubble";
 import { ThemeProvider } from "./lib/ThemeContext";
 import { lazy, Suspense } from "react";
 
@@ -46,6 +47,7 @@ function App() {
           </div>
           <Footer />
         </div>
+        <WhatsAppBubble />
       </WouterRouter>
       <Toaster />
     </ThemeProvider>
