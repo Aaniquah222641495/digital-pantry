@@ -49,15 +49,25 @@ export default function Contact() {
       <section className="bg-[#FFF8FB] dark:bg-[#0A0A0A] grain-section py-16 md:py-20 relative overflow-hidden transition-colors duration-300">
         <span className="grain-deco top-10 right-8 text-[#FFD700]/8 text-[8rem] md:text-[10rem] font-bebas leading-none select-none pointer-events-none">★</span>
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <AnimatedSection>
-            <p className="font-mono-brand text-[#FF2D87] text-xs tracking-[0.25em] uppercase mb-4">Get in Touch</p>
-            <h1 className="font-display font-black text-gray-900 dark:text-white leading-tight" style={{ fontSize: "clamp(2rem, 5vw, 4rem)" }}>
-              Let's Get <CutoutWord word="COOKING" baseSize="0.95em" /> ★
-            </h1>
-            <p className="font-body text-gray-500 dark:text-white/50 text-base md:text-lg mt-4 max-w-lg">
-              Ready to get cooking? Let's build something delicious.
-            </p>
-          </AnimatedSection>
+          <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
+            <AnimatedSection className="flex-1">
+              <p className="font-mono-brand text-[#FF2D87] text-xs tracking-[0.25em] uppercase mb-4">Get in Touch</p>
+              <h1 className="font-display font-black text-gray-900 dark:text-white leading-tight" style={{ fontSize: "clamp(2rem, 5vw, 4rem)" }}>
+                Let's Get <CutoutWord word="COOKING" baseSize="0.95em" /> ★
+              </h1>
+              <p className="font-body text-gray-500 dark:text-white/50 text-base md:text-lg mt-4 max-w-lg">
+                Ready to get cooking? Let's build something delicious.
+              </p>
+            </AnimatedSection>
+            <AnimatedSection direction="right" className="flex-shrink-0">
+              <img
+                src="/images/contact.webp"
+                alt=""
+                className="w-44 md:w-60 object-contain drop-shadow-[0_0_30px_rgba(255,45,135,0.25)]"
+                loading="eager"
+              />
+            </AnimatedSection>
+          </div>
         </div>
       </section>
 

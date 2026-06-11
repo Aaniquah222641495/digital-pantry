@@ -22,15 +22,25 @@ export default function Portfolio() {
       <section className="bg-[#FFF8FB] dark:bg-[#0A0A0A] grain-section py-16 md:py-20 relative overflow-hidden transition-colors duration-300">
         <span className="grain-deco top-16 right-8 md:right-16 text-[#FFD700]/10 dark:text-[#FFD700]/10 text-[8rem] md:text-[10rem] font-bebas leading-none select-none pointer-events-none">★</span>
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <AnimatedSection>
-            <p className="font-mono-brand text-[#FF2D87] text-xs tracking-[0.25em] uppercase mb-4">My Work</p>
-            <h1 className="font-display font-black text-gray-900 dark:text-white leading-tight" style={{ fontSize: "clamp(2.8rem, 8vw, 6rem)" }}>
-              <CutoutWord word="WORK" /> <span className="text-[#FFD700]">★</span>
-            </h1>
-            <p className="font-body text-gray-500 dark:text-white/50 text-base md:text-lg mt-4 max-w-lg">
-              Fresh out the kitchen. Here's what I've been cooking. ✦
-            </p>
-          </AnimatedSection>
+          <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
+            <AnimatedSection className="flex-1">
+              <p className="font-mono-brand text-[#FF2D87] text-xs tracking-[0.25em] uppercase mb-4">My Work</p>
+              <h1 className="font-display font-black text-gray-900 dark:text-white leading-tight" style={{ fontSize: "clamp(2.8rem, 8vw, 6rem)" }}>
+                <CutoutWord word="WORK" /> <span className="text-[#FFD700]">★</span>
+              </h1>
+              <p className="font-body text-gray-500 dark:text-white/50 text-base md:text-lg mt-4 max-w-lg">
+                Fresh out the kitchen. Here's what I've been cooking. ✦
+              </p>
+            </AnimatedSection>
+            <AnimatedSection direction="right" className="flex-shrink-0">
+              <img
+                src="/images/work.webp"
+                alt=""
+                className="w-44 md:w-60 object-contain drop-shadow-[0_0_30px_rgba(255,45,135,0.25)]"
+                loading="eager"
+              />
+            </AnimatedSection>
+          </div>
         </div>
       </section>
 
