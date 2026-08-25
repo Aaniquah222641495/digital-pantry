@@ -6,6 +6,10 @@ import { CTAButton } from "../components/CTAButton";
 
 const STACK_TAGS = ["React", "TypeScript", "Tailwind", "Netlify"];
 
+const LIVE_PROJECTS = [
+  { name: "Beginners Madrasah", category: "Religious Education", url: "https://beginnersmadrasah.co.za/" },
+];
+
 const COMING_SOON = [
   { name: "Snaccidents ZA",  category: "Food & Snacks" },
   { name: "Sweet Sisters CPT", category: "Bakery" },
@@ -114,8 +118,46 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* ── Coming Soon Grid ────────────────────────── */}
+      {/* ── Live Projects Grid ───────────────────────── */}
       <section className="bg-[#FFF8FB] dark:bg-[#0A0A0A] py-16 md:py-20 transition-colors duration-300">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <AnimatedSection className="mb-8 md:mb-10">
+            <h2 className="font-display font-bold text-gray-900 dark:text-white text-2xl md:text-3xl">
+              Also <span className="text-[#FF2D87]">Live</span> ★
+            </h2>
+            <p className="font-body text-gray-400 dark:text-white/40 mt-2 text-sm">Out in the wild, taking visitors.</p>
+          </AnimatedSection>
+
+          <motion.div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-5" variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}>
+            {LIVE_PROJECTS.map((project) => (
+              <motion.div
+                key={project.name}
+                variants={fadeUp}
+                whileHover={{ y: -4 }}
+                className="bg-white dark:bg-[#0f0a0d] border border-gray-200 dark:border-white/8 rounded-2xl p-6 md:p-7 relative overflow-hidden shadow-sm dark:shadow-none transition-all duration-300 hover:border-[#FF2D87]/30"
+              >
+                <div className="flex items-center gap-2 mb-4">
+                  <span className="bg-[#FF2D87] text-white text-xs font-mono-brand px-3 py-1 rounded-full">★ Live</span>
+                </div>
+                <h3 className="font-display font-bold text-gray-900 dark:text-white text-xl mb-1">{project.name}</h3>
+                <p className="font-mono-brand text-[#FF2D87] text-xs tracking-widest mb-4">{project.category}</p>
+                <a
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 font-body text-sm font-semibold text-[#FF2D87] border border-[#FF2D87]/30 hover:border-[#FF2D87] hover:bg-[#FF2D87]/10 px-4 py-2 rounded-full transition-all w-fit"
+                  data-testid={`link-${project.name.toLowerCase().replace(/\s+/g, "-")}-live`}
+                >
+                  <ExternalLink size={14} /> View Live Site
+                </a>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── Coming Soon Grid ────────────────────────── */}
+      <section className="bg-[#FFF0F5] dark:bg-[#0f0a0d] py-16 md:py-20 transition-colors duration-300">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <AnimatedSection className="mb-8 md:mb-10">
             <h2 className="font-display font-bold text-gray-900 dark:text-white text-2xl md:text-3xl">
