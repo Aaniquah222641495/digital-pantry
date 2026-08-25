@@ -145,9 +145,9 @@ export default function Contact() {
                   <label htmlFor="package" className={labelCls}>Package</label>
                   <select id="package" className={`${inputCls} appearance-none cursor-pointer`} data-testid="select-package" defaultValue="" {...register("package")}>
                     <option value="" disabled>Select a package</option>
-                    <option value="Starter">Starter — R1 500</option>
-                    <option value="Standard">Standard — R2 500</option>
-                    <option value="Premium">Premium — R4 000</option>
+                    <option value="Starter">Starter — R600</option>
+                    <option value="Standard">Standard — R1 000</option>
+                    <option value="Premium">Premium — R1 600</option>
                   </select>
                   {errors.package && <p className="font-body text-[#FF2D87] text-xs mt-1.5">{errors.package.message}</p>}
                 </div>

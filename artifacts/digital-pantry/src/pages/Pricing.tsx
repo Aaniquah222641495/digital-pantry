@@ -6,17 +6,17 @@ import { CTAButton } from "../components/CTAButton";
 
 const PLANS = [
   {
-    name: "Starter", price: "R1 500", popular: false, cta: "Get Started ★",
+    name: "Starter", price: "R600", popular: false, cta: "Get Started ★",
     img: "/images/starter.webp",
     features: ["Single page","Menu section","WhatsApp button","Mobile responsive"],
   },
   {
-    name: "Standard", price: "R2 500", popular: true, cta: "Most Popular ★",
+    name: "Standard", price: "R1 000", popular: true, cta: "Most Popular ★",
     img: "/images/standard.webp",
     features: ["Everything in Starter","Locations section","About section","Social links"],
   },
   {
-    name: "Premium", price: "R4 000", popular: false, cta: "Go Premium ★",
+    name: "Premium", price: "R1 600", popular: false, cta: "Go Premium ★",
     img: "/images/premium.webp",
     features: ["Everything in Standard","Custom domain setup","Google Business setup","Basic SEO setup","1 month of updates"],
   },
@@ -26,7 +26,7 @@ const FAQ_ITEMS = [
   { question: "Do I need to know how to code?",  answer: "No! That's literally my job. You handle the business, I handle the website.", side: "left"  },
   { question: "Do I keep my WhatsApp number?",   answer: "Yes! We just add a click-to-WhatsApp button on your site. Easy.",             side: "right" },
   { question: "How long does it take?",           answer: "Most projects are done within 5–7 business days.",                            side: "left"  },
-  { question: "What if I need changes later?",   answer: "That's what the R300/month retainer is for. Small edits, big peace of mind.", side: "right" },
+  { question: "What if I need changes later?",   answer: "That's what the R120/month retainer is for. Small edits, big peace of mind.", side: "right" },
 ];
 
 const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.1 } } };
@@ -134,7 +134,7 @@ export default function Pricing() {
                   <p className="font-mono-brand text-[#FFD700] text-xs tracking-[0.2em] uppercase">Keep Your Pantry Stocked ★</p>
                 </div>
                 <p className="font-display font-black text-gray-900 dark:text-white text-4xl mb-2">
-                  R300<span className="font-body font-normal text-gray-400 dark:text-white/40 text-lg">/month</span>
+                  R120<span className="font-body font-normal text-gray-400 dark:text-white/40 text-lg">/month</span>
                 </p>
                 <p className="font-body text-gray-500 dark:text-white/50 text-sm leading-relaxed">Menu updates. Schedule changes. Small edits. Always fresh.</p>
               </div>

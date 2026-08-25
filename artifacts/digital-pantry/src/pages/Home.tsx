@@ -30,9 +30,9 @@ const SERVICES = [
 ];
 
 const PRICING_PREVIEW = [
-  { label: "Starter", price: "R1 500", popular: false },
-  { label: "Standard", price: "R2 500", popular: true },
-  { label: "Premium", price: "R4 000", popular: false },
+  { label: "Starter", price: "R600", popular: false },
+  { label: "Standard", price: "R1 000", popular: true },
+  { label: "Premium", price: "R1 600", popular: false },
 ];
 
 const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.12 } } };
