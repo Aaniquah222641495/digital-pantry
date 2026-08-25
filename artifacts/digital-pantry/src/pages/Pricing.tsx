@@ -25,7 +25,7 @@ const PLANS = [
 const FAQ_ITEMS = [
   { question: "Do I need to know how to code?",  answer: "No! That's literally my job. You handle the business, I handle the website.", side: "left"  },
   { question: "Do I keep my WhatsApp number?",   answer: "Yes! We just add a click-to-WhatsApp button on your site. Easy.",             side: "right" },
-  { question: "How long does it take?",           answer: "Most projects are done within 5–7 business days.",                            side: "left"  },
+  { question: "How long does it take?",           answer: "Most projects are done within 5 to 7 business days.",                         side: "left"  },
   { question: "What if I need changes later?",   answer: "That's what the R120/month retainer is for. Small edits, big peace of mind.", side: "right" },
 ];
 
@@ -168,7 +168,7 @@ export default function Pricing() {
             {FAQ_ITEMS.map((item, i) => (
               <AnimatedSection key={i} delay={i * 0.1}>
                 <div className={`flex flex-col gap-2 ${item.side === "right" ? "items-end" : "items-start"}`}>
-                  {/* Customer question — always grey/white bubble */}
+                  {/* Customer question: always grey/white bubble */}
                   <motion.div
                     whileHover={{ scale: 1.01 }}
                     className={`max-w-[85%] rounded-2xl px-4 md:px-5 py-3 md:py-3.5 text-sm bg-white dark:bg-[#1c1c1e] text-gray-800 dark:text-white border border-gray-200 dark:border-white/8 shadow-sm dark:shadow-none ${
@@ -177,7 +177,7 @@ export default function Pricing() {
                   >
                     <p className="font-body leading-relaxed">{item.question}</p>
                   </motion.div>
-                  {/* Aaniquah's answer — always pink bubble, opposite side */}
+                  {/* Aaniquah's answer: always pink bubble, opposite side */}
                   <motion.div
                     whileHover={{ scale: 1.01 }}
                     className={`max-w-[85%] rounded-2xl px-4 md:px-5 py-3 md:py-3.5 text-sm bg-[#FF2D87] text-white ${
@@ -200,7 +200,7 @@ export default function Pricing() {
             Ready to get <span className="text-[#FF2D87]">built</span>?
           </h2>
           <p className="font-body text-gray-500 dark:text-white/50 mb-8 max-w-md mx-auto px-4 text-sm md:text-base">
-            Your business, beautifully built. No code knowledge needed — that's literally my job.
+            Your business, beautifully built. No code knowledge needed, because that's literally my job.
           </p>
           <CTAButton href="/contact" data-testid="button-pricing-bottom-cta">Let's Build Something ★</CTAButton>
         </AnimatedSection>

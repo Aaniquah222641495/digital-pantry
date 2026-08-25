@@ -32,7 +32,7 @@ export default function Contact() {
   });
 
   const onSubmit = (data: ContactFormData) => {
-    const subject = encodeURIComponent(`Website Enquiry — ${data.package} Package`);
+    const subject = encodeURIComponent(`Website Enquiry: ${data.package} Package`);
     const body    = encodeURIComponent(`Hi!\n\nName: ${data.name}\nBusiness: ${data.businessName}\nPackage: ${data.package}\n\nMessage:\n${data.message}`);
     window.location.href = `mailto:thedigitalpantryza@gmail.com?subject=${subject}&body=${body}`;
     reset();
@@ -110,7 +110,7 @@ export default function Contact() {
             <h2 className="font-display font-bold text-gray-900 dark:text-white text-2xl md:text-4xl">
               Send a Message <span className="text-[#FFD700]">★</span>
             </h2>
-            <p className="font-body text-gray-400 dark:text-white/40 mt-2 text-sm">Fill this in and it'll open your email client — quick and easy.</p>
+            <p className="font-body text-gray-400 dark:text-white/40 mt-2 text-sm">Fill this in and it'll open your email client. Quick and easy.</p>
           </AnimatedSection>
 
           {isSubmitSuccessful ? (
@@ -145,9 +145,9 @@ export default function Contact() {
                   <label htmlFor="package" className={labelCls}>Package</label>
                   <select id="package" className={`${inputCls} appearance-none cursor-pointer`} data-testid="select-package" defaultValue="" {...register("package")}>
                     <option value="" disabled>Select a package</option>
-                    <option value="Starter">Starter — R600</option>
-                    <option value="Standard">Standard — R1 000</option>
-                    <option value="Premium">Premium — R1 600</option>
+                    <option value="Starter">Starter (R600)</option>
+                    <option value="Standard">Standard (R1 000)</option>
+                    <option value="Premium">Premium (R1 600)</option>
                   </select>
                   {errors.package && <p className="font-body text-[#FF2D87] text-xs mt-1.5">{errors.package.message}</p>}
                 </div>

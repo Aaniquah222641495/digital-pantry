@@ -6,8 +6,14 @@ import { CTAButton } from "../components/CTAButton";
 
 const STACK_TAGS = ["React", "TypeScript", "Tailwind", "Netlify"];
 
-const LIVE_PROJECTS = [
-  { name: "Beginners Madrasah", category: "Religious Education", url: "https://beginnersmadrasah.co.za/" },
+const LIVE_SITES = [
+  {
+    emoji: "🕌",
+    name: "Beginners Madrasah",
+    displayUrl: "beginnersmadrasah.co.za",
+    url: "https://beginnersmadrasah.co.za/",
+    category: "Religious Education / Islamic Learning",
+  },
 ];
 
 const COMING_SOON = [
@@ -118,41 +124,48 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* ── Live Projects Grid ───────────────────────── */}
+      {/* ── Live Sites ────────────────────────────────  */}
       <section className="bg-[#FFF8FB] dark:bg-[#0A0A0A] py-16 md:py-20 transition-colors duration-300">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <AnimatedSection className="mb-8 md:mb-10">
-            <h2 className="font-display font-bold text-gray-900 dark:text-white text-2xl md:text-3xl">
-              Also <span className="text-[#FF2D87]">Live</span> ★
-            </h2>
-            <p className="font-body text-gray-400 dark:text-white/40 mt-2 text-sm">Out in the wild, taking visitors.</p>
+            <p className="font-mono-brand text-[#FF2D87] text-xs tracking-[0.25em] uppercase mb-2">Out In The Wild</p>
+            <h2 className="font-display font-bold text-gray-900 dark:text-white text-2xl md:text-3xl">Also Live ★</h2>
           </AnimatedSection>
 
-          <motion.div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-5" variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}>
-            {LIVE_PROJECTS.map((project) => (
-              <motion.div
-                key={project.name}
-                variants={fadeUp}
-                whileHover={{ y: -4 }}
-                className="bg-white dark:bg-[#0f0a0d] border border-gray-200 dark:border-white/8 rounded-2xl p-6 md:p-7 relative overflow-hidden shadow-sm dark:shadow-none transition-all duration-300 hover:border-[#FF2D87]/30"
-              >
-                <div className="flex items-center gap-2 mb-4">
-                  <span className="bg-[#FF2D87] text-white text-xs font-mono-brand px-3 py-1 rounded-full">★ Live</span>
+          <div className="grid gap-5 md:gap-6">
+            {LIVE_SITES.map((site, i) => (
+              <AnimatedSection key={site.name} delay={i * 0.1}>
+                <div className="bg-white dark:bg-[#0A0A0A] border border-gray-200 dark:border-white/8 rounded-3xl overflow-hidden shadow-sm dark:shadow-none">
+                  <div className="h-40 md:h-56 bg-gradient-to-br from-pink-50 dark:from-[#200d17] to-white dark:to-[#0A0A0A] relative flex items-center justify-center overflow-hidden">
+                    <div className="text-center z-10">
+                      <div className="text-5xl md:text-7xl mb-3">{site.emoji}</div>
+                      <p className="font-mono-brand text-gray-400 dark:text-white/30 text-sm">{site.displayUrl}</p>
+                    </div>
+                    <div className="absolute inset-0 bg-[#FF2D87]/2" />
+                    <div className="absolute top-4 left-4 bg-[#FF2D87] text-white text-xs font-mono-brand px-3 py-1 rounded-full">★ Live</div>
+                  </div>
+
+                  <div className="p-6 md:p-8 flex flex-wrap items-center justify-between gap-4">
+                    <div>
+                      <h3 className="font-display font-bold text-gray-900 dark:text-white text-xl md:text-2xl">
+                        {site.name}
+                      </h3>
+                      <p className="font-mono-brand text-[#FF2D87] text-sm tracking-widest mt-1">{site.category}</p>
+                    </div>
+                    <a
+                      href={site.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 font-body text-sm font-semibold text-[#FF2D87] border border-[#FF2D87]/30 hover:border-[#FF2D87] hover:bg-[#FF2D87]/10 px-4 py-2 rounded-full transition-all"
+                      data-testid={`link-${site.name.toLowerCase().replace(/\s+/g, "-")}-live`}
+                    >
+                      <ExternalLink size={14} /> View Live Site
+                    </a>
+                  </div>
                 </div>
-                <h3 className="font-display font-bold text-gray-900 dark:text-white text-xl mb-1">{project.name}</h3>
-                <p className="font-mono-brand text-[#FF2D87] text-xs tracking-widest mb-4">{project.category}</p>
-                <a
-                  href={project.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 font-body text-sm font-semibold text-[#FF2D87] border border-[#FF2D87]/30 hover:border-[#FF2D87] hover:bg-[#FF2D87]/10 px-4 py-2 rounded-full transition-all w-fit"
-                  data-testid={`link-${project.name.toLowerCase().replace(/\s+/g, "-")}-live`}
-                >
-                  <ExternalLink size={14} /> View Live Site
-                </a>
-              </motion.div>
+              </AnimatedSection>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 

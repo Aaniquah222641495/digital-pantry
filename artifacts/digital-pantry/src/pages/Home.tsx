@@ -312,17 +312,36 @@ export default function Home() {
             <AnimatedSection delay={0.2}>
               <motion.div
                 whileHover={{ y: -4 }}
-                className="bg-white dark:bg-[#0f0a0d] border border-gray-200 dark:border-white/5 rounded-2xl overflow-hidden h-full min-h-56 flex items-center justify-center transition-all duration-300 shadow-sm dark:shadow-none"
+                className="bg-white dark:bg-[#0f0a0d] border border-gray-200 dark:border-white/8 hover:border-[#FF2D87]/40 rounded-2xl overflow-hidden transition-all duration-300 group shadow-sm dark:shadow-none"
               >
-                <div className="text-center p-8">
-                  <div className="text-4xl mb-3 opacity-20 dark:opacity-30">
-                    ★
+                <div className="h-44 sm:h-52 bg-gradient-to-br from-pink-50 dark:from-[#1a0510] to-white dark:to-[#0A0A0A] relative overflow-hidden flex items-center justify-center">
+                  <div className="text-center">
+                    <div className="text-5xl md:text-6xl mb-2">🕌</div>
+                    <p className="font-mono-brand text-gray-400 dark:text-white/30 text-sm">
+                      beginnersmadrasah.co.za
+                    </p>
                   </div>
-                  <p className="font-display font-bold text-gray-400 dark:text-white/25 text-xl md:text-2xl mb-2">
-                    Coming Soon
-                  </p>
-                  <p className="font-body text-gray-400 dark:text-white/20 text-sm">
-                    More projects in the works
+                  <div className="absolute top-3 left-3 bg-[#FF2D87] text-white text-xs font-mono-brand px-2 py-1 rounded-full">
+                    ★ Live
+                  </div>
+                </div>
+                <div className="p-5 md:p-6">
+                  <div className="flex items-start justify-between mb-2">
+                    <h3 className="font-display font-bold text-gray-900 dark:text-white text-lg md:text-xl">
+                      Beginners Madrasah
+                    </h3>
+                    <a
+                      href="https://beginnersmadrasah.co.za/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-400 dark:text-white/30 hover:text-[#FF2D87] transition-colors"
+                      data-testid="link-madrasah-live"
+                    >
+                      <ExternalLink size={16} />
+                    </a>
+                  </div>
+                  <p className="font-mono-brand text-[#FF2D87] text-xs tracking-wider">
+                    Religious Education / Islamic Learning
                   </p>
                 </div>
               </motion.div>
@@ -426,7 +445,7 @@ export default function Home() {
 
           {/* Two-col layout */}
           <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-start">
-            {/* Left — image + badges */}
+            {/* Left column: image + badges */}
             <AnimatedSection direction="left">
               <div className="relative max-w-xs sm:max-w-sm mx-auto md:mx-0 mb-8">
                 <img
@@ -463,7 +482,7 @@ export default function Home() {
               </div>
             </AnimatedSection>
 
-            {/* Right — bio */}
+            {/* Right column: bio */}
             <AnimatedSection direction="right" className="space-y-5">
               <p className="font-display font-bold text-gray-900 dark:text-white text-xl md:text-2xl leading-snug">
                 I'm Aaniquah, a Cape Town-based software developer, hackathon
@@ -471,12 +490,12 @@ export default function Home() {
               </p>
 
               <p className="font-body text-gray-600 dark:text-white/60 leading-relaxed text-sm md:text-base">
-                I started coding in high school and never looked back. While my
+                I started coding in high school and never looked back. My
                 degree from CPUT covered the backend, the databases, and the
-                theory, everything you see on the frontend — the layouts, the
-                colours, the websites that actually look good — that's all
-                self-taught. Built from scratch. Just like every site I make for
-                you.
+                theory, but everything you see on the frontend, the layouts,
+                the colours, the websites that actually look good, is all
+                self-taught. Built from scratch, just like every site I make
+                for you.
               </p>
 
               <p className="font-body text-gray-600 dark:text-white/60 leading-relaxed text-sm md:text-base">
