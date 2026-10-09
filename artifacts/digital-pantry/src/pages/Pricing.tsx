@@ -18,7 +18,7 @@ const PLANS = [
   {
     name: "Premium", price: "R1 600", popular: false, cta: "Go Premium ★",
     img: "/images/premium.webp",
-    features: ["Everything in Standard","Custom domain setup","Google Business setup","Basic SEO setup","1 month of updates"],
+    features: ["Everything in Standard","Custom domain setup","Google Business setup","Basic SEO setup","Lead capture form + instant alerts","Auto-reply to every enquiry","1 month of updates"],
   },
 ];
 
