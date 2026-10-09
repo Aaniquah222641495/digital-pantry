@@ -18,7 +18,12 @@ const PLANS = [
   {
     name: "Premium", price: "R1 600", popular: false, cta: "Go Premium ★",
     img: "/images/premium.webp",
-    features: ["Everything in Standard","Custom domain setup","Google Business setup","Basic SEO setup","Lead capture form + instant alerts","Auto-reply to every enquiry","1 month of updates"],
+    features: ["Everything in Standard","Custom domain setup","Google Business setup","Basic SEO setup","1 month of updates"],
+  },
+  {
+    name: "Pro", price: "R2 500", popular: false, cta: "Go Pro ★",
+    img: "/images/pro.webp",
+    features: ["Everything in Premium","Lead capture form + instant alerts","Leads saved to your Google Sheet","Auto-reply to every enquiry","WhatsApp follow-up button","Tested before handover"],
   },
 ];
 
@@ -27,6 +32,7 @@ const FAQ_ITEMS = [
   { question: "Do I keep my WhatsApp number?",   answer: "Yes! We just add a click-to-WhatsApp button on your site. Easy.",             side: "right" },
   { question: "How long does it take?",           answer: "Most projects are done within 5 to 7 business days.",                         side: "left"  },
   { question: "What if I need changes later?",   answer: "That's what the R120/month retainer is for. Small edits, big peace of mind.", side: "right" },
+  { question: "Does Pro have monthly fees?",     answer: "No. Your lead system runs on free Google tools that you own. Every enquiry lands in your inbox and your own Sheet.", side: "left" },
 ];
 
 const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.1 } } };
@@ -64,7 +70,7 @@ export default function Pricing() {
       {/* ── Pricing Cards ────────────────────────────── */}
       <section className="bg-[#FFF0F5] dark:bg-[#0f0a0d] py-16 md:py-20 transition-colors duration-300">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <motion.div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5 md:gap-6" variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}>
+          <motion.div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6" variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}>
             {PLANS.map((plan) => (
               <motion.div
                 key={plan.name}

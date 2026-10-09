@@ -33,6 +33,7 @@ const PRICING_PREVIEW = [
   { label: "Starter", price: "R600", popular: false },
   { label: "Standard", price: "R1 000", popular: true },
   { label: "Premium", price: "R1 600", popular: false },
+  { label: "Pro", price: "R2 500", popular: false },
 ];
 
 const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.12 } } };
@@ -374,7 +375,7 @@ export default function Home() {
           </AnimatedSection>
 
           <motion.div
-            className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8"
+            className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8"
             variants={stagger}
             initial="hidden"
             whileInView="show"
