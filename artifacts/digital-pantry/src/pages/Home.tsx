@@ -486,37 +486,36 @@ export default function Home() {
             {/* Right column: bio */}
             <AnimatedSection direction="right" className="space-y-5">
               <p className="font-display font-bold text-gray-900 dark:text-white text-xl md:text-2xl leading-snug">
-                I'm Aaniquah, a Cape Town-based software developer, hackathon
-                winner, and the one-woman team behind Digital Pantry.
+                I'm Aaniquah, a software developer in Cape Town and the
+                one-woman team behind Digital Pantry.
               </p>
 
               <p className="font-body text-gray-600 dark:text-white/60 leading-relaxed text-sm md:text-base">
-                I started coding in high school and never looked back. My
-                degree from CPUT covered the backend, the databases, and the
-                theory, but everything you see on the frontend, the layouts,
-                the colours, the websites that actually look good, is all
-                self-taught. Built from scratch, just like every site I make
-                for you.
+                I started coding in high school and never looked back. My CPUT
+                degree covered the backend, databases and theory. The fun part, making
+                websites actually look good, I taught myself. So when I say I
+                build your site from scratch, I mean it: that's how I learnt
+                to do it in the first place.
               </p>
 
               <p className="font-body text-gray-600 dark:text-white/60 leading-relaxed text-sm md:text-base">
-                I graduated Cum Laude, won 1st place at the Vodacom Bursar
-                Hackathon, placed 3rd at GirlCode, completed the Cell C
-                Mentorship Programme, and I'm a Golden Key International Honour
-                Society member. I've also done it all while running Bellobeauty
-                on the side, because apparently I don't do things by halves.
+                Along the way I graduated Cum Laude, took 1st place at the
+                Vodacom Bursar Hackathon, came 3rd at GirlCode and completed
+                the Cell C Mentorship Programme. I'm also a Golden Key
+                International Honour Society member. I did all of that while
+                running Bellobeauty on the side, because apparently I don't do
+                things by halves.
               </p>
 
               <p className="font-body text-gray-600 dark:text-white/60 leading-relaxed text-sm md:text-base">
-                But here's what really drives me. Girlies work too hard to have
-                a boring website. Your brand is beautiful, your product is
-                amazing, and your online presence should match. I build websites
-                that actually look like <em>you</em>, not some generic template
-                that could belong to anyone.
+                Girlies work too hard to have a boring website. Your brand's
+                gorgeous and your product's amazing, so your website should
+                look just as good. I build sites that look like <em>you</em>,
+                made for your business and nobody else's.
               </p>
 
               <p className="font-display font-bold text-[#FF2D87] text-base md:text-lg">
-                Girl power isn't just a vibe here. It's the whole point. ★
+                Girl power is kind of the whole point here. ★
               </p>
 
               <div className="pt-2">
