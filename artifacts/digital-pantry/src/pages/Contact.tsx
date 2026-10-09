@@ -5,6 +5,7 @@ import { AnimatedSection } from "../components/AnimatedSection";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { Link } from "wouter";
 
 const contactSchema = z.object({
   name:         z.string().min(2, "Name must be at least 2 characters"),
@@ -169,6 +170,9 @@ export default function Contact() {
                 >
                   Send It ★
                 </motion.button>
+                <p className="font-body text-gray-400 dark:text-white/40 text-xs text-center">
+                  How we use your details: see our <Link href="/privacy" className="text-[#FF2D87] hover:underline">Privacy Notice</Link>.
+                </p>
               </form>
             </AnimatedSection>
           )}
