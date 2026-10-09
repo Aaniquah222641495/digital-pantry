@@ -9,7 +9,7 @@ import { z } from "zod";
 const contactSchema = z.object({
   name:         z.string().min(2, "Name must be at least 2 characters"),
   businessName: z.string().min(1, "Business name is required"),
-  package:      z.enum(["Starter", "Standard", "Premium"], { required_error: "Please select a package" }),
+  package:      z.enum(["Starter", "Standard", "Premium", "Pro"], { required_error: "Please select a package" }),
   message:      z.string().min(10, "Message must be at least 10 characters"),
 });
 
@@ -148,6 +148,7 @@ export default function Contact() {
                     <option value="Starter">Starter (R600)</option>
                     <option value="Standard">Standard (R1 000)</option>
                     <option value="Premium">Premium (R1 600)</option>
+                    <option value="Pro">Pro (R2 500, with lead automation)</option>
                   </select>
                   {errors.package && <p className="font-body text-[#FF2D87] text-xs mt-1.5">{errors.package.message}</p>}
                 </div>
