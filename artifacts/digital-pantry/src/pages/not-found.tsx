@@ -1,21 +1,37 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { AlertCircle } from "lucide-react";
+import { useEffect } from "react";
+import { CTAButton } from "../components/CTAButton";
 
 export default function NotFound() {
-  return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-gray-50">
-      <Card className="w-full max-w-md mx-4">
-        <CardContent className="pt-6">
-          <div className="flex mb-4 gap-2">
-            <AlertCircle className="h-8 w-8 text-red-500" />
-            <h1 className="text-2xl font-bold text-gray-900">404 Page Not Found</h1>
-          </div>
+  useEffect(() => {
+    const meta = document.createElement("meta");
+    meta.name = "robots";
+    meta.content = "noindex";
+    document.head.appendChild(meta);
+    return () => {
+      document.head.removeChild(meta);
+    };
+  }, []);
 
-          <p className="mt-4 text-sm text-gray-600">
-            Did you forget to add the page to the router?
+  return (
+    <main className="pt-20">
+      <section className="min-h-[70vh] bg-[#FFF8FB] dark:bg-[#0A0A0A] flex items-center transition-colors duration-300">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 py-16 text-center">
+          <p className="font-mono-brand text-[#FF2D87] text-xs tracking-[0.25em] uppercase mb-4">Error 404</p>
+          <h1
+            className="font-display font-black text-gray-900 dark:text-white leading-tight mb-4"
+            style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)" }}
+          >
+            This page isn't in the pantry <span className="text-[#FFD700]">★</span>
+          </h1>
+          <p className="font-body text-gray-600 dark:text-white/60 text-base leading-relaxed mb-8">
+            The link may be old or mistyped. Everything else is right where you left it.
           </p>
-        </CardContent>
-      </Card>
-    </div>
+          <div className="flex flex-wrap gap-3 justify-center">
+            <CTAButton href="/" data-testid="button-404-home">Back to home</CTAButton>
+            <CTAButton href="/contact" variant="outline" data-testid="button-404-contact">Get in touch</CTAButton>
+          </div>
+        </div>
+      </section>
+    </main>
   );
 }

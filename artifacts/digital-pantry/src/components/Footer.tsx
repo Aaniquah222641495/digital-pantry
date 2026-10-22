@@ -16,7 +16,7 @@ export function Footer() {
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-10 mb-12">
           <div>
             <img
-              src="/images/logo-nobg.png"
+              src="/images/logo-nobg.webp"
               alt="The Digital Pantry"
               className="h-40 w-auto object-contain mb-3"
             />
@@ -70,7 +70,7 @@ export function Footer() {
 
         <div className="border-t border-gray-200 dark:border-white/8 pt-6 flex flex-col sm:flex-row items-center justify-between gap-2">
           <p className="font-body text-gray-400 dark:text-white/30 text-xs">
-            © 2025 The Digital Pantry. Built from scratch.
+            © {new Date().getFullYear()} The Digital Pantry. Built from scratch.
           </p>
           <p className="font-mono-brand text-[#FF2D87]/60 text-xs tracking-widest">
             ★ CODED IN PINK ★
