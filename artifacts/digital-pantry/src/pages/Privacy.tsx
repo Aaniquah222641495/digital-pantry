@@ -22,7 +22,7 @@ export default function Privacy() {
               Digital Pantry Web Studio · thedigitalpantry.netlify.app
             </p>
             <p className="font-mono-brand text-gray-400 dark:text-white/40 text-xs tracking-widest uppercase mb-8">
-              Last updated: 9 October 2026
+              Last updated: 22 October 2026
             </p>
             <p className={pCls}>
               This explains how we look after your personal information under the Protection of Personal Information Act (POPIA).
@@ -39,10 +39,10 @@ export default function Privacy() {
             </p>
 
             <h2 className={`${h2Cls} mt-8`}>1. When you contact us through this website</h2>
-            <p className={pCls}><span className={strongCls}>What we collect:</span> the name, business name, package choice and message you type into the contact form. If you email or WhatsApp us directly, we also see your email address or phone number.</p>
-            <p className={pCls}><span className={strongCls}>How it works:</span> the form does not send anything to our server. When you press "Send", it opens a draft email in your own email app, addressed to us. Nothing reaches us unless you send that email.</p>
-            <p className={pCls}><span className={strongCls}>Why:</span> to reply to your enquiry and, if you go ahead, to quote and build your website.</p>
-            <p className={pCls}><span className={strongCls}>Who sees it:</span> only us. Emails arrive in Gmail (Google). We do not sell your information or use it for anything else.</p>
+            <p className={pCls}><span className={strongCls}>What we collect:</span> the name, phone number, email address, business name, what you are interested in (a package, a free mock-up, or "not sure yet") and the optional message you type into the contact form. The form also records the date and time you sent it and which page you sent it from. If you email or WhatsApp us directly, we also see your email address or phone number.</p>
+            <p className={pCls}><span className={strongCls}>How it works:</span> when you press "Send", the form sends your details to a small script in our Google account (Google Apps Script). It saves them as a new row in a private Google Sheet, emails us an alert, and emails you one automatic confirmation that we received your enquiry. If the form cannot send, it shows buttons to send the same details to us by WhatsApp or email instead, and nothing is sent until you press one.</p>
+            <p className={pCls}><span className={strongCls}>Why:</span> to reply to your enquiry and, if you go ahead, to quote and build your website. The confirmation email is not marketing. We do not add you to a mailing list and we do not send newsletters.</p>
+            <p className={pCls}><span className={strongCls}>Who sees it:</span> only us. Your details sit in our Google account (Sheets, Apps Script and Gmail). We do not sell your information or use it for anything else.</p>
             <p className={pCls}><span className={strongCls}>How long:</span> If your enquiry does not become a project, we delete it after 12 months.</p>
 
             <h2 className={`${h2Cls} mt-8`}>2. When we contact your business first (outreach)</h2>
@@ -68,13 +68,13 @@ export default function Privacy() {
             <h2 className={`${h2Cls} mt-8`}>4. Other companies that handle information for us</h2>
             <ul className={ulCls}>
               <li><span className={strongCls}>Netlify</span> hosts this website.</li>
-              <li><span className={strongCls}>Google</span> (Gmail, Google Sheets and Drive) holds our emails and our outreach Sheet; Google Fonts serves the site's fonts.</li>
+              <li><span className={strongCls}>Google</span> (Gmail, Google Sheets, Google Apps Script and Drive) holds our emails, the contact-form Sheet that receives your enquiry and our outreach Sheet, and sends the alert and confirmation emails; Google Fonts serves the site's fonts.</li>
               <li><span className={strongCls}>WhatsApp (Meta)</span> if you message us there, or we message you.</li>
             </ul>
             <p className={pCls}>Some of these providers (Google, Netlify, Meta/WhatsApp) may store information outside South Africa. We use only established providers with their own data protection commitments.</p>
 
             <h2 className={`${h2Cls} mt-8`}>5. Keeping it safe</h2>
-            <p className={pCls}>Our Google account and Sheet are private and limited to us. We do not put your details in public places. If your information is ever compromised in a way that puts you at risk, we will tell you and the Information Regulator as soon as reasonably possible.</p>
+            <p className={pCls}>Our Google account and Sheets are private and limited to us. We do not put your details in public places. If your information is ever compromised in a way that puts you at risk, we will tell you and the Information Regulator as soon as reasonably possible.</p>
 
             <h2 className={`${h2Cls} mt-8`}>6. Your rights</h2>
             <p className={pCls}>You can ask us to:</p>

@@ -4,6 +4,7 @@ import { CutoutWord } from "../components/CutoutWord";
 import { CTAButton } from "../components/CTAButton";
 import { AnimatedSection } from "../components/AnimatedSection";
 import { Ticker } from "../components/Ticker";
+import { MockupOffer } from "../components/MockupOffer";
 import { ExternalLink, Code2, Rocket, Palette } from "lucide-react";
 
 const mascotImg = "/images/logo.webp";
@@ -420,6 +421,9 @@ export default function Home() {
           </AnimatedSection>
         </div>
       </section>
+
+      {/* ── Free mock-up offer ──────────────────────── */}
+      <MockupOffer bgClass="bg-[#FFF8FB] dark:bg-[#0A0A0A]" testId="home-mockup-offer" />
 
       {/* ── About ───────────────────────────────────── */}
       <section className="bg-[#FFF8FB] dark:bg-[#0A0A0A] py-20 md:py-28 transition-colors duration-300">

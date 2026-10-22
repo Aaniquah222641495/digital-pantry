@@ -2,19 +2,7 @@ import { motion } from "framer-motion";
 import { MessageCircle, Mail } from "lucide-react";
 import { CutoutWord } from "../components/CutoutWord";
 import { AnimatedSection } from "../components/AnimatedSection";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { Link } from "wouter";
-
-const contactSchema = z.object({
-  name:         z.string().min(2, "Name must be at least 2 characters"),
-  businessName: z.string().min(1, "Business name is required"),
-  package:      z.enum(["Starter", "Standard", "Premium", "Pro"], { required_error: "Please select a package" }),
-  message:      z.string().min(10, "Message must be at least 10 characters"),
-});
-
-type ContactFormData = z.infer<typeof contactSchema>;
+import { LeadForm } from "../components/LeadForm";
 
 const QUICK_CONTACTS = [
   { icon: MessageCircle, label: "WhatsApp", sub: "Fastest response",           href: "https://wa.me/27724111011",           color: "#25D366", testId: "button-contact-whatsapp" },
@@ -22,28 +10,6 @@ const QUICK_CONTACTS = [
 ];
 
 export default function Contact() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting, isSubmitSuccessful },
-    reset,
-  } = useForm<ContactFormData>({
-    resolver: zodResolver(contactSchema),
-    defaultValues: { name: "", businessName: "", message: "" },
-  });
-
-  const onSubmit = (data: ContactFormData) => {
-    const subject = encodeURIComponent(`Website Enquiry: ${data.package} Package`);
-    const body    = encodeURIComponent(`Hi!\n\nName: ${data.name}\nBusiness: ${data.businessName}\nPackage: ${data.package}\n\nMessage:\n${data.message}`);
-    window.location.href = `mailto:thedigitalpantryza@gmail.com?subject=${subject}&body=${body}`;
-    reset();
-  };
-
-  const inputCls =
-    "w-full bg-gray-50 dark:bg-[#0A0A0A] border border-gray-200 dark:border-white/10 focus:border-[#FF2D87] rounded-xl px-4 py-3.5 font-body text-gray-900 dark:text-white text-sm outline-none transition-colors placeholder:text-gray-400 dark:placeholder:text-white/25";
-  const labelCls =
-    "block font-mono-brand text-gray-400 dark:text-white/40 text-xs tracking-widest uppercase mb-2";
-
   return (
     <main className="pt-20">
       {/* ── Header ──────────────────────────────────── */}
@@ -111,71 +77,14 @@ export default function Contact() {
             <h2 className="font-display font-bold text-gray-900 dark:text-white text-2xl md:text-4xl">
               Send a Message <span className="text-[#FFD700]">★</span>
             </h2>
-            <p className="font-body text-gray-400 dark:text-white/40 mt-2 text-sm">Fill this in and it'll open your email client. Quick and easy.</p>
+            <p className="font-body text-gray-600 dark:text-white/60 mt-2 text-sm md:text-base">
+              Ask for a quote, or pick the free mock-up to see your site before you decide. Fill this in and it comes straight to me.
+            </p>
           </AnimatedSection>
 
-          {isSubmitSuccessful ? (
-            <AnimatedSection>
-              <div className="bg-white dark:bg-[#0f0a0d] border border-gray-200 dark:border-[#FF2D87]/30 rounded-2xl p-10 text-center shadow-sm dark:shadow-none">
-                <div className="text-5xl mb-4 text-[#FFD700]">★</div>
-                <h3 className="font-display font-bold text-gray-900 dark:text-white text-2xl mb-2">Email ready!</h3>
-                <p className="font-body text-gray-500 dark:text-white/50">Your email client should have opened. Send it when you're ready!</p>
-              </div>
-            </AnimatedSection>
-          ) : (
-            <AnimatedSection delay={0.1}>
-              <form
-                onSubmit={handleSubmit(onSubmit)}
-                className="space-y-5 bg-white dark:bg-transparent p-6 md:p-8 rounded-2xl border border-gray-200 dark:border-transparent shadow-sm dark:shadow-none"
-                noValidate
-              >
-                <div className="grid sm:grid-cols-2 gap-5">
-                  <div>
-                    <label htmlFor="name" className={labelCls}>Name</label>
-                    <input id="name" type="text" placeholder="Your name" className={inputCls} data-testid="input-name" {...register("name")} />
-                    {errors.name && <p className="font-body text-[#FF2D87] text-xs mt-1.5">{errors.name.message}</p>}
-                  </div>
-                  <div>
-                    <label htmlFor="businessName" className={labelCls}>Business Name</label>
-                    <input id="businessName" type="text" placeholder="Your business" className={inputCls} data-testid="input-business-name" {...register("businessName")} />
-                    {errors.businessName && <p className="font-body text-[#FF2D87] text-xs mt-1.5">{errors.businessName.message}</p>}
-                  </div>
-                </div>
-
-                <div>
-                  <label htmlFor="package" className={labelCls}>Package</label>
-                  <select id="package" className={`${inputCls} appearance-none cursor-pointer`} data-testid="select-package" defaultValue="" {...register("package")}>
-                    <option value="" disabled>Select a package</option>
-                    <option value="Starter">Starter (R600)</option>
-                    <option value="Standard">Standard (R1 000)</option>
-                    <option value="Premium">Premium (R1 600)</option>
-                    <option value="Pro">Pro (R2 500, with lead automation)</option>
-                  </select>
-                  {errors.package && <p className="font-body text-[#FF2D87] text-xs mt-1.5">{errors.package.message}</p>}
-                </div>
-
-                <div>
-                  <label htmlFor="message" className={labelCls}>Message</label>
-                  <textarea id="message" rows={5} placeholder="Tell me about your business and what you need..." className={`${inputCls} resize-none`} data-testid="textarea-message" {...register("message")} />
-                  {errors.message && <p className="font-body text-[#FF2D87] text-xs mt-1.5">{errors.message.message}</p>}
-                </div>
-
-                <motion.button
-                  type="submit"
-                  disabled={isSubmitting}
-                  data-testid="button-submit"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="w-full bg-[#FF2D87] hover:bg-[#e0006e] text-white font-body font-semibold rounded-full py-4 text-base transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
-                >
-                  Send It ★
-                </motion.button>
-                <p className="font-body text-gray-400 dark:text-white/40 text-xs text-center">
-                  How we use your details: see our <Link href="/privacy" className="text-[#FF2D87] hover:underline">Privacy Notice</Link>.
-                </p>
-              </form>
-            </AnimatedSection>
-          )}
+          <AnimatedSection delay={0.1}>
+            <LeadForm source="contact-page" />
+          </AnimatedSection>
         </div>
       </section>
 

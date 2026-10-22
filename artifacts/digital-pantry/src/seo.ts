@@ -165,7 +165,7 @@ export const PAGES: PageMeta[] = [
     path: "/contact",
     title: "Contact: Get a Website Quote | The Digital Pantry",
     description:
-      "Get a quote for your small business website. WhatsApp +27 72 411 1011 or email thedigitalpantryza@gmail.com. Based in Cape Town, South Africa.",
+      "Get a quote or a free mock-up of your small business website. WhatsApp +27 72 411 1011 or email thedigitalpantryza@gmail.com. Cape Town, South Africa.",
     jsonLd: [
       graph(
         { "@type": "ContactPage", name: "Contact The Digital Pantry", url: `${SITE_URL}/contact`, about: { "@id": ORG_ID } },

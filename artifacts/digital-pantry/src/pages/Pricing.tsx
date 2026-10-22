@@ -3,26 +3,28 @@ import { Check } from "lucide-react";
 import { CutoutWord } from "../components/CutoutWord";
 import { AnimatedSection } from "../components/AnimatedSection";
 import { CTAButton } from "../components/CTAButton";
+import { MockupOffer } from "../components/MockupOffer";
+import { PLAN_PRICES } from "../lib/plans";
 import { FAQ } from "../seo";
 
 const PLANS = [
   {
-    name: "Starter", price: "R600", popular: false, cta: "Get Started ★",
+    name: "Starter", price: PLAN_PRICES.Starter, popular: false, cta: "Get Started ★",
     img: "/images/starter.webp",
     features: ["Single page","Menu section","WhatsApp button","Mobile responsive"],
   },
   {
-    name: "Standard", price: "R1 000", popular: true, cta: "Most Popular ★",
+    name: "Standard", price: PLAN_PRICES.Standard, popular: true, cta: "Most Popular ★",
     img: "/images/standard.webp",
     features: ["Everything in Starter","Locations section","About section","Social links"],
   },
   {
-    name: "Premium", price: "R1 600", popular: false, cta: "Go Premium ★",
+    name: "Premium", price: PLAN_PRICES.Premium, popular: false, cta: "Go Premium ★",
     img: "/images/premium.webp",
     features: ["Everything in Standard","Custom domain setup","Google Business setup","Basic SEO setup","1 month of updates"],
   },
   {
-    name: "Pro", price: "R2 500", popular: false, cta: "Go Pro ★",
+    name: "Pro", price: PLAN_PRICES.Pro, popular: false, cta: "Go Pro ★",
     img: "/images/pro.webp",
     features: ["Everything in Premium","Lead capture form + instant alerts","Leads saved to your Google Sheet","Auto-reply to every enquiry","WhatsApp follow-up button","Tested before handover"],
   },
@@ -193,6 +195,9 @@ export default function Pricing() {
           </div>
         </div>
       </section>
+
+      {/* ── Free mock-up offer ───────────────────────── */}
+      <MockupOffer bgClass="bg-[#FFF8FB] dark:bg-[#0A0A0A]" testId="pricing-mockup-offer" />
 
       {/* ── Bottom CTA ───────────────────────────────── */}
       <section className="bg-[#FFF8FB] dark:bg-[#0A0A0A] py-16 md:py-20 text-center transition-colors duration-300">

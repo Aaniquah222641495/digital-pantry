@@ -34,6 +34,9 @@ Last updated: 2026-10-22. Source page: https://thedigitalpantry.netlify.app/pric
 ## Retainer: R120 per month (optional)
 - Menu updates, schedule changes and small edits
 
+## Free mock-up
+- A free preview of your website, with no obligation to go ahead. Ask on the contact page: https://thedigitalpantry.netlify.app/contact?interest=mockup
+
 ## Contact
 - WhatsApp: +27 72 411 1011
 - Email: thedigitalpantryza@gmail.com
