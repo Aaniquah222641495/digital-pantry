@@ -5,6 +5,7 @@ import { Footer } from "./components/Footer";
 import { WhatsAppBubble } from "./components/WhatsAppBubble";
 import { ThemeProvider } from "./lib/ThemeContext";
 import { lazy, Suspense, useEffect } from "react";
+import { applyMeta } from "./seo";
 
 const Home = lazy(() => import("./pages/Home"));
 const Portfolio = lazy(() => import("./pages/Portfolio"));
@@ -29,6 +30,13 @@ function ScrollToTop() {
   return null;
 }
 
+// Keeps the tab title, description and canonical right when visitors move between pages.
+function RouteMeta() {
+  const [location] = useLocation();
+  useEffect(() => { applyMeta(location); }, [location]);
+  return null;
+}
+
 function Router() {
   return (
     <Switch>
@@ -42,13 +50,14 @@ function Router() {
   );
 }
 
-function App() {
+function App({ ssrPath }: { ssrPath?: string } = {}) {
   return (
     <ThemeProvider>
-      <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+      <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")} ssrPath={ssrPath}>
         <div className="min-h-screen bg-[#FFF8FB] dark:bg-[#0A0A0A] flex flex-col transition-colors duration-300">
           <Navbar />
           <ScrollToTop />
+          <RouteMeta />
           <div className="flex-1">
             <Suspense fallback={<PageLoader />}>
               <Router />

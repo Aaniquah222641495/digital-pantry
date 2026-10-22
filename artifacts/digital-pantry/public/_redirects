@@ -1,8 +1,8 @@
-# Real pages are served with 200. Anything else gets the app (which shows the 404 page) with a real 404 status,
-# so search engines don't index junk URLs. Files that exist (assets, images, sitemap) are served first.
-/            /index.html  200
-/portfolio   /index.html  200
-/pricing     /index.html  200
-/contact     /index.html  200
-/privacy     /index.html  200
-/*           /index.html  404
+# Each page is a prerendered HTML file (scripts/prerender.mjs). Serve it at the clean URL with 200.
+/pricing     /pricing.html    200
+/portfolio   /portfolio.html  200
+/contact     /contact.html    200
+/privacy     /privacy.html    200
+
+# Anything else: the prerendered 404 page with a real 404 status.
+/*           /404.html        404

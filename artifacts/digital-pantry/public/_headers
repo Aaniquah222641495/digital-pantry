@@ -14,3 +14,9 @@
 # Images keep their names when edited, so cache for a week and revalidate.
 /images/*
   Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+
+/llms.txt
+  Content-Type: text/plain; charset=utf-8
+
+/pricing.md
+  Content-Type: text/markdown; charset=utf-8

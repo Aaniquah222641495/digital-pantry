@@ -34,8 +34,8 @@ export default function Portfolio() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
             <AnimatedSection className="flex-1">
-              <p className="font-mono-brand text-[#FF2D87] text-xs tracking-[0.25em] uppercase mb-4">My Work</p>
               <h1 className="font-display font-black text-gray-900 dark:text-white leading-tight" style={{ fontSize: "clamp(2.8rem, 8vw, 6rem)" }}>
+                <span className="block font-normal font-mono-brand text-[#FF2D87] text-xs tracking-[0.25em] uppercase mb-4 leading-normal">Websites Built in Cape Town</span>
                 <CutoutWord word="WORK" /> <span className="text-[#FFD700]">★</span>
               </h1>
               <p className="font-body text-gray-500 dark:text-white/50 text-base md:text-lg mt-4 max-w-lg">
