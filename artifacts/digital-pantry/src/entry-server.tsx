@@ -2,7 +2,7 @@
 import { prerenderToNodeStream } from "react-dom/static";
 import App from "./App";
 
-export { PAGES, NOT_FOUND, headHtml } from "./seo";
+export { PAGES, NOT_FOUND, headHtml, SITE_URL, LAST_UPDATED } from "./seo";
 
 export async function render(path: string): Promise<string> {
   const { prelude } = await prerenderToNodeStream(<App ssrPath={path} />);

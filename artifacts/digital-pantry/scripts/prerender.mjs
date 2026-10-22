@@ -12,6 +12,7 @@ const serverEntry = path.resolve(here, "../dist/server/entry-server.js");
 const { render, PAGES, NOT_FOUND, headHtml, SITE_URL, LAST_UPDATED } = await import(pathToFileURL(serverEntry).href);
 const template = await readFile(path.join(out, "index.html"), "utf8");
 
+if (!SITE_URL || !LAST_UPDATED) throw new Error("entry-server.tsx must export SITE_URL and LAST_UPDATED");
 if (!template.includes("<!--seo-->") || !template.includes('<div id="root"></div>')) {
   throw new Error("index.html is missing the <!--seo--> marker or the empty #root div");
 }
