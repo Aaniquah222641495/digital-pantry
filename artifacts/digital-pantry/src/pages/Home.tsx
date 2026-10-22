@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { Link } from "wouter";
 import { CutoutWord } from "../components/CutoutWord";
 import { CTAButton } from "../components/CTAButton";
@@ -36,8 +36,8 @@ const PRICING_PREVIEW = [
   { label: "Pro", price: "R2 500", popular: false },
 ];
 
-const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.12 } } };
-const fadeUp = {
+const stagger: Variants = { hidden: {}, show: { transition: { staggerChildren: 0.12 } } };
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 30 },
   show: {
     opacity: 1,

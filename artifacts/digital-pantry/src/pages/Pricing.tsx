@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { Check } from "lucide-react";
 import { CutoutWord } from "../components/CutoutWord";
 import { AnimatedSection } from "../components/AnimatedSection";
@@ -35,8 +35,8 @@ const FAQ_ITEMS = [
   { question: "Does Pro have monthly fees?",     answer: "No. Your lead system runs on free Google tools that you own. Every enquiry lands in your inbox and your own Sheet.", side: "left" },
 ];
 
-const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.1 } } };
-const fadeUp = { hidden: { opacity: 0, y: 28 }, show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } } };
+const stagger: Variants = { hidden: {}, show: { transition: { staggerChildren: 0.1 } } };
+const fadeUp: Variants = { hidden: { opacity: 0, y: 28 }, show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } } };
 
 export default function Pricing() {
   return (

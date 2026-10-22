@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 import { CutoutWord } from "../components/CutoutWord";
 import { AnimatedSection } from "../components/AnimatedSection";
@@ -22,8 +22,8 @@ const COMING_SOON = [
   { name: "Kremco CPT",      category: "Food & Beverage" },
 ];
 
-const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.12 } } };
-const fadeUp = { hidden: { opacity: 0, y: 28 }, show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } } };
+const stagger: Variants = { hidden: {}, show: { transition: { staggerChildren: 0.12 } } };
+const fadeUp: Variants = { hidden: { opacity: 0, y: 28 }, show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } } };
 
 export default function Portfolio() {
   return (
