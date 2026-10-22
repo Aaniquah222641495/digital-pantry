@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://thedigitalpantry.netlify.app/sitemap.xml

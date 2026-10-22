@@ -1,1 +1,8 @@
-/* /index.html 200
+# Real pages are served with 200. Anything else gets the app (which shows the 404 page) with a real 404 status,
+# so search engines don't index junk URLs. Files that exist (assets, images, sitemap) are served first.
+/            /index.html  200
+/portfolio   /index.html  200
+/pricing     /index.html  200
+/contact     /index.html  200
+/privacy     /index.html  200
+/*           /index.html  404
