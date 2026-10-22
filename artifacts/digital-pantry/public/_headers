@@ -1,0 +1,16 @@
+# Netlify headers. Security headers on every response (STANDARDS non-negotiable).
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self' mailto:; object-src 'none'; upgrade-insecure-requests
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
+  Cross-Origin-Opener-Policy: same-origin
+
+# Vite puts a content hash in every built asset name, so they never change: cache for a year.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Images keep their names when edited, so cache for a week and revalidate.
+/images/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
