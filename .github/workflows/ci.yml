@@ -18,7 +18,7 @@ jobs:
         with:
           node-version: 24
       - name: Install pnpm (same version as the lockfile was made with)
-        run: npm install -g pnpm@9.15.9 && pnpm -v
+        run: npm install -g pnpm@10.34.7 && pnpm -v
       - run: pnpm install --frozen-lockfile
       - name: Typecheck
         run: pnpm run typecheck

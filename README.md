@@ -10,7 +10,7 @@ Studio site for Digital Pantry Web Studio: portfolio, pricing and contact. Live 
 
 ## Run it locally
 
-Needs Node 24 and pnpm 9.
+Needs Node 24 and pnpm 10 (the lockfile and the overrides in `pnpm-workspace.yaml` need pnpm 10; pnpm 9 ignores them).
 
 ```sh
 pnpm install
