@@ -6,7 +6,7 @@ Studio site for Digital Pantry Web Studio: portfolio, pricing and contact. Live 
 
 - **The live site** is `artifacts/digital-pantry`: React + Vite + Tailwind, built to static files and hosted on Netlify.
 - It has no backend. The contact form opens the visitor's own email app (`mailto:`); WhatsApp links go to wa.me. No cookies, no analytics.
-- `artifacts/api-server`, `lib/*` and `artifacts/mockup-sandbox` are Replit scaffolding. The live site does not use them.
+- `.replit` is kept so the site can still be opened in Replit. The unused Replit scaffolding (API server, database, codegen, mockup sandbox) was removed on 2026-10-22.
 
 ## Run it locally
 
