@@ -1,0 +1,246 @@
+// One source of truth for every page's title, description and structured data.
+// Used at build time (scripts/prerender.mjs writes it into each page's HTML) and in the
+// browser (RouteMeta keeps the tab title and tags right when visitors click between pages).
+// Only state facts that are already on the site. Update `LAST_UPDATED` when content changes.
+
+export const SITE_URL = "https://thedigitalpantry.netlify.app";
+export const SITE_NAME = "The Digital Pantry";
+export const LAST_UPDATED = "2026-10-22";
+const OG_IMAGE = `${SITE_URL}/opengraph.jpg`;
+const EMAIL = "thedigitalpantryza@gmail.com";
+const PHONE = "+27724111011";
+
+export interface PageMeta {
+  path: string;
+  title: string;
+  description: string;
+  noindex?: boolean;
+  jsonLd: object[];
+}
+
+const ORG_ID = `${SITE_URL}/#business`;
+const PERSON_ID = `${SITE_URL}/#aaniquah`;
+
+const PLANS = [
+  { name: "Starter", price: 600, includes: "Single page, menu section, WhatsApp button, mobile responsive." },
+  { name: "Standard", price: 1000, includes: "Everything in Starter plus locations, about section and social links." },
+  { name: "Premium", price: 1600, includes: "Everything in Standard plus custom domain setup, Google Business setup, basic SEO setup and 1 month of updates." },
+  { name: "Pro", price: 2500, includes: "Everything in Premium plus a lead capture form with instant alerts, leads saved to your Google Sheet, an auto-reply to every enquiry and a WhatsApp follow-up button, tested before handover." },
+];
+
+// Shown on the pricing page (Pricing.tsx imports this) and used for FAQPage structured data,
+// so the two always match word for word, as Google requires.
+export const FAQ = [
+  { q: "Do I need to know how to code?", a: "No! That's literally my job. You handle the business, I handle the website." },
+  { q: "Do I keep my WhatsApp number?", a: "Yes! We just add a click-to-WhatsApp button on your site. Easy." },
+  { q: "How long does it take?", a: "Most projects are done within 5 to 7 business days." },
+  { q: "What if I need changes later?", a: "That's what the R120/month retainer is for. Small edits, big peace of mind." },
+  { q: "Does Pro have monthly fees?", a: "No. Your lead system runs on free Google tools that you own. Every enquiry lands in your inbox and your own Sheet." },
+];
+
+const business = {
+  "@type": "ProfessionalService",
+  "@id": ORG_ID,
+  name: SITE_NAME,
+  alternateName: "Digital Pantry Web Studio",
+  slogan: "Coded in Pink. Built to Perform.",
+  description:
+    "Cape Town web studio building custom websites from scratch for South African small businesses. Packages from R600 to R2 500, most projects done in 5 to 7 business days.",
+  url: `${SITE_URL}/`,
+  logo: `${SITE_URL}/images/logo-nobg.webp`,
+  image: OG_IMAGE,
+  email: EMAIL,
+  telephone: PHONE,
+  priceRange: "R600 - R2 500",
+  currenciesAccepted: "ZAR",
+  address: { "@type": "PostalAddress", addressLocality: "Cape Town", addressRegion: "Western Cape", addressCountry: "ZA" },
+  areaServed: [{ "@type": "City", name: "Cape Town" }, { "@type": "Country", name: "South Africa" }],
+  knowsAbout: ["Web design", "Web development", "React", "TypeScript", "Small business websites", "Lead capture automation"],
+  founder: { "@id": PERSON_ID },
+};
+
+const person = {
+  "@type": "Person",
+  "@id": PERSON_ID,
+  name: "Aaniquah",
+  jobTitle: "Software developer and founder",
+  worksFor: { "@id": ORG_ID },
+  alumniOf: { "@type": "CollegeOrUniversity", name: "Cape Peninsula University of Technology" },
+  award: ["Cum Laude graduate", "1st place, Vodacom Bursar Hackathon", "3rd place, GirlCode", "Golden Key International Honour Society member"],
+  homeLocation: { "@type": "City", name: "Cape Town" },
+};
+
+const crumbs = (name: string, path: string) => ({
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
+    { "@type": "ListItem", position: 2, name, item: `${SITE_URL}${path}` },
+  ],
+});
+
+const graph = (...nodes: object[]) => ({ "@context": "https://schema.org", "@graph": nodes });
+
+export const PAGES: PageMeta[] = [
+  {
+    path: "/",
+    title: "Web Developer in Cape Town | The Digital Pantry",
+    description:
+      "Custom websites for South African small businesses, built from scratch by Cape Town developer Aaniquah. From R600, most done in 5 to 7 business days.",
+    jsonLd: [
+      graph(
+        { "@type": "WebSite", "@id": `${SITE_URL}/#website`, url: `${SITE_URL}/`, name: SITE_NAME, publisher: { "@id": ORG_ID }, inLanguage: "en-ZA" },
+        business,
+        person,
+      ),
+    ],
+  },
+  {
+    path: "/pricing",
+    title: "Website Prices in South Africa from R600 | Digital Pantry",
+    description:
+      "Small business website packages: Starter R600, Standard R1 000, Premium R1 600, Pro R2 500 with lead automation. Optional R120/month for updates.",
+    jsonLd: [
+      graph(
+        {
+          "@type": "Service",
+          name: "Custom small business website",
+          serviceType: "Web design and development",
+          provider: { "@id": ORG_ID },
+          areaServed: { "@type": "Country", name: "South Africa" },
+          hasOfferCatalog: {
+            "@type": "OfferCatalog",
+            name: "Website packages",
+            itemListElement: [
+              ...PLANS.map((p) => ({
+                "@type": "Offer",
+                name: `${p.name} website`,
+                description: p.includes,
+                price: p.price,
+                priceCurrency: "ZAR",
+                url: `${SITE_URL}/pricing`,
+              })),
+              {
+                "@type": "Offer",
+                name: "Monthly retainer",
+                description: "Menu updates, schedule changes and small edits.",
+                priceSpecification: { "@type": "UnitPriceSpecification", price: 120, priceCurrency: "ZAR", unitText: "MONTH" },
+                url: `${SITE_URL}/pricing`,
+              },
+            ],
+          },
+        },
+        {
+          "@type": "FAQPage",
+          mainEntity: FAQ.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+        },
+        crumbs("Pricing", "/pricing"),
+      ),
+    ],
+  },
+  {
+    path: "/portfolio",
+    title: "Portfolio: Websites Built in Cape Town | The Digital Pantry",
+    description:
+      "Live websites built from scratch for South African small businesses, including STUFF'D Bagels (WhatsApp ordering) and Beginners Madrasah.",
+    jsonLd: [
+      graph(
+        {
+          "@type": "CollectionPage",
+          name: "The Digital Pantry portfolio",
+          url: `${SITE_URL}/portfolio`,
+          about: { "@id": ORG_ID },
+          mainEntity: {
+            "@type": "ItemList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, item: { "@type": "WebSite", name: "STUFF'D Bagels", url: "https://stuffdbagels.netlify.app", creator: { "@id": ORG_ID } } },
+              { "@type": "ListItem", position: 2, item: { "@type": "WebSite", name: "Beginners Madrasah", url: "https://beginnersmadrasah.co.za/", creator: { "@id": ORG_ID } } },
+            ],
+          },
+        },
+        crumbs("Portfolio", "/portfolio"),
+      ),
+    ],
+  },
+  {
+    path: "/contact",
+    title: "Contact: Get a Website Quote | The Digital Pantry",
+    description:
+      "Get a quote for your small business website. WhatsApp +27 72 411 1011 or email thedigitalpantryza@gmail.com. Based in Cape Town, South Africa.",
+    jsonLd: [
+      graph(
+        { "@type": "ContactPage", name: "Contact The Digital Pantry", url: `${SITE_URL}/contact`, about: { "@id": ORG_ID } },
+        {
+          ...business,
+          contactPoint: { "@type": "ContactPoint", contactType: "sales", telephone: PHONE, email: EMAIL, availableLanguage: "English", areaServed: "ZA" },
+        },
+        crumbs("Contact", "/contact"),
+      ),
+    ],
+  },
+  {
+    path: "/privacy",
+    title: "Privacy Notice (POPIA) | The Digital Pantry",
+    description:
+      "How The Digital Pantry collects, uses and protects personal information under South Africa's POPIA, and how to contact us about your rights.",
+    jsonLd: [graph(crumbs("Privacy Notice", "/privacy"))],
+  },
+];
+
+export const NOT_FOUND: PageMeta = {
+  path: "/404",
+  title: "Page not found | The Digital Pantry",
+  description: "This page isn't in the pantry. Head back to the home page or get in touch.",
+  noindex: true,
+  jsonLd: [],
+};
+
+export function metaFor(path: string): PageMeta {
+  const clean = path.replace(/\/+$/, "") || "/";
+  return PAGES.find((p) => p.path === clean) ?? NOT_FOUND;
+}
+
+const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+/** The <head> tags for one page, as HTML. Used by the prerender script. */
+export function headHtml(m: PageMeta): string {
+  const url = m.noindex ? undefined : `${SITE_URL}${m.path === "/" ? "/" : m.path}`;
+  const tags = [
+    `<title>${esc(m.title)}</title>`,
+    `<meta name="description" content="${esc(m.description)}" />`,
+    `<meta name="robots" content="${m.noindex ? "noindex, follow" : "index, follow, max-image-preview:large"}" />`,
+    url ? `<link rel="canonical" href="${url}" />` : "",
+    `<meta property="og:type" content="website" />`,
+    `<meta property="og:site_name" content="${SITE_NAME}" />`,
+    `<meta property="og:locale" content="en_ZA" />`,
+    `<meta property="og:title" content="${esc(m.title)}" />`,
+    `<meta property="og:description" content="${esc(m.description)}" />`,
+    url ? `<meta property="og:url" content="${url}" />` : "",
+    `<meta property="og:image" content="${OG_IMAGE}" />`,
+    `<meta property="og:image:width" content="1280" />`,
+    `<meta property="og:image:height" content="720" />`,
+    `<meta property="og:image:alt" content="The Digital Pantry: Coded in Pink. Built to Perform." />`,
+    `<meta name="twitter:card" content="summary_large_image" />`,
+    `<meta name="twitter:title" content="${esc(m.title)}" />`,
+    `<meta name="twitter:description" content="${esc(m.description)}" />`,
+    `<meta name="twitter:image" content="${OG_IMAGE}" />`,
+    ...m.jsonLd.map((j) => `<script type="application/ld+json">${JSON.stringify(j).replace(/</g, "\\u003c")}</script>`),
+  ];
+  return tags.filter(Boolean).join("\n    ");
+}
+
+/** Keeps the browser tab title and key tags right after client-side navigation. */
+export function applyMeta(path: string) {
+  const m = metaFor(path);
+  document.title = m.title;
+  const set = (sel: string, attr: string, val: string) => document.head.querySelector(sel)?.setAttribute(attr, val);
+  set('meta[name="description"]', "content", m.description);
+  set('meta[property="og:title"]', "content", m.title);
+  set('meta[property="og:description"]', "content", m.description);
+  set('meta[name="twitter:title"]', "content", m.title);
+  set('meta[name="twitter:description"]', "content", m.description);
+  if (!m.noindex) {
+    const url = `${SITE_URL}${m.path === "/" ? "/" : m.path}`;
+    set('link[rel="canonical"]', "href", url);
+    set('meta[property="og:url"]', "content", url);
+  }
+}

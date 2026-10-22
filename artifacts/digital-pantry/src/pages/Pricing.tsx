@@ -3,6 +3,7 @@ import { Check } from "lucide-react";
 import { CutoutWord } from "../components/CutoutWord";
 import { AnimatedSection } from "../components/AnimatedSection";
 import { CTAButton } from "../components/CTAButton";
+import { FAQ } from "../seo";
 
 const PLANS = [
   {
@@ -27,13 +28,7 @@ const PLANS = [
   },
 ];
 
-const FAQ_ITEMS = [
-  { question: "Do I need to know how to code?",  answer: "No! That's literally my job. You handle the business, I handle the website.", side: "left"  },
-  { question: "Do I keep my WhatsApp number?",   answer: "Yes! We just add a click-to-WhatsApp button on your site. Easy.",             side: "right" },
-  { question: "How long does it take?",           answer: "Most projects are done within 5 to 7 business days.",                         side: "left"  },
-  { question: "What if I need changes later?",   answer: "That's what the R120/month retainer is for. Small edits, big peace of mind.", side: "right" },
-  { question: "Does Pro have monthly fees?",     answer: "No. Your lead system runs on free Google tools that you own. Every enquiry lands in your inbox and your own Sheet.", side: "left" },
-];
+const FAQ_ITEMS = FAQ.map((f, i) => ({ question: f.q, answer: f.a, side: i % 2 === 0 ? "left" : "right" }));
 
 const stagger: Variants = { hidden: {}, show: { transition: { staggerChildren: 0.1 } } };
 const fadeUp: Variants = { hidden: { opacity: 0, y: 28 }, show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } } };
@@ -47,8 +42,8 @@ export default function Pricing() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
             <AnimatedSection className="flex-1">
-              <p className="font-mono-brand text-[#FF2D87] text-xs tracking-[0.25em] uppercase mb-4">Investment</p>
               <h1 className="font-display font-black text-gray-900 dark:text-white leading-tight" style={{ fontSize: "clamp(2.8rem, 8vw, 6rem)" }}>
+                <span className="block font-normal font-mono-brand text-[#FF2D87] text-xs tracking-[0.25em] uppercase mb-4 leading-normal">Website Prices in South Africa</span>
                 <CutoutWord word="PRICING" /> <span className="text-[#FFD700]">★</span>
               </h1>
               <p className="font-body text-gray-500 dark:text-white/50 text-base md:text-lg mt-4 max-w-xl">

@@ -31,11 +31,20 @@ NODE_ENV=production PORT=3000 BASE_PATH=/ pnpm --filter @workspace/digital-pantr
 - GitHub Actions (`.github/workflows/ci.yml`) runs typecheck, build and a dependency audit on every pull request.
 - Dependabot opens weekly update PRs.
 
+## SEO and AI search
+
+- Every page is **prerendered** at build time (`scripts/prerender.mjs`), so Google, Bing and AI crawlers (ChatGPT, Claude, Perplexity, which mostly don't run JavaScript) get the full content, title, description and structured data in plain HTML. React then hydrates it in the browser.
+- **All titles, descriptions, structured data (JSON-LD) and the FAQ live in `src/seo.ts`.** The sitemap is generated from it. Keep titles under 60 characters and descriptions under 155, and only state facts that are on the site.
+- **Adding a page:** add the route in `App.tsx`, an entry in `PAGES` in `src/seo.ts`, and a line in `public/_redirects`. Update `public/llms.txt`.
+- **Changing prices:** update `Pricing.tsx`, `src/seo.ts` (PLANS) and `public/pricing.md`. The build fails if the pricing page stops showing a price the structured data uses.
+- `public/llms.txt` (summary for AI assistants), `public/pricing.md` (prices as plain text), `public/robots.txt` (all crawlers allowed, AI bots named).
+- Bump `LAST_UPDATED` in `src/seo.ts` when content changes (it feeds the sitemap).
+
 ## Netlify files (in `artifacts/digital-pantry/public/`)
 
 - `_headers`: security headers (CSP and friends) and caching. If you add a new outside service (fonts, embeds, scripts), add its domain to the Content-Security-Policy or the browser will block it.
-- `_redirects`: real pages return 200; anything else shows the 404 page with a real 404 status. **Add a line here when you add a page**, plus a `<url>` in `sitemap.xml`.
-- `robots.txt`, `sitemap.xml`, `opengraph.jpg` (link preview image).
+- `_redirects`: clean URLs (`/pricing`) serve the prerendered `pricing.html`; anything else serves `404.html` with a real 404 status.
+- `opengraph.jpg` is the link preview image for every page.
 
 ## Releasing
 

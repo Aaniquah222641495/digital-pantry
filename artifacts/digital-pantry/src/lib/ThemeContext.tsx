@@ -10,13 +10,15 @@ interface ThemeContextValue {
 const ThemeContext = createContext<ThemeContextValue>({ theme: "dark", toggle: () => {} });
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>(() => {
+  // Start dark (the default, and what the prerendered HTML uses), then apply a saved choice after load.
+  const [theme, setTheme] = useState<Theme>("dark");
+
+  useEffect(() => {
     try {
-      return (localStorage.getItem("dp-theme") as Theme) ?? "dark";
-    } catch {
-      return "dark";
-    }
-  });
+      const saved = localStorage.getItem("dp-theme");
+      if (saved === "light" || saved === "dark") setTheme(saved);
+    } catch {}
+  }, []);
 
   useEffect(() => {
     const root = document.documentElement;

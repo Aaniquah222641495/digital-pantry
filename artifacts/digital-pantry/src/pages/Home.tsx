@@ -67,18 +67,14 @@ export default function Home() {
             animate="show"
             className="order-2 md:order-1"
           >
-            <motion.p
-              variants={fadeUp}
-              className="font-mono-brand text-[#FF2D87] text-xs tracking-[0.25em] uppercase mb-5"
-            >
-              Cape Town Web Developer
-            </motion.p>
-
             <motion.h1
               variants={fadeUp}
               className="font-display font-black text-gray-900 dark:text-white leading-[1.05] mb-4"
               style={{ fontSize: "clamp(2.2rem, 6vw, 4.8rem)" }}
             >
+              <span className="block font-normal font-mono-brand text-[#FF2D87] text-xs tracking-[0.25em] uppercase mb-5 leading-normal">
+                Cape Town Web Developer
+              </span>
               Your website,
               <br />
               freshly <CutoutWord word="COOKED" baseSize="1em" /> ★

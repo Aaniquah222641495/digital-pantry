@@ -1,0 +1,20 @@
+# The Digital Pantry
+
+> Cape Town web studio run by software developer Aaniquah. Builds custom websites from scratch (React, TypeScript, Tailwind, hosted on Netlify) for South African small businesses. Packages from R600 to R2 500 once-off; most projects are done in 5 to 7 business days.
+
+Brand line: "Coded in Pink. Built to Perform." Based in Cape Town, Western Cape, South Africa. Works with small businesses across South Africa.
+
+## Key facts
+- Services: custom small business websites, WhatsApp ordering buttons, custom domain and Google Business setup, basic SEO, lead capture automation (Pro).
+- Prices (ZAR, once-off): Starter R600, Standard R1 000, Premium R1 600, Pro R2 500. Optional retainer R120/month for small edits.
+- Turnaround: most projects within 5 to 7 business days.
+- No coding knowledge needed from the client.
+- Contact: WhatsApp +27 72 411 1011, email thedigitalpantryza@gmail.com.
+
+## Pages
+- [Home](https://thedigitalpantry.netlify.app/): who we are, services, recent work, about Aaniquah
+- [Pricing](https://thedigitalpantry.netlify.app/pricing): all packages, what each includes, FAQ
+- [Pricing (plain text)](https://thedigitalpantry.netlify.app/pricing.md): the same prices in a machine-readable file
+- [Portfolio](https://thedigitalpantry.netlify.app/portfolio): live client sites (STUFF'D Bagels, Beginners Madrasah)
+- [Contact](https://thedigitalpantry.netlify.app/contact): WhatsApp, email and enquiry form
+- [Privacy notice](https://thedigitalpantry.netlify.app/privacy): POPIA privacy notice
