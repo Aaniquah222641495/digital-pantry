@@ -384,3 +384,9 @@ html.dp-theme-shift, html.dp-theme-shift * {
   input:not([type="submit"]):not([type="button"]):not([type="checkbox"]):not([type="radio"]), textarea { cursor: text; }
   button:disabled { cursor: not-allowed; }
 }
+
+/* Seam badge spin (Home chefs section) */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes dp-spin { to { transform: rotate(360deg); } }
+  .dp-spin { animation: dp-spin 22s linear infinite; transform-origin: 50% 50%; }
+}

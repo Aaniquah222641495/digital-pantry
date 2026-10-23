@@ -38,11 +38,6 @@ const CHEFS = [
   },
 ] as const;
 
-const PROMISES = [
-  ["You talk to the chefs", "The two people on your calls are the two people making your site, from the first chat to launch day."],
-  ["One kitchen, no handoffs", "Design and code happen side by side, so nothing gets lost between how it looks and how it works."],
-  ["Made from scratch", "Every site starts from your brand and your customers, never from a template."],
-] as const;
 
 const WORK = [
   {
@@ -161,70 +156,129 @@ function Hero() {
   );
 }
 
+// Rotating badge that sits on the seam between the two chefs (static for reduced motion).
+function SeamBadge() {
+  return (
+    <div aria-hidden="true" className="pointer-events-none absolute bottom-14 left-1/2 z-20 hidden h-36 w-36 -translate-x-1/2 md:block">
+      <div className="absolute inset-0 rounded-full bg-[#FFD43B] shadow-[0_20px_50px_-15px_rgba(12,11,13,0.55)]" />
+      <svg viewBox="0 0 144 144" className="dp-spin absolute inset-0 h-full w-full">
+        <defs>
+          <path id="seam-circle" d="M72,72 m-52,0 a52,52 0 1,1 104,0 a52,52 0 1,1 -104,0" />
+        </defs>
+        <text className="dp-cut-bebas" fontSize="17" letterSpacing="2.6" fill="#161214">
+          <textPath href="#seam-circle">TWO CHEFS ★ ONE KITCHEN ★ TWO CHEFS ★ ONE KITCHEN ★</textPath>
+        </text>
+      </svg>
+      <span className="absolute inset-0 grid place-items-center text-3xl text-[#161214]">★</span>
+    </div>
+  );
+}
+
 function Chefs() {
   return (
     <section aria-labelledby="chefs-heading" className="mx-auto max-w-[1320px] px-5 py-24 sm:px-8 md:py-32">
-      <Reveal>
-        <h2 id="chefs-heading" className={H2}>
-          Meet the <CutoutWord word="CHEFS" />
-        </h2>
-        <p className="mt-5 max-w-[54ch] text-lg leading-relaxed text-dp-muted">
-          Two chefs, one kitchen. One of us codes in pink, the other designs in the dark, and you work with both of us directly. Flip the switch at the top to see the studio through either of our eyes.
-        </p>
+      <Reveal className="flex flex-wrap items-end justify-between gap-8">
+        <div>
+          <h2 id="chefs-heading" className={H2}>
+            Meet the <CutoutWord word="CHEFS" />
+          </h2>
+          <p className="mt-5 max-w-[48ch] text-lg leading-relaxed text-dp-muted">
+            One of us codes in pink, the other designs in the dark, and you work with both of us directly.
+          </p>
+        </div>
+        <p className="text-[14px] text-dp-muted">Flip the switch at the top to see the studio through either of our eyes.</p>
       </Reveal>
 
-      <div className="mt-14 grid overflow-hidden rounded-[32px] border border-dp-line md:grid-cols-2">
+      {/* The two halves. On desktop the half you hover gently takes more of the counter. */}
+      <div className="relative mt-14 flex flex-col overflow-hidden rounded-[36px] md:h-[620px] md:flex-row">
         {CHEFS.map((c, i) => {
           const t = c.light
-            ? { bg: "bg-[#FCE8F0]", ink: "text-[#161214]", muted: "text-[#463E44]", label: "text-[#61575E]", accent: "text-[#B32F68]" }
-            : { bg: "bg-[#0C0B0D]", ink: "text-[#F3EFF2]", muted: "text-[#C9C2C7]", label: "text-[#A49CA2]", accent: "text-[#FFA7D2]" };
+            ? { bg: "bg-[#FCE8F0]", ink: "text-[#161214]", muted: "text-[#463E44]", label: "border-[#161214]/15 text-[#463E44]", accent: "text-[#B32F68]", glow: "bg-[radial-gradient(closest-side,#FFA7D2,transparent)]" }
+            : { bg: "bg-[#0C0B0D]", ink: "text-[#F3EFF2]", muted: "text-[#C9C2C7]", label: "border-white/15 text-[#C9C2C7]", accent: "text-[#FFA7D2]", glow: "bg-[radial-gradient(closest-side,rgba(255,167,210,0.28),transparent)]" };
           return (
-            <Reveal as="article" key={c.name} delay={i * 0.1} className={`flex flex-col gap-10 p-8 sm:p-12 ${t.bg} ${t.ink}`}>
-              <div className="flex items-start justify-between gap-6">
-                <span className={`font-mono text-[12px] ${t.label}`}>{c.side}</span>
+            <Reveal
+              as="article"
+              key={c.name}
+              delay={i * 0.1}
+              className={`group relative isolate flex min-h-[560px] flex-1 flex-col overflow-hidden p-8 transition-[flex-grow] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] sm:p-12 md:hover:flex-[1.22] ${c.light ? "md:pr-24" : "md:pl-24"} ${t.bg} ${t.ink}`}
+            >
+              <div aria-hidden="true" className={`absolute -bottom-1/4 ${c.light ? "-right-1/4" : "-left-1/4"} -z-10 h-[90%] w-[90%] rounded-full ${t.glow}`} />
+              <span className={`inline-flex w-fit items-center gap-2 rounded-full border px-3.5 py-1.5 text-[13px] ${t.label}`}>
+                <span aria-hidden="true">{c.light ? "☀" : "☾"}</span> {c.side}
+              </span>
+
+              <p className={`mt-8 max-w-[9ch] text-[clamp(2.6rem,5vw,4.5rem)] font-semibold leading-[0.95] tracking-[-0.05em] ${t.accent}`}>{c.owns}.</p>
+              {/* Pixel portrait, tucked into the top corner beside the headline */}
+              <div className={`pointer-events-none absolute right-8 top-8 w-24 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-1.5 sm:right-12 sm:top-12 sm:w-36 md:w-44 ${c.light ? "rotate-[-4deg] md:right-24 group-hover:rotate-0" : "rotate-[4deg] group-hover:rotate-0"}`}>
                 {c.light ? (
-                  <img src="/images/mascot.webp" alt="" width={600} height={600} loading="lazy" className="h-24 w-24 rounded-2xl bg-[#FFF7FA] object-contain" />
+                  <img src="/images/mascot.webp" alt="" width={600} height={600} loading="lazy" className="aspect-square w-full rounded-[22px] border-[3px] border-white bg-[#FFF7FA] object-contain shadow-[0_24px_50px_-24px_rgba(179,47,104,0.55)]" />
                 ) : IMAAN_AVATAR ? (
-                  <img src={IMAAN_AVATAR} alt="" loading="lazy" className="h-24 w-24 rounded-2xl object-contain" />
+                  <img src={IMAAN_AVATAR} alt="" loading="lazy" className="aspect-square w-full rounded-[22px] border-[3px] border-[#2A262B] object-contain" />
                 ) : (
-                  <Monogram className="h-24 w-24 rounded-2xl !bg-[#1B181C] text-3xl" />
+                  <Monogram className="aspect-square w-full rounded-[22px] border-[3px] border-[#2A262B] !bg-[#1B181C] text-[clamp(1.8rem,3.4vw,3rem)]" />
                 )}
               </div>
-              <div className="flex flex-1 flex-col">
-                <p className={`text-[clamp(1.6rem,2.6vw,2.2rem)] font-semibold tracking-[-0.035em] ${t.accent}`}>{c.owns}.</p>
-                <h3 className="mt-6 text-[1.35rem] font-semibold tracking-[-0.03em]">{c.name}</h3>
-                <p className={`text-[14px] ${t.label}`}>{c.role}</p>
-                <p className={`mt-5 max-w-[46ch] leading-relaxed ${t.muted}`}>{c.body}</p>
-                <p
-                  className={`mt-8 inline-flex w-fit items-center gap-2 rounded-full px-4 py-2 text-[13px] font-medium ${
-                    c.light ? "bg-[#FFD43B] text-[#161214] shadow-[0_10px_24px_-12px_rgba(224,176,0,0.8)]" : "border border-white/12 text-[#F3EFF2]"
-                  }`}
-                >
-                  <span aria-hidden="true" className={c.light ? "" : "text-[#FFA7D2]"}>★</span> {c.proof}
-                </p>
+
+              <div className="relative z-10 mt-auto pt-10">
+                <div className="min-w-0 flex-1">
+                  <h3 className="text-[1.5rem] font-semibold tracking-[-0.03em]">{c.name}</h3>
+                  <p className={`text-[14px] ${c.light ? "text-[#61575E]" : "text-[#A49CA2]"}`}>{c.role}</p>
+                  <p className={`mt-4 max-w-[40ch] leading-relaxed ${t.muted}`}>{c.body}</p>
+                  <p
+                    className={`mt-7 inline-flex w-fit items-center gap-2 rounded-full px-4 py-2 text-[13px] font-medium ${
+                      c.light ? "bg-[#FFD43B] text-[#161214] shadow-[0_10px_24px_-12px_rgba(224,176,0,0.8)]" : "border border-white/15 bg-white/[0.04] text-[#F3EFF2]"
+                    }`}
+                  >
+                    <span aria-hidden="true" className={c.light ? "" : "text-[#FFA7D2]"}>★</span> {c.proof}
+                  </p>
+                </div>
               </div>
             </Reveal>
           );
         })}
+        <SeamBadge />
       </div>
 
-      <ul className="mt-14 grid gap-8 md:grid-cols-3">
-        {PROMISES.map(([title, body], i) => (
-          <Reveal as="li" key={title} delay={i * 0.08} className="border-t border-dp-line pt-6">
-            <p className="text-[1.15rem] font-semibold tracking-[-0.02em]">
-              <span aria-hidden="true" className="mr-2 text-dp-accent">★</span>
-              {title}
-            </p>
-            <p className="mt-2 max-w-[38ch] leading-relaxed text-dp-muted">{body}</p>
-          </Reveal>
-        ))}
-      </ul>
+      {/* Promises as colour blocks: blush, ink, butter. */}
+      <div className="mt-5 grid gap-5 md:grid-cols-6">
+        <Reveal className="relative overflow-hidden rounded-[32px] bg-[#FDD2DE] p-8 text-[#161214] sm:p-10 md:col-span-4">
+          <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <h3 className="text-[clamp(1.8rem,3vw,2.6rem)] font-semibold leading-[1] tracking-[-0.04em]">You talk to the chefs.</h3>
+              <p className="mt-4 max-w-[40ch] leading-relaxed text-[#463E44]">
+                The two people on your calls are the two people making your site, from the first chat to launch day.
+              </p>
+            </div>
+            <div aria-hidden="true" className="flex shrink-0 -space-x-4">
+              <img src="/images/mascot.webp" alt="" width={600} height={600} loading="lazy" className="h-20 w-20 rotate-[-6deg] rounded-[20px] border-[3px] border-white bg-[#FFF7FA] object-contain" />
+              {IMAAN_AVATAR ? (
+                <img src={IMAAN_AVATAR} alt="" loading="lazy" className="h-20 w-20 rotate-[6deg] rounded-[20px] border-[3px] border-[#2A262B] object-contain" />
+              ) : (
+                <Monogram className="h-20 w-20 rotate-[6deg] rounded-[20px] border-[3px] border-[#2A262B] text-2xl" />
+              )}
+            </div>
+          </div>
+        </Reveal>
 
-      <Reveal className="mt-14">
-        <p className="text-[clamp(1.25rem,2vw,1.6rem)] font-medium tracking-[-0.02em] text-dp-ink">
-          Women-led, Cape Town made. Girl power is kind of the whole point here. <span className="text-dp-accent">★</span>
-        </p>
-      </Reveal>
+        <Reveal delay={0.08} className="relative overflow-hidden rounded-[32px] bg-[#141215] p-8 text-[#F3EFF2] sm:p-10 md:col-span-2">
+          <div aria-hidden="true" className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-[radial-gradient(closest-side,rgba(255,167,210,0.35),transparent)]" />
+          <p aria-hidden="true" className="dp-cut-marker text-[2.2rem] leading-none text-[#FFA7D2]">1 kitchen</p>
+          <h3 className="mt-6 text-[clamp(1.5rem,2.2vw,1.9rem)] font-semibold leading-[1.05] tracking-[-0.035em]">No handoffs.</h3>
+          <p className="mt-3 leading-relaxed text-[#C9C2C7]">Design and code happen side by side, so nothing gets lost between how it looks and how it works.</p>
+        </Reveal>
+
+        <Reveal delay={0.12} className="relative overflow-hidden rounded-[32px] bg-[#FFD43B] p-8 text-[#161214] sm:p-12 md:col-span-6">
+          <Sprinkles count={34} className="opacity-90" />
+          <div className="relative grid items-end gap-6 md:grid-cols-[1.4fr_1fr]">
+            <h3 className="text-[clamp(2.2rem,4.6vw,4rem)] font-semibold leading-[0.98] tracking-[-0.05em]">
+              Women-led. Made from <CutoutWord word="SCRATCH" tone="on-yellow" />
+            </h3>
+            <p className="max-w-[40ch] text-[17px] leading-relaxed text-[#3A3328]">
+              Every site starts from your brand and your customers, never a template. Girl power is kind of the whole point here. ★
+            </p>
+          </div>
+        </Reveal>
+      </div>
     </section>
   );
 }
