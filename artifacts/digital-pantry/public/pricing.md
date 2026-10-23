@@ -1,7 +1,7 @@
 # Pricing: The Digital Pantry (Cape Town, South Africa)
 
 Custom small business websites, built from scratch. The rand packages below are for South African small businesses with up to 10 staff. Larger businesses get a custom quote from R8 000. International clients have their own packages in US dollars (see the end of this file). All prices in South African rand (ZAR), once-off unless stated. Most projects are done within 5 to 7 business days.
-Last updated: 2026-10-22. Source page: https://thedigitalpantry.netlify.app/pricing
+Last updated: 2026-10-24. Source page: https://digitalpantry.co.za/pricing
 
 ## Starter: R600
 - Single page
@@ -36,11 +36,11 @@ Last updated: 2026-10-22. Source page: https://thedigitalpantry.netlify.app/pric
 - International clients: $90 per month. Larger businesses: quoted with the build.
 
 ## Free mock-up
-- A free preview of your website, with no obligation to go ahead. Ask on the contact page: https://thedigitalpantry.netlify.app/contact?interest=mockup
+- A free preview of your website, with no obligation to go ahead. Ask on the contact page: https://digitalpantry.co.za/contact?interest=mockup
 
 ## Contact
-- WhatsApp: +27 72 411 1011
 - Email: thedigitalpantryza@gmail.com
+- Enquiry form: https://digitalpantry.co.za/contact
 
 ## Larger businesses (South Africa)
 Custom builds from R8 000, quoted after a short chat. Price depends on pages and content, integrations, brand and design work, and timeline.

@@ -19,7 +19,7 @@ export default function Privacy() {
               Privacy Notice <span aria-hidden="true" className="text-dp-accent">★</span>
             </h1>
             <p className="font-mono text-[12px] text-dp-muted mb-1">
-              Digital Pantry Web Studio · thedigitalpantry.netlify.app
+              Digital Pantry Web Studio · digitalpantry.co.za
             </p>
             <p className="font-mono text-[12px] text-dp-muted mb-10 pb-10 border-b border-dp-line">
               Last updated: 22 October 2026

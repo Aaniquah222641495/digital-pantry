@@ -10,12 +10,12 @@ Brand line: "Coded in Pink. Built to Perform." Based in Cape Town, Western Cape,
 - Turnaround: most projects within 5 to 7 business days.
 - No coding knowledge needed from the client.
 - Free mock-up: a free preview of a client's site, no obligation to go ahead. Ask on the contact page.
-- Contact: WhatsApp +27 72 411 1011, email thedigitalpantryza@gmail.com.
+- Contact: email thedigitalpantryza@gmail.com (the best way to reach us), or the enquiry form at https://digitalpantry.co.za/contact.
 
 ## Pages
-- [Home](https://thedigitalpantry.netlify.app/): who we are, the two founders, recent work, process and prices
-- [Pricing](https://thedigitalpantry.netlify.app/pricing): all packages, what each includes, FAQ
-- [Pricing (plain text)](https://thedigitalpantry.netlify.app/pricing.md): the same prices in a machine-readable file
-- [Portfolio](https://thedigitalpantry.netlify.app/portfolio): live client sites (STUFF'D Bagels, Beginners Madrasah)
-- [Contact](https://thedigitalpantry.netlify.app/contact): WhatsApp, email and enquiry form (ask for a quote or a free mock-up)
-- [Privacy notice](https://thedigitalpantry.netlify.app/privacy): POPIA privacy notice
+- [Home](https://digitalpantry.co.za/): who we are, the two founders, recent work, process and prices
+- [Pricing](https://digitalpantry.co.za/pricing): all packages, what each includes, FAQ
+- [Pricing (plain text)](https://digitalpantry.co.za/pricing.md): the same prices in a machine-readable file
+- [Portfolio](https://digitalpantry.co.za/portfolio): live client sites (STUFF'D Bagels, Beginners Madrasah)
+- [Contact](https://digitalpantry.co.za/contact): email and enquiry form (ask for a quote or a free mock-up)
+- [Privacy notice](https://digitalpantry.co.za/privacy): POPIA privacy notice
