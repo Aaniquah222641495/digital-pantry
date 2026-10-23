@@ -1,5 +1,7 @@
-import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+import { createContext, startTransition, useContext, useEffect, useState, ReactNode } from "react";
 
+// Two sides of the studio: Night is Imaan's (the default), Day is Aaniquah's.
+// Stored as "dark" / "light" so earlier visitors keep their choice.
 type Theme = "light" | "dark";
 
 interface ThemeContextValue {
@@ -10,29 +12,27 @@ interface ThemeContextValue {
 const ThemeContext = createContext<ThemeContextValue>({ theme: "dark", toggle: () => {} });
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  // Start dark (the default, and what the prerendered HTML uses), then apply a saved choice after load.
+  // Prerendered HTML is Night; public/theme-init.js has already set the real side before paint.
   const [theme, setTheme] = useState<Theme>("dark");
 
   useEffect(() => {
-    try {
-      const saved = localStorage.getItem("dp-theme");
-      if (saved === "light" || saved === "dark") setTheme(saved);
-    } catch {}
+    const actual = document.documentElement.classList.contains("dark") ? "dark" : "light";
+    startTransition(() => setTheme(actual));
   }, []);
 
-  useEffect(() => {
-    const root = document.documentElement;
-    if (theme === "dark") {
-      root.classList.add("dark");
-    } else {
-      root.classList.remove("dark");
-    }
-    try {
-      localStorage.setItem("dp-theme", theme);
-    } catch {}
-  }, [theme]);
-
-  const toggle = () => setTheme((t) => (t === "dark" ? "light" : "dark"));
+  const toggle = () => {
+    setTheme((t) => {
+      const next: Theme = t === "dark" ? "light" : "dark";
+      const root = document.documentElement;
+      root.classList.add("dp-theme-shift");
+      root.classList.toggle("dark", next === "dark");
+      window.setTimeout(() => root.classList.remove("dp-theme-shift"), 700);
+      try {
+        localStorage.setItem("dp-theme", next);
+      } catch {}
+      return next;
+    });
+  };
 
   return <ThemeContext.Provider value={{ theme, toggle }}>{children}</ThemeContext.Provider>;
 }

@@ -1,5 +1,6 @@
 import { useEffect } from "react";
-import { CTAButton } from "../components/CTAButton";
+import { MagneticButton } from "../components/MagneticButton";
+import { CutoutWord } from "../components/CutoutWord";
 
 export default function NotFound() {
   useEffect(() => {
@@ -13,25 +14,25 @@ export default function NotFound() {
   }, []);
 
   return (
-    <main className="pt-20">
-      <section className="min-h-[70vh] bg-[#FFF8FB] dark:bg-[#0A0A0A] flex items-center transition-colors duration-300">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 py-16 text-center">
-          <p className="font-mono-brand text-[#FF2D87] text-xs tracking-[0.25em] uppercase mb-4">Error 404</p>
-          <h1
-            className="font-display font-black text-gray-900 dark:text-white leading-tight mb-4"
-            style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)" }}
-          >
-            This page isn't in the pantry <span className="text-[#FFD700]">★</span>
-          </h1>
-          <p className="font-body text-gray-600 dark:text-white/60 text-base leading-relaxed mb-8">
-            The link may be old or mistyped. Everything else is right where you left it.
-          </p>
-          <div className="flex flex-wrap gap-3 justify-center">
-            <CTAButton href="/" data-testid="button-404-home">Back to home</CTAButton>
-            <CTAButton href="/contact" variant="outline" data-testid="button-404-contact">Get in touch</CTAButton>
-          </div>
+    <main className="mx-auto flex min-h-[80dvh] max-w-[1320px] flex-col items-start justify-center gap-8 px-5 pb-16 pt-32 sm:px-8 md:flex-row md:items-center md:justify-between">
+      <div>
+        <p className="font-mono text-[13px] text-dp-accent">Error 404</p>
+        <h1 className="mt-4 max-w-[14ch] text-[clamp(2.4rem,6vw,5rem)] font-semibold leading-[1] tracking-[-0.05em]">
+          This page isn't in the <CutoutWord word="PANTRY" />
+        </h1>
+        <p className="mt-5 max-w-[40ch] text-lg leading-relaxed text-dp-muted">
+          The link may be old or mistyped. Everything else is right where you left it.
+        </p>
+        <div className="mt-9 flex flex-wrap gap-3">
+          <MagneticButton href="/" data-testid="button-404-home">
+            Back to home
+          </MagneticButton>
+          <MagneticButton href="/contact" variant="ghost" data-testid="button-404-contact">
+            Let's Get Cooking
+          </MagneticButton>
         </div>
-      </section>
+      </div>
+      <div className="dp-stage w-64 md:w-[26rem]"><img src="/images/art/empty-shelf.webp" alt="" width={600} height={600} className="w-full object-contain" /></div>
     </main>
   );
 }

@@ -1,187 +1,74 @@
-import { motion } from "framer-motion";
-import { MessageCircle, Mail } from "lucide-react";
+import type { CSSProperties } from "react";
+import { ArrowUpRight, Mail, MessageCircle } from "lucide-react";
 import { CutoutWord } from "../components/CutoutWord";
-import { AnimatedSection } from "../components/AnimatedSection";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { Link } from "wouter";
+import { Reveal } from "../components/Reveal";
+import { LeadForm } from "../components/LeadForm";
+import { H1 } from "../lib/style";
+import { useSideContact } from "../lib/contact";
+import { Sticker, DAY, NIGHT } from "../components/Stickers";
 
-const contactSchema = z.object({
-  name:         z.string().min(2, "Name must be at least 2 characters"),
-  businessName: z.string().min(1, "Business name is required"),
-  package:      z.enum(["Starter", "Standard", "Premium", "Pro"], { required_error: "Please select a package" }),
-  message:      z.string().min(10, "Message must be at least 10 characters"),
-});
-
-type ContactFormData = z.infer<typeof contactSchema>;
-
-const QUICK_CONTACTS = [
-  { icon: MessageCircle, label: "WhatsApp", sub: "Fastest response",           href: "https://wa.me/27724111011",           color: "#25D366", testId: "button-contact-whatsapp" },
-  { icon: Mail,          label: "Email",    sub: "thedigitalpantryza@gmail.com", href: "mailto:thedigitalpantryza@gmail.com", color: "#FF2D87", testId: "button-contact-email"    },
-];
 
 export default function Contact() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting, isSubmitSuccessful },
-    reset,
-  } = useForm<ContactFormData>({
-    resolver: zodResolver(contactSchema),
-    defaultValues: { name: "", businessName: "", message: "" },
-  });
-
-  const onSubmit = (data: ContactFormData) => {
-    const subject = encodeURIComponent(`Website Enquiry: ${data.package} Package`);
-    const body    = encodeURIComponent(`Hi!\n\nName: ${data.name}\nBusiness: ${data.businessName}\nPackage: ${data.package}\n\nMessage:\n${data.message}`);
-    window.location.href = `mailto:thedigitalpantryza@gmail.com?subject=${subject}&body=${body}`;
-    reset();
-  };
-
-  const inputCls =
-    "w-full bg-gray-50 dark:bg-[#0A0A0A] border border-gray-200 dark:border-white/10 focus:border-[#FF2D87] rounded-xl px-4 py-3.5 font-body text-gray-900 dark:text-white text-sm outline-none transition-colors placeholder:text-gray-400 dark:placeholder:text-white/25";
-  const labelCls =
-    "block font-mono-brand text-gray-400 dark:text-white/40 text-xs tracking-widest uppercase mb-2";
-
+  const contact = useSideContact();
+  const QUICK_CONTACTS = [
+    { icon: MessageCircle, label: `WhatsApp ${contact.name}`, sub: `${contact.display}, fastest reply`, href: contact.waLink, testId: "button-contact-whatsapp", iconCls: "bg-[#25D366]/15 text-[#1F8A50] dark:text-[#5BD38E]" },
+    { icon: Mail, label: "Email", sub: contact.email, href: `mailto:${contact.email}`, testId: "button-contact-email", iconCls: "bg-dp-soft text-dp-accent" },
+  ];
   return (
-    <main className="pt-20">
-      {/* ── Header ──────────────────────────────────── */}
-      <section className="bg-[#FFF8FB] dark:bg-[#0A0A0A] grain-section py-16 md:py-20 relative overflow-hidden transition-colors duration-300">
-        <span className="grain-deco top-10 right-8 text-[#FFD700]/8 text-[8rem] md:text-[10rem] font-bebas leading-none select-none pointer-events-none">★</span>
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
-            <AnimatedSection className="flex-1">
-              <h1 className="font-display font-black text-gray-900 dark:text-white leading-tight" style={{ fontSize: "clamp(2rem, 5vw, 4rem)" }}>
-                <span className="block font-normal font-mono-brand text-[#FF2D87] text-xs tracking-[0.25em] uppercase mb-4 leading-normal">Get a Website Quote</span>
-                Let's Get <CutoutWord word="COOKING" baseSize="0.95em" /> ★
-              </h1>
-              <p className="font-body text-gray-500 dark:text-white/50 text-base md:text-lg mt-4 max-w-lg">
-                Ready to get cooking? Let's build something delicious.
-              </p>
-            </AnimatedSection>
-            <AnimatedSection direction="right" className="flex-shrink-0">
-              <img
-                src="/images/contact.webp"
-                alt=""
-                className="w-56 md:w-72 mr-4 md:mr-16 object-contain drop-shadow-[0_0_30px_rgba(255,45,135,0.25)]"
-                loading="eager"
-              />
-            </AnimatedSection>
-          </div>
-        </div>
-      </section>
+    <main>
+      <section className="relative isolate overflow-hidden">
+        <div aria-hidden="true" className="pointer-events-none absolute -right-[15%] -top-[30%] -z-10 h-[80vh] w-[60vw] rounded-full bg-[radial-gradient(closest-side,var(--dp-glow),transparent)] blur-2xl" />
+        <div className="mx-auto grid max-w-[1320px] gap-14 px-5 pb-24 pt-36 sm:px-8 md:grid-cols-[1fr_1.1fr] md:gap-16 md:pt-40">
+          {/* Left: the invitation, the chefs and the quick ways to reach us */}
+          <div className="md:sticky md:top-32 md:self-start">
+            <h1 className={`dp-rise ${H1}`}>
+              <span className="sr-only">Get a website quote: </span>
+              Let's get <CutoutWord word="COOKING" /> <span aria-hidden="true" className="text-[0.8em]">★</span>
+            </h1>
+            <p className="dp-rise mt-6 max-w-[40ch] text-[clamp(1.05rem,1.5vw,1.25rem)] leading-relaxed text-dp-muted" style={{ "--d": "0.12s" } as CSSProperties}>
+              Ask for a quote, or pick the free mock-up and see your site before you decide. It comes straight to Aaniquah and Imaan.
+            </p>
 
-      {/* ── Quick Contact ────────────────────────────── */}
-      <section className="bg-[#FFF0F5] dark:bg-[#0f0a0d] py-12 md:py-16 transition-colors duration-300">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <AnimatedSection className="mb-6 md:mb-8">
-            <p className="font-mono-brand text-gray-400 dark:text-white/40 text-xs tracking-[0.2em] uppercase">Reach Me On</p>
-          </AnimatedSection>
-
-          <div className="flex flex-wrap gap-3 md:gap-4">
-            {QUICK_CONTACTS.map((contact, i) => (
-              <AnimatedSection key={contact.label} delay={i * 0.05}>
-                <motion.a
-                  href={contact.href}
-                  target={contact.href.startsWith("http") ? "_blank" : undefined}
-                  rel={contact.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  data-testid={contact.testId}
-                  whileHover={{ y: -4, scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="flex items-center gap-3 rounded-2xl border-2 px-6 py-4 bg-white dark:bg-transparent transition-all duration-200 shadow-sm dark:shadow-none"
-                  style={{ borderColor: `${contact.color}40` }}
-                >
-                  <contact.icon size={20} style={{ color: contact.color }} className="shrink-0" />
-                  <div>
-                    <p className="font-body font-semibold text-gray-900 dark:text-white text-sm">{contact.label}</p>
-                    <p className="font-mono-brand text-gray-500 dark:text-white/40 text-xs">{contact.sub}</p>
-                  </div>
-                </motion.a>
-              </AnimatedSection>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Contact Form ─────────────────────────────── */}
-      <section className="bg-[#FFF8FB] dark:bg-[#0A0A0A] py-16 md:py-20 transition-colors duration-300">
-        <div className="max-w-2xl mx-auto px-4 sm:px-6">
-          <AnimatedSection className="mb-8 md:mb-10">
-            <h2 className="font-display font-bold text-gray-900 dark:text-white text-2xl md:text-4xl">
-              Send a Message <span className="text-[#FFD700]">★</span>
-            </h2>
-            <p className="font-body text-gray-400 dark:text-white/40 mt-2 text-sm">Fill this in and it'll open your email client. Quick and easy.</p>
-          </AnimatedSection>
-
-          {isSubmitSuccessful ? (
-            <AnimatedSection>
-              <div className="bg-white dark:bg-[#0f0a0d] border border-gray-200 dark:border-[#FF2D87]/30 rounded-2xl p-10 text-center shadow-sm dark:shadow-none">
-                <div className="text-5xl mb-4 text-[#FFD700]">★</div>
-                <h3 className="font-display font-bold text-gray-900 dark:text-white text-2xl mb-2">Email ready!</h3>
-                <p className="font-body text-gray-500 dark:text-white/50">Your email client should have opened. Send it when you're ready!</p>
+            <div className="dp-rise relative mt-10 flex items-center gap-6" style={{ "--d": "0.18s" } as CSSProperties} aria-hidden="true">
+              <div className="dp-stage w-48 shrink-0 -rotate-3 sm:w-56">
+                <img src="/images/art/order-ticket.webp" alt="" width={600} height={600} className="w-full object-contain" />
               </div>
-            </AnimatedSection>
-          ) : (
-            <AnimatedSection delay={0.1}>
-              <form
-                onSubmit={handleSubmit(onSubmit)}
-                className="space-y-5 bg-white dark:bg-transparent p-6 md:p-8 rounded-2xl border border-gray-200 dark:border-transparent shadow-sm dark:shadow-none"
-                noValidate
-              >
-                <div className="grid sm:grid-cols-2 gap-5">
-                  <div>
-                    <label htmlFor="name" className={labelCls}>Name</label>
-                    <input id="name" type="text" placeholder="Your name" className={inputCls} data-testid="input-name" {...register("name")} />
-                    {errors.name && <p className="font-body text-[#FF2D87] text-xs mt-1.5">{errors.name.message}</p>}
-                  </div>
-                  <div>
-                    <label htmlFor="businessName" className={labelCls}>Business Name</label>
-                    <input id="businessName" type="text" placeholder="Your business" className={inputCls} data-testid="input-business-name" {...register("businessName")} />
-                    {errors.businessName && <p className="font-body text-[#FF2D87] text-xs mt-1.5">{errors.businessName.message}</p>}
-                  </div>
-                </div>
+              <p className="max-w-[22ch] text-[clamp(1.1rem,1.6vw,1.35rem)] font-medium leading-snug tracking-[-0.02em] text-dp-ink">
+                Every order lands on our board. <span className="text-dp-accent">Aaniquah or Imaan replies personally.</span>
+              </p>
+              <Sticker day={DAY.code} night={NIGHT.stylus} size={56} r={-12} d={0.5} style={{ left: "-10px", top: "-18px" }} />
+            </div>
 
-                <div>
-                  <label htmlFor="package" className={labelCls}>Package</label>
-                  <select id="package" className={`${inputCls} appearance-none cursor-pointer`} data-testid="select-package" defaultValue="" {...register("package")}>
-                    <option value="" disabled>Select a package</option>
-                    <option value="Starter">Starter (R600)</option>
-                    <option value="Standard">Standard (R1 000)</option>
-                    <option value="Premium">Premium (R1 600)</option>
-                    <option value="Pro">Pro (R2 500, with lead automation)</option>
-                  </select>
-                  {errors.package && <p className="font-body text-[#FF2D87] text-xs mt-1.5">{errors.package.message}</p>}
-                </div>
-
-                <div>
-                  <label htmlFor="message" className={labelCls}>Message</label>
-                  <textarea id="message" rows={5} placeholder="Tell me about your business and what you need..." className={`${inputCls} resize-none`} data-testid="textarea-message" {...register("message")} />
-                  {errors.message && <p className="font-body text-[#FF2D87] text-xs mt-1.5">{errors.message.message}</p>}
-                </div>
-
-                <motion.button
-                  type="submit"
-                  disabled={isSubmitting}
-                  data-testid="button-submit"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="w-full bg-[#FF2D87] hover:bg-[#e0006e] text-white font-body font-semibold rounded-full py-4 text-base transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+            <div className="dp-rise mt-10 flex flex-col gap-3" style={{ "--d": "0.22s" } as CSSProperties}>
+              {QUICK_CONTACTS.map((c) => (
+                <a
+                  key={c.label}
+                  href={c.href}
+                  target={c.href.startsWith("http") ? "_blank" : undefined}
+                  rel={c.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  data-testid={c.testId}
+                  className="group flex items-center gap-4 rounded-[20px] border border-dp-line bg-dp-surface/70 p-4 pr-5 transition-colors hover:border-dp-ink/30"
                 >
-                  Send It ★
-                </motion.button>
-                <p className="font-body text-gray-400 dark:text-white/40 text-xs text-center">
-                  How we use your details: see our <Link href="/privacy" className="text-[#FF2D87] hover:underline">Privacy Notice</Link>.
-                </p>
-              </form>
-            </AnimatedSection>
-          )}
-        </div>
-      </section>
+                  <span className={`grid h-11 w-11 shrink-0 place-items-center rounded-full ${c.iconCls}`}>
+                    <c.icon size={19} aria-hidden="true" />
+                  </span>
+                  <span className="flex-1">
+                    <span className="block font-medium text-dp-ink">{c.label}</span>
+                    <span className="block text-[14px] text-dp-muted">{c.sub}</span>
+                  </span>
+                  <ArrowUpRight size={17} aria-hidden="true" className="text-dp-muted transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                </a>
+              ))}
+            </div>
 
-      {/* ── Bottom strip ─────────────────────────────── */}
-      <section className="bg-[#FF2D87] py-8 md:py-10 text-center">
-        <p className="font-bebas text-white text-xl md:text-2xl tracking-widest px-4">CODED IN PINK ★ BUILT TO PERFORM ★ CAPE TOWN</p>
+          </div>
+
+          {/* Right: the form */}
+          <Reveal>
+            <h2 className="mb-6 text-[clamp(1.6rem,2.6vw,2.2rem)] font-semibold tracking-[-0.035em]">Send us your order</h2>
+            <LeadForm source="contact-page" />
+          </Reveal>
+        </div>
       </section>
     </main>
   );

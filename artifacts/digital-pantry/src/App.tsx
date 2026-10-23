@@ -1,34 +1,19 @@
 import { Switch, Route, Router as WouterRouter, useLocation } from "wouter";
-import { Toaster } from "@/components/ui/toaster";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { WhatsAppBubble } from "./components/WhatsAppBubble";
 import { ThemeProvider } from "./lib/ThemeContext";
-import { lazy, Suspense, useEffect } from "react";
+import { useEffect } from "react";
+import { SmoothScroll } from "./components/SmoothScroll";
 import { applyMeta } from "./seo";
 
-const Home = lazy(() => import("./pages/Home"));
-const Portfolio = lazy(() => import("./pages/Portfolio"));
-const Pricing = lazy(() => import("./pages/Pricing"));
-const Contact = lazy(() => import("./pages/Contact"));
-const Privacy = lazy(() => import("./pages/Privacy"));
-const NotFound = lazy(() => import("./pages/not-found"));
+import Home from "./pages/Home";
+import Portfolio from "./pages/Portfolio";
+import Pricing from "./pages/Pricing";
+import Contact from "./pages/Contact";
+import Privacy from "./pages/Privacy";
+import NotFound from "./pages/not-found";
 
-function PageLoader() {
-  return (
-    <div className="min-h-screen bg-[#FFF8FB] dark:bg-[#0A0A0A] flex items-center justify-center">
-      <div className="text-[#FF2D87] font-bebas text-3xl tracking-widest animate-pulse">
-        Loading ★
-      </div>
-    </div>
-  );
-}
-
-function ScrollToTop() {
-  const [location] = useLocation();
-  useEffect(() => { window.scrollTo(0, 0); }, [location]);
-  return null;
-}
 
 // Keeps the tab title, description and canonical right when visitors move between pages.
 function RouteMeta() {
@@ -54,20 +39,17 @@ function App({ ssrPath }: { ssrPath?: string } = {}) {
   return (
     <ThemeProvider>
       <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")} ssrPath={ssrPath}>
-        <div className="min-h-screen bg-[#FFF8FB] dark:bg-[#0A0A0A] flex flex-col transition-colors duration-300">
+        <div className="dp-grain flex min-h-[100dvh] flex-col bg-dp-bg text-dp-ink">
           <Navbar />
-          <ScrollToTop />
+          <SmoothScroll />
           <RouteMeta />
           <div className="flex-1">
-            <Suspense fallback={<PageLoader />}>
-              <Router />
-            </Suspense>
+            <Router />
           </div>
           <Footer />
         </div>
         <WhatsAppBubble />
       </WouterRouter>
-      <Toaster />
     </ThemeProvider>
   );
 }
