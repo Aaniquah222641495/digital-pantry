@@ -52,8 +52,10 @@ export function PantryShelf({ link = true, currency = "ZAR" }: { link?: boolean;
           return (
             <li key={j.name} className="group" style={{ transitionDelay: `${i * 60}ms` }}>
               {link ? (
-                <Link href={intl ? "/contact?interest=international" : `/contact?interest=${j.name.toLowerCase()}`} aria-label={`${j.name}, ${intl ? j.usd : j.price}: ask about this package`} className="block rounded-[20px] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-dp-accent">
+                <Link href={intl ? "/contact?interest=international" : `/contact?interest=${j.name.toLowerCase()}`} className="block rounded-[20px] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-dp-accent">
                   {tag}
+                  {/* The visible words stay in the link's name (voice control users say what they see) */}
+                  <span className="sr-only"> Ask about this package.</span>
                 </Link>
               ) : (
                 tag
