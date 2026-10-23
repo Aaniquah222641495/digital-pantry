@@ -5,6 +5,8 @@ import { Reveal } from "../components/Reveal";
 import { DeviceFrames } from "../components/DeviceFrames";
 import { FreeTaste } from "../components/FreeTaste";
 import { H1 } from "../lib/style";
+import { OrderUp } from "../components/OrderUp";
+import { Sticker, DAY, NIGHT } from "../components/Stickers";
 
 const STACK_TAGS = ["React", "TypeScript", "Tailwind", "Netlify"];
 
@@ -45,26 +47,35 @@ export default function Portfolio() {
     <main>
       <section className="relative isolate overflow-hidden">
         <div aria-hidden="true" className="pointer-events-none absolute -right-[15%] -top-[30%] -z-10 h-[80vh] w-[60vw] rounded-full bg-[radial-gradient(closest-side,var(--dp-glow),transparent)] blur-2xl" />
-        <div className="mx-auto max-w-[1320px] px-5 pb-6 pt-36 sm:px-8 md:pt-40">
-          <h1 className={`dp-rise ${H1}`}>
-            <span className="sr-only">Websites built in Cape Town: </span>
-            Fresh out the <CutoutWord word="KITCHEN" />
-          </h1>
-          <p className="dp-rise mt-6 max-w-[42ch] text-[clamp(1.05rem,1.5vw,1.25rem)] leading-relaxed text-dp-muted" style={{ "--d": "0.12s" } as CSSProperties}>
-            Websites built in Cape Town, from scratch. Here's what we've been cooking. <span aria-hidden="true" className="text-dp-accent">★</span>
-          </p>
+        <Sticker day={DAY.star} night={NIGHT.moon} size={54} r={-10} d={0.3} style={{ left: "46%", top: "18%" }} />
+        <div className="mx-auto grid min-h-[86dvh] max-w-[1320px] items-center gap-12 px-5 pb-10 pt-32 sm:px-8 md:grid-cols-[0.85fr_1.15fr] md:pt-28">
+          <div>
+            <h1 className={`dp-rise ${H1}`}>
+              <span className="sr-only">Websites built in Cape Town: </span>
+              Fresh out the <CutoutWord word="KITCHEN" />
+            </h1>
+            <p className="dp-rise mt-6 max-w-[38ch] text-[clamp(1.05rem,1.5vw,1.25rem)] leading-relaxed text-dp-muted" style={{ "--d": "0.12s" } as CSSProperties}>
+              Websites built in Cape Town, from scratch. Here's what we've been cooking. <span aria-hidden="true" className="text-dp-accent">★</span>
+            </p>
+            {/* Order ticket strip: facts only */}
+            <dl className="dp-rise mt-10 grid max-w-[460px] grid-cols-3 overflow-hidden rounded-[18px] border border-dp-line bg-dp-surface text-center" style={{ "--d": "0.24s" } as CSSProperties}>
+              {[
+                ["Served", `${CASES.length} live sites`],
+                ["Kitchen", "Cape Town"],
+                ["Usual wait", "5 to 7 days"],
+              ].map(([k, v], i) => (
+                <div key={k} className={`px-3 py-4 ${i > 0 ? "border-l border-dashed border-dp-line" : ""}`}>
+                  <dt className="font-mono text-[11px] text-dp-accent">{k}</dt>
+                  <dd className="mt-1 text-[15px] font-semibold tracking-[-0.02em] text-dp-ink">{v}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+          <div className="dp-rise pt-16 md:pt-24" style={{ "--d": "0.15s" } as CSSProperties}>
+            <OrderUp />
+          </div>
         </div>
       </section>
-
-      <Reveal className="mx-auto max-w-[1100px] px-5 sm:px-8">
-        <img
-          src="/images/art/launch-day.webp"
-          alt="Aaniquah and Imaan serving a new website on a silver tray under falling sprinkles"
-          width={1600}
-          height={893}
-          className="w-full object-contain"
-        />
-      </Reveal>
 
       <div className="mx-auto flex max-w-[1320px] flex-col gap-28 px-5 py-20 sm:px-8 md:gap-40 md:py-28">
         {CASES.map((c, i) => {
