@@ -24,18 +24,56 @@
   --dp-pink: #FFA7D2;
   --dp-blush: #FDD2DE;
   --dp-glow: rgba(255, 167, 210, 0.45);
+  --dp-gold: #B8923F;
+}
+/* Imaan's palette, used by Night and by her own panels on both sides.
+   Burgundy (default) and plum: preview plum with ?imaan=plum (public/theme-init.js). */
+:root {
+  --im-bg: #150708;
+  --im-surface: #200B0F;
+  --im-soft: #2C1217;
+  --im-border: #4E222A;
+  --im-band: #4A0F1A;
+  --im-deep: #7A1F2E;
+  --im-text: #F6EDED;
+  --im-muted: #CDB6BA;
+  --im-label: #B39CA1;
+  --im-accent: #EBA9B6;
+  --im-silver: #DCD8E2;
+  --im-glow: rgba(150, 32, 54, 0.45);
+  --im-glow-strong: rgba(160, 36, 60, 0.55);
+  --im-sky-a: rgba(140, 26, 46, 0.34);
+  --im-sky-b: rgba(92, 18, 36, 0.32);
+}
+:root[data-imaan="plum"] {
+  --im-bg: #120A13;
+  --im-surface: #1E1220;
+  --im-soft: #2A1A2D;
+  --im-border: #4A3550;
+  --im-band: #3A1740;
+  --im-deep: #9B3E8F;
+  --im-text: #F3ECF4;
+  --im-muted: #CDBFD1;
+  --im-label: #B5A8BA;
+  --im-accent: #E7A6D9;
+  --im-glow: rgba(176, 82, 166, 0.42);
+  --im-glow-strong: rgba(176, 82, 166, 0.5);
+  --im-sky-a: rgba(155, 62, 143, 0.32);
+  --im-sky-b: rgba(96, 44, 120, 0.3);
 }
 .dark {
-  --dp-bg: #0C0B0D;
-  --dp-surface: #141215;
-  --dp-soft: #1B181C;
-  --dp-line: rgba(255, 255, 255, 0.09);
-  --dp-ink: #F3EFF2;
-  --dp-muted: #A49CA2;
-  --dp-accent: #FFA7D2;
-  --dp-cta-bg: #FFA7D2;
-  --dp-cta-fg: #0C0B0D;
-  --dp-glow: rgba(255, 167, 210, 0.16);
+  /* Night = Imaan's room. */
+  --dp-bg: var(--im-bg);
+  --dp-surface: var(--im-surface);
+  --dp-soft: var(--im-soft);
+  --dp-line: rgba(246, 237, 237, 0.11);
+  --dp-ink: var(--im-text);
+  --dp-muted: var(--im-label);
+  --dp-accent: var(--im-accent);
+  --dp-cta-bg: var(--im-silver);
+  --dp-cta-fg: var(--im-bg);
+  --dp-glow: var(--im-glow);
+  --dp-gold: var(--im-silver);
 }
 
 @theme inline {
@@ -50,6 +88,7 @@
   --color-dp-cta-fg: var(--dp-cta-fg);
   --color-dp-pink: var(--dp-pink);
   --color-dp-blush: var(--dp-blush);
+  --color-dp-gold: var(--dp-gold);
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
@@ -331,7 +370,27 @@ body { background: var(--dp-bg); color: var(--dp-ink); font-feature-settings: "s
   opacity: 0.035;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E");
 }
-.dark .dp-grain::before { opacity: 0.06; }
+.dark .dp-grain::before { opacity: 0.08; }
+/* Night sky: plum glows that stay put while the page scrolls. */
+html.dark body {
+  background:
+    radial-gradient(1100px 760px at 88% -8%, var(--im-sky-a), transparent 62%),
+    radial-gradient(900px 700px at -12% 105%, var(--im-sky-b), transparent 60%),
+    var(--dp-bg);
+  background-attachment: fixed;
+}
+/* Night: a soft vignette, like a candlelit room. */
+.dark .dp-grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 59;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 60%, rgba(8, 2, 10, 0.4) 100%);
+}
+
+/* Imaan's spaced lowercase (her signature) for small labels on Night. */
+.dark .dp-tag { text-transform: lowercase; letter-spacing: 0.32em; }
 
 /* Lenis smooth scroll */
 html.lenis, html.lenis body { height: auto; }
@@ -391,7 +450,7 @@ html.dp-theme-shift, html.dp-theme-shift * {
   .dp-spin { animation: dp-spin 22s linear infinite; transform-origin: 50% 50%; }
 }
 
-/* Night is Imaan's side: her mouse is silver (chrome) with a bubblegum wheel. */
+/* Night is Imaan's side: her mouse is silver with a rose wheel. */
 @media (pointer: fine) {
   html.dark, html.dark body {
     cursor: url("/cursors/mouse-night.png") 5 5, auto;
@@ -403,4 +462,18 @@ html.dp-theme-shift, html.dp-theme-shift * {
     cursor: -webkit-image-set(url("/cursors/mouse-night-pointer.png") 1x, url("/cursors/mouse-night-pointer@2x.png") 2x) 5 5, pointer;
     cursor: image-set(url("/cursors/mouse-night-pointer.png") 1x, url("/cursors/mouse-night-pointer@2x.png") 2x) 5 5, pointer;
   }
+}
+
+/* Night ticker: Imaan's quiet spaced lowercase instead of the Bebas shout. */
+.dark .dp-ticker-text { font-family: var(--app-font-sans); font-size: clamp(0.85rem, 1.1vw, 1rem); font-weight: 400; text-transform: lowercase; letter-spacing: 0.4em; }
+
+/* "No handoffs" card: code and design slide together when the card reveals. */
+.dp-venn-a, .dp-venn-b { transition: transform 1.2s var(--ease-out-expo) 0.15s; }
+.dp-venn-a { transform: translateX(-34px); }
+.dp-venn-b { transform: translateX(34px); }
+.dp-venn-star { transition: transform 0.6s var(--ease-out-expo) 0.9s, opacity 0.6s ease 0.9s; }
+@media (prefers-reduced-motion: no-preference) {
+  .js .dp-venn:not(.is-in) .dp-venn-a { transform: translateX(-70px); }
+  .js .dp-venn:not(.is-in) .dp-venn-b { transform: translateX(70px); }
+  .js .dp-venn:not(.is-in) .dp-venn-star { transform: scale(0.4); opacity: 0; }
 }

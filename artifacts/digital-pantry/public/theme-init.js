@@ -10,6 +10,12 @@
   } catch (e) {}
   root.classList.toggle("dark", side === "night");
 
+  // Design preview only: ?imaan=plum shows Imaan's alternative palette.
+  try {
+    var pal = new URLSearchParams(location.search).get("imaan");
+    if (pal === "plum") root.setAttribute("data-imaan", "plum");
+  } catch (e) {}
+
   // Scroll reveals may start hidden only when scripts run. If the app has not started
   // within 3.5 s (slow phone, blocked script), show everything.
   root.classList.add("js");

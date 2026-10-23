@@ -4,6 +4,8 @@ import { useEffect, useRef } from "react";
 // off screen or the tab is hidden, and not drawn at all for visitors who ask for reduced motion.
 // mode "drift": a slow, endless fall behind a section. mode "burst": one celebratory shower.
 const COLORS = ["#FFA7D2", "#E8508A", "#FFD43B", "#FFFFFF", "#FDD2DE", "#B32F68"];
+// Night (Imaan's room): slow silver and rose flecks, like stars in her night sky.
+const NIGHT = ["#E9E3EE", "#C9C6D3", "#EBA9B6", "#FFFFFF", "#C9A0AA", "#D98A9C"];
 
 type Sprinkle = { x: number; y: number; vy: number; vx: number; rot: number; vr: number; len: number; w: number; color: string };
 
@@ -45,15 +47,19 @@ export function Sprinkles({ mode = "drift", count = 46, className = "" }: { mode
     let frame = 0;
     const draw = () => {
       ctx.clearRect(0, 0, w, h);
-      for (const s of items) {
-        s.y += s.vy;
+      const night = document.documentElement.classList.contains("dark");
+      const pace = night && mode === "drift" ? 0.55 : 1;
+      for (let k = 0; k < items.length; k++) {
+        const s = items[k];
+        if (night && mode === "drift" && k % 3 === 2) continue; // fewer flecks at night
+        s.y += s.vy * pace;
         s.x += s.vx + Math.sin((s.y + s.len) * 0.01) * 0.15;
         s.rot += s.vr;
         if (mode === "drift" && s.y > h + 20) Object.assign(s, make(true), { y: -20 });
         ctx.save();
         ctx.translate(s.x, s.y);
         ctx.rotate(s.rot);
-        ctx.fillStyle = s.color;
+        ctx.fillStyle = night ? NIGHT[k % NIGHT.length] : s.color;
         ctx.beginPath();
         ctx.roundRect(-s.len / 2, -s.w / 2, s.len, s.w, s.w / 2);
         ctx.fill();

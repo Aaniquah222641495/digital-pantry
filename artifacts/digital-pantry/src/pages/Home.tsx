@@ -12,7 +12,7 @@ import { PLAN_PRICES } from "../lib/plans";
 import { H2 } from "../lib/style";
 
 // Imaan's pixel avatar is being made; until then her cards show a monogram.
-const IMAAN_AVATAR: string | null = null;
+const IMAAN_AVATAR: string | null = "/images/imaan.webp";
 
 
 // Founders framed the way premium studios do it: two halves of one practice, what each
@@ -84,7 +84,7 @@ function Monogram({ className = "" }: { className?: string }) {
     <div
       role="img"
       aria-label="Imaan Cooper"
-      className={`grid place-items-center bg-[#0C0B0D] font-mono font-medium tracking-[-0.06em] text-[#FFA7D2] ${className}`}
+      className={`grid place-items-center bg-[var(--im-bg)] font-mono font-medium tracking-[-0.06em] text-[var(--im-accent)] ${className}`}
     >
       IC
     </div>
@@ -102,7 +102,7 @@ function Hero() {
       <Sprinkles className="-z-10 opacity-70 dark:opacity-55" />
       <div className="mx-auto grid min-h-[92dvh] max-w-[1320px] items-center gap-14 px-5 pb-14 pt-28 sm:px-8 md:grid-cols-[1.15fr_1fr] md:gap-10 md:pt-24">
         <div>
-          <p className="dp-rise mb-6 inline-flex items-center gap-2 rounded-full border border-dp-line px-3.5 py-1.5 text-[13px] text-dp-muted" style={rise(0)}>
+          <p className="dp-rise dp-tag mb-6 inline-flex items-center gap-2 rounded-full border border-dp-line px-3.5 py-1.5 text-[13px] text-dp-muted" style={rise(0)}>
             <span aria-hidden="true" className="text-dp-accent">★</span> A women-led web studio in Cape Town
           </p>
           <h1 className="dp-rise text-[clamp(2.6rem,6.4vw,5.75rem)] font-semibold leading-[0.98] tracking-[-0.055em] text-dp-ink" style={rise(0.06)}>
@@ -141,13 +141,13 @@ function Hero() {
               />
               <figcaption className="px-1 pb-1 pt-3 text-[13px] font-medium text-[#161214]">Aaniquah</figcaption>
             </figure>
-            <figure className="translate-y-8 rotate-[3deg] rounded-[28px] border-[3px] border-[#2A262B] bg-[#141215] p-3 shadow-[0_30px_60px_-30px_rgba(12,11,13,0.75)] transition-transform duration-700 ease-out hover:rotate-0">
+            <figure className="translate-y-8 rotate-[3deg] rounded-[28px] border-[3px] border-[var(--im-border)] bg-[var(--im-surface)] p-3 shadow-[0_30px_60px_-30px_rgba(12,11,13,0.75)] transition-transform duration-700 ease-out hover:rotate-0">
               {IMAAN_AVATAR ? (
-                <img src={IMAAN_AVATAR} alt="Imaan's pixel avatar" className="aspect-square w-full rounded-[20px] object-contain" />
+                <img src={IMAAN_AVATAR} alt="Imaan's pixel avatar designing at her desk" width={600} height={600} fetchPriority="high" className="aspect-square w-full rounded-[20px] bg-white object-contain" />
               ) : (
                 <Monogram className="aspect-square w-full rounded-[20px] text-[clamp(2.5rem,6vw,4.5rem)]" />
               )}
-              <figcaption className="px-1 pb-1 pt-3 text-[13px] font-medium text-[#F3EFF2]">Imaan</figcaption>
+              <figcaption className="px-1 pb-1 pt-3 text-[13px] font-medium text-[var(--im-text)]">Imaan</figcaption>
             </figure>
           </div>
         </div>
@@ -194,7 +194,7 @@ function Chefs() {
         {CHEFS.map((c, i) => {
           const t = c.light
             ? { bg: "bg-[#FCE8F0]", ink: "text-[#161214]", muted: "text-[#463E44]", label: "border-[#161214]/15 text-[#463E44]", accent: "text-[#B32F68]", glow: "bg-[radial-gradient(closest-side,#FFA7D2,transparent)]" }
-            : { bg: "bg-[#0C0B0D]", ink: "text-[#F3EFF2]", muted: "text-[#C9C2C7]", label: "border-white/15 text-[#C9C2C7]", accent: "text-[#FFA7D2]", glow: "bg-[radial-gradient(closest-side,rgba(255,167,210,0.28),transparent)]" };
+            : { bg: "bg-[var(--im-bg)]", ink: "text-[var(--im-text)]", muted: "text-[var(--im-muted)]", label: "border-white/15 text-[var(--im-muted)]", accent: "text-[var(--im-accent)]", glow: "bg-[radial-gradient(closest-side,var(--im-glow),transparent)]" };
           return (
             <Reveal
               as="article"
@@ -203,7 +203,7 @@ function Chefs() {
               className={`group relative isolate flex min-h-[560px] flex-1 flex-col overflow-hidden p-8 transition-[flex-grow] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] sm:p-12 md:hover:flex-[1.22] ${c.light ? "md:pr-24" : "md:pl-24"} ${t.bg} ${t.ink}`}
             >
               <div aria-hidden="true" className={`absolute -bottom-1/4 ${c.light ? "-right-1/4" : "-left-1/4"} -z-10 h-[90%] w-[90%] rounded-full ${t.glow}`} />
-              <span className={`inline-flex w-fit items-center gap-2 rounded-full border px-3.5 py-1.5 text-[13px] ${t.label}`}>
+              <span className={`inline-flex w-fit items-center gap-2 rounded-full border px-3.5 py-1.5 text-[13px] ${t.label} ${c.light ? "" : "lowercase tracking-[0.32em]"}`}>
                 <span aria-hidden="true">{c.light ? "☀" : "☾"}</span> {c.side}
               </span>
 
@@ -213,23 +213,23 @@ function Chefs() {
                 {c.light ? (
                   <img src="/images/mascot.webp" alt="" width={600} height={600} loading="lazy" className="aspect-square w-full rounded-[22px] border-[3px] border-white bg-[#FFF7FA] object-contain shadow-[0_24px_50px_-24px_rgba(179,47,104,0.55)]" />
                 ) : IMAAN_AVATAR ? (
-                  <img src={IMAAN_AVATAR} alt="" loading="lazy" className="aspect-square w-full rounded-[22px] border-[3px] border-[#2A262B] object-contain" />
+                  <img src={IMAAN_AVATAR} alt="" width={600} height={600} loading="lazy" className="aspect-square w-full rounded-[22px] border-[3px] border-[var(--im-border)] object-contain" />
                 ) : (
-                  <Monogram className="aspect-square w-full rounded-[22px] border-[3px] border-[#2A262B] !bg-[#1B181C] text-[clamp(1.8rem,3.4vw,3rem)]" />
+                  <Monogram className="aspect-square w-full rounded-[22px] border-[3px] border-[var(--im-border)] !bg-[var(--im-soft)] text-[clamp(1.8rem,3.4vw,3rem)]" />
                 )}
               </div>
 
               <div className="relative z-10 mt-auto pt-10">
                 <div className="min-w-0 flex-1">
                   <h3 className="text-[1.5rem] font-semibold tracking-[-0.03em]">{c.name}</h3>
-                  <p className={`text-[14px] ${c.light ? "text-[#61575E]" : "text-[#A49CA2]"}`}>{c.role}</p>
+                  <p className={`text-[14px] ${c.light ? "text-[#61575E]" : "text-[var(--im-label)]"}`}>{c.role}</p>
                   <p className={`mt-4 max-w-[40ch] leading-relaxed ${t.muted}`}>{c.body}</p>
                   <p
                     className={`mt-7 inline-flex w-fit items-center gap-2 rounded-full px-4 py-2 text-[13px] font-medium ${
-                      c.light ? "bg-[#FFD43B] text-[#161214] shadow-[0_10px_24px_-12px_rgba(224,176,0,0.8)]" : "border border-white/15 bg-white/[0.04] text-[#F3EFF2]"
+                      c.light ? "bg-[#FFD43B] text-[#161214] shadow-[0_10px_24px_-12px_rgba(224,176,0,0.8)]" : "border border-white/15 bg-white/[0.04] text-[var(--im-text)]"
                     }`}
                   >
-                    <span aria-hidden="true" className={c.light ? "" : "text-[#FFA7D2]"}>★</span> {c.proof}
+                    <span aria-hidden="true" className={c.light ? "" : "text-[var(--im-accent)]"}>★</span> {c.proof}
                   </p>
                 </div>
               </div>
@@ -252,19 +252,24 @@ function Chefs() {
             <div aria-hidden="true" className="flex shrink-0 -space-x-4">
               <img src="/images/mascot.webp" alt="" width={600} height={600} loading="lazy" className="h-20 w-20 rotate-[-6deg] rounded-[20px] border-[3px] border-white bg-[#FFF7FA] object-contain" />
               {IMAAN_AVATAR ? (
-                <img src={IMAAN_AVATAR} alt="" loading="lazy" className="h-20 w-20 rotate-[6deg] rounded-[20px] border-[3px] border-[#2A262B] object-contain" />
+                <img src={IMAAN_AVATAR} alt="" width={600} height={600} loading="lazy" className="h-20 w-20 rotate-[6deg] rounded-[20px] border-[3px] border-[var(--im-border)] object-contain" />
               ) : (
-                <Monogram className="h-20 w-20 rotate-[6deg] rounded-[20px] border-[3px] border-[#2A262B] text-2xl" />
+                <Monogram className="h-20 w-20 rotate-[6deg] rounded-[20px] border-[3px] border-[var(--im-border)] text-2xl" />
               )}
             </div>
           </div>
         </Reveal>
 
-        <Reveal delay={0.08} className="relative overflow-hidden rounded-[32px] bg-[#141215] p-8 text-[#F3EFF2] sm:p-10 md:col-span-2">
-          <div aria-hidden="true" className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-[radial-gradient(closest-side,rgba(255,167,210,0.35),transparent)]" />
-          <p aria-hidden="true" className="dp-cut-marker text-[2.2rem] leading-none text-[#FFA7D2]">1 kitchen</p>
-          <h3 className="mt-6 text-[clamp(1.5rem,2.2vw,1.9rem)] font-semibold leading-[1.05] tracking-[-0.035em]">No handoffs.</h3>
-          <p className="mt-3 leading-relaxed text-[#C9C2C7]">Design and code happen side by side, so nothing gets lost between how it looks and how it works.</p>
+        {/* No handoffs: her design and her partner's code meet in the middle as the card scrolls in. */}
+        <Reveal delay={0.08} className="dp-venn relative flex flex-col overflow-hidden rounded-[32px] bg-[var(--im-surface)] p-8 text-[var(--im-text)] sm:p-10 md:col-span-2">
+          <div aria-hidden="true" className="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-[radial-gradient(closest-side,var(--im-glow-strong),transparent)]" />
+          <div aria-hidden="true" className="relative mx-auto flex h-36 w-full max-w-[260px] items-center justify-center">
+            <span className="dp-venn-a absolute grid h-32 w-32 place-items-center rounded-full bg-[#FFA7D2] pr-8 text-[13px] font-semibold text-[#161214] mix-blend-screen">code</span>
+            <span className="dp-venn-b absolute grid h-32 w-32 place-items-center rounded-full bg-[var(--im-deep)] pl-8 text-[13px] font-semibold text-[var(--im-text)] mix-blend-screen">design</span>
+            <span className="dp-venn-star absolute z-10 grid h-9 w-9 place-items-center rounded-full bg-[#FFD43B] text-[15px] text-[#161214] shadow-[0_8px_20px_-6px_rgba(0,0,0,0.6)]">★</span>
+          </div>
+          <h3 className="mt-8 text-[clamp(1.5rem,2.2vw,1.9rem)] font-semibold leading-[1.05] tracking-[-0.035em]">No handoffs.</h3>
+          <p className="mt-3 leading-relaxed text-[var(--im-muted)]">Design and code happen side by side, so nothing gets lost between how it looks and how it works.</p>
         </Reveal>
 
         <Reveal delay={0.12} className="relative overflow-hidden rounded-[32px] bg-[#FFD43B] p-8 text-[#161214] sm:p-12 md:col-span-6">
