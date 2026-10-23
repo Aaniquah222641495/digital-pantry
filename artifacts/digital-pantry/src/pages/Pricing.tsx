@@ -3,6 +3,8 @@ import { CutoutWord } from "../components/CutoutWord";
 import { Reveal } from "../components/Reveal";
 import { MagneticButton } from "../components/MagneticButton";
 import { FreeTaste } from "../components/FreeTaste";
+import { PantryShelf } from "../components/PantryShelf";
+import { Sticker, DAY, NIGHT } from "../components/Stickers";
 import { PLAN_PRICES } from "../lib/plans";
 import { H1, H2 } from "../lib/style";
 import { FAQ } from "../seo";
@@ -42,14 +44,26 @@ export default function Pricing() {
             On the <CutoutWord word="MENU" /> <span aria-hidden="true" className="text-[0.8em]">★</span>
           </h1>
           <p className="dp-rise mt-6 max-w-[40ch] text-[clamp(1.05rem,1.5vw,1.25rem)] leading-relaxed text-dp-muted" style={{ "--d": "0.12s" } as React.CSSProperties}>
-            Website prices in South Africa, once-off and in rand. Pick your jar. We'll stock the shelves.
+            Website prices for South African small businesses, once-off and in rand. Pick your jar. We'll stock the shelves.
           </p>
+          <div className="dp-rise mt-16 md:mt-20" style={{ "--d": "0.2s" } as React.CSSProperties}>
+            <PantryShelf />
+          </div>
         </div>
+        <Sticker day={DAY.sparkle} night={NIGHT.star} size={48} r={10} style={{ right: "8%", top: "22%" }} />
+        <Sticker day={DAY.donut} night={NIGHT.moon} size={66} r={-8} d={0.8} style={{ right: "18%", top: "12%" }} />
       </section>
 
+      <Reveal className="mx-auto flex max-w-[1320px] flex-wrap items-end justify-between gap-6 px-5 pb-8 pt-10 sm:px-8">
+        <h2 className="text-[clamp(1.8rem,3vw,2.6rem)] font-semibold tracking-[-0.04em]">What's in each jar</h2>
+        <p className="max-w-[46ch] rounded-[16px] border border-dp-line bg-dp-surface px-5 py-3 text-[14px] leading-relaxed text-dp-muted">
+          <span className="font-medium text-dp-ink">Small-business pricing.</span> Bigger companies or larger projects?{" "}
+          <a href="/contact" className="text-dp-accent underline decoration-dp-line underline-offset-4 hover:decoration-dp-accent">Ask us for a custom quote.</a>
+        </p>
+      </Reveal>
+
       <section aria-label="Packages" className="mx-auto max-w-[1320px] px-5 pb-24 sm:px-8 md:pb-32">
-        {/* Jars on a shelf (desktop): the shelf is a wooden-ish ledge under the jar row */}
-        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+                <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
           {PLANS.map((p, i) => (
             <Reveal
               key={p.name}
@@ -62,10 +76,6 @@ export default function Pricing() {
                 {p.popular && (
                   <span className="absolute -top-3 left-8 rounded-full bg-[#FFD43B] px-3 py-1 text-[12px] font-semibold text-[#161214]">Most popular ★</span>
                 )}
-                <div className="relative mb-6 flex h-32 items-end justify-center">
-                  <img src={p.img} alt={`${p.name} package jar`} width={300} height={300} loading="lazy" className="relative z-10 h-28 w-28 object-contain transition-transform duration-500 hover:-translate-y-1 hover:rotate-[-4deg]" />
-                  <span aria-hidden="true" className={`absolute inset-x-2 bottom-0 h-2 rounded-full ${p.popular ? "bg-black/15" : "bg-[#C9A27E]/40 dark:bg-[#875E40]/50"}`} />
-                </div>
                 <p className={`text-[15px] ${p.popular ? "opacity-75" : "text-dp-muted"}`}>{p.name}</p>
                 <p className="mt-1 text-[clamp(2.6rem,4vw,3.25rem)] font-semibold tracking-[-0.05em]">{p.price}</p>
                 <p className={`text-[13px] ${p.popular ? "opacity-70" : "text-dp-muted"}`}>once-off</p>

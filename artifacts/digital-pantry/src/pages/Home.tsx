@@ -9,7 +9,8 @@ import { Ticker } from "../components/Ticker";
 import { FreeTaste } from "../components/FreeTaste";
 import { Sprinkles } from "../components/Sprinkles";
 import { HeroScene } from "../components/HeroScene";
-import { PLAN_PRICES } from "../lib/plans";
+import { PantryShelf } from "../components/PantryShelf";
+import { Sticker, DAY, NIGHT } from "../components/Stickers";
 import { H2 } from "../lib/style";
 
 // Imaan's pixel avatar is being made; until then her cards show a monogram.
@@ -74,12 +75,6 @@ const RECIPE = [
   { img: "/images/art/aaniquah-serving.webp", imgNight: "/images/art/imaan-serving.webp", title: "Served fresh", body: "Live on your own domain and ready for orders. Most sites take 5 to 7 business days." },
 ] as const;
 
-const MENU = [
-  { name: "Starter", price: PLAN_PRICES.Starter, img: "/images/starter.webp", note: "One page, a menu section and a WhatsApp button." },
-  { name: "Standard", price: PLAN_PRICES.Standard, img: "/images/standard.webp", note: "Adds locations, an about section and your socials.", popular: true },
-  { name: "Premium", price: PLAN_PRICES.Premium, img: "/images/premium.webp", note: "Adds your own domain, Google Business and basic SEO." },
-  { name: "Pro", price: PLAN_PRICES.Pro, img: "/images/pro.webp", note: "Adds a lead form with instant alerts to your phone." },
-] as const;
 
 function Monogram({ className = "" }: { className?: string }) {
   return (
@@ -129,8 +124,9 @@ function Hero() {
 
         {/* The two chefs at one counter, animated */}
         <div className="dp-rise relative mx-auto w-full max-w-[720px]" style={rise(0.2)}>
-          <span aria-hidden="true" className="absolute -left-3 -top-5 z-10 text-4xl text-[#FFD43B] drop-shadow-[0_4px_10px_rgba(224,176,0,0.5)]">★</span>
-          <span aria-hidden="true" className="absolute -bottom-4 -right-2 z-10 text-3xl text-dp-pink">✦</span>
+          <Sticker day={DAY.star} night={NIGHT.moon} size={58} r={-10} style={{ left: "-18px", top: "-26px" }} />
+          <Sticker day={DAY.sparkle} night={NIGHT.star} size={44} r={8} d={1.2} style={{ right: "-14px", top: "18%" }} />
+          <Sticker day={DAY.mug} night={NIGHT.stylus} size={62} r={6} d={0.6} style={{ right: "6%", bottom: "-30px" }} />
           <HeroScene />
         </div>
       </div>
@@ -325,34 +321,40 @@ function Work() {
 }
 
 function Recipe() {
+  const [first, ...rest] = RECIPE;
+  const Art = ({ s, cls }: { s: (typeof RECIPE)[number]; cls: string }) => (
+    <div aria-hidden="true" className={`dp-stage ${cls}`}>
+      <img src={s.img} alt="" width={600} height={600} loading="lazy" className="w-full object-contain dark:hidden" />
+      <img src={s.imgNight} alt="" width={600} height={600} loading="lazy" className="hidden w-full object-contain dark:block" />
+    </div>
+  );
   return (
-    <section aria-labelledby="recipe-heading" className="border-t border-dp-line bg-dp-soft/50">
-      <div className="mx-auto grid max-w-[1320px] gap-14 px-5 py-24 sm:px-8 md:grid-cols-[1fr_1.3fr] md:py-32">
-        <div className="md:sticky md:top-32 md:self-start">
-          <Reveal>
-            <h2 id="recipe-heading" className={H2}>
-              The <CutoutWord word="RECIPE" />
-            </h2>
-            <p className="mt-5 max-w-[36ch] text-lg leading-relaxed text-dp-muted">Three steps, one kitchen, and you taste everything before it's served.</p>
+    <section aria-labelledby="recipe-heading" className="relative border-t border-dp-line bg-dp-soft/50">
+      <div className="mx-auto max-w-[1320px] px-5 py-24 sm:px-8 md:py-32">
+        <Reveal className="flex flex-wrap items-end justify-between gap-6">
+          <h2 id="recipe-heading" className={H2}>
+            The <CutoutWord word="RECIPE" />
+          </h2>
+          <p className="max-w-[36ch] text-lg leading-relaxed text-dp-muted">Three steps, one kitchen, and you taste everything before it's served.</p>
+        </Reveal>
+
+        {/* Bento: step 1 tall on the left, steps 2 and 3 stacked on the right */}
+        <ol className="mt-14 grid gap-5 md:grid-cols-[1.1fr_1fr] md:grid-rows-2">
+          <Reveal as="li" className="relative flex flex-col overflow-hidden rounded-[32px] border border-dp-line bg-dp-surface p-8 sm:p-10 md:row-span-2">
+            <span className="font-mono text-[13px] text-dp-accent">Step 1</span>
+            <h3 className="mt-3 text-[clamp(1.8rem,3vw,2.6rem)] font-semibold tracking-[-0.04em]">{first.title}</h3>
+            <p className="mt-3 max-w-[42ch] leading-relaxed text-dp-muted">{first.body}</p>
+            <Art s={first} cls="mx-auto mt-auto w-[min(100%,380px)] pt-8" />
           </Reveal>
-        </div>
-        <ol className="flex flex-col gap-5">
-          {RECIPE.map((s, i) => (
-            <li
-              key={s.title}
-              className="sticky grid grid-cols-[1fr_auto] items-center gap-6 rounded-[24px] border border-dp-line bg-dp-surface p-7 shadow-[0_24px_60px_-40px_rgba(12,11,13,0.5)] sm:p-9"
-              style={{ top: `${112 + i * 18}px` }}
-            >
+          {rest.map((s, i) => (
+            <Reveal as="li" key={s.title} delay={0.08 * (i + 1)} className="relative grid items-center gap-4 overflow-hidden rounded-[32px] border border-dp-line bg-dp-surface p-8 sm:grid-cols-[1fr_auto] sm:p-10">
               <div>
-                <span className="font-mono text-[13px] text-dp-accent">Step {i + 1}</span>
-                <h3 className="mt-4 text-[clamp(1.5rem,2.4vw,2rem)] font-semibold tracking-[-0.035em]">{s.title}</h3>
-                <p className="mt-3 max-w-[40ch] leading-relaxed text-dp-muted">{s.body}</p>
+                <span className="font-mono text-[13px] text-dp-accent">Step {i + 2}</span>
+                <h3 className="mt-3 text-[clamp(1.6rem,2.4vw,2.1rem)] font-semibold tracking-[-0.035em]">{s.title}</h3>
+                <p className="mt-3 max-w-[36ch] leading-relaxed text-dp-muted">{s.body}</p>
               </div>
-              <span aria-hidden="true" className="block h-28 w-28 sm:h-36 sm:w-36">
-                <img src={s.img} alt="" width={600} height={600} loading="lazy" className="h-full w-full object-contain dark:hidden" />
-                <img src={s.imgNight} alt="" width={600} height={600} loading="lazy" className="hidden h-full w-full object-contain dark:block" />
-              </span>
-            </li>
+              <Art s={s} cls="mx-auto w-44 sm:w-48 md:w-52" />
+            </Reveal>
           ))}
         </ol>
       </div>
@@ -362,43 +364,25 @@ function Recipe() {
 
 function Menu() {
   return (
-    <section aria-labelledby="menu-heading" className="border-t border-dp-line">
+    <section aria-labelledby="menu-heading" className="relative border-t border-dp-line">
+      <Sticker day={DAY.donut} night={NIGHT.mug} size={64} r={-12} d={0.4} style={{ right: "6%", top: "9%" }} />
       <div className="mx-auto max-w-[1320px] px-5 py-24 sm:px-8 md:py-32">
         <Reveal className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <h2 id="menu-heading" className={H2}>
               On the <CutoutWord word="MENU" />
             </h2>
-            <p className="mt-5 max-w-[40ch] text-lg leading-relaxed text-dp-muted">Clear prices. No hidden fees. Built from scratch.</p>
+            <p className="mt-5 max-w-[40ch] text-lg leading-relaxed text-dp-muted">Clear prices. No hidden fees. Pick a jar to ask about it.</p>
           </div>
           <Link href="/pricing" className="group inline-flex items-center gap-1.5 text-[15px] text-dp-muted transition-colors hover:text-dp-ink" data-testid="button-pricing-preview-cta">
             See full packages
             <ArrowUpRight size={16} className="transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
           </Link>
         </Reveal>
-        <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {MENU.map((t, i) => {
-            const popular = "popular" in t;
-            return (
-              <Reveal
-                key={t.name}
-                delay={i * 0.06}
-                className={`relative flex flex-col rounded-[24px] border p-7 transition-transform duration-500 hover:-translate-y-1 ${
-                  popular ? "border-transparent bg-dp-cta text-dp-cta-fg" : "border-dp-line bg-dp-surface"
-                }`}
-              >
-                {popular && (
-                  <span className="absolute -top-3 left-7 rounded-full bg-[#FFD43B] px-3 py-1 text-[12px] font-semibold text-[#161214]">Most popular ★</span>
-                )}
-                <img src={t.img} alt="" width={240} height={240} loading="lazy" className="h-20 w-20 object-contain" />
-                <p className={`mt-6 text-[15px] ${popular ? "opacity-80" : "text-dp-muted"}`}>{t.name}</p>
-                <p className="mt-1 text-[clamp(2.4rem,3.6vw,3rem)] font-semibold tracking-[-0.05em]">{t.price}</p>
-                <p className={`mt-3 text-[15px] leading-relaxed ${popular ? "opacity-80" : "text-dp-muted"}`}>{t.note}</p>
-              </Reveal>
-            );
-          })}
-        </div>
-        <p className="mt-6 text-[14px] text-dp-muted">Once-off prices in rand. Small edits after launch from R120 a month.</p>
+        <Reveal className="mt-16">
+          <PantryShelf />
+        </Reveal>
+        <p className="mt-12 text-[14px] text-dp-muted">Small-business prices, once-off in rand. Small edits after launch from R120 a month. Bigger companies and larger projects get a custom quote.</p>
       </div>
     </section>
   );

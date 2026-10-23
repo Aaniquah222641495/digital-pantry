@@ -29,15 +29,15 @@
 /* Imaan's palette, used by Night and by her own panels on both sides.
    Burgundy (default) and plum: preview plum with ?imaan=plum (public/theme-init.js). */
 :root {
-  --im-bg: #150708;
-  --im-surface: #200B0F;
-  --im-soft: #2C1217;
-  --im-border: #4E222A;
+  --im-bg: #0F0406;
+  --im-surface: #1E0A0F;
+  --im-soft: #2A0F16;
+  --im-border: #5A2531;
   --im-band: #4A0F1A;
   --im-deep: #7A1F2E;
-  --im-text: #F6EDED;
-  --im-muted: #E6D2D5;
-  --im-label: #D4BCC1;
+  --im-text: #FBF2F3;
+  --im-muted: #EAD7DA;
+  --im-label: #D9C2C7;
   --im-accent: #FFA7D2;
   --im-hot: #FF5CA8;
   --im-cta: #FFA7D2;
@@ -45,9 +45,9 @@
   --im-silver: #DCD8E2;
   --im-glow: rgba(150, 32, 54, 0.45);
   --im-glow-strong: rgba(160, 36, 60, 0.55);
-  --im-sky-a: rgba(140, 26, 46, 0.34);
-  --im-sky-b: rgba(92, 18, 36, 0.32);
-  --im-sky-pink: rgba(255, 92, 168, 0.13);
+  --im-sky-a: rgba(160, 30, 56, 0.42);
+  --im-sky-b: rgba(110, 20, 42, 0.38);
+  --im-sky-pink: rgba(255, 92, 168, 0.16);
 }
 :root[data-imaan="plum"] {
   --im-bg: #120A13;
@@ -510,3 +510,56 @@ html.dp-theme-shift, html.dp-theme-shift * {
   .dp-steam { animation: dp-steam-kf 3.9s ease-out infinite; animation-delay: var(--d, 0s); }
   .dp-scene-img { animation: dp-breathe 7s ease-in-out infinite; transform-origin: 50% 70%; }
 }
+
+/* ── Night depth (2026-10-23): light, layers and stage lighting so Imaan's room feels premium. ── */
+html.dark body {
+  background:
+    radial-gradient(1200px 820px at 92% -10%, var(--im-sky-a), transparent 60%),
+    radial-gradient(1000px 760px at -15% 30%, var(--im-sky-pink), transparent 62%),
+    radial-gradient(1100px 800px at 110% 80%, var(--im-sky-b), transparent 60%),
+    linear-gradient(180deg, #14060A 0%, var(--im-bg) 40%, #0B0305 100%);
+  background-attachment: fixed;
+}
+/* Raised surfaces: a lit top edge, a faint inner sheen and a deep shadow, instead of flat brown. */
+.dark .bg-dp-surface,
+.dark .dp-raise {
+  background-image: linear-gradient(180deg, rgba(255, 220, 230, 0.06), rgba(255, 220, 230, 0) 45%);
+  box-shadow: inset 0 1px 0 rgba(255, 220, 230, 0.12), inset 0 0 0 1px rgba(255, 167, 210, 0.06), 0 30px 70px -35px rgba(0, 0, 0, 0.85);
+}
+.dark .border-dp-line { border-color: rgba(255, 196, 214, 0.14); }
+.dark .bg-dp-soft\/50, .dark .bg-dp-soft\/60 {
+  background-color: rgba(42, 15, 22, 0.55);
+  background-image: radial-gradient(900px 400px at 15% 0%, rgba(255, 92, 168, 0.08), transparent 70%);
+}
+/* Headline glow on Night: a faint warm halo so big type sits in the light. */
+.dark h1, .dark h2 { text-shadow: 0 0 40px rgba(255, 140, 180, 0.12); }
+
+/* Stage: a soft spotlight under each illustration (Day: blush pool, Night: pink-wine pool). */
+.dp-stage { position: relative; isolation: isolate; }
+.dp-stage::before {
+  content: ""; position: absolute; z-index: -1; left: 50%; bottom: 4%; width: 92%; height: 34%;
+  transform: translateX(-50%); border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(255, 167, 210, 0.55), transparent);
+  filter: blur(6px);
+}
+.dark .dp-stage::before { background: radial-gradient(closest-side, rgba(255, 92, 168, 0.42), rgba(160, 30, 56, 0.25) 60%, transparent); }
+.dp-stage::after {
+  content: ""; position: absolute; z-index: -2; inset: 8% 6% 10%; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(255, 255, 255, 0.7), transparent);
+}
+.dark .dp-stage::after { background: radial-gradient(closest-side, rgba(255, 130, 175, 0.16), transparent); }
+
+/* Stickers: pixel art with a thick white die-cut border and a soft shadow. */
+.dp-sticker {
+  image-rendering: pixelated;
+  filter: drop-shadow(3px 0 0 #fff) drop-shadow(-3px 0 0 #fff) drop-shadow(0 3px 0 #fff) drop-shadow(0 -3px 0 #fff) drop-shadow(0 10px 14px rgba(120, 30, 60, 0.28));
+}
+.dark .dp-sticker { filter: drop-shadow(3px 0 0 #FBF2F3) drop-shadow(-3px 0 0 #FBF2F3) drop-shadow(0 3px 0 #FBF2F3) drop-shadow(0 -3px 0 #FBF2F3) drop-shadow(0 12px 18px rgba(0, 0, 0, 0.6)); }
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes dp-float { 0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); } 50% { transform: translateY(-8px) rotate(calc(var(--r, 0deg) + 4deg)); } }
+  .dp-sticker-float { animation: dp-float 6s ease-in-out infinite; animation-delay: var(--d, 0s); }
+}
+
+/* Generated sticker lettering in headings: shadow added here (generated flat), lifts on Night. */
+.dp-wordmark { filter: drop-shadow(0 6px 10px rgba(179, 47, 104, 0.25)); }
+.dark .dp-wordmark { filter: drop-shadow(0 0 22px rgba(255, 92, 168, 0.35)) drop-shadow(0 10px 18px rgba(0, 0, 0, 0.55)); }

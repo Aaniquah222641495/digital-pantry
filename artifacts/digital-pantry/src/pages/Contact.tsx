@@ -4,6 +4,7 @@ import { CutoutWord } from "../components/CutoutWord";
 import { Reveal } from "../components/Reveal";
 import { LeadForm } from "../components/LeadForm";
 import { H1 } from "../lib/style";
+import { Sticker, DAY, NIGHT } from "../components/Stickers";
 
 const QUICK_CONTACTS = [
   { icon: MessageCircle, label: "WhatsApp", sub: "072 411 1011, fastest reply", href: "https://wa.me/27724111011", testId: "button-contact-whatsapp", iconCls: "bg-[#25D366]/15 text-[#1F8A50] dark:text-[#5BD38E]" },
@@ -25,6 +26,16 @@ export default function Contact() {
             <p className="dp-rise mt-6 max-w-[40ch] text-[clamp(1.05rem,1.5vw,1.25rem)] leading-relaxed text-dp-muted" style={{ "--d": "0.12s" } as CSSProperties}>
               Ask for a quote, or pick the free mock-up and see your site before you decide. It comes straight to Aaniquah and Imaan.
             </p>
+
+            <div className="dp-rise relative mt-10 flex items-center gap-6" style={{ "--d": "0.18s" } as CSSProperties} aria-hidden="true">
+              <div className="dp-stage w-48 shrink-0 -rotate-3 sm:w-56">
+                <img src="/images/art/order-ticket.webp" alt="" width={600} height={600} className="w-full object-contain" />
+              </div>
+              <p className="max-w-[22ch] text-[clamp(1.1rem,1.6vw,1.35rem)] font-medium leading-snug tracking-[-0.02em] text-dp-ink">
+                Every order lands on our board. <span className="text-dp-accent">Aaniquah or Imaan replies personally.</span>
+              </p>
+              <Sticker day={DAY.code} night={NIGHT.stylus} size={56} r={-12} d={0.5} style={{ left: "-10px", top: "-18px" }} />
+            </div>
 
             <div className="dp-rise mt-10 flex flex-col gap-3" style={{ "--d": "0.22s" } as CSSProperties}>
               {QUICK_CONTACTS.map((c) => (
@@ -48,10 +59,6 @@ export default function Contact() {
               ))}
             </div>
 
-            <div className="mt-10 hidden items-end gap-3 md:flex" aria-hidden="true">
-              <img src="/images/art/order-ticket.webp" alt="" width={600} height={600} className="h-40 w-40 object-contain" />
-              <span className="mb-3 rounded-full border border-dp-line px-3 py-1.5 text-[13px] text-dp-muted">Your order goes straight to us ★</span>
-            </div>
           </div>
 
           {/* Right: the form */}

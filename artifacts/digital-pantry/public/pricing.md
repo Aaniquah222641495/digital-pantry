@@ -1,6 +1,6 @@
 # Pricing: The Digital Pantry (Cape Town, South Africa)
 
-Custom small business websites, built from scratch. All prices in South African rand (ZAR), once-off unless stated. Most projects are done within 5 to 7 business days.
+Custom small business websites, built from scratch. These are small-business prices; larger companies and bigger projects are quoted separately. All prices in South African rand (ZAR), once-off unless stated. Most projects are done within 5 to 7 business days.
 Last updated: 2026-10-22. Source page: https://thedigitalpantry.netlify.app/pricing
 
 ## Starter: R600

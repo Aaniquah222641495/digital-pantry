@@ -35,6 +35,7 @@ export const FAQ = [
   { q: "Do I need to know how to code?", a: "No! That's literally our job. You handle the business, we handle the website." },
   { q: "Do I keep my WhatsApp number?", a: "Yes! We just add a click-to-WhatsApp button on your site. Easy." },
   { q: "How long does it take?", a: "Most projects are done within 5 to 7 business days." },
+  { q: "Do these prices apply to bigger companies?", a: "No, these are small-business prices. Larger companies and bigger projects get a custom quote, so just tell us what you need." },
   { q: "What if I need changes later?", a: "That's what the R120/month retainer is for. Small edits, big peace of mind." },
   { q: "Does Pro have monthly fees?", a: "No. Your lead system runs on free Google tools that you own. Every enquiry lands in your inbox and your own Sheet." },
 ];
