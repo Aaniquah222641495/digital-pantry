@@ -15,6 +15,9 @@
 
 const CONFIG = {
   OWNER_EMAIL: 'thedigitalpantryza@gmail.com',
+  // Leave empty when the script is attached to the Sheet (Extensions > Apps Script). For a standalone
+  // project, paste the Sheet's ID: the part of its URL between /d/ and /edit.
+  SPREADSHEET_ID: '',
   SHEET_NAME: 'Leads',
   SITE_URL: 'https://thedigitalpantry.netlify.app',
   WHATSAPP_NUMBER: '27724111011',
@@ -117,7 +120,7 @@ function processLead_(data) {
   }
 
   // The lead is safely in the Sheet. Emails come next; if one fails the lead is still saved.
-  const sheetUrl = SpreadsheetApp.getActiveSpreadsheet().getUrl();
+  const sheetUrl = spreadsheet_().getUrl();
   try {
     sendAlert_(lead, sheetUrl);
   } catch (err) {
@@ -192,8 +195,12 @@ function hash_(text) {
 /* Sheet                                                               */
 /* ------------------------------------------------------------------ */
 
+function spreadsheet_() {
+  return CONFIG.SPREADSHEET_ID ? SpreadsheetApp.openById(CONFIG.SPREADSHEET_ID) : SpreadsheetApp.getActiveSpreadsheet();
+}
+
 function getSheet_() {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const ss = spreadsheet_();
   let sheet = ss.getSheetByName(CONFIG.SHEET_NAME);
   if (!sheet) {
     sheet = ss.insertSheet(CONFIG.SHEET_NAME);

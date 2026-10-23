@@ -59,13 +59,17 @@ You do this once, signed in as **thedigitalpantryza@gmail.com**.
 
 If the form ever says "Let's make sure I get this", it could not reach the script and offers WhatsApp or email instead, so a visitor is never stuck.
 
+## If Extensions > Apps Script shows "Sorry, unable to open the file"
+
+Google has a bug when the business account is not the first account signed in to Chrome. Instead: go to https://script.google.com, click **New project**, name it **Lead endpoint**, paste `Code.gs`, and put the Sheet's ID (the part of the Sheet's URL between `/d/` and `/edit`) in `SPREADSHEET_ID` in the CONFIG block. Then carry on from Part 2. Google's permission prompt will ask for access to all your spreadsheets; the script only opens the one whose ID you entered. (This is how the live lead endpoint was set up, 2026-10-24.)
+
 ## Changing the script later
 
 Edit the code, save, then **Deploy** then **Manage deployments** then the pencil icon, set **Version** to **New version**, and click **Deploy**. The URL stays the same, so Netlify does not need touching. (Choosing "New deployment" again would give a new URL.)
 
 ## What the script protects against
 
-- Every field is checked again on the server, with length limits, a South African phone check and a fixed list for "interested in".
+- Every field is checked again on the server, with length limits, a phone check (South African or international with a country code) and a fixed list for "interested in".
 - Honeypot: a hidden field that only bots fill in. Those are silently ignored.
 - The same enquiry sent twice within 10 minutes is saved once.
 - One email address can send 3 enquiries an hour, and the whole form 40 an hour. Anything over that is not saved, and the visitor is offered WhatsApp or email instead.
