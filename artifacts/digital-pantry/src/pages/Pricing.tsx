@@ -1,216 +1,158 @@
-import { motion, type Variants } from "framer-motion";
 import { Check } from "lucide-react";
 import { CutoutWord } from "../components/CutoutWord";
-import { AnimatedSection } from "../components/AnimatedSection";
-import { CTAButton } from "../components/CTAButton";
-import { MockupOffer } from "../components/MockupOffer";
+import { Reveal } from "../components/Reveal";
+import { MagneticButton } from "../components/MagneticButton";
+import { FreeTaste } from "../components/FreeTaste";
 import { PLAN_PRICES } from "../lib/plans";
+import { H1, H2 } from "../lib/style";
 import { FAQ } from "../seo";
 
 const PLANS = [
   {
-    name: "Starter", price: PLAN_PRICES.Starter, popular: false, cta: "Get Started ★",
-    img: "/images/starter.webp",
-    features: ["Single page","Menu section","WhatsApp button","Mobile responsive"],
+    name: "Starter", price: PLAN_PRICES.Starter, popular: false, img: "/images/starter.webp",
+    line: "A one-page site that gets you found.",
+    features: ["Single page", "Menu section", "WhatsApp button", "Mobile responsive"],
   },
   {
-    name: "Standard", price: PLAN_PRICES.Standard, popular: true, cta: "Most Popular ★",
-    img: "/images/standard.webp",
-    features: ["Everything in Starter","Locations section","About section","Social links"],
+    name: "Standard", price: PLAN_PRICES.Standard, popular: true, img: "/images/standard.webp",
+    line: "The full shop window for most small brands.",
+    features: ["Everything in Starter", "Locations section", "About section", "Social links"],
   },
   {
-    name: "Premium", price: PLAN_PRICES.Premium, popular: false, cta: "Go Premium ★",
-    img: "/images/premium.webp",
-    features: ["Everything in Standard","Custom domain setup","Google Business setup","Basic SEO setup","1 month of updates"],
+    name: "Premium", price: PLAN_PRICES.Premium, popular: false, img: "/images/premium.webp",
+    line: "Your own domain, and Google knows you exist.",
+    features: ["Everything in Standard", "Custom domain setup", "Google Business setup", "Basic SEO setup", "1 month of updates"],
   },
   {
-    name: "Pro", price: PLAN_PRICES.Pro, popular: false, cta: "Go Pro ★",
-    img: "/images/pro.webp",
-    features: ["Everything in Premium","Lead capture form + instant alerts","Leads saved to your Google Sheet","Auto-reply to every enquiry","WhatsApp follow-up button","Tested before handover"],
+    name: "Pro", price: PLAN_PRICES.Pro, popular: false, img: "/images/pro.webp",
+    line: "Every enquiry caught, saved and answered.",
+    features: ["Everything in Premium", "Lead capture form + instant alerts", "Leads saved to your Google Sheet", "Auto-reply to every enquiry", "WhatsApp follow-up button", "Tested before handover"],
   },
-];
-
-const FAQ_ITEMS = FAQ.map((f, i) => ({ question: f.q, answer: f.a, side: i % 2 === 0 ? "left" : "right" }));
-
-const stagger: Variants = { hidden: {}, show: { transition: { staggerChildren: 0.1 } } };
-const fadeUp: Variants = { hidden: { opacity: 0, y: 28 }, show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } } };
+] as const;
 
 export default function Pricing() {
   return (
-    <main className="pt-20">
-      {/* ── Header ───────────────────────────────────── */}
-      <section className="bg-[#FFF8FB] dark:bg-[#0A0A0A] grain-section py-16 md:py-20 relative overflow-hidden transition-colors duration-300">
-        <span className="grain-deco top-10 right-8 text-[#FFD700]/8 text-[8rem] md:text-[12rem] font-bebas leading-none select-none pointer-events-none">★</span>
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
-            <AnimatedSection className="flex-1">
-              <h1 className="font-display font-black text-gray-900 dark:text-white leading-tight" style={{ fontSize: "clamp(2.8rem, 8vw, 6rem)" }}>
-                <span className="block font-normal font-mono-brand text-[#FF2D87] text-xs tracking-[0.25em] uppercase mb-4 leading-normal">Website Prices in South Africa</span>
-                <CutoutWord word="PRICING" /> <span className="text-[#FFD700]">★</span>
-              </h1>
-              <p className="font-body text-gray-500 dark:text-white/50 text-base md:text-lg mt-4 max-w-xl">
-                Pick your package. We'll stock the shelves.
-              </p>
-            </AnimatedSection>
-            <AnimatedSection direction="right" className="flex-shrink-0">
-              <img
-                src="/images/pricing.webp"
-                alt=""
-                className="w-56 md:w-72 mr-4 md:mr-16 object-contain drop-shadow-[0_0_30px_rgba(255,45,135,0.25)]"
-                loading="eager"
-              />
-            </AnimatedSection>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Pricing Cards ────────────────────────────── */}
-      <section className="bg-[#FFF0F5] dark:bg-[#0f0a0d] py-16 md:py-20 transition-colors duration-300">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <motion.div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6" variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }}>
-            {PLANS.map((plan) => (
-              <motion.div
-                key={plan.name}
-                variants={fadeUp}
-                whileHover={{ y: -8 }}
-                className={`rounded-2xl p-6 md:p-7 relative flex flex-col transition-all duration-300 ${
-                  plan.popular
-                    ? "bg-[#FF2D87] border-2 border-[#FF2D87] pink-glow"
-                    : "bg-white dark:bg-[#0A0A0A] border border-gray-200 dark:border-white/8 hover:border-[#FF2D87]/30 shadow-sm dark:shadow-none"
-                }`}
-                data-testid={`card-pricing-${plan.name.toLowerCase()}`}
-              >
-                {plan.popular && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#FFD700] text-[#0A0A0A] text-xs font-mono-brand font-bold px-4 py-1.5 rounded-full whitespace-nowrap shadow-lg">
-                    Most Popular ★
-                  </div>
-                )}
-
-                {/* Tier image */}
-                <div className="w-full h-36 mb-5 flex items-center justify-center">
-                  <img
-                    src={plan.img}
-                    alt={`${plan.name} package`}
-                    className="h-full w-auto object-contain drop-shadow-[0_4px_16px_rgba(255,45,135,0.25)]"
-                    loading="lazy"
-                    onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
-                  />
-                </div>
-
-                <div className="mb-6">
-                  <p className={`font-mono-brand text-xs tracking-[0.2em] uppercase mb-3 ${plan.popular ? "text-white/70" : "text-gray-400 dark:text-white/40"}`}>{plan.name}</p>
-                  <p className={`font-display font-black leading-none ${plan.popular ? "text-white" : "text-gray-900 dark:text-white"}`} style={{ fontSize: "clamp(2rem, 5vw, 3rem)" }}>
-                    {plan.price}
-                  </p>
-                  <p className={`font-body text-sm mt-1 ${plan.popular ? "text-white/60" : "text-gray-400 dark:text-white/35"}`}>once-off</p>
-                </div>
-
-                <ul className="space-y-3 flex-1 mb-7">
-                  {plan.features.map((feature) => (
-                    <li key={feature} className="flex items-start gap-3">
-                      <Check size={16} className={`mt-0.5 shrink-0 ${plan.popular ? "text-white" : "text-[#FF2D87]"}`} />
-                      <span className={`font-body text-sm ${plan.popular ? "text-white/85" : "text-gray-600 dark:text-white/60"}`}>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <CTAButton href="/contact" variant={plan.popular ? "ghost" : "outline"} className="w-full justify-center" data-testid={`button-pricing-${plan.name.toLowerCase()}`}>
-                  {plan.cta}
-                </CTAButton>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ── Retainer ─────────────────────────────────── */}
-      <section className="bg-[#FFF8FB] dark:bg-[#0A0A0A] py-14 md:py-16 transition-colors duration-300">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6">
-          <AnimatedSection>
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              className="bg-white dark:bg-gradient-to-r dark:from-[#1a0a0f] dark:to-[#0f0a0d] border border-[#FFD700]/30 rounded-2xl p-7 md:p-10 flex flex-col md:flex-row items-start md:items-center gap-7 md:gap-8 shadow-sm dark:shadow-none"
-            >
-              <div className="flex-1">
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="text-[#FFD700] text-2xl">★</span>
-                  <p className="font-mono-brand text-[#FFD700] text-xs tracking-[0.2em] uppercase">Keep Your Pantry Stocked ★</p>
-                </div>
-                <p className="font-display font-black text-gray-900 dark:text-white text-4xl mb-2">
-                  R120<span className="font-body font-normal text-gray-400 dark:text-white/40 text-lg">/month</span>
-                </p>
-                <p className="font-body text-gray-500 dark:text-white/50 text-sm leading-relaxed">Menu updates. Schedule changes. Small edits. Always fresh.</p>
-              </div>
-              <div className="flex-1 w-full">
-                <ul className="space-y-2.5 mb-5">
-                  {["Menu updates","Schedule changes","Small edits","Always fresh"].map((item) => (
-                    <li key={item} className="flex items-center gap-2.5">
-                      <span className="text-[#FFD700] text-xs">★</span>
-                      <span className="font-body text-gray-600 dark:text-white/65 text-sm">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-                <CTAButton href="/contact" variant="outline" data-testid="button-retainer-cta">Add Retainer ★</CTAButton>
-              </div>
-            </motion.div>
-          </AnimatedSection>
-        </div>
-      </section>
-
-      {/* ── iMessage FAQ ─────────────────────────────── */}
-      <section className="bg-[#FFF0F5] dark:bg-[#0f0a0d] grain-section py-16 md:py-20 transition-colors duration-300">
-        <div className="max-w-2xl mx-auto px-4 sm:px-6">
-          <AnimatedSection className="text-center mb-10 md:mb-12">
-            <p className="font-mono-brand text-[#FF2D87] text-xs tracking-[0.25em] uppercase mb-2">FAQ</p>
-            <h2 className="font-display font-black text-gray-900 dark:text-white text-3xl sm:text-4xl md:text-5xl">
-              Got questions? Let me dish it out. <span className="text-[#FFD700]">★</span>
-            </h2>
-          </AnimatedSection>
-
-          <div className="space-y-4">
-            {FAQ_ITEMS.map((item, i) => (
-              <AnimatedSection key={i} delay={i * 0.1}>
-                <div className={`flex flex-col gap-2 ${item.side === "right" ? "items-end" : "items-start"}`}>
-                  {/* Customer question: always grey/white bubble */}
-                  <motion.div
-                    whileHover={{ scale: 1.01 }}
-                    className={`max-w-[85%] rounded-2xl px-4 md:px-5 py-3 md:py-3.5 text-sm bg-white dark:bg-[#1c1c1e] text-gray-800 dark:text-white border border-gray-200 dark:border-white/8 shadow-sm dark:shadow-none ${
-                      item.side === "right" ? "rounded-tr-sm" : "rounded-tl-sm"
-                    }`}
-                  >
-                    <p className="font-body leading-relaxed">{item.question}</p>
-                  </motion.div>
-                  {/* Aaniquah's answer: always pink bubble, opposite side */}
-                  <motion.div
-                    whileHover={{ scale: 1.01 }}
-                    className={`max-w-[85%] rounded-2xl px-4 md:px-5 py-3 md:py-3.5 text-sm bg-[#FF2D87] text-white ${
-                      item.side === "right" ? "rounded-tl-sm self-start" : "rounded-tr-sm self-end"
-                    }`}
-                  >
-                    <p className="font-body leading-relaxed">{item.answer}</p>
-                  </motion.div>
-                </div>
-              </AnimatedSection>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Free mock-up offer ───────────────────────── */}
-      <MockupOffer bgClass="bg-[#FFF8FB] dark:bg-[#0A0A0A]" testId="pricing-mockup-offer" />
-
-      {/* ── Bottom CTA ───────────────────────────────── */}
-      <section className="bg-[#FFF8FB] dark:bg-[#0A0A0A] py-16 md:py-20 text-center transition-colors duration-300">
-        <AnimatedSection>
-          <h2 className="font-display font-black text-gray-900 dark:text-white text-3xl sm:text-4xl md:text-5xl mb-3">
-            Ready to get <span className="text-[#FF2D87]">built</span>?
-          </h2>
-          <p className="font-body text-gray-500 dark:text-white/50 mb-8 max-w-md mx-auto px-4 text-sm md:text-base">
-            Your business, beautifully built. No code knowledge needed, because that's literally my job.
+    <main>
+      {/* Header + the pantry shelf of jars */}
+      <section className="relative isolate overflow-hidden">
+        <div aria-hidden="true" className="pointer-events-none absolute -left-[15%] -top-[30%] -z-10 h-[80vh] w-[60vw] rounded-full bg-[radial-gradient(closest-side,var(--dp-glow),transparent)] blur-2xl" />
+        <div className="mx-auto max-w-[1320px] px-5 pb-10 pt-36 sm:px-8 md:pt-40">
+          <h1 className={`dp-rise ${H1}`}>
+            <span className="sr-only">Website prices in South Africa: </span>
+            On the <CutoutWord word="MENU" /> <span aria-hidden="true" className="text-[0.8em]">★</span>
+          </h1>
+          <p className="dp-rise mt-6 max-w-[40ch] text-[clamp(1.05rem,1.5vw,1.25rem)] leading-relaxed text-dp-muted" style={{ "--d": "0.12s" } as React.CSSProperties}>
+            Website prices in South Africa, once-off and in rand. Pick your jar. We'll stock the shelves.
           </p>
-          <CTAButton href="/contact" data-testid="button-pricing-bottom-cta">Let's Build Something ★</CTAButton>
-        </AnimatedSection>
+        </div>
       </section>
+
+      <section aria-label="Packages" className="mx-auto max-w-[1320px] px-5 pb-24 sm:px-8 md:pb-32">
+        {/* Jars on a shelf (desktop): the shelf is a wooden-ish ledge under the jar row */}
+        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+          {PLANS.map((p, i) => (
+            <Reveal
+              key={p.name}
+              delay={i * 0.07}
+              className={`relative flex flex-col rounded-[28px] border p-7 sm:p-8 ${
+                p.popular ? "border-transparent bg-dp-cta text-dp-cta-fg shadow-[0_30px_60px_-30px_var(--dp-glow)]" : "border-dp-line bg-dp-surface"
+              }`}
+            >
+              <div data-testid={`card-pricing-${p.name.toLowerCase()}`} className="flex h-full flex-col">
+                {p.popular && (
+                  <span className="absolute -top-3 left-8 rounded-full bg-[#FFD43B] px-3 py-1 text-[12px] font-semibold text-[#161214]">Most popular ★</span>
+                )}
+                <div className="relative mb-6 flex h-32 items-end justify-center">
+                  <img src={p.img} alt={`${p.name} package jar`} width={300} height={300} loading="lazy" className="relative z-10 h-28 w-28 object-contain transition-transform duration-500 hover:-translate-y-1 hover:rotate-[-4deg]" />
+                  <span aria-hidden="true" className={`absolute inset-x-2 bottom-0 h-2 rounded-full ${p.popular ? "bg-black/15" : "bg-[#C9A27E]/40 dark:bg-[#875E40]/50"}`} />
+                </div>
+                <p className={`text-[15px] ${p.popular ? "opacity-75" : "text-dp-muted"}`}>{p.name}</p>
+                <p className="mt-1 text-[clamp(2.6rem,4vw,3.25rem)] font-semibold tracking-[-0.05em]">{p.price}</p>
+                <p className={`text-[13px] ${p.popular ? "opacity-70" : "text-dp-muted"}`}>once-off</p>
+                <p className={`mt-5 leading-relaxed ${p.popular ? "opacity-85" : "text-dp-muted"}`}>{p.line}</p>
+                <ul className="mt-6 flex flex-1 flex-col gap-2.5">
+                  {p.features.map((f) => (
+                    <li key={f} className="flex items-start gap-2.5 text-[15px]">
+                      <Check size={16} strokeWidth={2.5} aria-hidden="true" className={`mt-0.5 shrink-0 ${p.popular ? "" : "text-dp-accent"}`} />
+                      <span>{f}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-8">
+                  {p.popular ? (
+                    <a
+                      href={`/contact?interest=${p.name.toLowerCase()}`}
+                      data-testid={`button-pricing-${p.name.toLowerCase()}`}
+                      className="inline-flex h-12 w-full items-center justify-center rounded-full bg-dp-bg text-[15px] font-medium text-dp-ink transition-transform active:scale-[0.98]"
+                    >
+                      Choose {p.name}
+                    </a>
+                  ) : (
+                    <a
+                      href={`/contact?interest=${p.name.toLowerCase()}`}
+                      data-testid={`button-pricing-${p.name.toLowerCase()}`}
+                      className="inline-flex h-12 w-full items-center justify-center rounded-full border border-dp-line text-[15px] font-medium text-dp-ink transition-colors hover:border-dp-ink/40 active:scale-[0.98]"
+                    >
+                      Choose {p.name}
+                    </a>
+                  )}
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+
+        {/* Retainer */}
+        <Reveal className="mt-8 grid items-center gap-8 rounded-[28px] border border-dp-line bg-dp-soft/60 p-8 sm:p-10 md:grid-cols-[1fr_auto]">
+          <div>
+            <h2 className="text-[clamp(1.6rem,2.6vw,2.2rem)] font-semibold tracking-[-0.035em]">
+              Keep your pantry stocked <span aria-hidden="true" className="text-dp-accent">★</span>
+            </h2>
+            <p className="mt-2 max-w-[52ch] leading-relaxed text-dp-muted">
+              Menu updates, schedule changes and small edits after launch, so your site always tastes fresh.
+            </p>
+          </div>
+          <div className="flex flex-wrap items-center gap-5">
+            <p className="text-[2.4rem] font-semibold tracking-[-0.05em]">
+              R120<span className="text-[1rem] font-normal text-dp-muted"> /month</span>
+            </p>
+            <a
+              href="/contact"
+              data-testid="button-retainer-cta"
+              className="inline-flex h-12 items-center rounded-full border border-dp-line px-6 text-[15px] font-medium text-dp-ink transition-colors hover:border-dp-ink/40"
+            >
+              Add the retainer
+            </a>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* FAQ as a text-message thread: the client asks, we answer */}
+      <section aria-labelledby="faq-heading" className="border-t border-dp-line">
+        <div className="mx-auto grid max-w-[1320px] gap-14 px-5 py-24 sm:px-8 md:grid-cols-[1fr_1.2fr] md:py-32">
+          <Reveal className="md:sticky md:top-32 md:self-start">
+            <h2 id="faq-heading" className={H2}>
+              Got questions? We'll <CutoutWord word="DISH" /> it out.
+            </h2>
+            <p className="mt-5 max-w-[36ch] text-lg leading-relaxed text-dp-muted">Still hungry for answers? WhatsApp us and a real person replies.</p>
+            <div className="mt-8">
+              <MagneticButton href="/contact" variant="ghost">
+                Ask us anything
+              </MagneticButton>
+            </div>
+          </Reveal>
+          <div className="flex flex-col gap-6">
+            {FAQ.map((f, i) => (
+              <Reveal key={f.q} delay={i * 0.05} className="flex flex-col gap-2">
+                <p className="max-w-[85%] self-start rounded-[22px] rounded-bl-md border border-dp-line bg-dp-surface px-5 py-3.5 text-[15px]">{f.q}</p>
+                <p className="max-w-[85%] self-end rounded-[22px] rounded-br-md bg-dp-cta px-5 py-3.5 text-[15px] leading-relaxed text-dp-cta-fg">{f.a}</p>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <FreeTaste testId="pricing-mockup-offer" />
     </main>
   );
 }

@@ -20,6 +20,7 @@ export interface PageMeta {
 
 const ORG_ID = `${SITE_URL}/#business`;
 const PERSON_ID = `${SITE_URL}/#aaniquah`;
+const IMAAN_ID = `${SITE_URL}/#imaan`;
 
 const PLANS = [
   { name: "Starter", price: 600, includes: "Single page, menu section, WhatsApp button, mobile responsive." },
@@ -31,7 +32,7 @@ const PLANS = [
 // Shown on the pricing page (Pricing.tsx imports this) and used for FAQPage structured data,
 // so the two always match word for word, as Google requires.
 export const FAQ = [
-  { q: "Do I need to know how to code?", a: "No! That's literally my job. You handle the business, I handle the website." },
+  { q: "Do I need to know how to code?", a: "No! That's literally our job. You handle the business, we handle the website." },
   { q: "Do I keep my WhatsApp number?", a: "Yes! We just add a click-to-WhatsApp button on your site. Easy." },
   { q: "How long does it take?", a: "Most projects are done within 5 to 7 business days." },
   { q: "What if I need changes later?", a: "That's what the R120/month retainer is for. Small edits, big peace of mind." },
@@ -56,17 +57,32 @@ const business = {
   address: { "@type": "PostalAddress", addressLocality: "Cape Town", addressRegion: "Western Cape", addressCountry: "ZA" },
   areaServed: [{ "@type": "City", name: "Cape Town" }, { "@type": "Country", name: "South Africa" }],
   knowsAbout: ["Web design", "Web development", "React", "TypeScript", "Small business websites", "Lead capture automation"],
-  founder: { "@id": PERSON_ID },
+  founder: [{ "@id": PERSON_ID }, { "@id": IMAAN_ID }],
 };
 
 const person = {
   "@type": "Person",
   "@id": PERSON_ID,
-  name: "Aaniquah",
-  jobTitle: "Software developer and founder",
+  name: "Aaniquah Dicks",
+  jobTitle: "Founder and web developer",
   worksFor: { "@id": ORG_ID },
   alumniOf: { "@type": "CollegeOrUniversity", name: "Cape Peninsula University of Technology" },
-  award: ["Cum Laude graduate", "1st place, Vodacom Bursar Hackathon", "3rd place, GirlCode", "Golden Key International Honour Society member"],
+  award: [
+    "1st place, GirlCode Pan-African Hackathon 2026 (team lead)",
+    "1st place, Vodacom Bursar Mini Hackathon 2025 (team lead)",
+    "Advanced Diploma in ICT, cum laude",
+    "Golden Key International Honour Society member",
+  ],
+  homeLocation: { "@type": "City", name: "Cape Town" },
+};
+
+const imaan = {
+  "@type": "Person",
+  "@id": IMAAN_ID,
+  name: "Imaan Cooper",
+  jobTitle: "Co-founder and web developer",
+  worksFor: { "@id": ORG_ID },
+  knowsAbout: ["Creative direction", "Web design", "Branding", "Figma"],
   homeLocation: { "@type": "City", name: "Cape Town" },
 };
 
@@ -85,12 +101,13 @@ export const PAGES: PageMeta[] = [
     path: "/",
     title: "Web Developer in Cape Town | The Digital Pantry",
     description:
-      "Custom websites for South African small businesses, built from scratch by Cape Town developer Aaniquah. From R600, most done in 5 to 7 business days.",
+      "Custom websites for South African small businesses, built from scratch by Aaniquah and Imaan in Cape Town. From R600, most done in 5 to 7 days.",
     jsonLd: [
       graph(
         { "@type": "WebSite", "@id": `${SITE_URL}/#website`, url: `${SITE_URL}/`, name: SITE_NAME, publisher: { "@id": ORG_ID }, inLanguage: "en-ZA" },
         business,
         person,
+        imaan,
       ),
     ],
   },

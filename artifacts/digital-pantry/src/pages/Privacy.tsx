@@ -1,27 +1,27 @@
-import { AnimatedSection } from "../components/AnimatedSection";
+import { Reveal as AnimatedSection } from "../components/Reveal";
 
 const EMAIL = "thedigitalpantryza@gmail.com";
 
-const h2Cls = "font-display font-bold text-gray-900 dark:text-white text-xl md:text-2xl mb-3";
-const pCls = "font-body text-gray-600 dark:text-white/60 text-sm md:text-base leading-relaxed mb-3";
-const ulCls = "list-disc pl-6 space-y-2 font-body text-gray-600 dark:text-white/60 text-sm md:text-base leading-relaxed mb-3";
-const linkCls = "text-[#FF2D87] hover:underline";
-const strongCls = "text-gray-900 dark:text-white font-semibold";
+const h2Cls = "text-[clamp(1.35rem,2.2vw,1.75rem)] font-semibold tracking-[-0.03em] text-dp-ink mb-3";
+const pCls = "text-dp-muted text-[15px] md:text-base leading-relaxed mb-3";
+const ulCls = "list-disc pl-6 space-y-2 text-dp-muted text-[15px] md:text-base leading-relaxed mb-3 marker:text-dp-accent";
+const linkCls = "text-dp-accent underline decoration-dp-line underline-offset-4 hover:decoration-dp-accent";
+const strongCls = "text-dp-ink font-semibold";
 
 export default function Privacy() {
   return (
-    <main className="pt-20">
-      <section className="bg-[#FFF8FB] dark:bg-[#0A0A0A] py-16 md:py-20 transition-colors duration-300">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6">
+    <main className="pt-28 md:pt-32">
+      <section className="py-12 md:py-16">
+        <div className="mx-auto max-w-[760px] px-5 sm:px-8">
           <AnimatedSection>
-            <p className="font-mono-brand text-[#FF2D87] text-xs tracking-[0.25em] uppercase mb-4">Legal</p>
-            <h1 className="font-display font-black text-gray-900 dark:text-white leading-tight mb-3" style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)" }}>
-              Privacy Notice <span className="text-[#FFD700]">★</span>
+            
+            <h1 className="mb-4 text-[clamp(2.4rem,5vw,4rem)] font-semibold leading-[1] tracking-[-0.05em] text-dp-ink">
+              Privacy Notice <span aria-hidden="true" className="text-dp-accent">★</span>
             </h1>
-            <p className="font-mono-brand text-gray-400 dark:text-white/40 text-xs tracking-widest uppercase mb-1">
+            <p className="font-mono text-[12px] text-dp-muted mb-1">
               Digital Pantry Web Studio · thedigitalpantry.netlify.app
             </p>
-            <p className="font-mono-brand text-gray-400 dark:text-white/40 text-xs tracking-widest uppercase mb-8">
+            <p className="font-mono text-[12px] text-dp-muted mb-10 pb-10 border-b border-dp-line">
               Last updated: 22 October 2026
             </p>
             <p className={pCls}>

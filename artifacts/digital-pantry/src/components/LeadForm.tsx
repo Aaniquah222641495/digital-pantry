@@ -13,13 +13,14 @@ import {
   whatsappUrl,
   type LeadFormValues,
 } from "../lib/leads";
+import { Sprinkles } from "./Sprinkles";
 
 type Phase = { name: "form" } | { name: "sent"; values: LeadFormValues } | { name: "fallback"; values: LeadFormValues };
 
 const inputCls =
-  "w-full min-h-12 bg-gray-50 dark:bg-[#0A0A0A] border border-gray-300 dark:border-white/15 focus:border-[#FF2D87] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FF2D87] aria-[invalid=true]:border-[#C2005F] dark:aria-[invalid=true]:border-[#FF7AB2] rounded-xl px-4 py-3 font-body text-gray-900 dark:text-white text-base outline-none transition-colors placeholder:text-gray-500 dark:placeholder:text-white/40";
-const labelCls = "block font-mono-brand text-gray-600 dark:text-white/65 text-xs tracking-widest uppercase mb-2";
-const errCls = "font-body text-[#B0004F] dark:text-[#FF8DBD] text-sm mt-1.5";
+  "w-full min-h-12 bg-dp-bg border border-dp-line focus:border-dp-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dp-accent aria-[invalid=true]:border-[#C2005F] dark:aria-[invalid=true]:border-[#FF7AB2] rounded-[14px] px-4 py-3 text-dp-ink text-base outline-none transition-colors placeholder:text-dp-muted/80";
+const labelCls = "block text-[14px] font-medium text-dp-ink mb-2";
+const errCls = "text-[#B0004F] dark:text-[#FF8DBD] text-sm mt-1.5";
 
 function FieldError({ id, message }: { id: string; message?: string }) {
   return message ? (
@@ -32,7 +33,7 @@ function FieldError({ id, message }: { id: string; message?: string }) {
 const waBtnCls =
   "inline-flex items-center justify-center gap-2 min-h-12 rounded-full bg-[#1FA855] hover:bg-[#188a45] text-white font-body font-semibold px-6 py-3 text-base transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1FA855]";
 const mailBtnCls =
-  "inline-flex items-center justify-center gap-2 min-h-12 rounded-full border-2 border-[#FF2D87] text-[#B0004F] dark:text-[#FF8DBD] hover:bg-[#FF2D87] hover:text-white font-body font-semibold px-6 py-3 text-base transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FF2D87]";
+  "inline-flex items-center justify-center gap-2 min-h-12 rounded-full border border-dp-line text-dp-ink hover:border-dp-ink/40 font-body font-semibold px-6 py-3 text-base transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dp-accent";
 
 /**
  * The lead form. Sends to the Google Apps Script endpoint (VITE_LEADS_ENDPOINT, see apps-script/).
@@ -79,20 +80,21 @@ export function LeadForm({ source = "contact-page" }: { source?: string }) {
   };
 
   const cardCls =
-    "bg-white dark:bg-[#120a0e] border-2 border-[#111] dark:border-[#FF2D87]/50 rounded-2xl shadow-[6px_6px_0_#FF2D87] dark:shadow-[6px_6px_0_rgba(255,45,135,0.45)]";
+    "bg-dp-surface border border-dp-line rounded-[28px] shadow-[0_40px_80px_-50px_rgba(12,11,13,0.5)]";
 
   if (phase.name === "sent") {
     const { values } = phase;
     return (
-      <div className={`${cardCls} p-8 md:p-10 text-center`} data-testid="lead-success">
-        <div className="text-5xl mb-3 text-[#FFD700]" aria-hidden="true">★</div>
-        <h3 ref={headingRef} tabIndex={-1} className="font-display font-black text-gray-900 dark:text-white text-2xl md:text-3xl mb-3 outline-none">
+      <div className={`${cardCls} relative overflow-hidden p-8 md:p-10 text-center`} data-testid="lead-success">
+        <Sprinkles mode="burst" count={90} />
+        <div className="text-5xl mb-3 text-[#E0B000] dark:text-[#FFD43B]" aria-hidden="true">★</div>
+        <h3 ref={headingRef} tabIndex={-1} className="font-semibold tracking-[-0.03em] text-dp-ink text-2xl md:text-3xl mb-3 outline-none">
           Thanks, {values.name.split(" ")[0]}. It's in the pantry!
         </h3>
-        <p className="font-body text-gray-600 dark:text-white/65 text-base mb-2">
-          Your enquiry about {values.interest === "Free mock-up" ? "a free mock-up" : values.interest === "Not sure yet" ? "our websites" : `the ${values.interest} package`} has been sent. I'll reply to {values.email} or on {values.phone}.
+        <p className="text-dp-muted text-base mb-2">
+          Your enquiry about {values.interest === "Free mock-up" ? "a free mock-up" : values.interest === "Not sure yet" ? "our websites" : `the ${values.interest} package`} has been sent. We'll reply to {values.email} or on {values.phone}.
         </p>
-        <p className="font-body text-gray-600 dark:text-white/65 text-sm mb-7">
+        <p className="text-dp-muted text-sm mb-7">
           A short confirmation email is on its way. If you can't see it, check your spam folder.
         </p>
         <a
@@ -105,7 +107,7 @@ export function LeadForm({ source = "contact-page" }: { source?: string }) {
           <MessageCircle size={20} aria-hidden="true" />
           Chat on WhatsApp
         </a>
-        <p className="font-body text-gray-500 dark:text-white/50 text-xs mt-3">Optional. Handy if it's urgent.</p>
+        <p className="font-body text-dp-muted text-xs mt-3">Optional. Handy if it's urgent.</p>
       </div>
     );
   }
@@ -114,12 +116,12 @@ export function LeadForm({ source = "contact-page" }: { source?: string }) {
     const { values } = phase;
     return (
       <div className={`${cardCls} p-8 md:p-10`} data-testid="lead-fallback" role="alert">
-        <h3 ref={headingRef} tabIndex={-1} className="font-display font-black text-gray-900 dark:text-white text-2xl mb-3 outline-none">
+        <h3 ref={headingRef} tabIndex={-1} className="font-semibold tracking-[-0.03em] text-dp-ink text-2xl mb-3 outline-none">
           Let's make sure I get this
         </h3>
-        <p className="font-body text-gray-700 dark:text-white/75 text-base mb-2">
-          The form couldn't confirm that your enquiry reached me, so don't rely on it. Nothing is lost: your details are below.
-          Send them by WhatsApp or email and I'll see them straight away.
+        <p className="text-dp-muted text-base mb-2">
+          The form couldn't confirm that your enquiry reached us, so don't rely on it. Nothing is lost: your details are below.
+          Send them by WhatsApp or email and we'll see them straight away.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 my-6">
           <a
@@ -140,7 +142,7 @@ export function LeadForm({ source = "contact-page" }: { source?: string }) {
         <button
           type="button"
           onClick={() => setPhase({ name: "form" })}
-          className="font-body text-sm text-[#B0004F] dark:text-[#FF8DBD] underline underline-offset-4 cursor-pointer"
+          className="font-body text-sm text-dp-accent underline underline-offset-4 cursor-pointer"
           data-testid="button-fallback-retry"
         >
           Go back and try the form again
@@ -192,11 +194,11 @@ export function LeadForm({ source = "contact-page" }: { source?: string }) {
               <option key={o.value} value={o.value}>{o.label}</option>
             ))}
           </select>
-          <ChevronDown size={18} aria-hidden="true" className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 dark:text-white/50" />
+          <ChevronDown size={18} aria-hidden="true" className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-dp-muted" />
         </div>
         <FieldError id="interest-error" message={err("interest")} />
         {interest === "Free mock-up" && (
-          <p className="font-body text-gray-600 dark:text-white/65 text-sm mt-2" data-testid="mockup-note">
+          <p className="text-dp-muted text-sm mt-2" data-testid="mockup-note">
             A free preview of your site, with no obligation to go ahead.
           </p>
         )}
@@ -204,9 +206,9 @@ export function LeadForm({ source = "contact-page" }: { source?: string }) {
 
       <div>
         <label htmlFor="lead-message" className={labelCls}>
-          Message <span className="normal-case tracking-normal text-gray-500 dark:text-white/50">(optional)</span>
+          Message <span className="font-normal text-dp-muted">(optional)</span>
         </label>
-        <textarea id="lead-message" rows={4} maxLength={LIMITS.message} placeholder="Tell me about your business and what you need." className={`${inputCls} resize-y`} data-testid="textarea-message" {...aria("message")} {...register("message")} />
+        <textarea id="lead-message" rows={4} maxLength={LIMITS.message} placeholder="Tell us about your business and what you need." className={`${inputCls} resize-y`} data-testid="textarea-message" {...aria("message")} {...register("message")} />
         <FieldError id="message-error" message={err("message")} />
       </div>
 
@@ -220,17 +222,17 @@ export function LeadForm({ source = "contact-page" }: { source?: string }) {
         type="submit"
         disabled={isSubmitting}
         data-testid="button-submit"
-        className="w-full min-h-12 bg-[#FF2D87] hover:bg-[#e0006e] text-white font-body font-semibold rounded-full py-4 text-base transition-colors disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#111] dark:focus-visible:outline-white"
+        className="w-full min-h-[52px] bg-dp-cta text-dp-cta-fg font-medium rounded-full py-4 text-base transition-transform active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer shadow-[0_10px_30px_-12px_var(--dp-glow)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dp-accent"
       >
         {isSubmitting ? "Sending..." : "Send it ★"}
       </button>
 
-      <p className="font-body text-gray-600 dark:text-white/60 text-xs leading-relaxed" data-testid="popia-notice">
-        <strong className="font-semibold text-gray-800 dark:text-white/80">How we use your details.</strong>{" "}
+      <p className="text-dp-muted text-xs leading-relaxed" data-testid="popia-notice">
+        <strong className="font-semibold text-dp-ink">How we use your details.</strong>{" "}
         Digital Pantry (Aaniquah Dicks) asks for your name, phone, email, business name, what you're interested in and your message so we can reply to this enquiry.
-        They are saved in a private Google Sheet and emailed to me, and you get one automatic confirmation email. Only I can see them.
+        They are saved in a private Google Sheet and emailed to us, and you get one automatic confirmation email. Only Aaniquah and Imaan can see them.
         Nothing is ticked for marketing and we don't add you to any mailing list.
-        Read the full <Link href="/privacy" className="text-[#B0004F] dark:text-[#FF8DBD] underline underline-offset-2">Privacy Notice</Link>.
+        Read the full <Link href="/privacy" className="text-dp-accent underline underline-offset-2">Privacy Notice</Link>.
       </p>
     </form>
   );

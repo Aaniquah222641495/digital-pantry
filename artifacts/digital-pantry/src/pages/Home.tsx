@@ -6,12 +6,14 @@ import { Reveal } from "../components/Reveal";
 import { DeviceFrames } from "../components/DeviceFrames";
 import { CutoutWord } from "../components/CutoutWord";
 import { Ticker } from "../components/Ticker";
+import { FreeTaste } from "../components/FreeTaste";
+import { Sprinkles } from "../components/Sprinkles";
 import { PLAN_PRICES } from "../lib/plans";
+import { H2 } from "../lib/style";
 
 // Imaan's pixel avatar is being made; until then her cards show a monogram.
 const IMAAN_AVATAR: string | null = null;
 
-const H2 = "text-[clamp(2.4rem,5.2vw,4.5rem)] font-semibold leading-[1] tracking-[-0.045em]";
 
 const CHEFS = [
   {
@@ -74,10 +76,9 @@ const WORK = [
 ] as const;
 
 const RECIPE = [
-  { img: "/images/recipe.webp", title: "Read the recipe", body: "We start with your business, your customers and the way you already sell." },
-  { img: "/images/contact.webp", title: "A free taste", body: "We design a first look at your site, so you see it before you decide." },
+  { img: "/images/recipe.webp", title: "Read the recipe", body: "We learn your business, your customers and how you sell, then design a free first look." },
   { img: "/images/cooking.webp", title: "Cook from scratch", body: "Clean code, mobile first and fast. No templates, nothing you don't need." },
-  { img: "/images/served.webp", title: "Served fresh", body: "Live on your own domain and ready for orders. Most sites take 5 to 7 business days." },
+  { img: "/images/mascot.webp", title: "Served fresh", body: "Live on your own domain and ready for orders. Most sites take 5 to 7 business days." },
 ] as const;
 
 const MENU = [
@@ -107,6 +108,7 @@ function Hero() {
         aria-hidden="true"
         className="pointer-events-none absolute -right-[20%] -top-[30%] -z-10 h-[90vh] w-[70vw] rounded-full bg-[radial-gradient(closest-side,var(--dp-glow),transparent)] blur-2xl"
       />
+      <Sprinkles className="-z-10 opacity-70 dark:opacity-55" />
       <div className="mx-auto grid min-h-[92dvh] max-w-[1320px] items-center gap-14 px-5 pb-14 pt-28 sm:px-8 md:grid-cols-[1.15fr_1fr] md:gap-10 md:pt-24">
         <div>
           <p className="dp-rise mb-6 inline-flex items-center gap-2 rounded-full border border-dp-line px-3.5 py-1.5 text-[13px] text-dp-muted" style={rise(0)}>
@@ -290,7 +292,7 @@ function Recipe() {
             <h2 id="recipe-heading" className={H2}>
               The <CutoutWord word="RECIPE" />
             </h2>
-            <p className="mt-5 max-w-[36ch] text-lg leading-relaxed text-dp-muted">Four steps, one kitchen, and you taste everything before it's served.</p>
+            <p className="mt-5 max-w-[36ch] text-lg leading-relaxed text-dp-muted">Three steps, one kitchen, and you taste everything before it's served.</p>
           </Reveal>
         </div>
         <ol className="flex flex-col gap-5">
@@ -358,33 +360,6 @@ function Menu() {
   );
 }
 
-function FreeTaste() {
-  return (
-    <section aria-labelledby="taste-heading" className="px-5 pb-24 sm:px-8 md:pb-28" data-testid="home-mockup-offer">
-      <Reveal className="relative mx-auto grid max-w-[1320px] items-center gap-10 overflow-hidden rounded-[36px] bg-[#FDD2DE] px-8 py-14 text-[#161214] sm:px-14 md:grid-cols-[1.4fr_1fr] md:py-20">
-        <div aria-hidden="true" className="pointer-events-none absolute -bottom-1/2 -right-1/4 h-[140%] w-[70%] rounded-full bg-[radial-gradient(closest-side,#FFA7D2,transparent)]" />
-        <div className="relative">
-          <h2 id="taste-heading" className="text-[clamp(2.4rem,5.2vw,4.5rem)] font-semibold leading-[1] tracking-[-0.045em]">
-            Get a free taste first. <span aria-hidden="true">★</span>
-          </h2>
-          <p className="mt-5 max-w-[44ch] text-lg leading-relaxed text-[#463E44]">
-            Tell us about your business and we'll design a free mock-up of your site. You see it before you decide, with no obligation to go ahead.
-          </p>
-          <Link
-            href="/contact?interest=mockup"
-            data-testid="home-mockup-offer-cta"
-            className="mt-10 inline-flex h-[52px] items-center gap-2 rounded-full bg-[#161214] px-7 text-[15px] font-medium text-[#FFF7FA] transition-transform active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#161214]"
-          >
-            Get My Free Mock-up
-            <ArrowUpRight size={17} aria-hidden="true" />
-          </Link>
-        </div>
-        <img src="/images/work.webp" alt="" width={300} height={300} loading="lazy" className="relative mx-auto w-40 rotate-6 drop-shadow-[0_20px_30px_rgba(179,47,104,0.3)] md:w-56" />
-      </Reveal>
-    </section>
-  );
-}
-
 export default function Home() {
   return (
     <main>
@@ -394,7 +369,7 @@ export default function Home() {
       <Work />
       <Recipe />
       <Menu />
-      <FreeTaste />
+      <FreeTaste testId="home-mockup-offer" />
     </main>
   );
 }
