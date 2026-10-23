@@ -15,37 +15,33 @@ import { H2 } from "../lib/style";
 const IMAAN_AVATAR: string | null = null;
 
 
+// Founders framed the way premium studios do it: two halves of one practice, what each
+// one owns for the client, and a single proof point each (not a CV).
 const CHEFS = [
   {
     side: "Day",
     name: "Aaniquah Dicks",
-    role: "Founder & Web Developer",
-    bio: "Software engineer and the pink half. Taught herself to make websites look as good as they work, then built a studio to do it for small brands.",
-    win: "Winner, GirlCode Pan-African Hackathon 2026, as team lead",
-    pantry: [
-      "Two-time hackathon winner",
-      "1st, Vodacom Bursar Mini Hackathon 2025",
-      "Advanced Diploma in ICT, cum laude (CPUT)",
-      "Golden Key International Honour Society",
-      "React, TypeScript, Java, SQL and AI tooling",
-    ],
+    role: "Founder, engineering",
+    owns: "Owns the build",
+    body: "Aaniquah turns the design into a fast, solid site and keeps it that way after launch. She writes every line of code, connects your domain and makes sure Google can find you.",
+    proof: "Winner, GirlCode Pan-African Hackathon 2026",
     light: true,
   },
   {
     side: "Night",
     name: "Imaan Cooper",
-    role: "Co-founder & Web Developer",
-    bio: "Creative director and the darker half. Turns a brief into a look, then works side by side with Aaniquah until it's live.",
-    pantry: [
-      "Former Head of Design, QuadCorp Digital",
-      "Led creative direction on client websites and campaigns",
-      "Design lead on a R30 000 e-commerce build",
-      "Freelance designer and developer since 2023",
-      "Bespoke sites for local and US clients",
-      "Figma, Adobe Creative Suite, HTML and CSS",
-    ],
+    role: "Co-founder, creative direction",
+    owns: "Owns the look",
+    body: "Imaan turns your brief into a look that feels like your brand: layout, colour, type and the small details customers notice. She shapes how your site feels before a line of code is written.",
+    proof: "Creative direction for local and international clients since 2023",
     light: false,
   },
+] as const;
+
+const PROMISES = [
+  ["You talk to the chefs", "The two people on your calls are the two people making your site, from the first chat to launch day."],
+  ["One kitchen, no handoffs", "Design and code happen side by side, so nothing gets lost between how it looks and how it works."],
+  ["Made from scratch", "Every site starts from your brand and your customers, never from a template."],
 ] as const;
 
 const WORK = [
@@ -173,15 +169,15 @@ function Chefs() {
           Meet the <CutoutWord word="CHEFS" />
         </h2>
         <p className="mt-5 max-w-[54ch] text-lg leading-relaxed text-dp-muted">
-          One of us codes in pink, the other in the dark. Same kitchen, same standards. Flip the switch at the top to see the studio through either of our eyes.
+          Two chefs, one kitchen. One of us codes in pink, the other designs in the dark, and you work with both of us directly. Flip the switch at the top to see the studio through either of our eyes.
         </p>
       </Reveal>
 
       <div className="mt-14 grid overflow-hidden rounded-[32px] border border-dp-line md:grid-cols-2">
         {CHEFS.map((c, i) => {
           const t = c.light
-            ? { bg: "bg-[#FCE8F0]", ink: "text-[#161214]", muted: "text-[#463E44]", label: "text-[#61575E]", accent: "text-[#B32F68]", chip: "border-[#161214]/12 bg-white/70", star: "text-[#E8508A]" }
-            : { bg: "bg-[#0C0B0D]", ink: "text-[#F3EFF2]", muted: "text-[#C9C2C7]", label: "text-[#A49CA2]", accent: "text-[#FFA7D2]", chip: "border-white/10 bg-white/[0.04]", star: "text-[#FFA7D2]" };
+            ? { bg: "bg-[#FCE8F0]", ink: "text-[#161214]", muted: "text-[#463E44]", label: "text-[#61575E]", accent: "text-[#B32F68]" }
+            : { bg: "bg-[#0C0B0D]", ink: "text-[#F3EFF2]", muted: "text-[#C9C2C7]", label: "text-[#A49CA2]", accent: "text-[#FFA7D2]" };
           return (
             <Reveal as="article" key={c.name} delay={i * 0.1} className={`flex flex-col gap-10 p-8 sm:p-12 ${t.bg} ${t.ink}`}>
               <div className="flex items-start justify-between gap-6">
@@ -194,35 +190,39 @@ function Chefs() {
                   <Monogram className="h-24 w-24 rounded-2xl !bg-[#1B181C] text-3xl" />
                 )}
               </div>
-              <div>
-                <h3 className="text-[clamp(1.9rem,3vw,2.6rem)] font-semibold tracking-[-0.04em]">{c.name}</h3>
-                <p className={`mt-1 text-[15px] ${t.accent}`}>{c.role}</p>
-                <p className={`mt-6 max-w-[44ch] leading-relaxed ${t.muted}`}>{c.bio}</p>
-              </div>
-              <div>
-                {"win" in c && (
-                  <p className="mb-5 inline-flex items-center gap-2 rounded-full bg-[#FFD43B] px-4 py-2 text-[14px] font-semibold text-[#161214] shadow-[0_10px_24px_-12px_rgba(224,176,0,0.8)]">
-                    <span aria-hidden="true">★</span> {c.win}
-                  </p>
-                )}
-                <p className={`mb-3 font-mono text-[12px] ${t.label}`}>In the pantry</p>
-                <ul className="flex flex-wrap gap-2">
-                  {c.pantry.map((item) => (
-                    <li key={item} className={`rounded-full border px-3.5 py-1.5 text-[13px] ${t.chip}`}>
-                      <span aria-hidden="true" className={`mr-1.5 ${t.star}`}>★</span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
+              <div className="flex flex-1 flex-col">
+                <p className={`text-[clamp(1.6rem,2.6vw,2.2rem)] font-semibold tracking-[-0.035em] ${t.accent}`}>{c.owns}.</p>
+                <h3 className="mt-6 text-[1.35rem] font-semibold tracking-[-0.03em]">{c.name}</h3>
+                <p className={`text-[14px] ${t.label}`}>{c.role}</p>
+                <p className={`mt-5 max-w-[46ch] leading-relaxed ${t.muted}`}>{c.body}</p>
+                <p
+                  className={`mt-8 inline-flex w-fit items-center gap-2 rounded-full px-4 py-2 text-[13px] font-medium ${
+                    c.light ? "bg-[#FFD43B] text-[#161214] shadow-[0_10px_24px_-12px_rgba(224,176,0,0.8)]" : "border border-white/12 text-[#F3EFF2]"
+                  }`}
+                >
+                  <span aria-hidden="true" className={c.light ? "" : "text-[#FFA7D2]"}>★</span> {c.proof}
+                </p>
               </div>
             </Reveal>
           );
         })}
       </div>
 
-      <Reveal className="mt-10">
+      <ul className="mt-14 grid gap-8 md:grid-cols-3">
+        {PROMISES.map(([title, body], i) => (
+          <Reveal as="li" key={title} delay={i * 0.08} className="border-t border-dp-line pt-6">
+            <p className="text-[1.15rem] font-semibold tracking-[-0.02em]">
+              <span aria-hidden="true" className="mr-2 text-dp-accent">★</span>
+              {title}
+            </p>
+            <p className="mt-2 max-w-[38ch] leading-relaxed text-dp-muted">{body}</p>
+          </Reveal>
+        ))}
+      </ul>
+
+      <Reveal className="mt-14">
         <p className="text-[clamp(1.25rem,2vw,1.6rem)] font-medium tracking-[-0.02em] text-dp-ink">
-          Girl power is kind of the whole point here. <span className="text-dp-accent">★</span>
+          Women-led, Cape Town made. Girl power is kind of the whole point here. <span className="text-dp-accent">★</span>
         </p>
       </Reveal>
     </section>

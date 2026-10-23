@@ -4,7 +4,7 @@ import { CutoutWord } from "../components/CutoutWord";
 import { Reveal } from "../components/Reveal";
 import { DeviceFrames } from "../components/DeviceFrames";
 import { FreeTaste } from "../components/FreeTaste";
-import { H1, H2 } from "../lib/style";
+import { H1 } from "../lib/style";
 
 const STACK_TAGS = ["React", "TypeScript", "Tailwind", "Netlify"];
 
@@ -39,11 +39,6 @@ const CASES = [
   },
 ] as const;
 
-const ON_THE_STOVE = [
-  { name: "Snaccidents ZA", category: "Food & snacks" },
-  { name: "Sweet Sisters CPT", category: "Bakery" },
-  { name: "Kremco CPT", category: "Food & beverage" },
-];
 
 export default function Portfolio() {
   return (
@@ -108,27 +103,6 @@ export default function Portfolio() {
         })}
       </div>
 
-      <section aria-labelledby="stove-heading" className="border-t border-dp-line">
-        <div className="mx-auto grid max-w-[1320px] gap-12 px-5 py-24 sm:px-8 md:grid-cols-[1fr_1.4fr] md:py-32">
-          <Reveal>
-            <h2 id="stove-heading" className={H2}>
-              On the <CutoutWord word="STOVE" />
-            </h2>
-            <p className="mt-5 max-w-[36ch] text-lg leading-relaxed text-dp-muted">Still simmering. These sites are on their way.</p>
-          </Reveal>
-          <ul className="grid gap-4 sm:grid-cols-3">
-            {ON_THE_STOVE.map((s, i) => (
-              <Reveal as="li" key={s.name} delay={i * 0.07} className="flex flex-col justify-between gap-10 rounded-[24px] border border-dp-line bg-dp-surface p-6">
-                <span className="w-fit rounded-full bg-dp-soft px-2.5 py-0.5 text-[12px] text-dp-muted">Coming soon</span>
-                <div>
-                  <p className="text-[1.25rem] font-semibold tracking-[-0.03em]">{s.name}</p>
-                  <p className="mt-1 text-[14px] text-dp-muted">{s.category}</p>
-                </div>
-              </Reveal>
-            ))}
-          </ul>
-        </div>
-      </section>
 
       <FreeTaste testId="portfolio-mockup-offer" />
     </main>

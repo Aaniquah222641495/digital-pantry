@@ -367,3 +367,20 @@ html.dp-theme-shift, html.dp-theme-shift * {
 
 /* Ticker band */
 @media (prefers-reduced-motion: reduce) { .ticker-track { animation: none; } }
+
+/* Logo-mouse cursor (public/cursors). Mouse and trackpad users only; touch is untouched.
+   Links and buttons get the "pressed" mouse; text fields keep the text cursor. */
+@media (pointer: fine) {
+  html, body {
+    cursor: url("/cursors/mouse.png") 5 5, auto;
+    cursor: -webkit-image-set(url("/cursors/mouse.png") 1x, url("/cursors/mouse@2x.png") 2x) 5 5, auto;
+    cursor: image-set(url("/cursors/mouse.png") 1x, url("/cursors/mouse@2x.png") 2x) 5 5, auto;
+  }
+  a, button, [role="button"], [role="radio"], summary, label[for], select {
+    cursor: url("/cursors/mouse-pointer.png") 5 5, pointer;
+    cursor: -webkit-image-set(url("/cursors/mouse-pointer.png") 1x, url("/cursors/mouse-pointer@2x.png") 2x) 5 5, pointer;
+    cursor: image-set(url("/cursors/mouse-pointer.png") 1x, url("/cursors/mouse-pointer@2x.png") 2x) 5 5, pointer;
+  }
+  input:not([type="submit"]):not([type="button"]):not([type="checkbox"]):not([type="radio"]), textarea { cursor: text; }
+  button:disabled { cursor: not-allowed; }
+}
