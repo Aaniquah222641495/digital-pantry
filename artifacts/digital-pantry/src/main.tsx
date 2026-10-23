@@ -3,8 +3,7 @@ import App from "./App";
 import "@fontsource-variable/geist";
 import "@fontsource-variable/geist-mono";
 import "@fontsource/bebas-neue/400.css";
-import "@fontsource/permanent-marker/400.css";
-import "@fontsource/playfair-display/900.css";
+import "@fontsource/jersey-10/400.css";
 import "./index.css";
 
 const root = document.getElementById("root")!;

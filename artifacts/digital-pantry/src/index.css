@@ -563,3 +563,38 @@ html.dark body {
 /* Generated sticker lettering in headings: shadow added here (generated flat), lifts on Night. */
 .dp-wordmark { filter: drop-shadow(0 6px 10px rgba(179, 47, 104, 0.25)); }
 .dark .dp-wordmark { filter: drop-shadow(0 0 22px rgba(255, 92, 168, 0.35)) drop-shadow(0 10px 18px rgba(0, 0, 0, 0.55)); }
+
+/* Pixel icing lettering for the brand words in headings (components/CutoutWord.tsx).
+   Real text in Jersey 10 (OFL, chosen for legibility): stepped fill like pixel shading, pixel
+   sprinkles in the top band, thin hard black outline, die-cut sticker edge. No blur on the letters.
+   Day = Aaniquah's pink icing with a white edge. Night = Imaan's silver icing with a wine edge. */
+.dp-pixel-word {
+  font-family: "Jersey 10", ui-monospace, monospace;
+  font-weight: 400;
+  font-size: 1.32em;
+  letter-spacing: 0.05em;
+  line-height: 0.9;
+  display: inline-block;
+  padding: 0 0.06em;
+  color: transparent;
+  text-shadow: none !important;
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='10' shape-rendering='crispEdges'><rect x='1' y='1' width='2' height='1' fill='%23FFD43B'/><rect x='5' y='0' width='2' height='1' fill='%23FFFFFF'/><rect x='3' y='4' width='2' height='1' fill='%235BC0EB'/><rect x='7' y='3' width='2' height='1' fill='%23FF5CA8'/><rect x='0' y='6' width='2' height='1' fill='%23FFFFFF'/><rect x='5' y='6' width='2' height='1' fill='%23FFD43B'/><rect x='9' y='1' width='2' height='1' fill='%235BC0EB'/><rect x='10' y='5' width='2' height='1' fill='%23FFFFFF'/><rect x='8' y='7' width='2' height='1' fill='%23FFD43B'/><rect x='2' y='8' width='2' height='1' fill='%23FF5CA8'/></svg>"), linear-gradient(180deg, #FFD3E8 0 30%, #FFA7D2 30% 68%, #FF5CA8 68% 100%);
+  background-size: 0.42em 0.3em, auto;
+  background-position: 0 0.08em, 0 0;
+  background-repeat: repeat-x, no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  filter:
+    drop-shadow(0.03em 0 0 #161214) drop-shadow(-0.03em 0 0 #161214) drop-shadow(0 0.03em 0 #161214) drop-shadow(0 -0.03em 0 #161214)
+    drop-shadow(0 0.04em 0 #161214)
+    drop-shadow(0.035em 0 0 #FFFFFF) drop-shadow(-0.035em 0 0 #FFFFFF) drop-shadow(0 0.035em 0 #FFFFFF) drop-shadow(0 -0.035em 0 #FFFFFF)
+    drop-shadow(0 0.06em 0 rgba(179, 47, 104, 0.3));
+}
+.dark .dp-pixel-word {
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='10' shape-rendering='crispEdges'><rect x='1' y='1' width='2' height='1' fill='%23FFD43B'/><rect x='5' y='0' width='2' height='1' fill='%23FFFFFF'/><rect x='3' y='4' width='2' height='1' fill='%235BC0EB'/><rect x='7' y='3' width='2' height='1' fill='%23FF5CA8'/><rect x='0' y='6' width='2' height='1' fill='%23FFFFFF'/><rect x='5' y='6' width='2' height='1' fill='%23FFD43B'/><rect x='9' y='1' width='2' height='1' fill='%235BC0EB'/><rect x='10' y='5' width='2' height='1' fill='%23FFFFFF'/><rect x='8' y='7' width='2' height='1' fill='%23FFD43B'/><rect x='2' y='8' width='2' height='1' fill='%23FF5CA8'/></svg>"), linear-gradient(180deg, #FFFFFF 0 30%, #E6E2EC 30% 68%, #B3ADC0 68% 100%);
+  filter:
+    drop-shadow(0.03em 0 0 #161214) drop-shadow(-0.03em 0 0 #161214) drop-shadow(0 0.03em 0 #161214) drop-shadow(0 -0.03em 0 #161214)
+    drop-shadow(0 0.04em 0 #161214)
+    drop-shadow(0.035em 0 0 #7A1F2E) drop-shadow(-0.035em 0 0 #7A1F2E) drop-shadow(0 0.035em 0 #7A1F2E) drop-shadow(0 -0.035em 0 #7A1F2E)
+    drop-shadow(0 0 0.2em rgba(255, 92, 168, 0.35));
+}
