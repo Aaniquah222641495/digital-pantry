@@ -20,7 +20,7 @@ export default function Contact() {
             <AnimatedSection className="flex-1">
               <h1 className="font-display font-black text-gray-900 dark:text-white leading-tight" style={{ fontSize: "clamp(2rem, 5vw, 4rem)" }}>
                 <span className="block font-normal font-mono-brand text-[#FF2D87] text-xs tracking-[0.25em] uppercase mb-4 leading-normal">Get a Website Quote</span>
-                Let's Get <CutoutWord word="COOKING" baseSize="0.95em" /> ★
+                Let's Get <CutoutWord word="COOKING" /> ★
               </h1>
               <p className="font-body text-gray-500 dark:text-white/50 text-base md:text-lg mt-4 max-w-lg">
                 Ready to get cooking? Let's build something delicious.

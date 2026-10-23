@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
 import { ReactNode } from "react";
+import { Reveal } from "./Reveal";
 
 interface AnimatedSectionProps {
   children: ReactNode;
@@ -8,27 +8,11 @@ interface AnimatedSectionProps {
   direction?: "up" | "left" | "right" | "none";
 }
 
-export function AnimatedSection({
-  children,
-  className = "",
-  delay = 0,
-  direction = "up",
-}: AnimatedSectionProps) {
-  const initial = {
-    opacity: 0,
-    y: direction === "up" ? 40 : 0,
-    x: direction === "left" ? -40 : direction === "right" ? 40 : 0,
-  };
-
+// Kept for older pages; now a plain Reveal so prerendered content is never hidden.
+export function AnimatedSection({ children, className = "", delay = 0 }: AnimatedSectionProps) {
   return (
-    <motion.div
-      className={className}
-      initial={initial}
-      whileInView={{ opacity: 1, y: 0, x: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] }}
-    >
+    <Reveal className={className} delay={delay}>
       {children}
-    </motion.div>
+    </Reveal>
   );
 }

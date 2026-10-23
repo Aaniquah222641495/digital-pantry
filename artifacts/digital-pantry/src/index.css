@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Space+Mono:wght@400;700&family=Bebas+Neue&family=Permanent+Marker&display=swap');
-
 @import "tailwindcss";
 @import "tw-animate-css";
 @plugin "@tailwindcss/typography";
@@ -10,7 +8,49 @@
   --pink-pale: #FFF0F7;
 }
 
+/* ── Two sides of the studio ─────────────────────────────────────────────
+   Day = Aaniquah (blush, ink buttons). Night = Imaan (ink, bubblegum as a thin accent).
+   Radius rule: buttons and chips are full pill, cards 24px, inputs 14px. */
+:root {
+  --dp-bg: #FFF7FA;
+  --dp-surface: #FFFFFF;
+  --dp-soft: #FCE8F0;
+  --dp-line: rgba(22, 18, 20, 0.1);
+  --dp-ink: #161214;
+  --dp-muted: #61575E;
+  --dp-accent: #B32F68;
+  --dp-cta-bg: #161214;
+  --dp-cta-fg: #FFF7FA;
+  --dp-pink: #FFA7D2;
+  --dp-blush: #FDD2DE;
+  --dp-glow: rgba(255, 167, 210, 0.45);
+}
+.dark {
+  --dp-bg: #0C0B0D;
+  --dp-surface: #141215;
+  --dp-soft: #1B181C;
+  --dp-line: rgba(255, 255, 255, 0.09);
+  --dp-ink: #F3EFF2;
+  --dp-muted: #A49CA2;
+  --dp-accent: #FFA7D2;
+  --dp-cta-bg: #FFA7D2;
+  --dp-cta-fg: #0C0B0D;
+  --dp-glow: rgba(255, 167, 210, 0.16);
+}
+
 @theme inline {
+  --color-dp-bg: var(--dp-bg);
+  --color-dp-surface: var(--dp-surface);
+  --color-dp-soft: var(--dp-soft);
+  --color-dp-line: var(--dp-line);
+  --color-dp-ink: var(--dp-ink);
+  --color-dp-muted: var(--dp-muted);
+  --color-dp-accent: var(--dp-accent);
+  --color-dp-cta: var(--dp-cta-bg);
+  --color-dp-cta-fg: var(--dp-cta-fg);
+  --color-dp-pink: var(--dp-pink);
+  --color-dp-blush: var(--dp-blush);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
   --color-border: hsl(var(--border));
@@ -123,9 +163,9 @@
   --chart-4: 0 0% 40%;
   --chart-5: 334 100% 40%;
 
-  --app-font-sans: 'DM Sans', sans-serif;
-  --app-font-serif: 'Playfair Display', Georgia, serif;
-  --app-font-mono: 'Space Mono', monospace;
+  --app-font-sans: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
+  --app-font-serif: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
+  --app-font-mono: 'Geist Mono Variable', ui-monospace, monospace;
   --radius: 0.75rem;
 
   --shadow-2xs: 0px 1px 2px 0px rgba(0,0,0,.4);
@@ -197,19 +237,20 @@
   }
   body {
     @apply font-sans antialiased bg-background text-foreground;
-    scroll-behavior: smooth;
   }
   h1, h2, h3 {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: var(--app-font-sans);
+    letter-spacing: -0.035em;
+    text-wrap: balance;
   }
 }
 
 /* ── Brand utilities ─────────────────────────────── */
-.font-display { font-family: 'Playfair Display', Georgia, serif; }
-.font-body    { font-family: 'DM Sans', sans-serif; }
-.font-mono-brand { font-family: 'Space Mono', monospace; }
-.font-bebas   { font-family: 'Bebas Neue', sans-serif; }
-.font-marker  { font-family: 'Permanent Marker', cursive; }
+.font-display { font-family: var(--app-font-sans); }
+.font-body    { font-family: var(--app-font-sans); }
+.font-mono-brand { font-family: var(--app-font-mono); }
+.font-bebas   { font-family: var(--app-font-sans); }
+.font-marker  { font-family: var(--app-font-sans); }
 
 .text-pink-hot  { color: #FF2D87; }
 .text-pink-soft { color: #FFB3D1; }
@@ -273,3 +314,56 @@
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: #0A0A0A; }
 ::-webkit-scrollbar-thumb { background: #FF2D87; border-radius: 3px; }
+
+/* ── Redesign 2026-10 ─────────────────────────────────────────────────── */
+html { background: var(--dp-bg); color-scheme: light; }
+html.dark { color-scheme: dark; }
+body { background: var(--dp-bg); color: var(--dp-ink); font-feature-settings: "ss01", "cv11"; }
+::selection { background: var(--dp-pink); color: #161214; }
+
+/* Fine film grain on a fixed layer only (never on scrolling sections). */
+.dp-grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.dark .dp-grain::before { opacity: 0.06; }
+
+/* Lenis smooth scroll */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+/* The theme switch repaints colours in one soft move. */
+html.dp-theme-shift, html.dp-theme-shift * {
+  transition: background-color 0.6s var(--ease-out-expo), color 0.6s var(--ease-out-expo), border-color 0.6s var(--ease-out-expo), fill 0.6s var(--ease-out-expo) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.dp-theme-shift, html.dp-theme-shift * { transition: none !important; }
+}
+
+/* Scroll reveal (see components/Reveal.tsx) */
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal] {
+    transition: opacity 1s var(--ease-out-expo), transform 1s var(--ease-out-expo);
+    transition-delay: var(--d, 0s);
+  }
+  .js [data-reveal]:not(.is-in) { opacity: 0; transform: translate3d(0, 28px, 0); }
+
+  /* Hero rise: pure CSS, plays on first paint without waiting for JavaScript. */
+  @keyframes dp-rise { from { opacity: 0; transform: translate3d(0, 24px, 0); } to { opacity: 1; transform: none; } }
+  .dp-rise { animation: dp-rise 1.1s var(--ease-out-expo) both; animation-delay: var(--d, 0s); }
+}
+
+/* Cut-out word letters (components/CutoutWord.tsx): the original brand faces. */
+.dp-cut-bebas { font-family: "Bebas Neue", sans-serif; font-weight: 400; letter-spacing: 0.01em; }
+.dp-cut-marker { font-family: "Permanent Marker", cursive; font-weight: 400; }
+.dp-cut-playfair { font-family: "Playfair Display", Georgia, serif; font-weight: 900; }
+
+/* Ticker band */
+@media (prefers-reduced-motion: reduce) { .ticker-track { animation: none; } }

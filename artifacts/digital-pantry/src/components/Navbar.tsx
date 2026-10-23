@@ -1,32 +1,34 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "wouter";
-import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Sun, Moon } from "lucide-react";
-import { useTheme } from "../lib/ThemeContext";
+import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
+import { Menu, X } from "lucide-react";
+import { FounderSwitch } from "./FounderSwitch";
+import { MagneticButton } from "./MagneticButton";
 
 const NAV_LINKS = [
-  { label: "Home", href: "/" },
   { label: "Portfolio", href: "/portfolio" },
   { label: "Pricing", href: "/pricing" },
   { label: "Contact", href: "/contact" },
 ];
 
+// Logo sits on a light sticker tile on Night (brand rule: logo only on light or blush).
+export function Logo({ className = "" }: { className?: string }) {
+  return (
+    <span className={`inline-flex items-center rounded-full px-3 py-1.5 transition-colors duration-500 dark:bg-[#FFF7FA] dark:shadow-[0_6px_24px_-8px_rgba(255,167,210,0.45)] ${className}`}>
+      <img src="/images/logo-wordmark.webp" alt="Digital Pantry" width={640} height={152} className="h-7 w-auto sm:h-8" />
+    </span>
+  );
+}
+
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [location] = useLocation();
-  const { theme, toggle } = useTheme();
+  const { scrollY } = useScroll();
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 30);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  useMotionValueEvent(scrollY, "change", (y) => setScrolled(y > 24));
 
-  useEffect(() => {
-    setMenuOpen(false);
-  }, [location]);
-
+  useEffect(() => setMenuOpen(false), [location]);
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => {
@@ -37,134 +39,87 @@ export function Navbar() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled
-            ? "backdrop-blur-xl bg-white/90 dark:bg-[#0A0A0A]/85 border-b border-gray-200 dark:border-white/8 shadow-sm"
-            : "bg-transparent"
+        className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-500 ${
+          scrolled ? "border-b border-dp-line bg-dp-bg/75 backdrop-blur-xl" : "border-b border-transparent"
         }`}
       >
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-          {/* Logo */}
-          <Link href="/" data-testid="nav-logo">
-            <motion.div
-              whileHover={{ scale: 1.04 }}
-              className="flex items-center cursor-pointer"
-            >
-              <img
-                src="/images/logo-nobg.webp"
-                alt="The Digital Pantry logo"
-                className="h-30 w-auto object-contain"
-              />
-            </motion.div>
+        <div className="mx-auto flex h-[72px] max-w-[1320px] items-center justify-between gap-6 px-5 sm:px-8">
+          <Link href="/" aria-label="Digital Pantry home" className="shrink-0 rounded-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-dp-accent">
+            <Logo />
           </Link>
 
-          {/* Desktop nav */}
-          <nav
-            className="hidden md:flex items-center gap-6 lg:gap-8"
-            role="navigation"
-            aria-label="Main navigation"
-          >
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                data-testid={`nav-link-${link.label.toLowerCase()}`}
-              >
-                <span
-                  className={`font-body text-sm font-medium transition-colors cursor-pointer relative group ${
-                    location === link.href
-                      ? "text-[#FF2D87]"
-                      : "text-gray-700 dark:text-white/80 hover:text-[#FF2D87] dark:hover:text-[#FF2D87]"
+          <nav aria-label="Main navigation" className="hidden items-center gap-1 md:flex">
+            {NAV_LINKS.map((link) => {
+              const active = location === link.href;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  data-testid={`nav-link-${link.label.toLowerCase()}`}
+                  aria-current={active ? "page" : undefined}
+                  className={`rounded-full px-4 py-2 text-[15px] transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-dp-accent ${
+                    active ? "text-dp-ink" : "text-dp-muted hover:text-dp-ink"
                   }`}
                 >
                   {link.label}
-                  <span className="absolute -bottom-0.5 left-0 right-0 h-px bg-[#FF2D87] scale-x-0 group-hover:scale-x-100 transition-transform origin-left" />
-                </span>
-              </Link>
-            ))}
-
-            {/* Theme toggle */}
-            <motion.button
-              onClick={toggle}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.93 }}
-              data-testid="button-theme-toggle"
-              aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
-              className="w-8 h-8 rounded-full flex items-center justify-center text-gray-600 dark:text-white/60 hover:text-[#FF2D87] dark:hover:text-[#FF2D87] transition-colors border border-gray-200 dark:border-white/10 hover:border-[#FF2D87]/40"
-            >
-              {theme === "dark" ? <Sun size={15} /> : <Moon size={15} />}
-            </motion.button>
-
-            <Link href="/contact">
-              <motion.span
-                data-testid="nav-cta"
-                className="font-body text-sm font-semibold bg-[#FF2D87] text-white px-5 py-2 rounded-full cursor-pointer whitespace-nowrap"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.97 }}
-              >
-                Let's Talk ★
-              </motion.span>
-            </Link>
+                </Link>
+              );
+            })}
           </nav>
 
-          {/* Mobile: theme toggle + hamburger */}
-          <div className="flex md:hidden items-center gap-2">
-            <motion.button
-              onClick={toggle}
-              whileTap={{ scale: 0.9 }}
-              data-testid="button-theme-toggle-mobile"
-              aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
-              className="w-9 h-9 rounded-full flex items-center justify-center text-gray-600 dark:text-white/60 border border-gray-200 dark:border-white/10"
-            >
-              {theme === "dark" ? <Sun size={15} /> : <Moon size={15} />}
-            </motion.button>
+          <div className="hidden items-center gap-3 md:flex">
+            <FounderSwitch />
+            <MagneticButton href="/contact" data-testid="nav-cta" size="sm">
+              Let's Get Cooking
+            </MagneticButton>
+          </div>
+
+          <div className="flex items-center gap-2 md:hidden">
+            <FounderSwitch compact />
             <button
-              className="text-gray-800 dark:text-white p-2"
+              type="button"
+              className="grid h-10 w-10 place-items-center rounded-full border border-dp-line text-dp-ink"
               onClick={() => setMenuOpen((v) => !v)}
-              aria-label="Toggle menu"
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={menuOpen}
               data-testid="button-menu-toggle"
             >
-              {menuOpen ? <X size={24} /> : <Menu size={24} />}
+              {menuOpen ? <X size={18} /> : <Menu size={18} />}
             </button>
           </div>
         </div>
       </header>
 
-      {/* Mobile full-screen menu */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.22 }}
-            className="fixed inset-0 z-40 bg-[#FFF8FB] dark:bg-[#0A0A0A] flex flex-col items-center justify-center gap-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-40 flex flex-col bg-dp-bg px-6 pb-10 pt-28 md:hidden"
           >
-            {NAV_LINKS.map((link, i) => (
-              <motion.div
-                key={link.href}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.07 }}
-              >
-                <Link href={link.href}>
-                  <span className="font-display text-4xl font-bold text-gray-900 dark:text-white hover:text-[#FF2D87] transition-colors cursor-pointer">
+            <nav aria-label="Mobile navigation" className="flex flex-col">
+              {[{ label: "Home", href: "/" }, ...NAV_LINKS].map((link, i) => (
+                <motion.div
+                  key={link.href}
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.05 + i * 0.06, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  <Link
+                    href={link.href}
+                    className="block border-b border-dp-line py-4 text-[2rem] font-medium tracking-[-0.03em] text-dp-ink"
+                  >
                     {link.label}
-                  </span>
-                </Link>
-              </motion.div>
-            ))}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: NAV_LINKS.length * 0.07 }}
-            >
-              <Link href="/contact">
-                <span className="font-body font-semibold bg-[#FF2D87] text-white px-8 py-3.5 rounded-full text-lg cursor-pointer">
-                  Let's Talk ★
-                </span>
-              </Link>
-            </motion.div>
+                  </Link>
+                </motion.div>
+              ))}
+            </nav>
+            <div className="mt-auto flex flex-col gap-4">
+              <FounderSwitch />
+              <MagneticButton href="/contact">Let's Get Cooking</MagneticButton>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

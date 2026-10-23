@@ -1,532 +1,400 @@
-import { motion, type Variants } from "framer-motion";
+import type { CSSProperties } from "react";
 import { Link } from "wouter";
+import { ArrowUpRight } from "lucide-react";
+import { MagneticButton } from "../components/MagneticButton";
+import { Reveal } from "../components/Reveal";
+import { DeviceFrames } from "../components/DeviceFrames";
 import { CutoutWord } from "../components/CutoutWord";
-import { CTAButton } from "../components/CTAButton";
-import { AnimatedSection } from "../components/AnimatedSection";
 import { Ticker } from "../components/Ticker";
-import { MockupOffer } from "../components/MockupOffer";
-import { ExternalLink, Code2, Rocket, Palette } from "lucide-react";
+import { PLAN_PRICES } from "../lib/plans";
 
-const mascotImg = "/images/logo.webp";
-const aboutImg = "/images/mascot.webp";
+// Imaan's pixel avatar is being made; until then her cards show a monogram.
+const IMAAN_AVATAR: string | null = null;
 
-const STACK_TAGS = ["React", "TypeScript", "Tailwind", "Netlify"];
+const H2 = "text-[clamp(2.4rem,5.2vw,4.5rem)] font-semibold leading-[1] tracking-[-0.045em]";
 
-const SERVICES = [
+const CHEFS = [
   {
-    img: "/images/recipe.webp",
-    title: "The Recipe",
-    desc: "We start with your brand, your vibe, your customers. No generic templates.",
+    side: "Day",
+    name: "Aaniquah Dicks",
+    role: "Founder & Web Developer",
+    bio: "Software engineer and the pink half. Taught herself to make websites look as good as they work, then built a studio to do it for small brands.",
+    win: "Winner, GirlCode Pan-African Hackathon 2026, as team lead",
+    pantry: [
+      "Two-time hackathon winner",
+      "1st, Vodacom Bursar Mini Hackathon 2025",
+      "Advanced Diploma in ICT, cum laude (CPUT)",
+      "Golden Key International Honour Society",
+      "React, TypeScript, Java, SQL and AI tooling",
+    ],
+    light: true,
   },
   {
-    img: "/images/cooking.webp",
-    title: "The Ingredients",
-    desc: "Clean code, beautiful design, mobile-first. All the right stuff, nothing you don't need.",
+    side: "Night",
+    name: "Imaan Cooper",
+    role: "Co-founder & Web Developer",
+    bio: "Creative director and the darker half. Turns a brief into a look, then works side by side with Aaniquah until it's live.",
+    pantry: [
+      "Former Head of Design, QuadCorp Digital",
+      "Led creative direction on client websites and campaigns",
+      "Design lead on a R30 000 e-commerce build",
+      "Freelance designer and developer since 2023",
+      "Bespoke sites for local and US clients",
+      "Figma, Adobe Creative Suite, HTML and CSS",
+    ],
+    light: false,
+  },
+] as const;
+
+const WORK = [
+  {
+    name: "Stuff'd Bagels",
+    kind: "Food pop-up, Cape Town",
+    url: "stuffdbagels.netlify.app",
+    href: "https://stuffdbagels.netlify.app",
+    desktop: "/images/work/stuffd-desktop.webp",
+    phone: "/images/work/stuffd-phone.webp",
+    lines: [
+      ["Before", "Customers had to hunt for a WhatsApp number and scroll social media to place an order."],
+      ["Now", "A single-page ordering site with the menu, this week's spots and one-tap WhatsApp ordering."],
+    ],
   },
   {
-    img: "/images/served.webp",
-    title: "Served Fresh",
-    desc: "Deployed, live, and ready to take orders.",
+    name: "Beginners Madrasah",
+    kind: "Islamic learning for women and children",
+    url: "beginnersmadrasah.co.za",
+    href: "https://beginnersmadrasah.co.za/",
+    desktop: "/images/work/madrasah-desktop.webp",
+    phone: "/images/work/madrasah-phone.webp",
+    lines: [
+      ["Built", "A calm, welcoming home for programmes, registration, testimonials and FAQs."],
+      ["For", "Parents and students who want clear answers on a phone, online or in person."],
+    ],
   },
-];
+] as const;
 
-const PRICING_PREVIEW = [
-  { label: "Starter", price: "R600", popular: false },
-  { label: "Standard", price: "R1 000", popular: true },
-  { label: "Premium", price: "R1 600", popular: false },
-  { label: "Pro", price: "R2 500", popular: false },
-];
+const RECIPE = [
+  { img: "/images/recipe.webp", title: "Read the recipe", body: "We start with your business, your customers and the way you already sell." },
+  { img: "/images/contact.webp", title: "A free taste", body: "We design a first look at your site, so you see it before you decide." },
+  { img: "/images/cooking.webp", title: "Cook from scratch", body: "Clean code, mobile first and fast. No templates, nothing you don't need." },
+  { img: "/images/served.webp", title: "Served fresh", body: "Live on your own domain and ready for orders. Most sites take 5 to 7 business days." },
+] as const;
 
-const stagger: Variants = { hidden: {}, show: { transition: { staggerChildren: 0.12 } } };
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
-  },
-};
+const MENU = [
+  { name: "Starter", price: PLAN_PRICES.Starter, img: "/images/starter.webp", note: "One page, a menu section and a WhatsApp button." },
+  { name: "Standard", price: PLAN_PRICES.Standard, img: "/images/standard.webp", note: "Adds locations, an about section and your socials.", popular: true },
+  { name: "Premium", price: PLAN_PRICES.Premium, img: "/images/premium.webp", note: "Adds your own domain, Google Business and basic SEO." },
+  { name: "Pro", price: PLAN_PRICES.Pro, img: "/images/pro.webp", note: "Adds a lead form with instant alerts to your phone." },
+] as const;
+
+function Monogram({ className = "" }: { className?: string }) {
+  return (
+    <div
+      role="img"
+      aria-label="Imaan Cooper"
+      className={`grid place-items-center bg-[#0C0B0D] font-mono font-medium tracking-[-0.06em] text-[#FFA7D2] ${className}`}
+    >
+      IC
+    </div>
+  );
+}
+
+function Hero() {
+  const rise = (d: number) => ({ "--d": `${d}s` }) as CSSProperties;
+  return (
+    <section className="relative isolate overflow-hidden">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-[20%] -top-[30%] -z-10 h-[90vh] w-[70vw] rounded-full bg-[radial-gradient(closest-side,var(--dp-glow),transparent)] blur-2xl"
+      />
+      <div className="mx-auto grid min-h-[92dvh] max-w-[1320px] items-center gap-14 px-5 pb-14 pt-28 sm:px-8 md:grid-cols-[1.15fr_1fr] md:gap-10 md:pt-24">
+        <div>
+          <p className="dp-rise mb-6 inline-flex items-center gap-2 rounded-full border border-dp-line px-3.5 py-1.5 text-[13px] text-dp-muted" style={rise(0)}>
+            <span aria-hidden="true" className="text-dp-accent">★</span> A women-led web studio in Cape Town
+          </p>
+          <h1 className="dp-rise text-[clamp(2.6rem,6.4vw,5.75rem)] font-semibold leading-[0.98] tracking-[-0.055em] text-dp-ink" style={rise(0.06)}>
+            Your website,
+            <br />
+            <span className="whitespace-nowrap">
+              freshly <CutoutWord word="COOKED" /> <span aria-hidden="true" className="text-[0.8em]">★</span>
+            </span>
+          </h1>
+          <p className="dp-rise mt-7 max-w-[38ch] text-[clamp(1.05rem,1.5vw,1.25rem)] leading-relaxed text-dp-muted" style={rise(0.18)}>
+            Made from scratch by Aaniquah and Imaan. No off-the-shelf ingredients. No boring templates.
+          </p>
+          <div className="dp-rise mt-10 flex flex-wrap items-center gap-3" style={rise(0.3)}>
+            <MagneticButton href="/contact" data-testid="button-hero-cta">
+              Let's Get Cooking
+            </MagneticButton>
+            <MagneticButton href="/portfolio" variant="ghost" data-testid="button-hero-portfolio">
+              See Our Work
+            </MagneticButton>
+          </div>
+        </div>
+
+        {/* The two chefs, as a pair of stickers */}
+        <div className="dp-rise relative mx-auto w-full max-w-[520px]" style={rise(0.2)}>
+          <span aria-hidden="true" className="absolute -left-4 -top-6 text-4xl text-[#FFD43B]">★</span>
+          <span aria-hidden="true" className="absolute -right-2 bottom-2 text-3xl text-dp-pink">✦</span>
+          <div className="grid grid-cols-2 items-end gap-4 sm:gap-6">
+            <figure className="rotate-[-3deg] rounded-[28px] border-[3px] border-white bg-[#FDD2DE] p-3 shadow-[0_30px_60px_-30px_rgba(179,47,104,0.5)] transition-transform duration-700 ease-out hover:rotate-0">
+              <img
+                src="/images/mascot.webp"
+                alt="Aaniquah's pixel avatar coding at her desk"
+                width={600}
+                height={600}
+                fetchPriority="high"
+                className="aspect-square w-full rounded-[20px] bg-[#FFF7FA] object-contain"
+              />
+              <figcaption className="px-1 pb-1 pt-3 text-[13px] font-medium text-[#161214]">Aaniquah</figcaption>
+            </figure>
+            <figure className="translate-y-8 rotate-[3deg] rounded-[28px] border-[3px] border-[#2A262B] bg-[#141215] p-3 shadow-[0_30px_60px_-30px_rgba(12,11,13,0.75)] transition-transform duration-700 ease-out hover:rotate-0">
+              {IMAAN_AVATAR ? (
+                <img src={IMAAN_AVATAR} alt="Imaan's pixel avatar" className="aspect-square w-full rounded-[20px] object-contain" />
+              ) : (
+                <Monogram className="aspect-square w-full rounded-[20px] text-[clamp(2.5rem,6vw,4.5rem)]" />
+              )}
+              <figcaption className="px-1 pb-1 pt-3 text-[13px] font-medium text-[#F3EFF2]">Imaan</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Chefs() {
+  return (
+    <section aria-labelledby="chefs-heading" className="mx-auto max-w-[1320px] px-5 py-24 sm:px-8 md:py-32">
+      <Reveal>
+        <h2 id="chefs-heading" className={H2}>
+          Meet the <CutoutWord word="CHEFS" />
+        </h2>
+        <p className="mt-5 max-w-[54ch] text-lg leading-relaxed text-dp-muted">
+          One of us codes in pink, the other in the dark. Same kitchen, same standards. Flip the switch at the top to see the studio through either of our eyes.
+        </p>
+      </Reveal>
+
+      <div className="mt-14 grid overflow-hidden rounded-[32px] border border-dp-line md:grid-cols-2">
+        {CHEFS.map((c, i) => {
+          const t = c.light
+            ? { bg: "bg-[#FCE8F0]", ink: "text-[#161214]", muted: "text-[#463E44]", label: "text-[#61575E]", accent: "text-[#B32F68]", chip: "border-[#161214]/12 bg-white/70", star: "text-[#E8508A]" }
+            : { bg: "bg-[#0C0B0D]", ink: "text-[#F3EFF2]", muted: "text-[#C9C2C7]", label: "text-[#A49CA2]", accent: "text-[#FFA7D2]", chip: "border-white/10 bg-white/[0.04]", star: "text-[#FFA7D2]" };
+          return (
+            <Reveal as="article" key={c.name} delay={i * 0.1} className={`flex flex-col gap-10 p-8 sm:p-12 ${t.bg} ${t.ink}`}>
+              <div className="flex items-start justify-between gap-6">
+                <span className={`font-mono text-[12px] ${t.label}`}>{c.side}</span>
+                {c.light ? (
+                  <img src="/images/mascot.webp" alt="" width={600} height={600} loading="lazy" className="h-24 w-24 rounded-2xl bg-[#FFF7FA] object-contain" />
+                ) : IMAAN_AVATAR ? (
+                  <img src={IMAAN_AVATAR} alt="" loading="lazy" className="h-24 w-24 rounded-2xl object-contain" />
+                ) : (
+                  <Monogram className="h-24 w-24 rounded-2xl !bg-[#1B181C] text-3xl" />
+                )}
+              </div>
+              <div>
+                <h3 className="text-[clamp(1.9rem,3vw,2.6rem)] font-semibold tracking-[-0.04em]">{c.name}</h3>
+                <p className={`mt-1 text-[15px] ${t.accent}`}>{c.role}</p>
+                <p className={`mt-6 max-w-[44ch] leading-relaxed ${t.muted}`}>{c.bio}</p>
+              </div>
+              <div>
+                {"win" in c && (
+                  <p className="mb-5 inline-flex items-center gap-2 rounded-full bg-[#FFD43B] px-4 py-2 text-[14px] font-semibold text-[#161214] shadow-[0_10px_24px_-12px_rgba(224,176,0,0.8)]">
+                    <span aria-hidden="true">★</span> {c.win}
+                  </p>
+                )}
+                <p className={`mb-3 font-mono text-[12px] ${t.label}`}>In the pantry</p>
+                <ul className="flex flex-wrap gap-2">
+                  {c.pantry.map((item) => (
+                    <li key={item} className={`rounded-full border px-3.5 py-1.5 text-[13px] ${t.chip}`}>
+                      <span aria-hidden="true" className={`mr-1.5 ${t.star}`}>★</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </Reveal>
+          );
+        })}
+      </div>
+
+      <Reveal className="mt-10">
+        <p className="text-[clamp(1.25rem,2vw,1.6rem)] font-medium tracking-[-0.02em] text-dp-ink">
+          Girl power is kind of the whole point here. <span className="text-dp-accent">★</span>
+        </p>
+      </Reveal>
+    </section>
+  );
+}
+
+function Work() {
+  return (
+    <section aria-labelledby="work-heading" className="border-t border-dp-line">
+      <div className="mx-auto max-w-[1320px] px-5 py-24 sm:px-8 md:py-32">
+        <Reveal className="flex flex-wrap items-end justify-between gap-6">
+          <h2 id="work-heading" className={H2}>
+            Fresh out the <CutoutWord word="KITCHEN" />
+          </h2>
+          <Link href="/portfolio" className="group inline-flex items-center gap-1.5 text-[15px] text-dp-muted transition-colors hover:text-dp-ink">
+            All our work
+            <ArrowUpRight size={16} className="transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+          </Link>
+        </Reveal>
+
+        <div className="mt-16 flex flex-col gap-28 md:gap-36">
+          {WORK.map((w, i) => {
+            const flip = i % 2 === 1;
+            return (
+              <article key={w.name} className="grid items-center gap-12 md:grid-cols-12 md:gap-10">
+                <Reveal className={`md:col-span-7 ${flip ? "md:order-2" : ""}`}>
+                  <DeviceFrames desktop={w.desktop} phone={w.phone} alt={`The ${w.name} website`} url={w.url} flip={flip} />
+                </Reveal>
+                <Reveal delay={0.1} className={`md:col-span-5 ${flip ? "md:order-1 md:pr-6" : "md:pl-6"}`}>
+                  <p className="text-[14px] text-dp-muted">{w.kind}</p>
+                  <h3 className="mt-2 text-[clamp(1.9rem,3.2vw,2.75rem)] font-semibold tracking-[-0.04em]">
+                    {w.name} <span aria-hidden="true" className="text-dp-accent">★</span>
+                  </h3>
+                  <dl className="mt-8 flex flex-col gap-5">
+                    {w.lines.map(([k, v]) => (
+                      <div key={k} className="grid grid-cols-[72px_1fr] gap-4">
+                        <dt className="pt-0.5 font-mono text-[12px] text-dp-accent">{k}</dt>
+                        <dd className="leading-relaxed text-dp-muted">{v}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                  <a
+                    href={w.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group mt-9 inline-flex items-center gap-1.5 text-[15px] font-medium text-dp-ink underline decoration-dp-line underline-offset-[6px] transition-colors hover:decoration-dp-accent"
+                  >
+                    Visit the live site
+                    <ArrowUpRight size={16} className="transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                  </a>
+                </Reveal>
+              </article>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Recipe() {
+  return (
+    <section aria-labelledby="recipe-heading" className="border-t border-dp-line bg-dp-soft/50">
+      <div className="mx-auto grid max-w-[1320px] gap-14 px-5 py-24 sm:px-8 md:grid-cols-[1fr_1.3fr] md:py-32">
+        <div className="md:sticky md:top-32 md:self-start">
+          <Reveal>
+            <h2 id="recipe-heading" className={H2}>
+              The <CutoutWord word="RECIPE" />
+            </h2>
+            <p className="mt-5 max-w-[36ch] text-lg leading-relaxed text-dp-muted">Four steps, one kitchen, and you taste everything before it's served.</p>
+          </Reveal>
+        </div>
+        <ol className="flex flex-col gap-5">
+          {RECIPE.map((s, i) => (
+            <li
+              key={s.title}
+              className="sticky grid grid-cols-[1fr_auto] items-center gap-6 rounded-[24px] border border-dp-line bg-dp-surface p-7 shadow-[0_24px_60px_-40px_rgba(12,11,13,0.5)] sm:p-9"
+              style={{ top: `${112 + i * 18}px` }}
+            >
+              <div>
+                <span className="font-mono text-[13px] text-dp-accent">Step {i + 1}</span>
+                <h3 className="mt-4 text-[clamp(1.5rem,2.4vw,2rem)] font-semibold tracking-[-0.035em]">{s.title}</h3>
+                <p className="mt-3 max-w-[40ch] leading-relaxed text-dp-muted">{s.body}</p>
+              </div>
+              <img src={s.img} alt="" width={240} height={240} loading="lazy" className="h-24 w-24 object-contain sm:h-32 sm:w-32" />
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  );
+}
+
+function Menu() {
+  return (
+    <section aria-labelledby="menu-heading" className="border-t border-dp-line">
+      <div className="mx-auto max-w-[1320px] px-5 py-24 sm:px-8 md:py-32">
+        <Reveal className="flex flex-wrap items-end justify-between gap-6">
+          <div>
+            <h2 id="menu-heading" className={H2}>
+              On the <CutoutWord word="MENU" />
+            </h2>
+            <p className="mt-5 max-w-[40ch] text-lg leading-relaxed text-dp-muted">Clear prices. No hidden fees. Built from scratch.</p>
+          </div>
+          <Link href="/pricing" className="group inline-flex items-center gap-1.5 text-[15px] text-dp-muted transition-colors hover:text-dp-ink" data-testid="button-pricing-preview-cta">
+            See full packages
+            <ArrowUpRight size={16} className="transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+          </Link>
+        </Reveal>
+        <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {MENU.map((t, i) => {
+            const popular = "popular" in t;
+            return (
+              <Reveal
+                key={t.name}
+                delay={i * 0.06}
+                className={`relative flex flex-col rounded-[24px] border p-7 transition-transform duration-500 hover:-translate-y-1 ${
+                  popular ? "border-transparent bg-dp-cta text-dp-cta-fg" : "border-dp-line bg-dp-surface"
+                }`}
+              >
+                {popular && (
+                  <span className="absolute -top-3 left-7 rounded-full bg-[#FFD43B] px-3 py-1 text-[12px] font-semibold text-[#161214]">Most popular ★</span>
+                )}
+                <img src={t.img} alt="" width={240} height={240} loading="lazy" className="h-20 w-20 object-contain" />
+                <p className={`mt-6 text-[15px] ${popular ? "opacity-80" : "text-dp-muted"}`}>{t.name}</p>
+                <p className="mt-1 text-[clamp(2.4rem,3.6vw,3rem)] font-semibold tracking-[-0.05em]">{t.price}</p>
+                <p className={`mt-3 text-[15px] leading-relaxed ${popular ? "opacity-80" : "text-dp-muted"}`}>{t.note}</p>
+              </Reveal>
+            );
+          })}
+        </div>
+        <p className="mt-6 text-[14px] text-dp-muted">Once-off prices in rand. Small edits after launch from R120 a month.</p>
+      </div>
+    </section>
+  );
+}
+
+function FreeTaste() {
+  return (
+    <section aria-labelledby="taste-heading" className="px-5 pb-24 sm:px-8 md:pb-28" data-testid="home-mockup-offer">
+      <Reveal className="relative mx-auto grid max-w-[1320px] items-center gap-10 overflow-hidden rounded-[36px] bg-[#FDD2DE] px-8 py-14 text-[#161214] sm:px-14 md:grid-cols-[1.4fr_1fr] md:py-20">
+        <div aria-hidden="true" className="pointer-events-none absolute -bottom-1/2 -right-1/4 h-[140%] w-[70%] rounded-full bg-[radial-gradient(closest-side,#FFA7D2,transparent)]" />
+        <div className="relative">
+          <h2 id="taste-heading" className="text-[clamp(2.4rem,5.2vw,4.5rem)] font-semibold leading-[1] tracking-[-0.045em]">
+            Get a free taste first. <span aria-hidden="true">★</span>
+          </h2>
+          <p className="mt-5 max-w-[44ch] text-lg leading-relaxed text-[#463E44]">
+            Tell us about your business and we'll design a free mock-up of your site. You see it before you decide, with no obligation to go ahead.
+          </p>
+          <Link
+            href="/contact?interest=mockup"
+            data-testid="home-mockup-offer-cta"
+            className="mt-10 inline-flex h-[52px] items-center gap-2 rounded-full bg-[#161214] px-7 text-[15px] font-medium text-[#FFF7FA] transition-transform active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#161214]"
+          >
+            Get My Free Mock-up
+            <ArrowUpRight size={17} aria-hidden="true" />
+          </Link>
+        </div>
+        <img src="/images/work.webp" alt="" width={300} height={300} loading="lazy" className="relative mx-auto w-40 rotate-6 drop-shadow-[0_20px_30px_rgba(179,47,104,0.3)] md:w-56" />
+      </Reveal>
+    </section>
+  );
+}
 
 export default function Home() {
   return (
     <main>
-      {/* ── Hero ─────────────────────────────────────── */}
-      <section className="min-h-screen relative flex items-center bg-[#FFF8FB] dark:bg-[#0A0A0A] grain-section pt-20 transition-colors duration-300">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#FF2D87]/5 via-transparent to-[#FFD700]/3 pointer-events-none" />
-        <span className="grain-deco top-28 right-10 md:right-16 text-[#FFD700]/15 dark:text-[#FFD700]/20 text-6xl md:text-7xl font-bebas select-none pointer-events-none">
-          ★
-        </span>
-        <span className="grain-deco bottom-40 left-6 md:left-10 text-[#FF2D87]/10 dark:text-[#FF2D87]/15 text-5xl font-bebas select-none pointer-events-none">
-          ★
-        </span>
-
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 w-full grid md:grid-cols-2 gap-10 md:gap-12 items-center py-12 md:py-16">
-          {/* Text */}
-          <motion.div
-            variants={stagger}
-            initial="hidden"
-            animate="show"
-            className="order-2 md:order-1"
-          >
-            <motion.h1
-              variants={fadeUp}
-              className="font-display font-black text-gray-900 dark:text-white leading-[1.05] mb-4"
-              style={{ fontSize: "clamp(2.2rem, 6vw, 4.8rem)" }}
-            >
-              <span className="block font-normal font-mono-brand text-[#FF2D87] text-xs tracking-[0.25em] uppercase mb-5 leading-normal">
-                Cape Town Web Developer
-              </span>
-              Your website,
-              <br />
-              freshly <CutoutWord word="COOKED" baseSize="1em" /> ★
-            </motion.h1>
-
-            <motion.p
-              variants={fadeUp}
-              className="font-body text-gray-600 dark:text-white/60 text-base md:text-lg leading-relaxed mb-8 max-w-md"
-            >
-              At Digital Pantry, every website is made from scratch. No
-              off-the-shelf ingredients. No boring templates. Just a site that
-              tastes exactly like your brand.
-            </motion.p>
-
-            <motion.div
-              variants={fadeUp}
-              className="flex flex-wrap gap-3 md:gap-4"
-            >
-              <CTAButton href="/contact" data-testid="button-hero-cta">
-                Let's Get Cooking ★
-              </CTAButton>
-              <CTAButton
-                href="/portfolio"
-                variant="outline"
-                data-testid="button-hero-portfolio"
-              >
-                See My Work
-              </CTAButton>
-            </motion.div>
-
-            <motion.div
-              variants={fadeUp}
-              className="mt-8 md:mt-10 flex items-center gap-4"
-            >
-              <div className="flex -space-x-2">
-                {["#FF2D87", "#FFD700", "#FFB3D1"].map((c, i) => (
-                  <div
-                    key={i}
-                    className="w-7 h-7 md:w-8 md:h-8 rounded-full border-2 border-[#FFF8FB] dark:border-[#0A0A0A]"
-                    style={{ backgroundColor: c }}
-                  />
-                ))}
-              </div>
-              <p className="font-body text-gray-500 dark:text-white/40 text-sm">
-                Small business energy. Professional web presence.
-              </p>
-            </motion.div>
-          </motion.div>
-
-          {/* Mascot */}
-          <div className="order-1 md:order-2 flex justify-center">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.85 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className="relative"
-            >
-              <div className="float-bob">
-                <div className="relative w-80 h-80 sm:w-[22rem] sm:h-[22rem] md:w-[28rem] md:h-[28rem]">
-                  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#FF2D87]/20 to-[#FFD700]/10 blur-3xl" />
-                  <div className="relative w-full h-full flex items-center justify-center">
-                    <img
-                      src={mascotImg}
-                      alt="The Digital Pantry logo"
-                      className="w-full h-full object-contain drop-shadow-[0_0_30px_rgba(255,45,135,0.35)]"
-                      loading="eager"
-                      fetchPriority="high"
-                    />
-                  </div>
-                  <motion.div
-                    animate={{ y: [0, -6, 0] }}
-                    transition={{ repeat: Infinity, duration: 3.5, delay: 0.5 }}
-                    className="absolute -bottom-4 -left-2 sm:-left-4 bg-white dark:bg-[#0A0A0A] border border-gray-200 dark:border-[#FF2D87]/30 rounded-xl px-3 py-2 shadow-xl"
-                  >
-                    <p className="font-mono-brand text-[#FF2D87] text-xs">
-                      const site =
-                    </p>
-                    <p className="font-mono-brand text-[#FFD700] text-xs">
-                      {"  ✨ perfection"}
-                    </p>
-                  </motion.div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Ticker ─────────────────────────────────── */}
+      <Hero />
       <Ticker />
-
-      {/* ── What I Do ──────────────────────────────── */}
-      <section className="bg-[#FFF0F5] dark:bg-[#0f0a0d] grain-section py-20 md:py-24 transition-colors duration-300">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <AnimatedSection className="text-center mb-12 md:mb-16">
-            <p className="font-mono-brand text-[#FF2D87] text-xs tracking-[0.25em] uppercase mb-3">
-              Services
-            </p>
-            <h2 className="font-display font-black text-gray-900 dark:text-white text-3xl sm:text-4xl md:text-5xl">
-              What I Do <span className="text-[#FFD700]">★</span>
-            </h2>
-          </AnimatedSection>
-
-          <motion.div
-            className="grid sm:grid-cols-2 md:grid-cols-3 gap-5 md:gap-6"
-            variants={stagger}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, margin: "-60px" }}
-          >
-            {SERVICES.map((s) => (
-              <motion.div
-                key={s.title}
-                variants={fadeUp}
-                whileHover={{ y: -6, scale: 1.02 }}
-                className="group bg-white dark:bg-[#0A0A0A] border border-gray-200 dark:border-white/8 hover:border-[#FF2D87]/40 rounded-2xl p-7 md:p-8 transition-all duration-300 cursor-default shadow-sm dark:shadow-none text-center"
-              >
-                <img
-                  src={s.img}
-                  alt={s.title}
-                  className="w-34 h-34 object-contain mb-5 mx-auto"
-                />
-
-                <h3 className="font-display font-bold text-gray-900 dark:text-white text-xl md:text-2xl mb-3">
-                  <span className="text-[#FFD700]">★</span> {s.title}
-                </h3>
-                <p className="font-body text-gray-600 dark:text-white/55 leading-relaxed text-sm md:text-base">
-                  {s.desc}
-                </p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ── Portfolio Preview ───────────────────────── */}
-      <section className="bg-[#FFF8FB] dark:bg-[#0A0A0A] py-20 md:py-24 transition-colors duration-300">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <AnimatedSection className="flex items-center justify-between mb-10 md:mb-12 flex-wrap gap-4">
-            <div className="flex items-center gap-6 md:gap-10">
-              <div>
-                <p className="font-mono-brand text-[#FF2D87] text-xs tracking-[0.25em] uppercase mb-2">
-                  Portfolio
-                </p>
-                <h2 className="font-display font-black text-gray-900 dark:text-white text-3xl sm:text-4xl md:text-5xl">
-                  Recent <CutoutWord word="WORK" baseSize="0.9em" />
-                </h2>
-              </div>
-              <img
-                src="/images/work.webp"
-                alt=""
-                className="w-24 md:w-36 object-contain drop-shadow-[0_0_20px_rgba(255,45,135,0.25)] hidden sm:block"
-                loading="lazy"
-              />
-            </div>
-            <Link href="/portfolio">
-              <span className="font-body text-[#FF2D87] hover:text-[#FFD700] transition-colors font-semibold cursor-pointer text-sm md:text-base">
-                See All Work ★ →
-              </span>
-            </Link>
-          </AnimatedSection>
-
-          <div className="grid sm:grid-cols-2 gap-5 md:gap-6">
-            <AnimatedSection delay={0.1}>
-              <motion.div
-                whileHover={{ y: -4 }}
-                className="bg-white dark:bg-[#0f0a0d] border border-gray-200 dark:border-white/8 hover:border-[#FF2D87]/40 rounded-2xl overflow-hidden transition-all duration-300 group shadow-sm dark:shadow-none"
-              >
-                <div className="h-44 sm:h-52 bg-gradient-to-br from-pink-50 dark:from-[#1a0510] to-white dark:to-[#0A0A0A] relative overflow-hidden flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="text-5xl md:text-6xl mb-2">🥯</div>
-                    <p className="font-bebas text-[#FF2D87] text-xl md:text-2xl tracking-widest">
-                      STUFF'D BAGELS
-                    </p>
-                  </div>
-                  <div className="absolute top-3 left-3 bg-[#FF2D87] text-white text-xs font-mono-brand px-2 py-1 rounded-full">
-                    ★ Live
-                  </div>
-                </div>
-                <div className="p-5 md:p-6">
-                  <div className="flex items-start justify-between mb-2">
-                    <h3 className="font-display font-bold text-gray-900 dark:text-white text-lg md:text-xl">
-                      STUFF'D Bagels <span className="text-[#FFD700]">★</span>
-                    </h3>
-                    <a
-                      href="https://stuffdbagels.netlify.app"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-gray-400 dark:text-white/30 hover:text-[#FF2D87] transition-colors"
-                      data-testid="link-stuffd-live"
-                    >
-                      <ExternalLink size={16} />
-                    </a>
-                  </div>
-                  <p className="font-mono-brand text-[#FF2D87] text-xs tracking-wider mb-4">
-                    Food & Beverage / Pop-Up
-                  </p>
-                  <div className="space-y-2 mb-5 text-sm">
-                    <div>
-                      <span className="font-mono-brand text-gray-400 dark:text-white/30 text-xs uppercase">
-                        Problem:{" "}
-                      </span>
-                      <span className="font-body text-gray-600 dark:text-white/60">
-                        Customers had to hunt for a WhatsApp number and scroll
-                        social media to place orders.
-                      </span>
-                    </div>
-                    <div>
-                      <span className="font-mono-brand text-gray-400 dark:text-white/30 text-xs uppercase">
-                        Solution:{" "}
-                      </span>
-                      <span className="font-body text-gray-600 dark:text-white/60">
-                        Single-page ordering site with menu, schedule and
-                        one-tap WhatsApp ordering.
-                      </span>
-                    </div>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {STACK_TAGS.map((tag) => (
-                      <span
-                        key={tag}
-                        className="font-mono-brand text-xs text-[#FF2D87] bg-[#FF2D87]/10 border border-[#FF2D87]/20 px-2.5 py-1 rounded-full"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            </AnimatedSection>
-
-            <AnimatedSection delay={0.2}>
-              <motion.div
-                whileHover={{ y: -4 }}
-                className="bg-white dark:bg-[#0f0a0d] border border-gray-200 dark:border-white/8 hover:border-[#FF2D87]/40 rounded-2xl overflow-hidden transition-all duration-300 group shadow-sm dark:shadow-none"
-              >
-                <div className="h-44 sm:h-52 bg-gradient-to-br from-pink-50 dark:from-[#1a0510] to-white dark:to-[#0A0A0A] relative overflow-hidden flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="text-5xl md:text-6xl mb-2">🕌</div>
-                    <p className="font-mono-brand text-gray-400 dark:text-white/30 text-sm">
-                      beginnersmadrasah.co.za
-                    </p>
-                  </div>
-                  <div className="absolute top-3 left-3 bg-[#FF2D87] text-white text-xs font-mono-brand px-2 py-1 rounded-full">
-                    ★ Live
-                  </div>
-                </div>
-                <div className="p-5 md:p-6">
-                  <div className="flex items-start justify-between mb-2">
-                    <h3 className="font-display font-bold text-gray-900 dark:text-white text-lg md:text-xl">
-                      Beginners Madrasah
-                    </h3>
-                    <a
-                      href="https://beginnersmadrasah.co.za/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-gray-400 dark:text-white/30 hover:text-[#FF2D87] transition-colors"
-                      data-testid="link-madrasah-live"
-                    >
-                      <ExternalLink size={16} />
-                    </a>
-                  </div>
-                  <p className="font-mono-brand text-[#FF2D87] text-xs tracking-wider">
-                    Religious Education / Islamic Learning
-                  </p>
-                </div>
-              </motion.div>
-            </AnimatedSection>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Pricing Preview ─────────────────────────── */}
-      <section className="bg-[#FFF0F5] dark:bg-[#0f0a0d] grain-section py-20 md:py-24 transition-colors duration-300">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <AnimatedSection className="flex items-center justify-between mb-10 md:mb-12 flex-wrap gap-4">
-            <div>
-              <p className="font-mono-brand text-[#FF2D87] text-xs tracking-[0.25em] uppercase mb-2">
-                Investment
-              </p>
-              <h2 className="font-display font-black text-gray-900 dark:text-white text-3xl sm:text-4xl md:text-5xl mb-2">
-                <CutoutWord word="PRICING" baseSize="0.85em" />
-              </h2>
-              <p className="font-body text-gray-500 dark:text-white/50 text-sm md:text-base">
-                Straightforward. No hidden fees. Built from scratch.
-              </p>
-            </div>
-            <img
-              src="/images/pricing.webp"
-              alt=""
-              className="w-24 md:w-36 object-contain drop-shadow-[0_0_20px_rgba(255,45,135,0.25)] hidden sm:block"
-              loading="lazy"
-            />
-          </AnimatedSection>
-
-          <motion.div
-            className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8"
-            variants={stagger}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-          >
-            {PRICING_PREVIEW.map((tier) => (
-              <motion.div
-                key={tier.label}
-                variants={fadeUp}
-                whileHover={{ y: -6 }}
-                className={`rounded-2xl p-6 text-center transition-all duration-300 relative ${
-                  tier.popular
-                    ? "bg-[#FF2D87] border-2 border-[#FF2D87] pink-glow"
-                    : "bg-white dark:bg-[#0A0A0A] border border-gray-200 dark:border-white/8 hover:border-[#FF2D87]/30 shadow-sm dark:shadow-none"
-                }`}
-              >
-                {tier.popular && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#FFD700] text-[#0A0A0A] text-xs font-mono-brand font-bold px-3 py-1 rounded-full whitespace-nowrap">
-                    Most Popular ★
-                  </div>
-                )}
-                <p
-                  className={`font-mono-brand text-xs tracking-widest uppercase mb-3 ${tier.popular ? "text-white/70" : "text-gray-400 dark:text-white/40"}`}
-                >
-                  {tier.label}
-                </p>
-                <p
-                  className={`font-display font-black text-2xl md:text-3xl ${tier.popular ? "text-white" : "text-gray-900 dark:text-white"}`}
-                >
-                  {tier.price}
-                </p>
-              </motion.div>
-            ))}
-          </motion.div>
-
-          <AnimatedSection className="text-center">
-            <Link href="/pricing">
-              <motion.span
-                data-testid="button-pricing-preview-cta"
-                className="inline-block font-body font-semibold text-[#FF2D87] hover:text-[#FFD700] transition-colors cursor-pointer"
-                whileHover={{ scale: 1.04 }}
-              >
-                See Full Packages →
-              </motion.span>
-            </Link>
-          </AnimatedSection>
-        </div>
-      </section>
-
-      {/* ── Free mock-up offer ──────────────────────── */}
-      <MockupOffer bgClass="bg-[#FFF8FB] dark:bg-[#0A0A0A]" testId="home-mockup-offer" />
-
-      {/* ── About ───────────────────────────────────── */}
-      <section className="bg-[#FFF8FB] dark:bg-[#0A0A0A] py-20 md:py-28 transition-colors duration-300">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          {/* Section heading */}
-          <AnimatedSection className="mb-12 md:mb-16">
-            <p className="font-mono-brand text-[#FF2D87] text-xs tracking-[0.25em] uppercase mb-3">
-              About
-            </p>
-            <h2
-              className="font-display font-black text-gray-900 dark:text-white leading-tight mb-4"
-              style={{ fontSize: "clamp(2.8rem, 7vw, 5.5rem)" }}
-            >
-              About <span className="text-[#FFD700]">★</span>
-            </h2>
-            <p className="font-body text-gray-500 dark:text-white/50 text-base md:text-xl max-w-lg">
-              The girl behind the <CutoutWord word="PANTRY" baseSize="1em" />
-            </p>
-          </AnimatedSection>
-
-          {/* Two-col layout */}
-          <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-start">
-            {/* Left column: image + badges */}
-            <AnimatedSection direction="left">
-              <div className="relative max-w-xs sm:max-w-sm mx-auto md:mx-0 mb-8">
-                <img
-                  src={aboutImg}
-                  alt="Digital Pantry mascot"
-                  className="w-full object-contain drop-shadow-[0_0_50px_rgba(255,45,135,0.35)]"
-                  loading="lazy"
-                />
-                <div className="absolute top-4 right-4 bg-[#FFD700] text-[#0A0A0A] text-xs font-mono-brand font-bold px-3 py-1.5 rounded-full shadow-lg">
-                  ★ Available for projects
-                </div>
-                <div className="absolute bottom-4 left-0 bg-[#FF2D87] text-white text-xs font-mono-brand font-bold px-3 py-1.5 rounded-full shadow-lg whitespace-nowrap">
-                  Engineering Diva ★
-                </div>
-              </div>
-
-              {/* Achievement badges */}
-              <div className="flex flex-wrap gap-2">
-                {[
-                  "Cum Laude Graduate",
-                  "1st Place Vodacom Hackathon",
-                  "GirlCode Top 3",
-                  "Golden Key Member",
-                  "Cell C Mentee",
-                  "Self-Taught Frontend Dev",
-                ].map((badge) => (
-                  <span
-                    key={badge}
-                    className="font-mono-brand text-xs text-[#FF2D87] bg-[#FF2D87]/10 border border-[#FF2D87]/20 px-3 py-1.5 rounded-full"
-                  >
-                    ★ {badge}
-                  </span>
-                ))}
-              </div>
-            </AnimatedSection>
-
-            {/* Right column: bio */}
-            <AnimatedSection direction="right" className="space-y-5">
-              <p className="font-display font-bold text-gray-900 dark:text-white text-xl md:text-2xl leading-snug">
-                I'm Aaniquah, a software developer in Cape Town and the
-                one-woman team behind Digital Pantry.
-              </p>
-
-              <p className="font-body text-gray-600 dark:text-white/60 leading-relaxed text-sm md:text-base">
-                I started coding in high school and never looked back. My CPUT
-                degree covered the backend, databases and theory. The fun part, making
-                websites actually look good, I taught myself. So when I say I
-                build your site from scratch, I mean it: that's how I learnt
-                to do it in the first place.
-              </p>
-
-              <p className="font-body text-gray-600 dark:text-white/60 leading-relaxed text-sm md:text-base">
-                Along the way I graduated Cum Laude, took 1st place at the
-                Vodacom Bursar Hackathon, came 3rd at GirlCode and completed
-                the Cell C Mentorship Programme. I'm also a Golden Key
-                International Honour Society member. I did all of that while
-                running Bellobeauty on the side, because apparently I don't do
-                things by halves.
-              </p>
-
-              <p className="font-body text-gray-600 dark:text-white/60 leading-relaxed text-sm md:text-base">
-                Girlies work too hard to have a boring website. Your brand's
-                gorgeous and your product's amazing, so your website should
-                look just as good. I build sites that look like <em>you</em>,
-                made for your business and nobody else's.
-              </p>
-
-              <p className="font-display font-bold text-[#FF2D87] text-base md:text-lg">
-                Girl power is kind of the whole point here. ★
-              </p>
-
-              <div className="pt-2">
-                <CTAButton href="/contact" data-testid="button-about-cta">
-                  Work With Me ★
-                </CTAButton>
-              </div>
-            </AnimatedSection>
-          </div>
-        </div>
-      </section>
+      <Chefs />
+      <Work />
+      <Recipe />
+      <Menu />
+      <FreeTaste />
     </main>
   );
 }

@@ -5,6 +5,7 @@ import { Footer } from "./components/Footer";
 import { WhatsAppBubble } from "./components/WhatsAppBubble";
 import { ThemeProvider } from "./lib/ThemeContext";
 import { lazy, Suspense, useEffect } from "react";
+import { SmoothScroll } from "./components/SmoothScroll";
 import { applyMeta } from "./seo";
 
 const Home = lazy(() => import("./pages/Home"));
@@ -16,18 +17,8 @@ const NotFound = lazy(() => import("./pages/not-found"));
 
 function PageLoader() {
   return (
-    <div className="min-h-screen bg-[#FFF8FB] dark:bg-[#0A0A0A] flex items-center justify-center">
-      <div className="text-[#FF2D87] font-bebas text-3xl tracking-widest animate-pulse">
-        Loading ★
-      </div>
-    </div>
+    <div className="min-h-[100dvh] bg-dp-bg" aria-busy="true" />
   );
-}
-
-function ScrollToTop() {
-  const [location] = useLocation();
-  useEffect(() => { window.scrollTo(0, 0); }, [location]);
-  return null;
 }
 
 // Keeps the tab title, description and canonical right when visitors move between pages.
@@ -54,9 +45,9 @@ function App({ ssrPath }: { ssrPath?: string } = {}) {
   return (
     <ThemeProvider>
       <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")} ssrPath={ssrPath}>
-        <div className="min-h-screen bg-[#FFF8FB] dark:bg-[#0A0A0A] flex flex-col transition-colors duration-300">
+        <div className="dp-grain flex min-h-[100dvh] flex-col bg-dp-bg text-dp-ink">
           <Navbar />
-          <ScrollToTop />
+          <SmoothScroll />
           <RouteMeta />
           <div className="flex-1">
             <Suspense fallback={<PageLoader />}>
