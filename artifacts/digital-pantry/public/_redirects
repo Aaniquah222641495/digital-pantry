@@ -7,5 +7,8 @@ https://thedigitalpantry.netlify.app/*  https://digitalpantry.co.za/:splat  301!
 /contact     /contact.html    200
 /privacy     /privacy.html    200
 
+# Browsers and crawlers ask for /favicon.ico by default.
+/favicon.ico  /favicon.png  200
+
 # Anything else: the prerendered 404 page with a real 404 status.
 /*           /404.html        404

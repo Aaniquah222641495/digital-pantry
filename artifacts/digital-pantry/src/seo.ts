@@ -6,7 +6,7 @@
 export const SITE_URL = "https://digitalpantry.co.za";
 export const SITE_NAME = "The Digital Pantry";
 export const LAST_UPDATED = "2026-10-24";
-const OG_IMAGE = `${SITE_URL}/opengraph.jpg`;
+const OG_IMAGE = `${SITE_URL}/og-card.jpg`; // 1200x630 link-preview card (WhatsApp, LinkedIn, X)
 // Email is the contact we publish to search engines and AI assistants (founder, 2026-10-24).
 // The founders' WhatsApp numbers stay on the pages for visitors but are left out of this data.
 const EMAIL = "thedigitalpantryza@gmail.com";
@@ -260,9 +260,10 @@ export function headHtml(m: PageMeta): string {
     `<meta property="og:description" content="${esc(m.description)}" />`,
     url ? `<meta property="og:url" content="${url}" />` : "",
     `<meta property="og:image" content="${OG_IMAGE}" />`,
-    `<meta property="og:image:width" content="1280" />`,
-    `<meta property="og:image:height" content="720" />`,
-    `<meta property="og:image:alt" content="The Digital Pantry: Coded in Pink. Built to Perform." />`,
+    `<meta property="og:image:type" content="image/jpeg" />`,
+    `<meta property="og:image:width" content="1200" />`,
+    `<meta property="og:image:height" content="630" />`,
+    `<meta property="og:image:alt" content="Aaniquah and Imaan at the Digital Pantry counter, with the line Coded in Pink. Built to Perform." />`,
     `<meta name="twitter:card" content="summary_large_image" />`,
     `<meta name="twitter:title" content="${esc(m.title)}" />`,
     `<meta name="twitter:description" content="${esc(m.description)}" />`,

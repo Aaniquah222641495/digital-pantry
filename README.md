@@ -52,7 +52,7 @@ NODE_ENV=production PORT=3000 BASE_PATH=/ pnpm --filter @workspace/digital-pantr
 
 - `_headers`: security headers (CSP and friends) and caching. If you add a new outside service (fonts, embeds, scripts), add its domain to the Content-Security-Policy or the browser will block it.
 - `_redirects`: clean URLs (`/pricing`) serve the prerendered `pricing.html`; anything else serves `404.html` with a real 404 status.
-- `opengraph.jpg` is the link preview image for every page.
+- `og-card.jpg` (1200x630) is the link preview card for every page (WhatsApp, LinkedIn, X). Give a replacement a new filename: WhatsApp caches previews by image URL.
 
 ## Releasing
 
