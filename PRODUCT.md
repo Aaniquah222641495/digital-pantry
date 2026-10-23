@@ -18,7 +18,7 @@ Every site is built from scratch by one developer, Aaniquah, a Cape Town softwar
 ## Operating Context
 - Pages: Home, Portfolio, Pricing, Contact, Privacy.
 - Visitors arrive from outreach emails, word of mouth and search, and compare packages before getting in touch.
-- React site hosted on Netlify. Live at https://thedigitalpantry.netlify.app.
+- React site hosted on Netlify. Live at https://digitalpantry.co.za.
 
 ## Capabilities and Constraints
 - Packages (once-off, ZAR): Starter R600, Standard R1 000, Premium R1 600, Pro R2 500. Retainer R120/month for small edits. Prices are read from `artifacts/digital-pantry/src/pages/Pricing.tsx`; that file is the source of truth and prices are never hard-coded elsewhere from memory.

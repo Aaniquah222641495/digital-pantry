@@ -3,12 +3,13 @@
 // browser (RouteMeta keeps the tab title and tags right when visitors click between pages).
 // Only state facts that are already on the site. Update `LAST_UPDATED` when content changes.
 
-export const SITE_URL = "https://thedigitalpantry.netlify.app";
+export const SITE_URL = "https://digitalpantry.co.za";
 export const SITE_NAME = "The Digital Pantry";
-export const LAST_UPDATED = "2026-10-22";
+export const LAST_UPDATED = "2026-10-24";
 const OG_IMAGE = `${SITE_URL}/opengraph.jpg`;
+// Email is the contact we publish to search engines and AI assistants (founder, 2026-10-24).
+// The founders' WhatsApp numbers stay on the pages for visitors but are left out of this data.
 const EMAIL = "thedigitalpantryza@gmail.com";
-const PHONE = "+27724111011";
 
 export interface PageMeta {
   path: string;
@@ -61,7 +62,6 @@ const business = {
   logo: `${SITE_URL}/images/logo-wordmark.webp`,
   image: OG_IMAGE,
   email: EMAIL,
-  telephone: PHONE,
   priceRange: "R600 - R2 500",
   currenciesAccepted: "ZAR",
   address: { "@type": "PostalAddress", addressLocality: "Cape Town", addressRegion: "Western Cape", addressCountry: "ZA" },
@@ -209,13 +209,13 @@ export const PAGES: PageMeta[] = [
     path: "/contact",
     title: "Contact: Get a Website Quote | The Digital Pantry",
     description:
-      "Get a quote or a free mock-up of your small business website. WhatsApp +27 72 411 1011 or email thedigitalpantryza@gmail.com. Cape Town, South Africa.",
+      "Email thedigitalpantryza@gmail.com for a quote or a free mock-up of your website, or use the enquiry form. Cape Town, South Africa.",
     jsonLd: [
       graph(
         { "@type": "ContactPage", name: "Contact The Digital Pantry", url: `${SITE_URL}/contact`, about: { "@id": ORG_ID } },
         {
           ...business,
-          contactPoint: { "@type": "ContactPoint", contactType: "sales", telephone: PHONE, email: EMAIL, availableLanguage: "English", areaServed: "ZA" },
+          contactPoint: { "@type": "ContactPoint", contactType: "sales", email: EMAIL, availableLanguage: "English", areaServed: "ZA" },
         },
         crumbs("Contact", "/contact"),
       ),

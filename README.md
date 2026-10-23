@@ -1,6 +1,6 @@
 # The Digital Pantry website
 
-Studio site for Digital Pantry Web Studio: portfolio, pricing and contact. Live at https://thedigitalpantry.netlify.app.
+Studio site for Digital Pantry Web Studio: portfolio, pricing and contact. Live at https://digitalpantry.co.za.
 
 ## What runs where
 

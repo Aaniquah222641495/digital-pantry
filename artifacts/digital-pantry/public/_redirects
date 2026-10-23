@@ -1,3 +1,6 @@
+# The old Netlify address forwards to the real domain (deploy previews have their own hosts, so they are unaffected).
+https://thedigitalpantry.netlify.app/*  https://digitalpantry.co.za/:splat  301!
+
 # Each page is a prerendered HTML file (scripts/prerender.mjs). Serve it at the clean URL with 200.
 /pricing     /pricing.html    200
 /portfolio   /portfolio.html  200

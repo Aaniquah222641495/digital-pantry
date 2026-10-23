@@ -3,7 +3,7 @@ const PHRASES = [
   "Built from scratch",
   "Cape Town",
   "Girl power",
-  "GirlCode Pan-African Hackathon winner 2026",
+  "Aaniquah: GirlCode Pan-African Hackathon winner 2026",
   "Women in STEM",
   "Cooked to order",
   "No boring templates",

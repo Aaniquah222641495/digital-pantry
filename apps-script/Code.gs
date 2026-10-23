@@ -19,7 +19,7 @@ const CONFIG = {
   // project, paste the Sheet's ID: the part of its URL between /d/ and /edit.
   SPREADSHEET_ID: '',
   SHEET_NAME: 'Leads',
-  SITE_URL: 'https://thedigitalpantry.netlify.app',
+  SITE_URL: 'https://digitalpantry.co.za',
   WHATSAPP_NUMBER: '27724111011',
   WHATSAPP_DISPLAY: '+27 72 411 1011',
   TIMEZONE: 'Africa/Johannesburg',
