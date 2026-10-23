@@ -219,23 +219,50 @@ function Chefs() {
 
       {/* Promises as colour blocks: blush, ink, butter. */}
       <div className="mt-5 grid gap-5 md:grid-cols-6">
-        <Reveal className="relative overflow-hidden rounded-[32px] bg-[#FDD2DE] p-8 text-[#161214] sm:p-10 md:col-span-4">
-          <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <h3 className="text-[clamp(1.8rem,3vw,2.6rem)] font-semibold leading-[1] tracking-[-0.04em]">You talk to the chefs.</h3>
-              <p className="mt-4 max-w-[40ch] leading-relaxed text-[#463E44]">
-                The two people on your calls are the two people making your site, from the first chat to launch day.
-              </p>
-            </div>
-            <div aria-hidden="true" className="flex shrink-0 -space-x-4">
-              <img src="/images/aaniquah.webp" alt="" width={600} height={600} loading="lazy" className="h-20 w-20 rotate-[-6deg] rounded-[20px] border-[3px] border-white bg-[#FFF7FA] object-contain" />
-              {IMAAN_AVATAR ? (
-                <img src={IMAAN_AVATAR} alt="" width={600} height={600} loading="lazy" className="h-20 w-20 rotate-[6deg] rounded-[20px] border-[3px] border-[var(--im-border)] object-contain" />
-              ) : (
-                <Monogram className="h-20 w-20 rotate-[6deg] rounded-[20px] border-[3px] border-[var(--im-border)] text-2xl" />
-              )}
-            </div>
+        {/* You talk to the chefs: an illustrative chat thread (not a real client conversation). */}
+        <Reveal className="dp-chat relative grid gap-8 overflow-hidden rounded-[32px] bg-[#FDD2DE] p-8 text-[#161214] sm:p-10 md:col-span-4 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+          <div aria-hidden="true" className="pointer-events-none absolute -bottom-24 -left-16 h-64 w-64 rounded-full bg-[radial-gradient(closest-side,#FFA7D2,transparent)]" />
+          <div className="relative">
+            <h3 className="text-[clamp(1.8rem,3vw,2.6rem)] font-semibold leading-[1] tracking-[-0.04em]">You talk to the chefs.</h3>
+            <p className="mt-4 max-w-[34ch] leading-relaxed text-[#463E44]">
+              The two people on your calls are the two people making your site, from the first chat to launch day.
+            </p>
+            <a
+              href="https://wa.me/27724111011"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-7 inline-flex h-11 items-center gap-2 rounded-full bg-[#161214] px-5 text-[14px] font-medium text-[#FFF7FA] transition-transform active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#161214]"
+            >
+              <span aria-hidden="true" className="h-2 w-2 rounded-full bg-[#25D366]" /> Chat to us on WhatsApp
+            </a>
           </div>
+
+          <ol aria-label="Example of how a chat with us goes" className="relative flex flex-col gap-3 rounded-[24px] bg-white/70 p-4 shadow-[0_24px_50px_-30px_rgba(179,47,104,0.6)] backdrop-blur sm:p-5">
+            <li className="dp-chat-msg flex justify-end" style={{ "--i": 0 } as CSSProperties}>
+              <p className="max-w-[80%] rounded-[18px] rounded-br-md bg-[#161214] px-4 py-2.5 text-[14px] leading-snug text-[#FFF7FA]">
+                Hi! Can you help with a website for my bakery?
+              </p>
+            </li>
+            <li className="dp-chat-msg flex items-end gap-2.5" style={{ "--i": 1 } as CSSProperties}>
+              <img src="/images/aaniquah.webp" alt="" width={600} height={600} loading="lazy" className="h-9 w-9 shrink-0 rounded-full border-2 border-white bg-[#FFF7FA] object-cover" />
+              <p className="max-w-[78%] rounded-[18px] rounded-bl-md bg-[#FFA7D2] px-4 py-2.5 text-[14px] leading-snug">
+                <span className="block text-[11px] font-semibold text-[#B32F68]">Aaniquah</span>
+                Yes! Tell us how you take orders and I'll handle the build.
+              </p>
+            </li>
+            <li className="dp-chat-msg flex items-end gap-2.5" style={{ "--i": 2 } as CSSProperties}>
+              <img src={IMAAN_AVATAR ?? "/images/imaan.webp"} alt="" width={600} height={600} loading="lazy" className="h-9 w-9 shrink-0 rounded-full border-2 border-[var(--im-border)] bg-white object-cover" />
+              <p className="max-w-[78%] rounded-[18px] rounded-bl-md bg-[var(--im-surface)] px-4 py-2.5 text-[14px] leading-snug text-[var(--im-text)]">
+                <span className="block text-[11px] font-semibold text-[var(--im-accent)]">Imaan</span>
+                And I'll make it look as good as your cakes.
+              </p>
+            </li>
+            <li className="dp-chat-msg flex items-center gap-1.5 pl-12 text-[#61575E]" style={{ "--i": 3 } as CSSProperties} aria-label="typing">
+              <span className="dp-typing h-1.5 w-1.5 rounded-full bg-current" />
+              <span className="dp-typing h-1.5 w-1.5 rounded-full bg-current [animation-delay:0.15s]" />
+              <span className="dp-typing h-1.5 w-1.5 rounded-full bg-current [animation-delay:0.3s]" />
+            </li>
+          </ol>
         </Reveal>
 
         {/* No handoffs: her design and her partner's code meet in the middle as the card scrolls in. */}
