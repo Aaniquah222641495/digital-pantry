@@ -66,7 +66,10 @@ export default function Portfolio() {
               </Reveal>
               <Reveal delay={0.1} className={`md:col-span-5 ${flip ? "md:order-1" : ""}`}>
                 <p className="flex items-center gap-2 text-[14px] text-dp-muted">
-                  <span className="rounded-full bg-[#2FB36A]/15 px-2.5 py-0.5 text-[12px] font-medium text-[#1F8A50] dark:text-[#5BD38E]">Live</span>
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-dp-line px-2.5 py-0.5 text-[12px] font-medium text-dp-ink">
+                    <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-[#2FB36A] shadow-[0_0_8px_#2FB36A]" />
+                    Live
+                  </span>
                   {c.kind}
                 </p>
                 <h2 id={`case-${i}`} className="mt-3 text-[clamp(2rem,3.4vw,3rem)] font-semibold tracking-[-0.04em]">

@@ -40,6 +40,8 @@
   --im-label: #D4BCC1;
   --im-accent: #FFA7D2;
   --im-hot: #FF5CA8;
+  --im-cta: #FFA7D2;
+  --im-cta-fg: #2A0A12;
   --im-silver: #DCD8E2;
   --im-glow: rgba(150, 32, 54, 0.45);
   --im-glow-strong: rgba(160, 36, 60, 0.55);
@@ -63,6 +65,8 @@
   --im-sky-a: rgba(155, 62, 143, 0.32);
   --im-sky-b: rgba(96, 44, 120, 0.3);
   --im-sky-pink: rgba(255, 92, 168, 0.1);
+  --im-cta: #E7A6D9;
+  --im-cta-fg: #120A13;
 }
 .dark {
   /* Night = Imaan's room. */
@@ -73,9 +77,9 @@
   --dp-ink: var(--im-text);
   --dp-muted: var(--im-label);
   --dp-accent: var(--im-accent);
-  --dp-cta-bg: var(--im-silver);
-  --dp-cta-fg: var(--im-bg);
-  --dp-glow: var(--im-glow);
+  --dp-cta-bg: var(--im-cta);
+  --dp-cta-fg: var(--im-cta-fg);
+  --dp-glow: rgba(255, 92, 168, 0.35);
   --dp-gold: var(--im-silver);
 }
 
