@@ -1,10 +1,13 @@
+import { useSideContact } from "../lib/contact";
+
 export function WhatsAppBubble() {
+  const c = useSideContact();
   return (
     <a
-      href="https://wa.me/27724111011"
+      href={c.waLink}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Chat on WhatsApp"
+      aria-label={`Chat with ${c.name} on WhatsApp`}
       className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 rounded-full shadow-lg transition-transform duration-200 hover:scale-110 active:scale-95"
       style={{ backgroundColor: "#25D366" }}
     >

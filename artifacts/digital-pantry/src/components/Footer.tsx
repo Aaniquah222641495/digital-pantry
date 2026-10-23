@@ -2,6 +2,7 @@ import { Link } from "wouter";
 import { Logo } from "./Navbar";
 import { MagneticButton } from "./MagneticButton";
 import { Reveal } from "./Reveal";
+import { useSideContact } from "../lib/contact";
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
@@ -12,6 +13,7 @@ const NAV_LINKS = [
 ];
 
 export function Footer() {
+  const contact = useSideContact();
   return (
     <footer className="relative overflow-hidden border-t border-dp-line">
       <div className="mx-auto max-w-[1320px] px-5 pb-10 pt-24 sm:px-8 md:pt-32">
@@ -41,8 +43,8 @@ export function Footer() {
           </nav>
 
           <div className="flex flex-col gap-2.5 text-[15px]">
-            <a href="https://wa.me/27724111011" className="w-fit text-dp-muted transition-colors duration-300 hover:text-dp-ink" data-testid="footer-link-whatsapp">
-              WhatsApp 072 411 1011
+            <a href={contact.waLink} className="w-fit text-dp-muted transition-colors duration-300 hover:text-dp-ink" data-testid="footer-link-whatsapp">
+              WhatsApp {contact.name} {contact.display}
             </a>
             <a href="mailto:thedigitalpantryza@gmail.com" className="w-fit text-dp-muted transition-colors duration-300 hover:text-dp-ink" data-testid="footer-link-email">
               thedigitalpantryza@gmail.com

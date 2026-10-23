@@ -12,6 +12,7 @@ import { HeroScene } from "../components/HeroScene";
 import { PantryShelf } from "../components/PantryShelf";
 import { Sticker, DAY, NIGHT } from "../components/Stickers";
 import { H2 } from "../lib/style";
+import { useSideContact } from "../lib/contact";
 
 // Imaan's pixel avatar is being made; until then her cards show a monogram.
 const IMAAN_AVATAR: string | null = "/images/imaan.webp";
@@ -153,6 +154,7 @@ function SeamBadge() {
 }
 
 function Chefs() {
+  const contact = useSideContact();
   return (
     <section aria-labelledby="chefs-heading" className="mx-auto max-w-[1320px] px-5 py-24 sm:px-8 md:py-32">
       <Reveal className="flex flex-wrap items-end justify-between gap-8">
@@ -228,12 +230,12 @@ function Chefs() {
               The two people on your calls are the two people making your site, from the first chat to launch day.
             </p>
             <a
-              href="https://wa.me/27724111011"
+              href={contact.waLink}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-7 inline-flex h-11 items-center gap-2 rounded-full bg-[#161214] px-5 text-[14px] font-medium text-[#FFF7FA] transition-transform active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#161214]"
             >
-              <span aria-hidden="true" className="h-2 w-2 rounded-full bg-[#25D366]" /> Chat to us on WhatsApp
+              <span aria-hidden="true" className="h-2 w-2 rounded-full bg-[#25D366]" /> WhatsApp {contact.name}
             </a>
           </div>
 

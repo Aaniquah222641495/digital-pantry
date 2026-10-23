@@ -4,14 +4,16 @@ import { CutoutWord } from "../components/CutoutWord";
 import { Reveal } from "../components/Reveal";
 import { LeadForm } from "../components/LeadForm";
 import { H1 } from "../lib/style";
+import { useSideContact } from "../lib/contact";
 import { Sticker, DAY, NIGHT } from "../components/Stickers";
 
-const QUICK_CONTACTS = [
-  { icon: MessageCircle, label: "WhatsApp", sub: "072 411 1011, fastest reply", href: "https://wa.me/27724111011", testId: "button-contact-whatsapp", iconCls: "bg-[#25D366]/15 text-[#1F8A50] dark:text-[#5BD38E]" },
-  { icon: Mail, label: "Email", sub: "thedigitalpantryza@gmail.com", href: "mailto:thedigitalpantryza@gmail.com", testId: "button-contact-email", iconCls: "bg-dp-soft text-dp-accent" },
-];
 
 export default function Contact() {
+  const contact = useSideContact();
+  const QUICK_CONTACTS = [
+    { icon: MessageCircle, label: `WhatsApp ${contact.name}`, sub: `${contact.display}, fastest reply`, href: contact.waLink, testId: "button-contact-whatsapp", iconCls: "bg-[#25D366]/15 text-[#1F8A50] dark:text-[#5BD38E]" },
+    { icon: Mail, label: "Email", sub: contact.email, href: `mailto:${contact.email}`, testId: "button-contact-email", iconCls: "bg-dp-soft text-dp-accent" },
+  ];
   return (
     <main>
       <section className="relative isolate overflow-hidden">
