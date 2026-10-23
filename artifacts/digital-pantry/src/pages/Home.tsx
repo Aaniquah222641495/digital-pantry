@@ -69,7 +69,7 @@ const WORK = [
 const RECIPE = [
   { img: "/images/recipe.webp", title: "Read the recipe", body: "We learn your business, your customers and how you sell, then design a free first look." },
   { img: "/images/cooking.webp", title: "Cook from scratch", body: "Clean code, mobile first and fast. No templates, nothing you don't need." },
-  { img: "/images/mascot.webp", title: "Served fresh", body: "Live on your own domain and ready for orders. Most sites take 5 to 7 business days." },
+  { img: "/images/aaniquah.webp", title: "Served fresh", body: "Live on your own domain and ready for orders. Most sites take 5 to 7 business days." },
 ] as const;
 
 const MENU = [
@@ -132,7 +132,7 @@ function Hero() {
           <div className="grid grid-cols-2 items-end gap-4 sm:gap-6">
             <figure className="rotate-[-3deg] rounded-[28px] border-[3px] border-white bg-[#FDD2DE] p-3 shadow-[0_30px_60px_-30px_rgba(179,47,104,0.5)] transition-transform duration-700 ease-out hover:rotate-0">
               <img
-                src="/images/mascot.webp"
+                src="/images/aaniquah.webp"
                 alt="Aaniquah's pixel avatar coding at her desk"
                 width={600}
                 height={600}
@@ -211,7 +211,7 @@ function Chefs() {
               {/* Pixel portrait, tucked into the top corner beside the headline */}
               <div className={`pointer-events-none absolute right-8 top-8 w-24 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-1.5 sm:right-12 sm:top-12 sm:w-36 md:w-44 ${c.light ? "rotate-[-4deg] md:right-24 group-hover:rotate-0" : "rotate-[4deg] group-hover:rotate-0"}`}>
                 {c.light ? (
-                  <img src="/images/mascot.webp" alt="" width={600} height={600} loading="lazy" className="aspect-square w-full rounded-[22px] border-[3px] border-white bg-[#FFF7FA] object-contain shadow-[0_24px_50px_-24px_rgba(179,47,104,0.55)]" />
+                  <img src="/images/aaniquah.webp" alt="" width={600} height={600} loading="lazy" className="aspect-square w-full rounded-[22px] border-[3px] border-white bg-[#FFF7FA] object-contain shadow-[0_24px_50px_-24px_rgba(179,47,104,0.55)]" />
                 ) : IMAAN_AVATAR ? (
                   <img src={IMAAN_AVATAR} alt="" width={600} height={600} loading="lazy" className="aspect-square w-full rounded-[22px] border-[3px] border-[var(--im-border)] object-contain" />
                 ) : (
@@ -250,7 +250,7 @@ function Chefs() {
               </p>
             </div>
             <div aria-hidden="true" className="flex shrink-0 -space-x-4">
-              <img src="/images/mascot.webp" alt="" width={600} height={600} loading="lazy" className="h-20 w-20 rotate-[-6deg] rounded-[20px] border-[3px] border-white bg-[#FFF7FA] object-contain" />
+              <img src="/images/aaniquah.webp" alt="" width={600} height={600} loading="lazy" className="h-20 w-20 rotate-[-6deg] rounded-[20px] border-[3px] border-white bg-[#FFF7FA] object-contain" />
               {IMAAN_AVATAR ? (
                 <img src={IMAAN_AVATAR} alt="" width={600} height={600} loading="lazy" className="h-20 w-20 rotate-[6deg] rounded-[20px] border-[3px] border-[var(--im-border)] object-contain" />
               ) : (
