@@ -390,3 +390,17 @@ html.dp-theme-shift, html.dp-theme-shift * {
   @keyframes dp-spin { to { transform: rotate(360deg); } }
   .dp-spin { animation: dp-spin 22s linear infinite; transform-origin: 50% 50%; }
 }
+
+/* Night is Imaan's side: her mouse is silver (chrome) with a bubblegum wheel. */
+@media (pointer: fine) {
+  html.dark, html.dark body {
+    cursor: url("/cursors/mouse-night.png") 5 5, auto;
+    cursor: -webkit-image-set(url("/cursors/mouse-night.png") 1x, url("/cursors/mouse-night@2x.png") 2x) 5 5, auto;
+    cursor: image-set(url("/cursors/mouse-night.png") 1x, url("/cursors/mouse-night@2x.png") 2x) 5 5, auto;
+  }
+  html.dark :is(a, button, [role="button"], [role="radio"], summary, label[for], select) {
+    cursor: url("/cursors/mouse-night-pointer.png") 5 5, pointer;
+    cursor: -webkit-image-set(url("/cursors/mouse-night-pointer.png") 1x, url("/cursors/mouse-night-pointer@2x.png") 2x) 5 5, pointer;
+    cursor: image-set(url("/cursors/mouse-night-pointer.png") 1x, url("/cursors/mouse-night-pointer@2x.png") 2x) 5 5, pointer;
+  }
+}
