@@ -99,7 +99,9 @@ function Hero() {
       />
       <Sprinkles className="-z-10 opacity-70 dark:opacity-55" />
       <div className="mx-auto grid min-h-[92dvh] max-w-[1320px] items-center gap-14 px-5 pb-14 pt-28 sm:px-8 md:grid-cols-[0.95fr_1.05fr] md:gap-12 md:pt-24">
-        <div>
+        <div className="relative">
+          {/* Sprinkles shower onto the headline once on load */}
+          <Sprinkles mode="burst" count={55} className="-inset-x-6 -top-10 bottom-1/3 !h-auto" />
           <p className="dp-rise dp-tag mb-6 inline-flex items-center gap-2 rounded-full border border-dp-line px-3.5 py-1.5 text-[13px] text-dp-muted" style={rise(0)}>
             <span aria-hidden="true" className="text-dp-accent">★</span> A women-led web studio in Cape Town
           </p>

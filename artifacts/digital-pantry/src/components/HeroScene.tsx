@@ -1,4 +1,5 @@
-import type { CSSProperties } from "react";
+import { useRef, type CSSProperties } from "react";
+import { motion, useMotionTemplate, useMotionValue, useReducedMotion, useSpring, useTransform } from "framer-motion";
 import { Sprinkles } from "./Sprinkles";
 
 // The two chefs at one counter (pixel art), brought to life with light CSS effects layered on
@@ -16,35 +17,65 @@ const STARS: [number, number, number][] = [
 const at = (left: number, top: number, extra: CSSProperties = {}) => ({ left: `${left}%`, top: `${top}%`, ...extra }) as CSSProperties;
 
 export function HeroScene() {
+  const ref = useRef<HTMLDivElement>(null);
+  const reduce = useReducedMotion();
+  const mx = useMotionValue(0.5);
+  const my = useMotionValue(0.4);
+  const rx = useSpring(useTransform(my, [0, 1], [6, -6]), { stiffness: 110, damping: 18 });
+  const ry = useSpring(useTransform(mx, [0, 1], [-8, 8]), { stiffness: 110, damping: 18 });
+  const lx = useTransform(mx, (v) => `${v * 100}%`);
+  const ly = useTransform(my, (v) => `${v * 100}%`);
+  const spot = useMotionTemplate`radial-gradient(420px circle at ${lx} ${ly}, rgba(255,255,255,0.22), transparent 60%)`;
+
+  const onMove = (e: React.PointerEvent) => {
+    if (reduce || e.pointerType !== "mouse" || !ref.current) return;
+    const r = ref.current.getBoundingClientRect();
+    mx.set((e.clientX - r.left) / r.width);
+    my.set((e.clientY - r.top) / r.height);
+  };
+  const onLeave = () => {
+    mx.set(0.5);
+    my.set(0.4);
+  };
+
   return (
-    <figure className="dp-scene relative isolate w-full overflow-hidden rounded-[30px] border-[3px] border-white bg-[#FCE8F0] shadow-[0_40px_90px_-40px_rgba(179,47,104,0.55)] dark:border-[var(--im-border)] dark:shadow-[0_40px_90px_-30px_rgba(255,92,168,0.35)]">
-      <img
-        src="/images/hero-scene.webp"
-        srcSet="/images/hero-scene-900.webp 900w, /images/hero-scene.webp 1600w"
-        sizes="(min-width: 768px) 55vw, 100vw"
-        width={1600}
-        height={830}
-        alt="Aaniquah and Imaan at one kitchen counter: Aaniquah on the pink daytime side with a mixing bowl and laptop, Imaan on the burgundy night side tasting from a silver spoon, under a Digital Pantry sign"
-        fetchPriority="high"
-        className="dp-scene-img block aspect-[1600/830] w-full object-cover"
-      />
+    <div ref={ref} onPointerMove={onMove} onPointerLeave={onLeave} className="[perspective:1400px]">
+      <motion.figure
+        style={{ rotateX: rx, rotateY: ry }}
+        className="dp-scene relative isolate w-full overflow-hidden rounded-[30px] border-[3px] border-white bg-[#FCE8F0] shadow-[0_40px_90px_-40px_rgba(179,47,104,0.55)] dark:border-[var(--im-border)] dark:shadow-[0_40px_90px_-30px_rgba(255,92,168,0.35)]">
+        <img
+          src="/images/hero-scene.webp"
+          srcSet="/images/hero-scene-900.webp 900w, /images/hero-scene.webp 1600w"
+          sizes="(min-width: 768px) 55vw, 100vw"
+          width={1600}
+          height={830}
+          alt="Aaniquah and Imaan at one kitchen counter: Aaniquah on the pink daytime side with a mixing bowl and laptop, Imaan on the burgundy night side tasting from a silver spoon, under a Digital Pantry sign"
+          fetchPriority="high"
+          className="dp-scene-img block aspect-[1600/830] w-full object-cover"
+        />
 
-      {/* Day/Night: the side that isn't "on" softens a little */}
-      <span aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-0 w-1/2 bg-[#FFF7FA]/15 transition-colors duration-700 dark:bg-transparent" />
-      <span aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 w-1/2 bg-transparent transition-colors duration-700 dark:bg-[#150708]/25" />
+        {/* Side lighting: Day = warm sunlight on Aaniquah's half; Night = Aaniquah's half dims,
+            moonlight and pink neon on Imaan's. Cross-fades when the founders switch flips. */}
+        <span aria-hidden="true" className="dp-light-day pointer-events-none absolute inset-0" />
+        <span aria-hidden="true" className="dp-light-night pointer-events-none absolute inset-0" />
+        {/* Light sweep that runs across the counter whenever the side changes */}
+        <span aria-hidden="true" className="dp-sweep pointer-events-none absolute inset-0 overflow-hidden"><span /></span>
+        {/* Soft spotlight that follows the mouse */}
+        <motion.span aria-hidden="true" style={{ backgroundImage: spot }} className="pointer-events-none absolute inset-0 mix-blend-soft-light" />
 
-      <span aria-hidden="true" className="dp-sun absolute h-[16%] w-[11%] -translate-x-1/2 -translate-y-1/2 rounded-full" style={at(11.2, 16)} />
-      {STARS.map(([l, t, d]) => (
-        <span key={`${l}-${t}`} aria-hidden="true" className="dp-twinkle absolute h-[3.2%] w-[1.8%] -translate-x-1/2 -translate-y-1/2" style={at(l, t, { "--d": `${d}s` } as CSSProperties)} />
-      ))}
-      <span aria-hidden="true" className="dp-sign-glow absolute h-[22%] w-[44%] -translate-x-1/2 -translate-y-1/2 rounded-full" style={at(50.6, 42.6)} />
-      <span aria-hidden="true" className="dp-screen-shine absolute overflow-hidden" style={at(42.6, 62.8, { width: "15.6%", height: "16.4%" })}>
-        <span />
-      </span>
-      {[0, 1.3, 2.6].map((d) => (
-        <span key={d} aria-hidden="true" className="dp-steam absolute h-[9%] w-[1.6%] -translate-x-1/2 rounded-full" style={at(31 + d, 66, { "--d": `${d}s` } as CSSProperties)} />
-      ))}
-      <Sprinkles count={16} className="opacity-80" />
-    </figure>
+        <span aria-hidden="true" className="dp-sun absolute h-[16%] w-[11%] -translate-x-1/2 -translate-y-1/2 rounded-full" style={at(11.2, 16)} />
+        {STARS.map(([l, t, d]) => (
+          <span key={`${l}-${t}`} aria-hidden="true" className="dp-twinkle absolute h-[3.2%] w-[1.8%] -translate-x-1/2 -translate-y-1/2" style={at(l, t, { "--d": `${d}s` } as CSSProperties)} />
+        ))}
+        <span aria-hidden="true" className="dp-sign-glow absolute h-[22%] w-[44%] -translate-x-1/2 -translate-y-1/2 rounded-full" style={at(50.6, 42.6)} />
+        <span aria-hidden="true" className="dp-screen-shine absolute overflow-hidden" style={at(42.6, 62.8, { width: "15.6%", height: "16.4%" })}>
+          <span />
+        </span>
+        {[0, 1.3, 2.6].map((d) => (
+          <span key={d} aria-hidden="true" className="dp-steam absolute h-[9%] w-[1.6%] -translate-x-1/2 rounded-full" style={at(31 + d, 66, { "--d": `${d}s` } as CSSProperties)} />
+        ))}
+        <Sprinkles count={16} className="opacity-80" />
+      </motion.figure>
+    </div>
   );
 }

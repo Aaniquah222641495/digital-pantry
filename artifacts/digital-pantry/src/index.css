@@ -621,3 +621,14 @@ html.dark body {
     animation-delay: var(--d, 0s), calc(var(--d, 0s) + 1.2s);
   }
 }
+
+/* Hero side lighting + switch sweep (components/HeroScene.tsx) */
+.dp-light-day { background: radial-gradient(70% 90% at 12% 10%, rgba(255, 214, 120, 0.28), transparent 60%), linear-gradient(90deg, transparent 50%, rgba(255, 247, 250, 0.18) 50%); transition: opacity 0.9s var(--ease-out-expo); }
+.dp-light-night { opacity: 0; background: linear-gradient(90deg, rgba(14, 3, 6, 0.5) 0 50%, transparent 50%), radial-gradient(55% 70% at 88% 18%, rgba(220, 216, 226, 0.28), transparent 60%), radial-gradient(40% 30% at 50% 43%, rgba(255, 92, 168, 0.35), transparent 70%); transition: opacity 0.9s var(--ease-out-expo); }
+.dark .dp-light-day { opacity: 0; }
+.dark .dp-light-night { opacity: 1; }
+.dp-sweep > span { position: absolute; top: -10%; bottom: -10%; left: -40%; width: 35%; transform: skewX(-18deg); background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.55), transparent); opacity: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes dp-sweep-kf { 0% { left: -40%; opacity: 0; } 20% { opacity: 1; } 100% { left: 120%; opacity: 0; } }
+  html.dp-theme-shift .dp-sweep > span { animation: dp-sweep-kf 0.8s var(--ease-out-expo); }
+}
