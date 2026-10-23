@@ -15,7 +15,7 @@ import { H2 } from "../lib/style";
 import { useSideContact } from "../lib/contact";
 
 // Imaan's pixel avatar is being made; until then her cards show a monogram.
-const IMAAN_AVATAR: string | null = "/images/imaan.webp";
+const IMAAN_AVATAR: string | null = "/images/imaan-cut.webp";
 
 
 // Founders framed the way premium studios do it: two halves of one practice, what each
@@ -189,13 +189,13 @@ function Chefs() {
                 <span aria-hidden="true">{c.light ? "☀" : "☾"}</span> {c.side}
               </span>
 
-              <p className={`mt-8 max-w-[9ch] text-[clamp(2.6rem,5vw,4.5rem)] font-semibold leading-[0.95] tracking-[-0.05em] ${t.accent}`}>{c.owns}.</p>
+              <p className={`mt-8 max-w-[9ch] pr-28 text-[clamp(2.6rem,5vw,4.5rem)] sm:pr-0 sm:max-w-[calc(100%-10rem)] md:max-w-[calc(100%-12rem)] font-semibold leading-[0.95] tracking-[-0.05em] ${t.accent}`}>{c.owns}.</p>
               {/* Pixel portrait, tucked into the top corner beside the headline */}
               <div className={`pointer-events-none absolute right-8 top-8 w-24 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-1.5 sm:right-12 sm:top-12 sm:w-36 md:w-44 ${c.light ? "rotate-[-4deg] md:right-24 group-hover:rotate-0" : "rotate-[4deg] group-hover:rotate-0"}`}>
                 {c.light ? (
                   <img src="/images/aaniquah.webp" alt="" width={600} height={600} loading="lazy" className="aspect-square w-full rounded-[22px] border-[3px] border-white bg-[#FFF7FA] object-contain shadow-[0_24px_50px_-24px_rgba(179,47,104,0.55)]" />
                 ) : IMAAN_AVATAR ? (
-                  <img src={IMAAN_AVATAR} alt="" width={600} height={600} loading="lazy" className="aspect-square w-full rounded-[22px] border-[3px] border-[var(--im-border)] object-contain" />
+                  <img src={IMAAN_AVATAR} alt="" width={600} height={600} loading="lazy" className="aspect-square w-full rounded-[22px] border-[3px] border-[var(--im-border)] bg-[var(--im-soft)] object-contain" />
                 ) : (
                   <Monogram className="aspect-square w-full rounded-[22px] border-[3px] border-[var(--im-border)] !bg-[var(--im-soft)] text-[clamp(1.8rem,3.4vw,3rem)]" />
                 )}
@@ -255,7 +255,7 @@ function Chefs() {
               </p>
             </li>
             <li className="dp-chat-msg flex items-end gap-2.5" style={{ "--i": 2 } as CSSProperties}>
-              <img src={IMAAN_AVATAR ?? "/images/imaan.webp"} alt="" width={600} height={600} loading="lazy" className="h-9 w-9 shrink-0 rounded-full border-2 border-[var(--im-border)] bg-white object-cover" />
+              <img src={IMAAN_AVATAR ?? "/images/imaan-cut.webp"} alt="" width={600} height={600} loading="lazy" className="h-9 w-9 shrink-0 rounded-full border-2 border-[var(--im-border)] bg-[var(--im-soft)] object-cover" />
               <p className="max-w-[78%] rounded-[18px] rounded-bl-md bg-[var(--im-surface)] px-4 py-2.5 text-[14px] leading-snug text-[var(--im-text)]">
                 <span className="block text-[11px] font-semibold text-[var(--im-accent)]">Imaan</span>
                 And I'll make it look as good as your cakes.
