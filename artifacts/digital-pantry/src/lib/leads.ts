@@ -41,11 +41,17 @@ export function interestFromQuery(search: string): Interest | undefined {
   return raw ? INTEREST_ALIASES[raw] : undefined;
 }
 
-/** South African numbers: 0XX XXX XXXX, +27 XX XXX XXXX or 27XXXXXXXXX. Returns +27XXXXXXXXX. */
+/**
+ * South African numbers: 0XX XXX XXXX, +27 XX XXX XXXX or 27XXXXXXXXX. Returns +27XXXXXXXXX.
+ * International clients: +<country code><number> or 00<country code><number>, 8 to 15 digits. Returns +<digits>.
+ * Keep in step with the phone check in validate_ (apps-script/Code.gs).
+ */
 export function normalisePhone(input: string): string | null {
   const digits = input.replace(/[\s\-().]/g, "");
-  const m = /^(?:\+27|0027|27|0)([1-9]\d{8})$/.exec(digits);
-  return m ? `+27${m[1]}` : null;
+  const za = /^(?:\+27|0027|27|0)([1-9]\d{8})$/.exec(digits);
+  if (za) return `+27${za[1]}`;
+  const intl = /^(?:\+|00)([1-9]\d{7,14})$/.exec(digits);
+  return intl ? `+${intl[1]}` : null;
 }
 
 export const leadSchema = z.object({
@@ -54,14 +60,14 @@ export const leadSchema = z.object({
     .string()
     .trim()
     .min(1, "Please enter your phone number")
-    .refine((v) => normalisePhone(v) !== null, "Use a South African number, like 072 411 1011 or +27 72 411 1011"),
+    .refine((v) => normalisePhone(v) !== null, "Use a number like 072 411 1011, or +44 20 7946 0000 from abroad"),
   email: z
     .string()
     .trim()
     .min(1, "Please enter your email")
     .max(LIMITS.email, "That email is too long")
     .email("That email doesn't look right"),
-  interest: z.enum(INTEREST_VALUES, { errorMap: () => ({ message: "Pick what you're interested in" }) }),
+  interest: z.enum(INTEREST_VALUES, { error: "Pick what you're interested in" }),
   businessName: z
     .string()
     .trim()

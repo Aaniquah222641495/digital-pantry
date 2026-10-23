@@ -166,8 +166,11 @@ function validate_(d) {
   const source = /^[a-z0-9-]{1,40}$/.test(String(d.source || '')) ? String(d.source) : 'unknown';
 
   const digits = clean_(d.phone, 40, true).replace(/[\s\-().]/g, '');
-  const m = /^(?:\+27|0027|27|0)([1-9]\d{8})$/.exec(digits);
-  const phone = m ? '+27' + m[1] : '';
+  // South African numbers become +27...; international ones (+ or 00, 8 to 15 digits) keep their country code.
+  // Keep in step with normalisePhone in src/lib/leads.ts.
+  const za = /^(?:\+27|0027|27|0)([1-9]\d{8})$/.exec(digits);
+  const intl = /^(?:\+|00)([1-9]\d{7,14})$/.exec(digits);
+  const phone = za ? '+27' + za[1] : intl ? '+' + intl[1] : '';
 
   const ok =
     name.length >= 2 && name.length <= LIMITS.name &&
