@@ -632,3 +632,25 @@ html.dark body {
   @keyframes dp-sweep-kf { 0% { left: -40%; opacity: 0; } 20% { opacity: 1; } 100% { left: 120%; opacity: 0; } }
   html.dp-theme-shift .dp-sweep > span { animation: dp-sweep-kf 0.8s var(--ease-out-expo); }
 }
+
+/* Framework-free motion (2026-10-23 launch check): pointer variables from lib/pointer.ts. */
+.dp-magnet { transform: translate3d(calc(var(--px, 0) * 6px), calc(var(--py, 0) * 5px), 0); transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.5s, border-color 0.5s; }
+.dp-tilt-target { transform: rotateX(calc(var(--py, 0) * -5deg)) rotateY(calc(var(--px, 0) * 7deg)); transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1); will-change: transform; }
+.dp-spotlight { background: radial-gradient(420px circle at calc((var(--px, 0) + 1) * 50%) calc((var(--py, -0.2) + 1) * 50%), rgba(255, 255, 255, 0.22), transparent 60%); }
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes dp-menu-fade { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes dp-menu-rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+  .dp-menu-in { animation: dp-menu-fade 0.3s ease both; }
+  .dp-menu-item { animation: dp-menu-rise 0.5s cubic-bezier(0.16, 1, 0.3, 1) both; }
+}
+/* Device frames parallax: scroll-driven where supported (Chrome, Edge, Safari 26), static elsewhere. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    @keyframes dp-par-phone { from { translate: 0 var(--par-y); } to { translate: 0 calc(var(--par-y) * -1); } }
+    @keyframes dp-par-browser { from { translate: 0 20px; } to { translate: 0 -20px; } }
+    .dp-par { --par-y: 24px; }
+    @media (min-width: 768px) { .dp-par { --par-y: 70px; } }
+    .dp-par .dp-par-phone { animation: dp-par-phone linear both; animation-timeline: view(); }
+    .dp-par .dp-par-browser { animation: dp-par-browser linear both; animation-timeline: view(); }
+  }
+}

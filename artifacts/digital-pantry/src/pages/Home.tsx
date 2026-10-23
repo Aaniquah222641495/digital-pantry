@@ -97,7 +97,7 @@ function Hero() {
         aria-hidden="true"
         className="pointer-events-none absolute -right-[20%] -top-[30%] -z-10 h-[90vh] w-[70vw] rounded-full bg-[radial-gradient(closest-side,var(--dp-glow),transparent)] blur-2xl"
       />
-      <Sprinkles className="-z-10 opacity-70 dark:opacity-55" />
+      <Sprinkles count={28} className="-z-10 opacity-70 dark:opacity-55" />
       <div className="mx-auto grid min-h-[92dvh] max-w-[1320px] items-center gap-14 px-5 pb-14 pt-28 sm:px-8 md:grid-cols-[0.95fr_1.05fr] md:gap-12 md:pt-24">
         <div className="relative">
           {/* Sprinkles shower onto the headline once on load */}
@@ -250,7 +250,7 @@ function Chefs() {
             <li className="dp-chat-msg flex items-end gap-2.5" style={{ "--i": 1 } as CSSProperties}>
               <img src="/images/aaniquah.webp" alt="" width={600} height={600} loading="lazy" className="h-9 w-9 shrink-0 rounded-full border-2 border-white bg-[#FFF7FA] object-cover" />
               <p className="max-w-[78%] rounded-[18px] rounded-bl-md bg-[#FFA7D2] px-4 py-2.5 text-[14px] leading-snug">
-                <span className="block text-[11px] font-semibold text-[#B32F68]">Aaniquah</span>
+                <span className="block text-[11px] font-semibold text-[#7A1F45]">Aaniquah</span>
                 Yes! Tell us how you take orders and I'll handle the build.
               </p>
             </li>
@@ -282,7 +282,7 @@ function Chefs() {
         </Reveal>
 
         <Reveal delay={0.12} className="relative overflow-hidden rounded-[32px] bg-[#FFD43B] p-8 text-[#161214] sm:p-12 md:col-span-6">
-          <Sprinkles count={34} className="opacity-90" />
+          <Sprinkles count={20} className="opacity-90" />
           <div className="relative grid items-end gap-6 md:grid-cols-[1.4fr_1fr]">
             <h3 className="text-[clamp(2.2rem,4.6vw,4rem)] font-semibold leading-[0.98] tracking-[-0.05em]">
               Women-led. Made from <CutoutWord word="SCRATCH" tone="on-yellow" />
@@ -305,7 +305,7 @@ function Work() {
           <h2 id="work-heading" className={H2}>
             Fresh out the <CutoutWord word="KITCHEN" />
           </h2>
-          <Link href="/portfolio" className="group inline-flex items-center gap-1.5 text-[15px] text-dp-muted transition-colors hover:text-dp-ink">
+          <Link href="/portfolio" className="group inline-flex min-h-11 items-center gap-1.5 text-[15px] text-dp-muted transition-colors hover:text-dp-ink">
             All our work
             <ArrowUpRight size={16} className="transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
           </Link>
@@ -336,7 +336,7 @@ function Work() {
                     href={w.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group mt-9 inline-flex items-center gap-1.5 text-[15px] font-medium text-dp-ink underline decoration-dp-line underline-offset-[6px] transition-colors hover:decoration-dp-accent"
+                    className="group mt-7 inline-flex min-h-11 items-center gap-1.5 text-[15px] font-medium text-dp-ink underline decoration-dp-line underline-offset-[6px] transition-colors hover:decoration-dp-accent"
                   >
                     Visit the live site
                     <ArrowUpRight size={16} className="transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
@@ -396,7 +396,7 @@ function Recipe() {
 function Menu() {
   return (
     <section aria-labelledby="menu-heading" className="relative border-t border-dp-line">
-      <Sticker day={DAY.donut} night={NIGHT.mug} size={64} r={-12} d={0.4} style={{ right: "6%", top: "9%" }} />
+      <Sticker day={DAY.donut} night={NIGHT.mug} size={64} r={-12} d={0.4} style={{ right: "6%", top: "24px" }} />
       <div className="mx-auto max-w-[1320px] px-5 py-24 sm:px-8 md:py-32">
         <Reveal className="flex flex-wrap items-end justify-between gap-6">
           <div>
@@ -405,7 +405,7 @@ function Menu() {
             </h2>
             <p className="mt-5 max-w-[40ch] text-lg leading-relaxed text-dp-muted">Clear prices. No hidden fees. Pick a jar to ask about it.</p>
           </div>
-          <Link href="/pricing" className="group inline-flex items-center gap-1.5 text-[15px] text-dp-muted transition-colors hover:text-dp-ink" data-testid="button-pricing-preview-cta">
+          <Link href="/pricing" className="group inline-flex min-h-11 items-center gap-1.5 text-[15px] text-dp-muted transition-colors hover:text-dp-ink" data-testid="button-pricing-preview-cta">
             See full packages
             <ArrowUpRight size={16} className="transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
           </Link>

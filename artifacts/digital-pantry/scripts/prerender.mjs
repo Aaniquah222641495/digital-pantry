@@ -1,7 +1,7 @@
 // Runs after `vite build`. Saves every page as finished HTML so search engines and AI
 // crawlers (most of which don't run JavaScript) can read the content, titles and
 // structured data. React then attaches to this HTML in the browser (hydrateRoot).
-import { readFile, writeFile, rm } from "node:fs/promises";
+import { readFile, writeFile, rm, readdir } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
@@ -17,6 +17,15 @@ if (!template.includes("<!--seo-->") || !template.includes('<div id="root"></div
   throw new Error("index.html is missing the <!--seo--> marker or the empty #root div");
 }
 
+// Preload the fonts used at the top of every page (body sans and the pixel lettering), so text
+// paints in its final font and doesn't jump when the font arrives (layout shift).
+const assets = await readdir(path.join(out, "assets"));
+const preloads = [/^geist-latin-wght-normal-.*\.woff2$/, /^jersey-10-latin-400-normal-.*\.woff2$/]
+  .map((re) => assets.find((f) => re.test(f)))
+  .filter(Boolean)
+  .map((f) => `<link rel="preload" href="/assets/${f}" as="font" type="font/woff2" crossorigin>`)
+  .join("\n    ");
+
 const fileFor = (p) => (p === "/" ? "index.html" : p === NOT_FOUND.path ? "404.html" : `${p.slice(1)}.html`);
 
 for (const page of [...PAGES, NOT_FOUND]) {
@@ -25,12 +34,12 @@ for (const page of [...PAGES, NOT_FOUND]) {
   if (body.includes("<script")) throw new Error(`Inline script in ${page.path}: it would break the CSP`);
   if (page.path === "/pricing") {
     // Guard: structured-data prices must match what the page shows.
-    for (const price of ["R600", "R1 000", "R1 600", "R2 500", "R120"]) {
+    for (const price of ["R600", "R1 000", "R1 600", "R2 500", "R120", "$450", "$750", "$1 200", "$1 800", "R8 000", "$90"]) {
       if (!body.includes(price)) throw new Error(`Pricing page no longer shows ${price}: update src/seo.ts and public/pricing.md`);
     }
   }
   const html = template
-    .replace(/<!--seo-->[\s\S]*?<!--\/seo-->/, headHtml(page))
+    .replace(/<!--seo-->[\s\S]*?<!--\/seo-->/, `${preloads}\n    ${headHtml(page)}`)
     .replace('<div id="root"></div>', `<div id="root">${body}</div>`);
   await writeFile(path.join(out, fileFor(page.path)), html);
   console.log(`prerendered ${page.path.padEnd(11)} -> ${fileFor(page.path)} (${Math.round(body.length / 1024)} KB)`);

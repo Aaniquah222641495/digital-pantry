@@ -1,11 +1,9 @@
-import { motion, useReducedMotion } from "framer-motion";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "../lib/ThemeContext";
 
 // The light/dark switch is the founders switch: Day is Aaniquah's side, Night is Imaan's.
 export function FounderSwitch({ compact = false }: { compact?: boolean }) {
   const { theme, toggle } = useTheme();
-  const reduce = useReducedMotion();
   const sides = [
     { key: "light", name: "Aaniquah", Icon: Sun, label: "Day: Aaniquah's side" },
     { key: "dark", name: "Imaan", Icon: Moon, label: "Night: Imaan's side" },
@@ -32,13 +30,7 @@ export function FounderSwitch({ compact = false }: { compact?: boolean }) {
               compact ? "w-9 justify-center" : "px-3"
             } ${active ? "text-dp-cta-fg" : "text-dp-muted hover:text-dp-ink"}`}
           >
-            {active && (
-              <motion.span
-                layoutId={compact ? "founder-thumb-compact" : "founder-thumb"}
-                transition={reduce ? { duration: 0 } : { type: "spring", stiffness: 380, damping: 32 }}
-                className="absolute inset-0 -z-10 rounded-full bg-dp-cta"
-              />
-            )}
+            <span aria-hidden="true" className={`absolute inset-0 -z-10 rounded-full bg-dp-cta transition-[opacity,transform] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${active ? "scale-100 opacity-100" : "scale-75 opacity-0"}`} />
             <Icon size={14} strokeWidth={2} aria-hidden="true" />
             {!compact && <span>{name}</span>}
           </button>

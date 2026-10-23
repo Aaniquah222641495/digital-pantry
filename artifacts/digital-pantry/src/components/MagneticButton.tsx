@@ -1,10 +1,10 @@
 import { useRef, type ReactNode } from "react";
 import { Link } from "wouter";
-import { motion, useMotionValue, useReducedMotion, useSpring } from "framer-motion";
+import { usePointerVars } from "../lib/pointer";
 import { ArrowUpRight } from "lucide-react";
 
 // Primary and secondary buttons. The primary leans gently toward the cursor (desktop only,
-// off for reduced motion). Motion values only: no React state per mouse move.
+// off for reduced motion). CSS variables only: no React state per mouse move.
 export function MagneticButton({
   href,
   children,
@@ -21,20 +21,7 @@ export function MagneticButton({
   "data-testid"?: string;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const reduce = useReducedMotion();
-  const x = useSpring(useMotionValue(0), { stiffness: 220, damping: 18, mass: 0.4 });
-  const y = useSpring(useMotionValue(0), { stiffness: 220, damping: 18, mass: 0.4 });
-
-  const onMove = (e: React.PointerEvent) => {
-    if (reduce || e.pointerType !== "mouse" || !ref.current) return;
-    const r = ref.current.getBoundingClientRect();
-    x.set((e.clientX - (r.left + r.width / 2)) * 0.25);
-    y.set((e.clientY - (r.top + r.height / 2)) * 0.35);
-  };
-  const onLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
+  usePointerVars(ref);
 
   const pad = size === "sm" ? "h-10 px-5 text-[14px]" : "h-[52px] px-7 text-[15px]";
   const look =
@@ -43,12 +30,9 @@ export function MagneticButton({
       : "border border-dp-line text-dp-ink hover:border-dp-ink/40";
 
   const inner = (
-    <motion.span
+    <span
       ref={ref}
-      style={{ x, y }}
-      onPointerMove={onMove}
-      onPointerLeave={onLeave}
-      className={`group inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full font-medium transition-[box-shadow,border-color] duration-500 active:scale-[0.98] ${pad} ${look}`}
+      className={`dp-magnet group inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full font-medium transition-[box-shadow,border-color] duration-500 active:scale-[0.98] ${pad} ${look}`}
     >
       {children}
       <ArrowUpRight
@@ -57,7 +41,7 @@ export function MagneticButton({
         aria-hidden="true"
         className="transition-transform duration-500 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
       />
-    </motion.span>
+    </span>
   );
 
   const focus = "inline-flex rounded-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-dp-accent";

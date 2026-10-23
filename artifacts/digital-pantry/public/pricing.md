@@ -33,6 +33,7 @@ Last updated: 2026-10-22. Source page: https://thedigitalpantry.netlify.app/pric
 
 ## Retainer: R120 per month (optional)
 - Menu updates, schedule changes and small edits
+- International clients: $90 per month. Larger businesses: quoted with the build.
 
 ## Free mock-up
 - A free preview of your website, with no obligation to go ahead. Ask on the contact page: https://thedigitalpantry.netlify.app/contact?interest=mockup

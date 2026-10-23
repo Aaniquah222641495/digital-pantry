@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+import { createContext, startTransition, useContext, useEffect, useState, ReactNode } from "react";
 
 // Two sides of the studio: Night is Imaan's (the default), Day is Aaniquah's.
 // Stored as "dark" / "light" so earlier visitors keep their choice.
@@ -16,7 +16,8 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>("dark");
 
   useEffect(() => {
-    setTheme(document.documentElement.classList.contains("dark") ? "dark" : "light");
+    const actual = document.documentElement.classList.contains("dark") ? "dark" : "light";
+    startTransition(() => setTheme(actual));
   }, []);
 
   const toggle = () => {

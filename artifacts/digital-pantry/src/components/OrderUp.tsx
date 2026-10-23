@@ -1,5 +1,5 @@
 import { useRef, type CSSProperties } from "react";
-import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from "framer-motion";
+import { usePointerVars } from "../lib/pointer";
 import { Sprinkles } from "./Sprinkles";
 
 // Portfolio hero: the launch-day illustration, with the two live client sites served up out of
@@ -12,22 +12,11 @@ const PLATES = [
 
 export function OrderUp() {
   const ref = useRef<HTMLDivElement>(null);
-  const reduce = useReducedMotion();
-  const mx = useMotionValue(0);
-  const my = useMotionValue(0);
-  const rx = useSpring(useTransform(my, [-1, 1], [5, -5]), { stiffness: 120, damping: 18 });
-  const ry = useSpring(useTransform(mx, [-1, 1], [-7, 7]), { stiffness: 120, damping: 18 });
-
-  const onMove = (e: React.PointerEvent) => {
-    if (reduce || e.pointerType !== "mouse" || !ref.current) return;
-    const r = ref.current.getBoundingClientRect();
-    mx.set(((e.clientX - r.left) / r.width) * 2 - 1);
-    my.set(((e.clientY - r.top) / r.height) * 2 - 1);
-  };
+  usePointerVars(ref);
 
   return (
-    <div ref={ref} onPointerMove={onMove} onPointerLeave={() => { mx.set(0); my.set(0); }} className="relative [perspective:1200px]">
-      <motion.div style={{ rotateX: rx, rotateY: ry }} className="dp-stage relative [transform-style:preserve-3d]">
+    <div ref={ref} className="dp-tilt relative [perspective:1200px]">
+      <div className="dp-tilt-target dp-stage relative [transform-style:preserve-3d]">
         <img
           src="/images/art/launch-day.webp"
           alt="Aaniquah and Imaan serving a new website on a silver tray under falling sprinkles"
@@ -46,7 +35,7 @@ export function OrderUp() {
           </figure>
         ))}
         <Sprinkles mode="burst" count={70} />
-      </motion.div>
+      </div>
     </div>
   );
 }

@@ -47,7 +47,7 @@ export default function Portfolio() {
     <main>
       <section className="relative isolate overflow-hidden">
         <div aria-hidden="true" className="pointer-events-none absolute -right-[15%] -top-[30%] -z-10 h-[80vh] w-[60vw] rounded-full bg-[radial-gradient(closest-side,var(--dp-glow),transparent)] blur-2xl" />
-        <Sticker day={DAY.star} night={NIGHT.moon} size={54} r={-10} d={0.3} style={{ left: "46%", top: "18%" }} />
+        <Sticker day={DAY.star} night={NIGHT.moon} size={54} r={-10} d={0.3} className="max-md:hidden" style={{ left: "46%", top: "18%" }} />
         <div className="mx-auto grid min-h-[86dvh] max-w-[1320px] items-center gap-12 px-5 pb-10 pt-32 sm:px-8 md:grid-cols-[0.85fr_1.15fr] md:pt-28">
           <div>
             <h1 className={`dp-rise ${H1}`}>
@@ -116,7 +116,7 @@ export default function Portfolio() {
                   target="_blank"
                   rel="noopener noreferrer"
                   data-testid={c.testId}
-                  className="group mt-9 inline-flex items-center gap-1.5 text-[15px] font-medium text-dp-ink underline decoration-dp-line underline-offset-[6px] transition-colors hover:decoration-dp-accent"
+                  className="group mt-7 inline-flex min-h-11 items-center gap-1.5 text-[15px] font-medium text-dp-ink underline decoration-dp-line underline-offset-[6px] transition-colors hover:decoration-dp-accent"
                 >
                   Visit the live site
                   <ArrowUpRight size={16} className="transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />

@@ -20,3 +20,8 @@ export const INTL_PRICES = {
 
 export const SMALL_BUSINESS_LIMIT = "up to 10 staff";
 export const LARGER_FROM = "R8 000";
+
+// Monthly retainer. USD keeps the same premium as the international packages (founder: "you choose",
+// 2026-10-24). Larger businesses get theirs quoted with the build.
+export const RETAINER = "R120";
+export const INTL_RETAINER = "$90";

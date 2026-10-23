@@ -2,13 +2,14 @@ import { useEffect } from "react";
 import { useLocation } from "wouter";
 import Lenis from "lenis";
 
-// Weighted, smooth page scrolling. Off for visitors who ask for reduced motion.
+// Weighted, smooth page scrolling for mouse and trackpad users. Off for touch (native scroll is
+// better there and it avoids a frame loop on phones) and for visitors who ask for reduced motion.
 // Also takes over "scroll to top on page change".
 export function SmoothScroll() {
   const [location] = useLocation();
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !window.matchMedia("(pointer: fine)").matches) return;
     const lenis = new Lenis({ duration: 1.1, easing: (t) => 1 - Math.pow(1 - t, 4) });
     let frame = 0;
     const raf = (time: number) => {

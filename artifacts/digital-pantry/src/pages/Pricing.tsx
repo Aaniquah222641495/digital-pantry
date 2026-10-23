@@ -5,7 +5,7 @@ import { MagneticButton } from "../components/MagneticButton";
 import { FreeTaste } from "../components/FreeTaste";
 import { PantryShelf } from "../components/PantryShelf";
 import { Sticker, DAY, NIGHT } from "../components/Stickers";
-import { INTL_PRICES, LARGER_FROM, PLAN_PRICES, SMALL_BUSINESS_LIMIT } from "../lib/plans";
+import { INTL_PRICES, INTL_RETAINER, LARGER_FROM, PLAN_PRICES, RETAINER, SMALL_BUSINESS_LIMIT } from "../lib/plans";
 import { useEffect, useState } from "react";
 import { useSearch } from "wouter";
 import { H1, H2 } from "../lib/style";
@@ -78,7 +78,7 @@ export default function Pricing() {
           </p>
 
           {/* Who is ordering? */}
-          <div role="tablist" aria-label="Choose who the prices are for" className="dp-rise mt-10 inline-grid grid-cols-1 gap-2 rounded-[22px] border border-dp-line bg-dp-surface p-1.5 sm:grid-cols-3" style={{ "--d": "0.18s" } as React.CSSProperties}>
+          <div role="tablist" aria-label="Choose who the prices are for" className="dp-rise mt-10 grid w-full grid-cols-1 gap-2 rounded-[22px] sm:inline-grid sm:w-auto border border-dp-line bg-dp-surface p-1.5 sm:grid-cols-3" style={{ "--d": "0.18s" } as React.CSSProperties}>
             {AUDIENCES.map((a) => {
               const on = audience === a.id;
               return (
@@ -141,7 +141,7 @@ export default function Pricing() {
           </div>
         </div>
         <Sticker day={DAY.sparkle} night={NIGHT.star} size={48} r={10} style={{ right: "8%", top: "22%" }} />
-        <Sticker day={DAY.donut} night={NIGHT.moon} size={66} r={-8} d={0.8} style={{ right: "18%", top: "12%" }} />
+        <Sticker day={DAY.donut} night={NIGHT.moon} size={66} r={-8} d={0.8} className="max-md:hidden" style={{ right: "18%", top: "12%" }} />
       </section>
 
       {audience !== "larger" && (
@@ -220,9 +220,14 @@ export default function Pricing() {
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-5">
-            <p className="text-[2.4rem] font-semibold tracking-[-0.05em]">
-              R120<span className="text-[1rem] font-normal text-dp-muted"> /month</span>
-            </p>
+            {audience === "larger" ? (
+              <p className="max-w-[16ch] text-[1.1rem] font-semibold leading-snug">Quoted with your build</p>
+            ) : (
+              <p className="text-[2.4rem] font-semibold tracking-[-0.05em]">
+                {intl ? INTL_RETAINER : RETAINER}
+                <span className="text-[1rem] font-normal text-dp-muted"> /month</span>
+              </p>
+            )}
             <a
               href="/contact"
               data-testid="button-retainer-cta"

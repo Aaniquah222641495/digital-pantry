@@ -34,22 +34,22 @@ export function Footer() {
             </p>
           </div>
 
-          <nav aria-label="Footer navigation" className="flex flex-col gap-2.5">
+          <nav aria-label="Footer navigation" className="flex flex-col">
             {NAV_LINKS.map((link) => (
-              <Link key={link.href} href={link.href} className="w-fit text-[15px] text-dp-muted transition-colors duration-300 hover:text-dp-ink">
+              <Link key={link.href} href={link.href} className="w-fit py-1.5 text-[15px] text-dp-muted transition-colors duration-300 hover:text-dp-ink">
                 {link.label}
               </Link>
             ))}
           </nav>
 
-          <div className="flex flex-col gap-2.5 text-[15px]">
-            <a href={contact.waLink} className="w-fit text-dp-muted transition-colors duration-300 hover:text-dp-ink" data-testid="footer-link-whatsapp">
+          <div className="flex flex-col text-[15px]">
+            <a href={contact.waLink} className="w-fit py-1.5 text-dp-muted transition-colors duration-300 hover:text-dp-ink" data-testid="footer-link-whatsapp">
               WhatsApp {contact.name} {contact.display}
             </a>
-            <a href="mailto:thedigitalpantryza@gmail.com" className="w-fit text-dp-muted transition-colors duration-300 hover:text-dp-ink" data-testid="footer-link-email">
+            <a href="mailto:thedigitalpantryza@gmail.com" className="w-fit py-1.5 text-dp-muted transition-colors duration-300 hover:text-dp-ink" data-testid="footer-link-email">
               thedigitalpantryza@gmail.com
             </a>
-            <p className="text-dp-muted">Cape Town, South Africa</p>
+            <p className="py-1.5 text-dp-muted">Cape Town, South Africa</p>
           </div>
         </div>
 

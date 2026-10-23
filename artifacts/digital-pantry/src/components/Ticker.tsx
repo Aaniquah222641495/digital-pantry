@@ -22,7 +22,8 @@ export function Ticker() {
     </span>
   );
   return (
-    <div className="overflow-hidden border-y border-[#161214]/10 bg-[#FFA7D2] py-4 text-[#161214] dark:border-white/10 dark:bg-[var(--im-band)] dark:py-5 dark:text-[var(--im-text)]" aria-label={PHRASES.join(", ")}>
+    <div className="relative overflow-hidden border-y border-[#161214]/10 bg-[#FFA7D2] py-4 text-[#161214] dark:border-white/10 dark:bg-[var(--im-band)] dark:py-5 dark:text-[var(--im-text)]">
+      <p className="sr-only">{PHRASES.join(", ")}</p>
       <div className="ticker-track flex w-max" aria-hidden="true">
         {run}
         {run}

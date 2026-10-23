@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "wouter";
-import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { FounderSwitch } from "./FounderSwitch";
 import { MagneticButton } from "./MagneticButton";
@@ -24,9 +23,16 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [location] = useLocation();
-  const { scrollY } = useScroll();
+  const sentinel = useRef<HTMLSpanElement>(null);
 
-  useMotionValueEvent(scrollY, "change", (y) => setScrolled(y > 24));
+  // A 1px marker 24px down the page: once it leaves the viewport, the bar turns solid.
+  useEffect(() => {
+    const el = sentinel.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([e]) => setScrolled(!e.isIntersecting));
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
   useEffect(() => setMenuOpen(false), [location]);
   useEffect(() => {
@@ -38,6 +44,7 @@ export function Navbar() {
 
   return (
     <>
+      <span ref={sentinel} aria-hidden="true" className="pointer-events-none absolute left-0 top-6 h-px w-px" />
       <header
         className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-500 ${
           scrolled ? "border-b border-dp-line bg-dp-bg/75 backdrop-blur-xl" : "border-b border-transparent"
@@ -90,39 +97,28 @@ export function Navbar() {
         </div>
       </header>
 
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 flex flex-col bg-dp-bg px-6 pb-10 pt-28 md:hidden"
+      {menuOpen && (
+          <div
+            className="dp-menu-in fixed inset-0 z-40 flex flex-col bg-dp-bg px-6 pb-10 pt-28 md:hidden"
           >
             <nav aria-label="Mobile navigation" className="flex flex-col">
               {[{ label: "Home", href: "/" }, ...NAV_LINKS].map((link, i) => (
-                <motion.div
-                  key={link.href}
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.05 + i * 0.06, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                >
+                <div key={link.href} className="dp-menu-item" style={{ animationDelay: `${0.05 + i * 0.06}s` }}>
                   <Link
                     href={link.href}
                     className="block border-b border-dp-line py-4 text-[2rem] font-medium tracking-[-0.03em] text-dp-ink"
                   >
                     {link.label}
                   </Link>
-                </motion.div>
+                </div>
               ))}
             </nav>
             <div className="mt-auto flex flex-col gap-4">
               <FounderSwitch />
               <MagneticButton href="/contact">Let's Get Cooking</MagneticButton>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          </div>
+      )}
     </>
   );
 }

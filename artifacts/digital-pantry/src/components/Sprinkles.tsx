@@ -41,11 +41,15 @@ export function Sprinkles({ mode = "drift", count = 46, className = "" }: { mode
       w: 3.4 + Math.random() * 1.4,
       color: COLORS[Math.floor(Math.random() * COLORS.length)],
     });
-    let items = Array.from({ length: count }, () => make(mode === "burst"));
+    const n = window.matchMedia("(pointer: coarse)").matches ? Math.ceil(count / 2) : count;
+    let items = Array.from({ length: n }, () => make(mode === "burst"));
 
     let visible = true;
     let frame = 0;
-    const draw = () => {
+    let last = 0;
+    const draw = (now: number = performance.now()) => {
+      if (now - last < 32) { frame = requestAnimationFrame(draw); return; } // ~30 fps is plenty for sprinkles
+      last = now;
       ctx.clearRect(0, 0, w, h);
       const night = document.documentElement.classList.contains("dark");
       const pace = night && mode === "drift" ? 0.55 : 1;
@@ -84,9 +88,12 @@ export function Sprinkles({ mode = "drift", count = 46, className = "" }: { mode
     document.addEventListener("visibilitychange", onVis);
     const ro = new ResizeObserver(resize);
     ro.observe(canvas);
-    frame = requestAnimationFrame(draw);
+    // Wait until the page has settled so sprinkles never compete with the first paint.
+    const win = window as Window & { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number; cancelIdleCallback?: (id: number) => void };
+    const idle = win.requestIdleCallback ? win.requestIdleCallback(() => { frame = requestAnimationFrame(draw); }, { timeout: 1500 }) : window.setTimeout(() => { frame = requestAnimationFrame(draw); }, 900);
 
     return () => {
+      if (win.cancelIdleCallback) win.cancelIdleCallback(idle); else window.clearTimeout(idle);
       cancelAnimationFrame(frame);
       io.disconnect();
       ro.disconnect();

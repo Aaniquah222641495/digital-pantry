@@ -1,6 +1,5 @@
 import { useRef, type CSSProperties } from "react";
-import { motion, useMotionTemplate, useMotionValue, useReducedMotion, useSpring, useTransform } from "framer-motion";
-import { Sprinkles } from "./Sprinkles";
+import { usePointerVars } from "../lib/pointer";
 
 // The two chefs at one counter (pixel art), brought to life with light CSS effects layered on
 // top: sun glow, twinkling night stars, steam from the bowl, a shine across the laptop and a
@@ -18,31 +17,12 @@ const at = (left: number, top: number, extra: CSSProperties = {}) => ({ left: `$
 
 export function HeroScene() {
   const ref = useRef<HTMLDivElement>(null);
-  const reduce = useReducedMotion();
-  const mx = useMotionValue(0.5);
-  const my = useMotionValue(0.4);
-  const rx = useSpring(useTransform(my, [0, 1], [6, -6]), { stiffness: 110, damping: 18 });
-  const ry = useSpring(useTransform(mx, [0, 1], [-8, 8]), { stiffness: 110, damping: 18 });
-  const lx = useTransform(mx, (v) => `${v * 100}%`);
-  const ly = useTransform(my, (v) => `${v * 100}%`);
-  const spot = useMotionTemplate`radial-gradient(420px circle at ${lx} ${ly}, rgba(255,255,255,0.22), transparent 60%)`;
-
-  const onMove = (e: React.PointerEvent) => {
-    if (reduce || e.pointerType !== "mouse" || !ref.current) return;
-    const r = ref.current.getBoundingClientRect();
-    mx.set((e.clientX - r.left) / r.width);
-    my.set((e.clientY - r.top) / r.height);
-  };
-  const onLeave = () => {
-    mx.set(0.5);
-    my.set(0.4);
-  };
+  usePointerVars(ref);
 
   return (
-    <div ref={ref} onPointerMove={onMove} onPointerLeave={onLeave} className="[perspective:1400px]">
-      <motion.figure
-        style={{ rotateX: rx, rotateY: ry }}
-        className="dp-scene relative isolate w-full overflow-hidden rounded-[30px] border-[3px] border-white bg-[#FCE8F0] shadow-[0_40px_90px_-40px_rgba(179,47,104,0.55)] dark:border-[var(--im-border)] dark:shadow-[0_40px_90px_-30px_rgba(255,92,168,0.35)]">
+    <div ref={ref} className="dp-tilt [perspective:1400px]">
+      <figure
+        className="dp-tilt-target dp-scene relative isolate w-full overflow-hidden rounded-[30px] border-[3px] border-white bg-[#FCE8F0] shadow-[0_40px_90px_-40px_rgba(179,47,104,0.55)] dark:border-[var(--im-border)] dark:shadow-[0_40px_90px_-30px_rgba(255,92,168,0.35)]">
         <img
           src="/images/hero-scene.webp"
           srcSet="/images/hero-scene-900.webp 900w, /images/hero-scene.webp 1600w"
@@ -61,7 +41,7 @@ export function HeroScene() {
         {/* Light sweep that runs across the counter whenever the side changes */}
         <span aria-hidden="true" className="dp-sweep pointer-events-none absolute inset-0 overflow-hidden"><span /></span>
         {/* Soft spotlight that follows the mouse */}
-        <motion.span aria-hidden="true" style={{ backgroundImage: spot }} className="pointer-events-none absolute inset-0 mix-blend-soft-light" />
+        <span aria-hidden="true" className="dp-spotlight pointer-events-none absolute inset-0 mix-blend-soft-light" />
 
         <span aria-hidden="true" className="dp-sun absolute h-[16%] w-[11%] -translate-x-1/2 -translate-y-1/2 rounded-full" style={at(11.2, 16)} />
         {STARS.map(([l, t, d]) => (
@@ -74,8 +54,7 @@ export function HeroScene() {
         {[0, 1.3, 2.6].map((d) => (
           <span key={d} aria-hidden="true" className="dp-steam absolute h-[9%] w-[1.6%] -translate-x-1/2 rounded-full" style={at(31 + d, 66, { "--d": `${d}s` } as CSSProperties)} />
         ))}
-        <Sprinkles count={16} className="opacity-80" />
-      </motion.figure>
+      </figure>
     </div>
   );
 }

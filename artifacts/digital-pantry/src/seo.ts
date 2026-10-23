@@ -45,7 +45,7 @@ export const FAQ = [
   { q: "How long does it take?", a: "Most projects are done within 5 to 7 business days." },
   { q: "Do these prices apply to bigger companies?", a: "No. The rand packages are for South African small businesses with up to 10 staff. Larger businesses get a custom quote, from R8 000." },
   { q: "Do you work with international clients?", a: "Yes. International packages are priced in US dollars: Starter $450, Standard $750, Premium $1 200 and Pro $1 800, once-off." },
-  { q: "What if I need changes later?", a: "That's what the R120/month retainer is for. Small edits, big peace of mind." },
+  { q: "What if I need changes later?", a: "That's what the R120/month retainer is for ($90/month for international clients). Small edits, big peace of mind." },
   { q: "Does Pro have monthly fees?", a: "No. Your lead system runs on free Google tools that you own. Every enquiry lands in your inbox and your own Sheet." },
 ];
 
@@ -58,7 +58,7 @@ const business = {
   description:
     "Cape Town web studio building custom websites from scratch for South African small businesses. Packages from R600 to R2 500, most projects done in 5 to 7 business days.",
   url: `${SITE_URL}/`,
-  logo: `${SITE_URL}/images/logo-nobg.webp`,
+  logo: `${SITE_URL}/images/logo-wordmark.webp`,
   image: OG_IMAGE,
   email: EMAIL,
   telephone: PHONE,
@@ -125,7 +125,7 @@ export const PAGES: PageMeta[] = [
     path: "/pricing",
     title: "Website Prices in South Africa from R600 | Digital Pantry",
     description:
-      "Small business website packages: Starter R600, Standard R1 000, Premium R1 600, Pro R2 500 with lead automation. Optional R120/month for updates.",
+      "Small business website packages: Starter R600, Standard R1 000, Premium R1 600, Pro R2 500 with lead automation. Optional R120/month for updates ($90/month internationally).",
     jsonLd: [
       graph(
         {
@@ -161,6 +161,14 @@ export const PAGES: PageMeta[] = [
                 description: "Menu updates, schedule changes and small edits.",
                 priceSpecification: { "@type": "UnitPriceSpecification", price: 120, priceCurrency: "ZAR", unitText: "MONTH" },
                 url: `${SITE_URL}/pricing`,
+              },
+              {
+                "@type": "Offer",
+                name: "Monthly retainer (international)",
+                description: "Menu updates, schedule changes and small edits.",
+                priceSpecification: { "@type": "UnitPriceSpecification", price: 90, priceCurrency: "USD", unitText: "MONTH" },
+                eligibleRegion: { "@type": "Place", name: "Outside South Africa" },
+                url: `${SITE_URL}/pricing?for=intl`,
               },
             ],
           },

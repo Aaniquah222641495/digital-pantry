@@ -1,8 +1,7 @@
-import { useRef } from "react";
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 
 // Real screenshots of a client site in a browser and a phone frame. The phone drifts
-// against the browser as the section scrolls past (off for reduced motion).
+// against the browser as the section scrolls past: CSS scroll-driven animation in index.css,
+// static where unsupported or for reduced motion.
 export function DeviceFrames({
   desktop,
   phone,
@@ -16,17 +15,10 @@ export function DeviceFrames({
   url: string;
   flip?: boolean;
 }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const reduce = useReducedMotion();
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const phoneY = useTransform(scrollYProgress, [0, 1], reduce ? [0, 0] : [70, -70]);
-  const browserY = useTransform(scrollYProgress, [0, 1], reduce ? [0, 0] : [20, -20]);
-
   return (
-    <div ref={ref} className={`relative pb-10 ${flip ? "pl-10 sm:pl-16" : "pr-10 sm:pr-16"}`}>
-      <motion.figure
-        style={{ y: browserY }}
-        className="overflow-hidden rounded-[18px] border border-dp-line bg-dp-surface shadow-[0_40px_80px_-40px_rgba(12,11,13,0.45)]"
+    <div className={`dp-par relative pb-10 ${flip ? "pl-10 sm:pl-16" : "pr-10 sm:pr-16"}`}>
+      <figure
+        className="dp-par-browser overflow-hidden rounded-[18px] border border-dp-line bg-dp-surface shadow-[0_40px_80px_-40px_rgba(12,11,13,0.45)]"
       >
         <div className="flex h-9 items-center gap-3 border-b border-dp-line px-4" aria-hidden="true">
           <span className="flex gap-1.5">
@@ -45,10 +37,9 @@ export function DeviceFrames({
           decoding="async"
           className="aspect-[16/10] w-full object-cover object-top"
         />
-      </motion.figure>
-      <motion.figure
-        style={{ y: phoneY }}
-        className={`absolute bottom-0 w-[30%] max-w-[220px] overflow-hidden rounded-[26px] border-[5px] border-[#0C0B0D] bg-[#0C0B0D] shadow-[0_30px_60px_-20px_rgba(12,11,13,0.55)] ${
+      </figure>
+      <figure
+        className={`dp-par-phone absolute bottom-0 w-[30%] max-w-[220px] overflow-hidden rounded-[26px] border-[5px] border-[#0C0B0D] bg-[#0C0B0D] shadow-[0_30px_60px_-20px_rgba(12,11,13,0.55)] ${
           flip ? "left-0" : "right-0"
         }`}
       >
@@ -61,7 +52,7 @@ export function DeviceFrames({
           decoding="async"
           className="aspect-[390/844] w-full rounded-[21px] object-cover object-top"
         />
-      </motion.figure>
+      </figure>
     </div>
   );
 }
