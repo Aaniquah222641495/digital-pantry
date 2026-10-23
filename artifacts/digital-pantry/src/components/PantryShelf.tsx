@@ -1,16 +1,17 @@
 import { Link } from "wouter";
-import { PLAN_PRICES } from "../lib/plans";
+import { INTL_PRICES, PLAN_PRICES } from "../lib/plans";
 
 // The four packages as jars standing on one wooden pantry shelf, each with a hanging price tag.
 // Used on Home ("On the MENU") and as the Pricing page header.
 const JARS = [
-  { name: "Starter", price: PLAN_PRICES.Starter, img: "/images/starter.webp", note: "One page, a menu and WhatsApp." },
-  { name: "Standard", price: PLAN_PRICES.Standard, img: "/images/standard.webp", note: "The full shop window.", popular: true },
-  { name: "Premium", price: PLAN_PRICES.Premium, img: "/images/premium.webp", note: "Your domain, Google and SEO." },
-  { name: "Pro", price: PLAN_PRICES.Pro, img: "/images/pro.webp", note: "Every enquiry caught for you." },
+  { name: "Starter", price: PLAN_PRICES.Starter, usd: INTL_PRICES.Starter, img: "/images/starter.webp", note: "One page, a menu and WhatsApp." },
+  { name: "Standard", price: PLAN_PRICES.Standard, usd: INTL_PRICES.Standard, img: "/images/standard.webp", note: "The full shop window.", popular: true },
+  { name: "Premium", price: PLAN_PRICES.Premium, usd: INTL_PRICES.Premium, img: "/images/premium.webp", note: "Your domain, Google and SEO." },
+  { name: "Pro", price: PLAN_PRICES.Pro, usd: INTL_PRICES.Pro, img: "/images/pro.webp", note: "Every enquiry caught for you." },
 ] as const;
 
-export function PantryShelf({ link = true }: { link?: boolean }) {
+export function PantryShelf({ link = true, currency = "ZAR" }: { link?: boolean; currency?: "ZAR" | "USD" }) {
+  const intl = currency === "USD";
   return (
     <div className="relative">
       <ul className="relative z-10 grid grid-cols-2 gap-x-4 gap-y-16 md:grid-cols-4 md:gap-y-0">
@@ -42,7 +43,7 @@ export function PantryShelf({ link = true }: { link?: boolean }) {
                     <span className="absolute -right-3 -top-3 rounded-full bg-[#FFD43B] px-2 py-0.5 text-[11px] font-semibold text-[#161214] shadow-sm">Popular ★</span>
                   )}
                   <p className={`text-[13px] ${popular ? "opacity-80" : "text-dp-muted"}`}>{j.name}</p>
-                  <p className="text-[clamp(1.6rem,2.4vw,2.1rem)] font-semibold tracking-[-0.05em]">{j.price}</p>
+                  <p className="text-[clamp(1.6rem,2.4vw,2.1rem)] font-semibold tracking-[-0.05em]">{intl ? j.usd : j.price}</p>
                   <p className={`mt-0.5 max-w-[17ch] text-[13px] leading-snug ${popular ? "opacity-80" : "text-dp-muted"}`}>{j.note}</p>
                 </div>
               </div>
@@ -51,7 +52,7 @@ export function PantryShelf({ link = true }: { link?: boolean }) {
           return (
             <li key={j.name} className="group" style={{ transitionDelay: `${i * 60}ms` }}>
               {link ? (
-                <Link href={`/contact?interest=${j.name.toLowerCase()}`} aria-label={`${j.name}, ${j.price}: ask about this package`} className="block rounded-[20px] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-dp-accent">
+                <Link href={intl ? "/contact?interest=international" : `/contact?interest=${j.name.toLowerCase()}`} aria-label={`${j.name}, ${intl ? j.usd : j.price}: ask about this package`} className="block rounded-[20px] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-dp-accent">
                   {tag}
                 </Link>
               ) : (

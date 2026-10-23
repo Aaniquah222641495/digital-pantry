@@ -22,6 +22,14 @@ const ORG_ID = `${SITE_URL}/#business`;
 const PERSON_ID = `${SITE_URL}/#aaniquah`;
 const IMAAN_ID = `${SITE_URL}/#imaan`;
 
+// International packages (USD), founder decision 2026-10-23.
+const INTL_PLANS = [
+  { name: "Starter", price: 450 },
+  { name: "Standard", price: 750 },
+  { name: "Premium", price: 1200 },
+  { name: "Pro", price: 1800 },
+];
+
 const PLANS = [
   { name: "Starter", price: 600, includes: "Single page, menu section, WhatsApp button, mobile responsive." },
   { name: "Standard", price: 1000, includes: "Everything in Starter plus locations, about section and social links." },
@@ -35,7 +43,8 @@ export const FAQ = [
   { q: "Do I need to know how to code?", a: "No! That's literally our job. You handle the business, we handle the website." },
   { q: "Do I keep my WhatsApp number?", a: "Yes! We just add a click-to-WhatsApp button on your site. Easy." },
   { q: "How long does it take?", a: "Most projects are done within 5 to 7 business days." },
-  { q: "Do these prices apply to bigger companies?", a: "No, these are small-business prices. Larger companies and bigger projects get a custom quote, so just tell us what you need." },
+  { q: "Do these prices apply to bigger companies?", a: "No. The rand packages are for South African small businesses with up to 10 staff. Larger businesses get a custom quote, from R8 000." },
+  { q: "Do you work with international clients?", a: "Yes. International packages are priced in US dollars: Starter $450, Standard $750, Premium $1 200 and Pro $1 800, once-off." },
   { q: "What if I need changes later?", a: "That's what the R120/month retainer is for. Small edits, big peace of mind." },
   { q: "Does Pro have monthly fees?", a: "No. Your lead system runs on free Google tools that you own. Every enquiry lands in your inbox and your own Sheet." },
 ];
@@ -124,7 +133,7 @@ export const PAGES: PageMeta[] = [
           name: "Custom small business website",
           serviceType: "Web design and development",
           provider: { "@id": ORG_ID },
-          areaServed: { "@type": "Country", name: "South Africa" },
+          areaServed: [{ "@type": "Country", name: "South Africa" }, { "@type": "Place", name: "Worldwide" }],
           hasOfferCatalog: {
             "@type": "OfferCatalog",
             name: "Website packages",
@@ -136,6 +145,15 @@ export const PAGES: PageMeta[] = [
                 price: p.price,
                 priceCurrency: "ZAR",
                 url: `${SITE_URL}/pricing`,
+              })),
+              ...INTL_PLANS.map((p) => ({
+                "@type": "Offer",
+                name: `${p.name} website (international)`,
+                description: "International package, priced in US dollars.",
+                price: p.price,
+                priceCurrency: "USD",
+                eligibleRegion: { "@type": "Place", name: "Outside South Africa" },
+                url: `${SITE_URL}/pricing?for=intl`,
               })),
               {
                 "@type": "Offer",

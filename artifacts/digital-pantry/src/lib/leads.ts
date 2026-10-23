@@ -2,7 +2,7 @@
 // fallbacks. The limits below are repeated in apps-script/Code.gs (the server checks them
 // again). If you change one, change both.
 import { z } from "zod";
-import { PLAN_PRICES } from "./plans";
+import { LARGER_FROM, PLAN_PRICES } from "./plans";
 
 export const WHATSAPP_NUMBER = "27724111011";
 export const CONTACT_EMAIL = "thedigitalpantryza@gmail.com";
@@ -14,6 +14,8 @@ export const INTEREST_OPTIONS = [
   { value: "Standard", label: `Standard (${PLAN_PRICES.Standard})` },
   { value: "Premium", label: `Premium (${PLAN_PRICES.Premium})` },
   { value: "Pro", label: `Pro (${PLAN_PRICES.Pro}, with lead automation)` },
+  { value: "Larger business", label: `A larger business (custom quote, from ${LARGER_FROM})` },
+  { value: "International", label: "International client (USD packages)" },
   { value: "Free mock-up", label: "A free mock-up of my site" },
   { value: "Not sure yet", label: "Not sure yet" },
 ] as const;
@@ -30,6 +32,9 @@ const INTEREST_ALIASES: Record<string, Interest> = {
   premium: "Premium",
   pro: "Pro",
   unsure: "Not sure yet",
+  larger: "Larger business",
+  international: "International",
+  intl: "International",
 };
 export function interestFromQuery(search: string): Interest | undefined {
   const raw = new URLSearchParams(search).get("interest")?.toLowerCase().trim();

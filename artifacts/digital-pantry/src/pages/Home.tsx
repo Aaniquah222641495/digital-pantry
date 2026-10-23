@@ -413,7 +413,7 @@ function Menu() {
         <Reveal className="mt-16">
           <PantryShelf />
         </Reveal>
-        <p className="mt-12 text-[14px] text-dp-muted">Small-business prices, once-off in rand. Small edits after launch from R120 a month. Bigger companies and larger projects get a custom quote.</p>
+        <p className="mt-12 text-[14px] text-dp-muted">For South African small businesses with up to 10 staff, once-off in rand. Larger businesses from R8 000, quoted. Abroad? See our international prices in US dollars.</p>
       </div>
     </section>
   );

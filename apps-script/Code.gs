@@ -29,7 +29,7 @@ const CONFIG = {
 
 const LIMITS = { name: 80, businessName: 100, email: 254, message: 1000 };
 
-const INTERESTS = ['Starter', 'Standard', 'Premium', 'Pro', 'Free mock-up', 'Not sure yet'];
+const INTERESTS = ['Starter', 'Standard', 'Premium', 'Pro', 'Larger business', 'International', 'Free mock-up', 'Not sure yet'];
 
 const HEADERS = [
   'Received (SAST)', 'Name', 'Business', 'Phone', 'Email',
@@ -211,6 +211,8 @@ function getSheet_() {
 function interestPhrase_(interest) {
   if (interest === 'Free mock-up') return 'a free mock-up of your website';
   if (interest === 'Not sure yet') return 'our websites';
+  if (interest === 'Larger business') return 'a custom website for your business';
+  if (interest === 'International') return 'our international website packages';
   return 'the ' + interest + ' package';
 }
 
