@@ -16,7 +16,7 @@ export function Ticker() {
       {PHRASES.map((p) => (
         <span key={p} className="flex items-center">
           <span className="dp-cut-bebas dp-ticker-text px-6 text-[clamp(1.5rem,2.6vw,2.25rem)] tracking-[0.06em]">{p}</span>
-          <span aria-hidden="true" className="text-[1.1rem] dark:text-[var(--im-accent)]">★</span>
+          <span aria-hidden="true" className="text-[1.1rem] dark:text-[var(--im-hot)] dark:[text-shadow:0_0_14px_rgba(255,92,168,0.7)]">★</span>
         </span>
       ))}
     </span>

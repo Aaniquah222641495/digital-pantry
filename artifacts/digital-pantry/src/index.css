@@ -38,12 +38,14 @@
   --im-text: #F6EDED;
   --im-muted: #CDB6BA;
   --im-label: #B39CA1;
-  --im-accent: #EBA9B6;
+  --im-accent: #FFA7D2;
+  --im-hot: #FF5CA8;
   --im-silver: #DCD8E2;
   --im-glow: rgba(150, 32, 54, 0.45);
   --im-glow-strong: rgba(160, 36, 60, 0.55);
   --im-sky-a: rgba(140, 26, 46, 0.34);
   --im-sky-b: rgba(92, 18, 36, 0.32);
+  --im-sky-pink: rgba(255, 92, 168, 0.13);
 }
 :root[data-imaan="plum"] {
   --im-bg: #120A13;
@@ -60,6 +62,7 @@
   --im-glow-strong: rgba(176, 82, 166, 0.5);
   --im-sky-a: rgba(155, 62, 143, 0.32);
   --im-sky-b: rgba(96, 44, 120, 0.3);
+  --im-sky-pink: rgba(255, 92, 168, 0.1);
 }
 .dark {
   /* Night = Imaan's room. */
@@ -376,6 +379,7 @@ html.dark body {
   background:
     radial-gradient(1100px 760px at 88% -8%, var(--im-sky-a), transparent 62%),
     radial-gradient(900px 700px at -12% 105%, var(--im-sky-b), transparent 60%),
+    radial-gradient(700px 520px at 8% 18%, var(--im-sky-pink), transparent 65%),
     var(--dp-bg);
   background-attachment: fixed;
 }
@@ -477,3 +481,7 @@ html.dp-theme-shift, html.dp-theme-shift * {
   .js .dp-venn:not(.is-in) .dp-venn-b { transform: translateX(70px); }
   .js .dp-venn:not(.is-in) .dp-venn-star { transform: scale(0.4); opacity: 0; }
 }
+
+/* Pink on Night: real bubblegum with a soft neon glow, so it lifts off the burgundy. */
+.dark .text-dp-accent { text-shadow: 0 0 22px rgba(255, 92, 168, 0.45), 0 0 2px rgba(255, 167, 210, 0.35); }
+.dark .dp-glow-pink { text-shadow: 0 0 18px rgba(255, 92, 168, 0.55); }

@@ -1,12 +1,12 @@
 // The brand's ransom-note word: each letter cut from a different "label" (font, colour, tilt).
 // Colours swap with the side through CSS (dark: variant), so prerendered HTML matches on hydration.
-// Night uses vintage-magazine clippings in Imaan's palette: her accent, silver, ivory and a deeper rose.
+// Night uses vintage-magazine clippings in Imaan's palette: hot pink and bubblegum (with a soft glow), silver and ivory.
 const FONTS = ["dp-cut-bebas", "dp-cut-marker", "dp-cut-playfair"];
 const COLORS = [
-  "text-[#E8508A] dark:text-[var(--im-accent)]",
+  "text-[#E8508A] dark:text-[var(--im-hot)] dark:[text-shadow:0_0_18px_rgba(255,92,168,0.55)]",
   "text-[#E0B000] dark:text-[var(--im-silver)]",
   "text-[#161214] dark:text-[var(--im-text)]",
-  "text-[#F08DBA] dark:text-[#D98A9C]",
+  "text-[#F08DBA] dark:text-[var(--im-accent)] dark:[text-shadow:0_0_16px_rgba(255,167,210,0.4)]",
 ];
 const ROTATIONS = [-4, 3, -2, 5, -3, 2, -5, 4];
 const SIZES = ["1em", "1.08em", "0.94em", "1.12em", "1.02em", "0.96em"];

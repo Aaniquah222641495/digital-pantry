@@ -4,8 +4,8 @@ import { useEffect, useRef } from "react";
 // off screen or the tab is hidden, and not drawn at all for visitors who ask for reduced motion.
 // mode "drift": a slow, endless fall behind a section. mode "burst": one celebratory shower.
 const COLORS = ["#FFA7D2", "#E8508A", "#FFD43B", "#FFFFFF", "#FDD2DE", "#B32F68"];
-// Night (Imaan's room): slow silver and rose flecks, like stars in her night sky.
-const NIGHT = ["#E9E3EE", "#C9C6D3", "#EBA9B6", "#FFFFFF", "#C9A0AA", "#D98A9C"];
+// Night (Imaan's room): slow silver and hot-pink flecks, like stars in her night sky.
+const NIGHT = ["#E9E3EE", "#FF5CA8", "#FFA7D2", "#FFFFFF", "#C9C6D3", "#FF5CA8"];
 
 type Sprinkle = { x: number; y: number; vy: number; vx: number; rot: number; vr: number; len: number; w: number; color: string };
 
