@@ -56,6 +56,16 @@ export default function Portfolio() {
         </div>
       </section>
 
+      <Reveal className="mx-auto max-w-[1100px] px-5 sm:px-8">
+        <img
+          src="/images/art/launch-day.webp"
+          alt="Aaniquah and Imaan serving a new website on a silver tray under falling sprinkles"
+          width={1600}
+          height={893}
+          className="w-full object-contain"
+        />
+      </Reveal>
+
       <div className="mx-auto flex max-w-[1320px] flex-col gap-28 px-5 py-20 sm:px-8 md:gap-40 md:py-28">
         {CASES.map((c, i) => {
           const flip = i % 2 === 1;

@@ -489,3 +489,24 @@ html.dp-theme-shift, html.dp-theme-shift * {
 /* Pink on Night: real bubblegum with a soft neon glow, so it lifts off the burgundy. */
 .dark .text-dp-accent { text-shadow: 0 0 22px rgba(255, 92, 168, 0.45), 0 0 2px rgba(255, 167, 210, 0.35); }
 .dark .dp-glow-pink { text-shadow: 0 0 18px rgba(255, 92, 168, 0.55); }
+
+/* Hero scene (components/HeroScene.tsx): light effects over the pixel-art counter. */
+.dp-sun { background: radial-gradient(closest-side, rgba(255, 228, 120, 0.7), rgba(255, 212, 59, 0)); mix-blend-mode: screen; }
+.dp-twinkle { background: #fff; clip-path: polygon(50% 0, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0 50%, 40% 40%); filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.9)); opacity: 0.85; }
+.dp-sign-glow { background: radial-gradient(closest-side, rgba(255, 92, 168, 0.35), transparent); mix-blend-mode: screen; opacity: 0.6; }
+.dp-screen-shine > span { position: absolute; inset: -20% auto -20% -60%; width: 40%; background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.55), transparent); opacity: 0; }
+.dp-steam { background: linear-gradient(to top, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0)); filter: blur(2px); opacity: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes dp-sun-pulse { 0%, 100% { transform: translate(-50%, -50%) scale(0.92); opacity: 0.65; } 50% { transform: translate(-50%, -50%) scale(1.12); opacity: 1; } }
+  @keyframes dp-twinkle-kf { 0%, 100% { transform: translate(-50%, -50%) scale(0.5) rotate(0deg); opacity: 0.25; } 50% { transform: translate(-50%, -50%) scale(1.15) rotate(45deg); opacity: 1; } }
+  @keyframes dp-sign-kf { 0%, 100% { opacity: 0.35; } 50% { opacity: 0.85; } }
+  @keyframes dp-shine-kf { 0%, 62% { transform: translateX(0); opacity: 0; } 70% { opacity: 1; } 100% { transform: translateX(420%); opacity: 0; } }
+  @keyframes dp-steam-kf { 0% { transform: translate(-50%, 30%) scaleY(0.6); opacity: 0; } 30% { opacity: 0.8; } 100% { transform: translate(-30%, -120%) scaleY(1.2); opacity: 0; } }
+  @keyframes dp-breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.012); } }
+  .dp-sun { animation: dp-sun-pulse 4.5s ease-in-out infinite; }
+  .dp-twinkle { animation: dp-twinkle-kf 2.8s ease-in-out infinite; animation-delay: var(--d, 0s); }
+  .dp-sign-glow { animation: dp-sign-kf 3.6s ease-in-out infinite; }
+  .dp-screen-shine > span { animation: dp-shine-kf 5.5s ease-in-out infinite; }
+  .dp-steam { animation: dp-steam-kf 3.9s ease-out infinite; animation-delay: var(--d, 0s); }
+  .dp-scene-img { animation: dp-breathe 7s ease-in-out infinite; transform-origin: 50% 70%; }
+}

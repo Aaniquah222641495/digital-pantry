@@ -32,7 +32,7 @@ export default function NotFound() {
           </MagneticButton>
         </div>
       </div>
-      <img src="/images/recipe.webp" alt="" width={300} height={300} className="w-48 object-contain md:w-72" />
+      <img src="/images/art/empty-shelf.webp" alt="" width={600} height={600} className="w-56 object-contain md:w-80" />
     </main>
   );
 }

@@ -49,8 +49,8 @@ export default function Contact() {
             </div>
 
             <div className="mt-10 hidden items-end gap-3 md:flex" aria-hidden="true">
-              <img src="/images/recipe.webp" alt="" width={240} height={240} className="h-28 w-28 object-contain" />
-              <span className="mb-3 rounded-full border border-dp-line px-3 py-1.5 text-[13px] text-dp-muted">Reading your recipe soon ★</span>
+              <img src="/images/art/order-ticket.webp" alt="" width={600} height={600} className="h-40 w-40 object-contain" />
+              <span className="mb-3 rounded-full border border-dp-line px-3 py-1.5 text-[13px] text-dp-muted">Your order goes straight to us ★</span>
             </div>
           </div>
 

@@ -24,7 +24,7 @@ export function FreeTaste({ testId }: { testId: string }) {
             <ArrowUpRight size={17} aria-hidden="true" />
           </Link>
         </div>
-        <img src="/images/served.webp" alt="" width={300} height={300} loading="lazy" className="relative mx-auto w-52 -rotate-3 drop-shadow-[0_24px_30px_rgba(179,47,104,0.35)] md:w-72" />
+        <img src="/images/art/free-taste.webp" alt="" width={600} height={600} loading="lazy" className="relative mx-auto w-56 drop-shadow-[0_24px_30px_rgba(179,47,104,0.35)] md:w-80" />
       </Reveal>
     </section>
   );

@@ -8,6 +8,7 @@ import { CutoutWord } from "../components/CutoutWord";
 import { Ticker } from "../components/Ticker";
 import { FreeTaste } from "../components/FreeTaste";
 import { Sprinkles } from "../components/Sprinkles";
+import { HeroScene } from "../components/HeroScene";
 import { PLAN_PRICES } from "../lib/plans";
 import { H2 } from "../lib/style";
 
@@ -66,10 +67,11 @@ const WORK = [
   },
 ] as const;
 
+// Each step shows Aaniquah's chef on Day and Imaan's on Night.
 const RECIPE = [
-  { img: "/images/recipe.webp", title: "Read the recipe", body: "We learn your business, your customers and how you sell, then design a free first look." },
-  { img: "/images/cooking.webp", title: "Cook from scratch", body: "Clean code, mobile first and fast. No templates, nothing you don't need." },
-  { img: "/images/aaniquah.webp", title: "Served fresh", body: "Live on your own domain and ready for orders. Most sites take 5 to 7 business days." },
+  { img: "/images/art/aaniquah-reading.webp", imgNight: "/images/art/imaan-reading.webp", title: "Read the recipe", body: "We learn your business, your customers and how you sell, then design a free first look." },
+  { img: "/images/art/aaniquah-chef.webp", imgNight: "/images/art/imaan-chef.webp", title: "Cook from scratch", body: "Clean code, mobile first and fast. No templates, nothing you don't need." },
+  { img: "/images/art/aaniquah-serving.webp", imgNight: "/images/art/imaan-serving.webp", title: "Served fresh", body: "Live on your own domain and ready for orders. Most sites take 5 to 7 business days." },
 ] as const;
 
 const MENU = [
@@ -100,7 +102,7 @@ function Hero() {
         className="pointer-events-none absolute -right-[20%] -top-[30%] -z-10 h-[90vh] w-[70vw] rounded-full bg-[radial-gradient(closest-side,var(--dp-glow),transparent)] blur-2xl"
       />
       <Sprinkles className="-z-10 opacity-70 dark:opacity-55" />
-      <div className="mx-auto grid min-h-[92dvh] max-w-[1320px] items-center gap-14 px-5 pb-14 pt-28 sm:px-8 md:grid-cols-[1.15fr_1fr] md:gap-10 md:pt-24">
+      <div className="mx-auto grid min-h-[92dvh] max-w-[1320px] items-center gap-14 px-5 pb-14 pt-28 sm:px-8 md:grid-cols-[0.95fr_1.05fr] md:gap-12 md:pt-24">
         <div>
           <p className="dp-rise dp-tag mb-6 inline-flex items-center gap-2 rounded-full border border-dp-line px-3.5 py-1.5 text-[13px] text-dp-muted" style={rise(0)}>
             <span aria-hidden="true" className="text-dp-accent">★</span> A women-led web studio in Cape Town
@@ -125,31 +127,11 @@ function Hero() {
           </div>
         </div>
 
-        {/* The two chefs, as a pair of stickers */}
-        <div className="dp-rise relative mx-auto w-full max-w-[520px]" style={rise(0.2)}>
-          <span aria-hidden="true" className="absolute -left-4 -top-6 text-4xl text-[#FFD43B]">★</span>
-          <span aria-hidden="true" className="absolute -right-2 bottom-2 text-3xl text-dp-pink">✦</span>
-          <div className="grid grid-cols-2 items-end gap-4 sm:gap-6">
-            <figure className="rotate-[-3deg] rounded-[28px] border-[3px] border-white bg-[#FDD2DE] p-3 shadow-[0_30px_60px_-30px_rgba(179,47,104,0.5)] transition-transform duration-700 ease-out hover:rotate-0">
-              <img
-                src="/images/aaniquah.webp"
-                alt="Aaniquah's pixel avatar coding at her desk"
-                width={600}
-                height={600}
-                fetchPriority="high"
-                className="aspect-square w-full rounded-[20px] bg-[#FFF7FA] object-contain"
-              />
-              <figcaption className="px-1 pb-1 pt-3 text-[13px] font-medium text-[#161214]">Aaniquah</figcaption>
-            </figure>
-            <figure className="translate-y-8 rotate-[3deg] rounded-[28px] border-[3px] border-[var(--im-border)] bg-[var(--im-surface)] p-3 shadow-[0_30px_60px_-30px_rgba(12,11,13,0.75)] transition-transform duration-700 ease-out hover:rotate-0">
-              {IMAAN_AVATAR ? (
-                <img src={IMAAN_AVATAR} alt="Imaan's pixel avatar designing at her desk" width={600} height={600} fetchPriority="high" className="aspect-square w-full rounded-[20px] bg-white object-contain" />
-              ) : (
-                <Monogram className="aspect-square w-full rounded-[20px] text-[clamp(2.5rem,6vw,4.5rem)]" />
-              )}
-              <figcaption className="px-1 pb-1 pt-3 text-[13px] font-medium text-[var(--im-text)]">Imaan</figcaption>
-            </figure>
-          </div>
+        {/* The two chefs at one counter, animated */}
+        <div className="dp-rise relative mx-auto w-full max-w-[720px]" style={rise(0.2)}>
+          <span aria-hidden="true" className="absolute -left-3 -top-5 z-10 text-4xl text-[#FFD43B] drop-shadow-[0_4px_10px_rgba(224,176,0,0.5)]">★</span>
+          <span aria-hidden="true" className="absolute -bottom-4 -right-2 z-10 text-3xl text-dp-pink">✦</span>
+          <HeroScene />
         </div>
       </div>
     </section>
@@ -366,7 +348,10 @@ function Recipe() {
                 <h3 className="mt-4 text-[clamp(1.5rem,2.4vw,2rem)] font-semibold tracking-[-0.035em]">{s.title}</h3>
                 <p className="mt-3 max-w-[40ch] leading-relaxed text-dp-muted">{s.body}</p>
               </div>
-              <img src={s.img} alt="" width={240} height={240} loading="lazy" className="h-24 w-24 object-contain sm:h-32 sm:w-32" />
+              <span aria-hidden="true" className="block h-28 w-28 sm:h-36 sm:w-36">
+                <img src={s.img} alt="" width={600} height={600} loading="lazy" className="h-full w-full object-contain dark:hidden" />
+                <img src={s.imgNight} alt="" width={600} height={600} loading="lazy" className="hidden h-full w-full object-contain dark:block" />
+              </span>
             </li>
           ))}
         </ol>
