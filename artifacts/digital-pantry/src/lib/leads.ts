@@ -60,7 +60,7 @@ export const leadSchema = z.object({
     .string()
     .trim()
     .min(1, "Please enter your phone number")
-    .refine((v) => normalisePhone(v) !== null, "Use a number like 072 411 1011, or +44 20 7946 0000 from abroad"),
+    .refine((v) => normalisePhone(v) !== null, "Use a South African number like 0XX XXX XXXX, or your country code (+44...) from abroad"),
   email: z
     .string()
     .trim()

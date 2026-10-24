@@ -175,7 +175,7 @@ export function LeadForm({ source = "contact-page" }: { source?: string }) {
       <div className="grid sm:grid-cols-2 gap-5">
         <div>
           <label htmlFor="lead-phone" className={labelCls}>Phone or WhatsApp</label>
-          <input id="lead-phone" type="tel" inputMode="tel" autoComplete="tel" placeholder="072 411 1011" className={inputCls} data-testid="input-phone" {...aria("phone")} {...register("phone")} />
+          <input id="lead-phone" type="tel" inputMode="tel" autoComplete="tel" placeholder="0XX XXX XXXX" className={inputCls} data-testid="input-phone" {...aria("phone")} {...register("phone")} />
           <FieldError id="phone-error" message={err("phone")} />
         </div>
         <div>

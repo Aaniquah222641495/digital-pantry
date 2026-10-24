@@ -11,7 +11,7 @@ import { Sticker, DAY, NIGHT } from "../components/Stickers";
 export default function Contact() {
   const contact = useSideContact();
   const QUICK_CONTACTS = [
-    { icon: MessageCircle, label: `WhatsApp ${contact.name}`, sub: `${contact.display}, fastest reply`, href: contact.waLink, testId: "button-contact-whatsapp", iconCls: "bg-[#25D366]/15 text-[#1F8A50] dark:text-[#5BD38E]" },
+    { icon: MessageCircle, label: `WhatsApp ${contact.name}`, sub: contact.display ? `${contact.display}, fastest reply` : "Fastest reply", href: contact.waLink, testId: "button-contact-whatsapp", iconCls: "bg-[#25D366]/15 text-[#1F8A50] dark:text-[#5BD38E]" },
     { icon: Mail, label: "Email", sub: contact.email, href: `mailto:${contact.email}`, testId: "button-contact-email", iconCls: "bg-dp-soft text-dp-accent" },
   ];
   return (
@@ -44,8 +44,8 @@ export default function Contact() {
                 <a
                   key={c.label}
                   href={c.href}
-                  target={c.href.startsWith("http") ? "_blank" : undefined}
-                  rel={c.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  target={c.href?.startsWith("http") ? "_blank" : undefined}
+                  rel={c.href?.startsWith("http") ? "noopener noreferrer" : undefined}
                   data-testid={c.testId}
                   className="group flex items-center gap-4 rounded-[20px] border border-dp-line bg-dp-surface/70 p-4 pr-5 transition-colors hover:border-dp-ink/30"
                 >
@@ -54,7 +54,7 @@ export default function Contact() {
                   </span>
                   <span className="flex-1">
                     <span className="block font-medium text-dp-ink">{c.label}</span>
-                    <span className="block text-[14px] text-dp-muted">{c.sub}</span>
+                    <span className="block text-[14px] text-dp-muted" data-nosnippet="">{c.sub}</span>
                   </span>
                   <ArrowUpRight size={17} aria-hidden="true" className="text-dp-muted transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                 </a>

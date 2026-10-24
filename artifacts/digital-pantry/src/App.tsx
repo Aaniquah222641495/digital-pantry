@@ -12,6 +12,8 @@ import Portfolio from "./pages/Portfolio";
 import Pricing from "./pages/Pricing";
 import Contact from "./pages/Contact";
 import Privacy from "./pages/Privacy";
+import CostGuide from "./pages/CostGuide";
+import { FoodBusinesses, SchoolsAndMadrasahs } from "./pages/Industry";
 import NotFound from "./pages/not-found";
 
 
@@ -30,6 +32,9 @@ function Router() {
       <Route path="/pricing" component={Pricing} />
       <Route path="/contact" component={Contact} />
       <Route path="/privacy" component={Privacy} />
+      <Route path="/websites-for-food-businesses" component={FoodBusinesses} />
+      <Route path="/websites-for-schools-and-madrasahs" component={SchoolsAndMadrasahs} />
+      <Route path="/website-cost-south-africa" component={CostGuide} />
       <Route component={NotFound} />
     </Switch>
   );
