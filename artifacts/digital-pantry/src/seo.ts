@@ -3,6 +3,8 @@
 // browser (RouteMeta keeps the tab title and tags right when visitors click between pages).
 // Only state facts that are already on the site. Update `LAST_UPDATED` when content changes.
 
+import { COST_FAQ, COST_GUIDE, INDUSTRIES, type Industry } from "./lib/guides";
+
 export const SITE_URL = "https://digitalpantry.co.za";
 export const SITE_NAME = "The Digital Pantry";
 export const LAST_UPDATED = "2026-10-24";
@@ -105,6 +107,34 @@ const crumbs = (name: string, path: string) => ({
 });
 
 const graph = (...nodes: object[]) => ({ "@context": "https://schema.org", "@graph": nodes });
+
+
+const faqPage = (faq: { q: string; a: string }[]) => ({
+  "@type": "FAQPage",
+  mainEntity: faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+});
+
+const industryPage = (p: Industry, title: string, description: string): PageMeta => ({
+  path: p.path,
+  title,
+  description,
+  jsonLd: [
+    graph(
+      {
+        "@type": "Service",
+        name: p.heading,
+        serviceType: "Web design and development",
+        description: p.intro,
+        provider: { "@id": ORG_ID },
+        areaServed: [{ "@type": "City", name: "Cape Town" }, { "@type": "Country", name: "South Africa" }],
+        offers: { "@type": "AggregateOffer", lowPrice: 600, highPrice: 2500, priceCurrency: "ZAR", url: `${SITE_URL}/pricing` },
+        url: `${SITE_URL}${p.path}`,
+      },
+      faqPage(p.faq),
+      crumbs(p.label, p.path),
+    ),
+  ],
+});
 
 export const PAGES: PageMeta[] = [
   {
@@ -227,6 +257,39 @@ export const PAGES: PageMeta[] = [
     description:
       "How The Digital Pantry collects, uses and protects personal information under South Africa's POPIA, and how to contact us about your rights.",
     jsonLd: [graph(crumbs("Privacy Notice", "/privacy"))],
+  },
+  industryPage(
+    INDUSTRIES[0],
+    "Websites for Food Businesses in Cape Town | Digital Pantry",
+    "Websites for bakeries, pop-ups, home kitchens and takeaways in Cape Town: your menu, where to find you and one-tap WhatsApp ordering. From R600.",
+  ),
+  industryPage(
+    INDUSTRIES[1],
+    "Websites for Schools and Madrasahs in Cape Town | Digital Pantry",
+    "Calm websites for madrasahs, schools and learning centres: programmes, registration and FAQs parents can use on a phone. From R600.",
+  ),
+  {
+    path: COST_GUIDE.path,
+    title: "How Much Does a Website Cost in South Africa? (2026) | Digital Pantry",
+    description:
+      "2026 website prices in South Africa: template sites, small business sites, custom builds, what changes the price and the yearly costs people forget.",
+    jsonLd: [
+      graph(
+        {
+          "@type": "Article",
+          headline: COST_GUIDE.heading,
+          datePublished: COST_GUIDE.published,
+          dateModified: COST_GUIDE.published,
+          author: { "@id": PERSON_ID },
+          publisher: { "@id": ORG_ID },
+          image: OG_IMAGE,
+          mainEntityOfPage: `${SITE_URL}${COST_GUIDE.path}`,
+          inLanguage: "en-ZA",
+        },
+        faqPage(COST_FAQ),
+        crumbs("Website costs", COST_GUIDE.path),
+      ),
+    ],
   },
 ];
 

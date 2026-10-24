@@ -3,6 +3,10 @@ import { Logo } from "./Navbar";
 import { MagneticButton } from "./MagneticButton";
 import { Reveal } from "./Reveal";
 import { useSideContact } from "../lib/contact";
+import { COST_GUIDE, INDUSTRIES } from "../lib/guides";
+
+// Guides for search visitors: linked from every page so Google finds and weighs them.
+const GUIDE_LINKS = [...INDUSTRIES.map((p) => ({ label: p.label, href: p.path })), { label: "What websites cost", href: COST_GUIDE.path }];
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
@@ -26,7 +30,7 @@ export function Footer() {
           </MagneticButton>
         </Reveal>
 
-        <div className="mt-20 grid gap-10 border-t border-dp-line pt-10 sm:grid-cols-2 md:grid-cols-[1.4fr_1fr_1fr]">
+        <div className="mt-20 grid gap-10 border-t border-dp-line pt-10 sm:grid-cols-2 md:grid-cols-[1.4fr_1fr_1.2fr_1.2fr]">
           <div className="flex flex-col items-start gap-4">
             <Logo />
             <p className="max-w-xs text-[15px] leading-relaxed text-dp-muted">
@@ -42,9 +46,17 @@ export function Footer() {
             ))}
           </nav>
 
+          <nav aria-label="Guides" className="flex flex-col">
+            {GUIDE_LINKS.map((link) => (
+              <Link key={link.href} href={link.href} className="w-fit py-1.5 text-[15px] text-dp-muted transition-colors duration-300 hover:text-dp-ink">
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+
           <div className="flex flex-col text-[15px]">
             <a href={contact.waLink} className="w-fit py-1.5 text-dp-muted transition-colors duration-300 hover:text-dp-ink" data-testid="footer-link-whatsapp">
-              WhatsApp {contact.name} {contact.display}
+              WhatsApp {contact.name} <span data-nosnippet="">{contact.display}</span>
             </a>
             <a href="mailto:thedigitalpantryza@gmail.com" className="w-fit py-1.5 text-dp-muted transition-colors duration-300 hover:text-dp-ink" data-testid="footer-link-email">
               thedigitalpantryza@gmail.com

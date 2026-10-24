@@ -7,7 +7,8 @@ import { PantryShelf } from "../components/PantryShelf";
 import { Sticker, DAY, NIGHT } from "../components/Stickers";
 import { INTL_PRICES, INTL_RETAINER, LARGER_FROM, PLAN_PRICES, RETAINER, SMALL_BUSINESS_LIMIT } from "../lib/plans";
 import { useEffect, useState } from "react";
-import { useSearch } from "wouter";
+import { Link, useSearch } from "wouter";
+import { COST_GUIDE } from "../lib/guides";
 import { H1, H2 } from "../lib/style";
 import { FAQ } from "../seo";
 
@@ -247,6 +248,13 @@ export default function Pricing() {
               Got questions? We'll <CutoutWord word="DISH" /> it out.
             </h2>
             <p className="mt-5 max-w-[36ch] text-lg leading-relaxed text-dp-muted">Still hungry for answers? WhatsApp us and a real person replies.</p>
+            <p className="mt-4 max-w-[36ch] leading-relaxed text-dp-muted">
+              Comparing quotes?{" "}
+              <Link href={COST_GUIDE.path} className="text-dp-accent underline decoration-dp-line underline-offset-4 hover:decoration-dp-accent">
+                See what websites cost in South Africa
+              </Link>
+              .
+            </p>
             <div className="mt-8">
               <MagneticButton href="/contact" variant="ghost">
                 Ask us anything
