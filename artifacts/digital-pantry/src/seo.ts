@@ -76,7 +76,7 @@ const person = {
   "@type": "Person",
   "@id": PERSON_ID,
   name: "Aaniquah Dicks",
-  jobTitle: "Founder and web developer",
+  jobTitle: "Founder and software engineer",
   worksFor: { "@id": ORG_ID },
   alumniOf: { "@type": "CollegeOrUniversity", name: "Cape Peninsula University of Technology" },
   award: [
@@ -92,7 +92,7 @@ const imaan = {
   "@type": "Person",
   "@id": IMAAN_ID,
   name: "Imaan Cooper",
-  jobTitle: "Co-founder and web developer",
+  jobTitle: "Co-founder and creative director",
   worksFor: { "@id": ORG_ID },
   knowsAbout: ["Creative direction", "Web design", "Branding", "Figma"],
   homeLocation: { "@type": "City", name: "Cape Town" },
