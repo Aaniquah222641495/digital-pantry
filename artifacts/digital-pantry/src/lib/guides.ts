@@ -2,7 +2,7 @@
 // The pages and src/seo.ts (FAQPage structured data) both read from here, so the questions and
 // answers Google sees always match the page word for word. Only state facts that are already on
 // the site or in a dated, sourced brief (ops/research/2026-10-23-pricing-tiers-and-international.md).
-import { LARGER_FROM, PLAN_PRICES } from "./plans";
+import { LARGER_FROM, PLAN_PRICES, TURNAROUND_TERMS } from "./plans";
 
 export interface Faq {
   q: string;
@@ -58,14 +58,14 @@ export const FOOD: Industry = {
     phone: "/images/work/stuffd-phone.webp",
     rows: [
       ["The problem", "Customers had to hunt for a WhatsApp number and scroll social media to place orders. No central hub, so sales slipped through the cracks."],
-      ["What we cooked", "A single-page ordering site with the menu, this week's pop-up spots and one-tap WhatsApp ordering. Customers find what they need in seconds."],
+      ["What we cooked", "A single-page ordering site with the menu, this week's pop-up spots and one-tap WhatsApp ordering."],
     ],
   },
   fit: `Starter (${PLAN_PRICES.Starter}) is one page with your menu and a WhatsApp button, which is all many food businesses need. Premium (${PLAN_PRICES.Premium}) adds your own domain, a Google Business Profile and basic SEO.`,
   faq: [
     { q: "Can customers order without an online shop?", a: "Yes. The site sends them to your WhatsApp with one tap, so you take orders the way you already do and don't pay for an online shop." },
     { q: "Can you update my menu after launch?", a: "Yes. The optional R120/month retainer covers menu updates, schedule changes and small edits." },
-    { q: "How long does a food business website take?", a: "Most of our sites are done within 5 to 7 business days." },
+    { q: "How long does a food business website take?", a: TURNAROUND_TERMS },
   ],
 };
 
@@ -100,7 +100,7 @@ export const SCHOOLS: Industry = {
   faq: [
     { q: "Can parents register online?", a: "Yes. Pro includes a form that saves every registration to your own Google Sheet and emails you straight away. Smaller packages use a WhatsApp button instead." },
     { q: "Do you build websites for madrasahs and Islamic schools?", a: "Yes. Beginners Madrasah is one of our live sites, and we're happy to build for madrasahs, masjids and Islamic learning centres." },
-    { q: "How long does a school website take?", a: "Most of our sites are done within 5 to 7 business days." },
+    { q: "How long does a school website take?", a: TURNAROUND_TERMS },
   ],
 };
 
@@ -164,7 +164,7 @@ export const COST_FAQ: Faq[] = [
   },
   {
     q: "How long does it take to build a website?",
-    a: "Most of our small business sites are done within 5 to 7 business days. Larger custom builds take longer and are planned with you.",
+    a: TURNAROUND_TERMS,
   },
 ];
 

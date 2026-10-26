@@ -3,11 +3,12 @@
 // browser (RouteMeta keeps the tab title and tags right when visitors click between pages).
 // Only state facts that are already on the site. Update `LAST_UPDATED` when content changes.
 
+import { BILLED_SEPARATELY_SUMMARY, TURNAROUND_TERMS } from "./lib/plans";
 import { COST_FAQ, COST_GUIDE, INDUSTRIES, type Industry } from "./lib/guides";
 
 export const SITE_URL = "https://digitalpantry.co.za";
 export const SITE_NAME = "The Digital Pantry";
-export const LAST_UPDATED = "2026-10-24";
+export const LAST_UPDATED = "2026-10-26";
 const OG_IMAGE = `${SITE_URL}/og-card.jpg`; // 1200x630 link-preview card (WhatsApp, LinkedIn, X)
 // Email is the contact we publish to search engines and AI assistants (founder, 2026-10-24).
 // The founders' WhatsApp numbers stay on the pages for visitors but are left out of this data.
@@ -45,7 +46,8 @@ const PLANS = [
 export const FAQ = [
   { q: "Do I need to know how to code?", a: "No! That's literally our job. You handle the business, we handle the website." },
   { q: "Do I keep my WhatsApp number?", a: "Yes! We just add a click-to-WhatsApp button on your site. Easy." },
-  { q: "How long does it take?", a: "Most projects are done within 5 to 7 business days." },
+  { q: "How long does it take?", a: TURNAROUND_TERMS },
+  { q: "What is not included in the price?", a: BILLED_SEPARATELY_SUMMARY },
   { q: "Do these prices apply to bigger companies?", a: "No. The rand packages are for South African small businesses with up to 10 staff. Larger businesses get a custom quote, from R8 000." },
   { q: "Do you work with international clients?", a: "Yes. International packages are priced in US dollars: Starter $450, Standard $750, Premium $1 200 and Pro $1 800, once-off." },
   { q: "What if I need changes later?", a: "That's what the R120/month retainer is for ($90/month for international clients). Small edits, big peace of mind." },
@@ -59,7 +61,7 @@ const business = {
   alternateName: "Digital Pantry Web Studio",
   slogan: "Coded in Pink. Built to Perform.",
   description:
-    "Cape Town web studio building custom websites from scratch for South African small businesses. Packages from R600 to R2 500, most projects done in 5 to 7 business days.",
+    "Cape Town web studio building custom websites from scratch for South African small businesses. Packages from R600 to R2 500.",
   url: `${SITE_URL}/`,
   logo: `${SITE_URL}/images/logo-wordmark.webp`,
   image: OG_IMAGE,
@@ -141,7 +143,7 @@ export const PAGES: PageMeta[] = [
     path: "/",
     title: "Web Developer in Cape Town | The Digital Pantry",
     description:
-      "Custom websites for South African small businesses, built from scratch by Aaniquah and Imaan in Cape Town. From R600, most done in 5 to 7 days.",
+      "Custom websites for South African small businesses, built from scratch by Aaniquah and Imaan in Cape Town. From R600.",
     jsonLd: [
       graph(
         { "@type": "WebSite", "@id": `${SITE_URL}/#website`, url: `${SITE_URL}/`, name: SITE_NAME, publisher: { "@id": ORG_ID }, inLanguage: "en-ZA" },

@@ -6,6 +6,7 @@ import { Reveal } from "../components/Reveal";
 import { FreeTaste } from "../components/FreeTaste";
 import { H1 } from "../lib/style";
 import { COST_BANDS, COST_DRIVERS, COST_EXTRAS, COST_FAQ, COST_GUIDE, COST_SOURCES, INDUSTRIES, OUR_PRICES } from "../lib/guides";
+import { TURNAROUND_TERMS } from "../lib/plans";
 
 // "How much does a website cost in South Africa?": an answer-first guide built from the dated,
 // sourced pricing brief. Every market figure names its source; ours come from src/lib/plans.ts.
@@ -113,7 +114,7 @@ export default function CostGuide() {
             <h2 className={h2Cls}>Where Digital Pantry fits</h2>
             <p className={`mt-4 text-lg ${pCls}`}>{OUR_PRICES}</p>
             <p className={`mt-4 ${pCls}`}>
-              We keep small business sites focused: the pages your customers actually use, built from scratch, mobile first, usually in 5 to 7 business days. See what a site looks like for{" "}
+              We keep small business sites focused: the pages your customers actually use, built from scratch and mobile first. {TURNAROUND_TERMS} See what a site looks like for{" "}
               {INDUSTRIES.map((ind, i) => (
                 <span key={ind.path}>
                   {i > 0 && " or "}

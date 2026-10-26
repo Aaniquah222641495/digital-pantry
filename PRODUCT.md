@@ -13,7 +13,7 @@ Cape Town small business owners who need a first website or a better one and do 
 The Digital Pantry Web Studio's own site. It shows the portfolio and the packages, and turns visitors into enquiries through the contact form. Success means qualified enquiries that become signed projects.
 
 ## Positioning
-Every site is built from scratch by one developer, Aaniquah, a Cape Town software engineer. No templates. Most projects are done within 5 to 7 business days.
+Every site is built from scratch by one developer, Aaniquah, a Cape Town software engineer. No templates. Starter, Standard and Premium sites take 5 to 7 business days from deposit and full content, with conditions (ADR-0025); Pro and custom builds are estimated in the quote.
 
 ## Operating Context
 - Pages: Home, Portfolio, Pricing, Contact, Privacy.
@@ -37,7 +37,7 @@ Every site is built from scratch by one developer, Aaniquah, a Cape Town softwar
 
 ## Product Principles
 1. Show the work and let the quality speak. Confident, not salesy.
-2. Clear prices, no hidden fees.
+2. Clear prices, and a plain list of what is billed separately.
 3. Make it easy to get in touch: the enquiry is the goal of every page.
 4. Never invent facts, reviews or figures.
 
