@@ -32,12 +32,12 @@ const PROMISES = [
 
 export function BuildTicket() {
   return (
-    <section aria-labelledby="build-heading" className="relative isolate overflow-hidden border-t border-dp-line">
+    <section aria-labelledby="ticket-heading" className="relative isolate overflow-hidden border-t border-dp-line">
       <div aria-hidden="true" className="pointer-events-none absolute -left-[10%] top-1/3 -z-10 h-[60vh] w-[50vw] rounded-full bg-[radial-gradient(closest-side,var(--dp-glow),transparent)] blur-2xl" />
       <div className="mx-auto grid max-w-[1320px] gap-16 px-5 py-24 sm:px-8 md:grid-cols-12 md:gap-10 md:py-32">
         <div className="md:col-span-6 lg:col-span-7">
           <Reveal>
-            <h2 id="build-heading" className={`max-w-[14ch] text-balance ${H2}`}>
+            <h2 id="ticket-heading" className={`max-w-[14ch] text-balance ${H2}`}>
               Sweet on the outside. <CutoutWord word="SERIOUS" /> about the build.
             </h2>
             <p className="mt-6 max-w-[48ch] text-lg leading-relaxed text-dp-muted">

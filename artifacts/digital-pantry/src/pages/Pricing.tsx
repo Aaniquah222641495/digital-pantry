@@ -4,6 +4,7 @@ import { Reveal } from "../components/Reveal";
 import { MagneticButton } from "../components/MagneticButton";
 import { FreeTaste } from "../components/FreeTaste";
 import { PantryShelf } from "../components/PantryShelf";
+import { BusinessPicker } from "../components/BusinessPicker";
 import { Sticker, DAY, NIGHT } from "../components/Stickers";
 import { BILLED_SEPARATELY, INTL_PRICES, INTL_RETAINER, LARGER_DRIVERS, LARGER_FROM, PLAN_PRICES, RETAINER, SMALL_BUSINESS_LIMIT } from "../lib/plans";
 import { useEffect, useState } from "react";
@@ -258,6 +259,8 @@ export default function Pricing() {
       </section>
 
       {/* FAQ as a text-message thread: the client asks, we answer */}
+      {audience !== "larger" && <BusinessPicker />}
+
       <section aria-labelledby="faq-heading" className="border-t border-dp-line">
         <div className="mx-auto grid max-w-[1320px] gap-14 px-5 py-24 sm:px-8 md:grid-cols-[1fr_1.2fr] md:py-32">
           <Reveal className="md:sticky md:top-32 md:self-start">

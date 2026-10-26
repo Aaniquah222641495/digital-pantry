@@ -9,13 +9,10 @@ import { Ticker } from "../components/Ticker";
 import { FreeTaste } from "../components/FreeTaste";
 import { Sprinkles } from "../components/Sprinkles";
 import { HeroScene } from "../components/HeroScene";
-import { PantryShelf } from "../components/PantryShelf";
 import { Sticker, DAY, NIGHT } from "../components/Stickers";
 import { H2 } from "../lib/style";
 import { useSideContact } from "../lib/contact";
-import { LARGER_FROM, PLAN_PRICES, TURNAROUND_NOTE } from "../lib/plans";
-import { INDUSTRIES } from "../lib/guides";
-import { BuildTicket } from "../components/BuildTicket";
+import { TURNAROUND_NOTE } from "../lib/plans";
 import { WhatWeCook } from "../components/WhatWeCook";
 
 // Imaan's pixel avatar is being made; until then her cards show a monogram.
@@ -46,7 +43,7 @@ const CHEFS = [
 ] as const;
 
 
-// Case studies (PRD 4.4): client and context, the business need, what we built, and the technical
+// Case studies (PRD 4.4, full version on Portfolio; Home shows the need and what we built): client and context, the business need, what we built, and the technical
 // side next to the screenshots, with a live link. Every line checked against the live site and the
 // project records on 2026-10-26. No results or testimonials we can't verify.
 const WORK = [
@@ -130,23 +127,6 @@ function Hero() {
             <MagneticButton href="/portfolio" variant="ghost" data-testid="button-hero-portfolio">
               See our work
             </MagneticButton>
-          </div>
-          {/* Two doors, priced: small businesses and bigger projects (PRD 4.2) */}
-          <div className="dp-rise mt-12 grid max-w-[520px] grid-cols-2 border-t border-dp-ink/15 dark:border-white/15" style={rise(0.36)}>
-            <Link href="/pricing" className="group border-r border-dp-ink/15 py-4 pr-4 dark:border-white/15">
-              <span className="block text-[13px] text-dp-muted">Small business sites</span>
-              <span className="mt-1 flex items-center gap-1.5 text-[1.05rem] font-semibold tracking-[-0.02em] text-dp-ink">
-                From {PLAN_PRICES.Starter}
-                <ArrowUpRight size={15} aria-hidden="true" className="transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-              </span>
-            </Link>
-            <Link href="/business-projects" className="group py-4 pl-5">
-              <span className="block text-[13px] text-dp-muted">Custom builds and agencies</span>
-              <span className="mt-1 flex items-center gap-1.5 text-[1.05rem] font-semibold tracking-[-0.02em] text-dp-ink">
-                From {LARGER_FROM}
-                <ArrowUpRight size={15} aria-hidden="true" className="transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-              </span>
-            </Link>
           </div>
         </div>
 
@@ -254,7 +234,7 @@ function Chefs() {
       {/* Promises as colour blocks: blush, ink, butter. */}
       <div className="mt-5 grid gap-5 md:grid-cols-6">
         {/* You talk to the chefs: an illustrative chat thread (not a real client conversation). */}
-        <Reveal className="dp-chat relative grid gap-8 overflow-hidden rounded-[32px] bg-[#FDD2DE] p-8 text-[#161214] sm:p-10 md:col-span-4 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+        <Reveal className="dp-chat relative grid gap-8 overflow-hidden rounded-[32px] bg-[#FDD2DE] p-8 text-[#161214] sm:p-10 md:col-span-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div aria-hidden="true" className="pointer-events-none absolute -bottom-24 -left-16 h-64 w-64 rounded-full bg-[radial-gradient(closest-side,#FFA7D2,transparent)]" />
           <div className="relative">
             <h3 className="text-[clamp(1.8rem,3vw,2.6rem)] font-semibold leading-[1] tracking-[-0.04em]">You talk to the chefs.</h3>
@@ -299,18 +279,6 @@ function Chefs() {
           </ol>
         </Reveal>
 
-        {/* No handoffs: her design and her partner's code meet in the middle as the card scrolls in. */}
-        <Reveal delay={0.08} className="dp-venn relative flex flex-col overflow-hidden rounded-[32px] bg-[var(--im-surface)] p-8 text-[var(--im-text)] sm:p-10 md:col-span-2">
-          <div aria-hidden="true" className="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-[radial-gradient(closest-side,var(--im-glow-strong),transparent)]" />
-          <div aria-hidden="true" className="relative mx-auto flex h-36 w-full max-w-[260px] items-center justify-center">
-            <span className="dp-venn-a absolute grid h-32 w-32 place-items-center rounded-full bg-[#FFA7D2] pr-8 text-[13px] font-semibold text-[#161214] mix-blend-screen">code</span>
-            <span className="dp-venn-b absolute grid h-32 w-32 place-items-center rounded-full bg-[var(--im-deep)] pl-8 text-[13px] font-semibold text-[var(--im-text)] mix-blend-screen">design</span>
-            <span className="dp-venn-star absolute z-10 grid h-9 w-9 place-items-center rounded-full bg-[#FFD43B] text-[15px] text-[#161214] shadow-[0_8px_20px_-6px_rgba(0,0,0,0.6)]">★</span>
-          </div>
-          <h3 className="mt-8 text-[clamp(1.5rem,2.2vw,1.9rem)] font-semibold leading-[1.05] tracking-[-0.035em]">No handoffs.</h3>
-          <p className="mt-3 leading-relaxed text-[var(--im-muted)]">Design and code happen side by side, so nothing gets lost between how it looks and how it works.</p>
-        </Reveal>
-
         <Reveal delay={0.12} className="relative overflow-hidden rounded-[32px] bg-[#FFD43B] p-8 text-[#161214] sm:p-12 md:col-span-6">
           <Sprinkles count={20} className="opacity-90" />
           <div className="relative grid items-end gap-6 md:grid-cols-[1.4fr_1fr]">
@@ -322,65 +290,6 @@ function Chefs() {
             </p>
           </div>
         </Reveal>
-      </div>
-    </section>
-  );
-}
-
-// "What are you cooking up?" (DPW-14): send each visitor to the page that fits their business.
-// Only pages that exist; new segments get a card when their page ships.
-const SEGMENTS = [
-  ...INDUSTRIES.map((ind) => ({ href: ind.path, ...ind.card })),
-  { href: "/business-projects", title: "Something bigger", body: "Custom builds, integrations and agency work, quoted after a short chat.", tag: "From R8 000", image: "/images/stock/custom-coding-laptop.webp" },
-];
-
-function CookingUp() {
-  return (
-    <section aria-labelledby="cooking-heading" className="border-t border-dp-line">
-      <div className="mx-auto max-w-[1320px] px-5 py-20 sm:px-8 md:py-24">
-        <Reveal>
-          <h2 id="cooking-heading" className={H2}>
-            What are you <CutoutWord word="COOKING" /> up?
-          </h2>
-          <p className="mt-5 max-w-[52ch] text-lg leading-relaxed text-dp-muted">Running a small business? Pick yours to see what your site would include and which package fits.</p>
-        </Reveal>
-        <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" data-testid="segment-selector">
-          {SEGMENTS.map((s, i) => {
-            // The custom route closes the grid as a wider, inverted card, so bigger buyers can't miss it.
-            const big = s.href === "/business-projects";
-            return (
-            <li key={s.href} className={big ? "sm:col-span-2" : ""}>
-              <Reveal delay={(i % 4) * 0.06} className="h-full">
-                <Link
-                  href={s.href}
-                  className={`group flex h-full flex-col overflow-hidden rounded-[24px] border transition-[border-color,box-shadow] duration-500 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-dp-accent ${big ? "border-transparent bg-dp-cta text-dp-cta-fg sm:grid sm:grid-cols-2" : "border-dp-line bg-dp-surface hover:border-dp-accent hover:shadow-[0_24px_50px_-30px_rgba(179,47,104,0.55)]"}`}
-                >
-                  <span className={`relative block overflow-hidden ${big ? "aspect-[16/9] sm:order-2 sm:aspect-auto sm:h-full" : "aspect-[16/9] sm:aspect-[4/3]"}`}>
-                    <img
-                      src={s.image}
-                      alt=""
-                      width={800}
-                      height={1000}
-                      loading="lazy"
-                      decoding="async"
-                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.05]"
-                    />
-                    <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/0 to-black/0" />
-                    <span className="absolute bottom-3 left-3 rounded-full bg-white/92 px-3 py-1 font-mono text-[11px] text-[#211A1E] backdrop-blur-sm">{s.tag}</span>
-                  </span>
-                  <span className={`flex flex-1 flex-col ${big ? "p-7 sm:justify-center sm:p-9" : "p-6"}`}>
-                    <span className={`flex items-start justify-between gap-3 font-semibold leading-tight tracking-[-0.03em] ${big ? "text-[clamp(1.6rem,2.4vw,2.1rem)]" : "text-[1.35rem] text-dp-ink"}`}>
-                      {s.title}
-                      <ArrowUpRight aria-hidden="true" size={18} className="mt-1 shrink-0 transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                    </span>
-                    <span className={`mt-3 max-w-[40ch] text-[15px] leading-relaxed ${big ? "opacity-80" : "text-dp-muted"}`}>{s.body}</span>
-                  </span>
-                </Link>
-              </Reveal>
-            </li>
-            );
-          })}
-        </ul>
       </div>
     </section>
   );
@@ -418,7 +327,7 @@ function Work() {
                     {w.name}
                   </h3>
                   <dl className="mt-7 flex flex-col gap-4">
-                    {w.facts.map(([k, v]) => (
+                    {w.facts.filter(([k]) => k === "The need" || k === "What we built").map(([k, v]) => (
                       <div key={k} className="grid gap-1 sm:grid-cols-[116px_1fr] sm:gap-4">
                         <dt className="pt-0.5 text-[13px] font-semibold text-dp-accent">{k}</dt>
                         <dd className="text-[15px] leading-relaxed text-dp-muted">{v}</dd>
@@ -434,6 +343,9 @@ function Work() {
                     Visit the live site
                     <ArrowUpRight size={16} className="transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                   </a>
+                  <Link href="/portfolio" className="ml-5 inline-flex min-h-11 items-center text-[15px] font-medium text-dp-ink underline decoration-dp-line underline-offset-[6px] hover:decoration-dp-accent">
+                    Full case study
+                  </Link>
                 </Reveal>
               </article>
             );
@@ -490,43 +402,14 @@ function Recipe() {
   );
 }
 
-function Menu() {
-  return (
-    <section aria-labelledby="menu-heading" className="relative border-t border-dp-line">
-      <Sticker day={DAY.donut} night={NIGHT.mug} size={64} r={-12} d={0.4} style={{ right: "6%", top: "24px" }} />
-      <div className="mx-auto max-w-[1320px] px-5 py-24 sm:px-8 md:py-32">
-        <Reveal className="flex flex-wrap items-end justify-between gap-6">
-          <div>
-            <h2 id="menu-heading" className={H2}>
-              On the <CutoutWord word="MENU" />
-            </h2>
-            <p className="mt-5 max-w-[40ch] text-lg leading-relaxed text-dp-muted">Once-off prices in rand. See what is and is not included on the pricing page, then pick a jar to ask about it.</p>
-          </div>
-          <Link href="/pricing" className="group inline-flex min-h-11 items-center gap-1.5 text-[15px] text-dp-muted transition-colors hover:text-dp-ink" data-testid="button-pricing-preview-cta">
-            See full packages
-            <ArrowUpRight size={16} className="transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-          </Link>
-        </Reveal>
-        <Reveal className="mt-16">
-          <PantryShelf />
-        </Reveal>
-        <p className="mt-12 text-[14px] text-dp-muted">For South African small businesses with up to 10 staff, once-off in rand. Larger businesses from R8 000, quoted. Abroad? See our international prices in US dollars.</p>
-      </div>
-    </section>
-  );
-}
-
 export default function Home() {
   return (
     <main>
       <Hero />
       <Ticker />
       <WhatWeCook />
-      <CookingUp />
       <Work />
       <Recipe />
-      <BuildTicket />
-      <Menu />
       <Chefs />
       <FreeTaste testId="home-mockup-offer" />
     </main>
