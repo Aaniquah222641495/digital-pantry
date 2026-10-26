@@ -2,6 +2,7 @@ import { Link } from "wouter";
 import { ArrowUpRight } from "lucide-react";
 import { MOCKUP_BAND } from "../lib/plans";
 import { Reveal } from "./Reveal";
+import { track } from "../lib/analytics";
 
 // "Free mock-up" offer band, shared by Home, Pricing and Portfolio.
 export function FreeTaste({ testId }: { testId: string }) {
@@ -22,6 +23,7 @@ export function FreeTaste({ testId }: { testId: string }) {
           <Link
             href="/contact?interest=mockup"
             data-testid={`${testId}-cta`}
+            onClick={() => track("package_cta_click", { package: "free_mockup", surface: "mockup_band" })}
             className="mt-10 inline-flex h-[52px] items-center gap-2 rounded-full bg-[#161214] px-7 text-[15px] font-medium text-[#FFF7FA] dark:bg-[var(--im-cta)] dark:text-[var(--im-cta-fg)] dark:shadow-[0_10px_30px_-10px_rgba(255,92,168,0.6)] transition-transform active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#161214]"
           >
             Get My Free Mock-up

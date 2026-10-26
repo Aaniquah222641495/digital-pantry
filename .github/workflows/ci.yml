@@ -22,12 +22,18 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - name: Typecheck
         run: pnpm run typecheck
+      - name: Analytics setup matches ADR-0026 (pinned tracker, script tag, CSP)
+        run: pnpm --filter @workspace/digital-pantry run check:analytics
       - name: Build the website
         run: pnpm --filter @workspace/digital-pantry run build
         env:
           NODE_ENV: production
           PORT: "3000"
           BASE_PATH: /
+      - name: Install Chromium for the egress test
+        run: pnpm --filter @workspace/digital-pantry exec playwright install --with-deps chromium
+      - name: Analytics egress test (no personal data leaves the page)
+        run: pnpm --filter @workspace/digital-pantry run test:egress
       - name: Audit dependencies (high and critical)
         run: pnpm audit --audit-level high
         continue-on-error: true
