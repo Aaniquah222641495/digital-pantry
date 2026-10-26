@@ -47,7 +47,10 @@ Starter, Standard and Premium sites take 5 to 7 business days, counted from when
 - International clients: $90 per month. Larger businesses: quoted with the build.
 
 ## Free mock-up
-- A free preview of your website, with no obligation to go ahead. Ask on the contact page: https://digitalpantry.co.za/contact?interest=mockup
+- One free concept per business, for qualified enquiries: a real business, with the decision-maker, open to a paid build.
+- You get a mock-up pack (phone and desktop videos and a quote PDF), not a working site, within 5 business days of your brief.
+- Development, a live link, source files and revisions start once the deposit is paid. The concept and files stay ours until the agreed fee is paid.
+- No obligation to go ahead. Ask on the contact page: https://digitalpantry.co.za/contact?interest=mockup
 
 ## Contact
 - Email: thedigitalpantryza@gmail.com

@@ -3,7 +3,7 @@
 // browser (RouteMeta keeps the tab title and tags right when visitors click between pages).
 // Only state facts that are already on the site. Update `LAST_UPDATED` when content changes.
 
-import { BILLED_SEPARATELY_SUMMARY, TURNAROUND_TERMS } from "./lib/plans";
+import { BILLED_SEPARATELY_SUMMARY, MOCKUP_TERMS, TURNAROUND_TERMS } from "./lib/plans";
 import { COST_FAQ, COST_GUIDE, INDUSTRIES, type Industry } from "./lib/guides";
 
 export const SITE_URL = "https://digitalpantry.co.za";
@@ -47,6 +47,7 @@ export const FAQ = [
   { q: "Do I need to know how to code?", a: "No! That's literally our job. You handle the business, we handle the website." },
   { q: "Do I keep my WhatsApp number?", a: "Yes! We just add a click-to-WhatsApp button on your site. Easy." },
   { q: "How long does it take?", a: TURNAROUND_TERMS },
+  { q: "What do I get in the free mock-up?", a: MOCKUP_TERMS },
   { q: "What is not included in the price?", a: BILLED_SEPARATELY_SUMMARY },
   { q: "Do these prices apply to bigger companies?", a: "No. The rand packages are for South African small businesses with up to 10 staff. Larger businesses get a custom quote, from R8 000." },
   { q: "Do you work with international clients?", a: "Yes. International packages are priced in US dollars: Starter $450, Standard $750, Premium $1 200 and Pro $1 800, once-off." },

@@ -46,3 +46,13 @@ export const LARGER_FROM = "R8 000";
 // 2026-10-24). Larger businesses get theirs quoted with the build.
 export const RETAINER = "R120";
 export const INTL_RETAINER = "$90";
+
+// Free mock-up terms (DPW-7; ADR-0025, founder 2026-10-26). The band, the form note, the FAQ,
+// pricing.md and llms.txt all say the same thing, so change them together.
+// Excluded until the deposit is paid: development, a live link, source files, revisions.
+export const MOCKUP_BAND =
+  "One free concept per business, for qualified enquiries. You get phone and desktop videos and a quote PDF within 5 business days of your brief. It's a mock-up, not a working site: nothing goes live and nothing is editable until the deposit is paid.";
+export const MOCKUP_FORM_NOTE =
+  "One free concept per business, for qualified enquiries: phone and desktop videos and a quote PDF within 5 business days of your brief. Nothing goes live or is editable until the deposit is paid.";
+export const MOCKUP_TERMS =
+  "One free concept per business, for qualified enquiries: a real business, with the decision-maker, open to a paid build. You get a mock-up pack (phone and desktop videos and a quote PDF), not a working site, within 5 business days of your brief. Development, a live link, source files and revisions start once the deposit is paid, and the concept and files stay ours until the agreed fee is paid.";
