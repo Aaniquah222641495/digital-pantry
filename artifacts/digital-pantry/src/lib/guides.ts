@@ -72,6 +72,7 @@ export const FOOD: Industry = {
     { q: "Can you update my menu after launch?", a: "Yes. The optional R120/month retainer covers menu updates, schedule changes and small edits." },
     { q: "How long does a food business website take?", a: TURNAROUND_TERMS },
   ],
+  photo: { src: "/images/stock/food-cafe-counter.webp", alt: "A café counter with an espresso machine, pendant lights and stools under a pink wall", credit: "Merve" },
   card: { title: "Food and drinks", body: "Menus, market days and one-tap WhatsApp orders.", tag: "Bakes, pop-ups, cafes", image: "/images/stock/food-cafe-counter.webp" },
 };
 
@@ -108,6 +109,7 @@ export const SCHOOLS: Industry = {
     { q: "Do you build websites for madrasahs and Islamic schools?", a: "Yes. Beginners Madrasah is one of our live sites, and we're happy to build for madrasahs, masjids and Islamic learning centres." },
     { q: "How long does a school website take?", a: TURNAROUND_TERMS },
   ],
+  photo: { src: "/images/stock/schools-textbook.webp", alt: "An open workbook with a ruler, pencils and a pencil case on a wooden desk", credit: "Katerina Holmes" },
   card: { title: "Schools and tutors", body: "Programmes, registrations and answers for parents.", tag: "Madrasahs, tutors, centres", image: "/images/stock/schools-textbook.webp" },
 };
 

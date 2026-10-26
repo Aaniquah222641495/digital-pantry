@@ -1,164 +1,212 @@
 import type { CSSProperties } from "react";
 import { Link } from "wouter";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Plus } from "lucide-react";
 import { CutoutWord } from "../components/CutoutWord";
 import { Reveal } from "../components/Reveal";
 import { DeviceFrames } from "../components/DeviceFrames";
 import { FreeTaste } from "../components/FreeTaste";
 import { H1, H2 } from "../lib/style";
+import { LARGER_FROM, PLAN_PRICES } from "../lib/plans";
 import { BEAUTY, CONSULTANTS, COST_GUIDE, FOOD, PRODUCT_BRANDS, SCHOOLS, TRADES, type Industry } from "../lib/guides";
 
 // Search landing pages for one kind of business: what their site needs, a live site we built
 // for that kind of business, which package fits, and their questions. Content: src/lib/guides.ts.
+// Packages named in the page's advice, in shelf order, so the order slip never repeats a price by hand.
+const PLAN_ORDER = ["Starter", "Standard", "Premium", "Pro"] as const;
+const plansIn = (text: string) => PLAN_ORDER.filter((name) => new RegExp(`\\b${name}\\b`).test(text));
+
 function IndustryPage({ page }: { page: Industry }) {
   const { proof } = page;
+  const plans = plansIn(page.fit);
   return (
     <main>
+      {/* Hero: the promise on the left, the kind of business on the right */}
       <section className="relative isolate overflow-hidden">
         <div aria-hidden="true" className="pointer-events-none absolute -right-[15%] -top-[30%] -z-10 h-[80vh] w-[60vw] rounded-full bg-[radial-gradient(closest-side,var(--dp-glow),transparent)] blur-2xl" />
-        <div className={`mx-auto max-w-[1320px] px-5 pb-16 pt-36 sm:px-8 md:pb-24 md:pt-40 ${page.photo ? "md:grid md:grid-cols-12 md:items-center md:gap-10" : ""}`}>
-          <div className={page.photo ? "md:col-span-7" : ""}>
-          <nav aria-label="Breadcrumb" className="dp-rise mb-3 font-mono text-[12px] text-dp-muted">
-            <Link href="/" className="inline-block py-3 underline decoration-dp-line underline-offset-4 hover:text-dp-ink">Home</Link>
-            <span aria-hidden="true" className="mx-2">/</span>
-            <span aria-current="page">{page.label}</span>
-          </nav>
-          <h1 className={`dp-rise max-w-[16ch] ${H1}`}>
-            <span className="sr-only">{page.heading}</span>
-            <span aria-hidden="true">
-              {page.before} <CutoutWord word={page.word} /> {page.after}
-            </span>
-          </h1>
-          <p className="dp-rise mt-6 max-w-[52ch] text-[clamp(1.05rem,1.5vw,1.25rem)] leading-relaxed text-dp-muted" style={{ "--d": "0.12s" } as CSSProperties}>
-            {page.intro}
-          </p>
-          <div className="dp-rise mt-9 flex flex-wrap gap-3" style={{ "--d": "0.2s" } as CSSProperties}>
-            <Link href="/contact" className="inline-flex h-[52px] items-center gap-2 rounded-full bg-dp-cta px-7 text-[15px] font-medium text-dp-cta-fg transition-transform active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-dp-accent">
-              Get a quote <ArrowUpRight size={17} aria-hidden="true" />
-            </Link>
-            <Link href="/pricing" className="inline-flex h-[52px] items-center rounded-full border border-dp-line px-7 text-[15px] font-medium text-dp-ink transition-colors hover:border-dp-ink/40">
-              See prices
-            </Link>
-          </div>
+        <div className="mx-auto grid max-w-[1320px] items-center gap-14 px-5 pb-20 pt-32 sm:px-8 md:grid-cols-12 md:gap-10 md:pb-28 md:pt-36">
+          <div className="md:col-span-6 lg:col-span-7">
+            <nav aria-label="Breadcrumb" className="dp-rise mb-3 font-mono text-[12px] text-dp-muted">
+              <Link href="/" className="inline-block py-3 underline decoration-dp-line underline-offset-4 hover:text-dp-ink">Home</Link>
+              <span aria-hidden="true" className="mx-2">/</span>
+              <span aria-current="page">{page.label}</span>
+            </nav>
+            <h1 className={`dp-rise max-w-[14ch] ${H1}`}>
+              <span className="sr-only">{page.heading}</span>
+              <span aria-hidden="true">
+                {page.before} <CutoutWord word={page.word} /> {page.after}
+              </span>
+            </h1>
+            <p className="dp-rise mt-7 max-w-[46ch] text-[clamp(1.1rem,1.6vw,1.3rem)] leading-[1.5] text-dp-ink/80" style={{ "--d": "0.12s" } as CSSProperties}>
+              {page.intro}
+            </p>
+            <div className="dp-rise mt-10 flex flex-wrap gap-3" style={{ "--d": "0.2s" } as CSSProperties}>
+              <Link href="/contact" className="inline-flex h-[52px] items-center gap-2 rounded-full bg-dp-cta px-7 text-[15px] font-medium text-dp-cta-fg transition-transform active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-dp-accent">
+                Get a quote <ArrowUpRight size={17} aria-hidden="true" />
+              </Link>
+              <a href="#fit-heading" className="inline-flex h-[52px] items-center rounded-full border border-dp-line px-7 text-[15px] font-medium text-dp-ink transition-colors hover:border-dp-ink/40">
+                Which package fits
+              </a>
+            </div>
           </div>
           {page.photo && (
-            <figure className="dp-rise mx-auto mt-14 w-[min(100%,420px)] md:col-span-5 md:mt-0" style={{ "--d": "0.25s" } as CSSProperties}>
-              <div className="rotate-[2deg] rounded-[30px] border-[3px] border-white bg-dp-surface p-2 shadow-[0_30px_60px_-30px_rgba(179,47,104,0.55)] dark:border-[var(--im-border)]">
-                <img src={page.photo.src} alt={page.photo.alt} width={800} height={1000} fetchPriority="high" className="aspect-[4/5] w-full rounded-[24px] object-cover" />
+            <figure className="dp-rise relative mx-auto w-full max-w-[520px] md:col-span-6 lg:col-span-5" style={{ "--d": "0.25s" } as CSSProperties}>
+              <div className="overflow-hidden rounded-[36px] bg-dp-surface shadow-[0_40px_80px_-40px_rgba(179,47,104,0.6)] ring-1 ring-dp-line">
+                <img src={page.photo.src} alt={page.photo.alt} width={800} height={1000} fetchPriority="high" className="aspect-[4/5] w-full object-cover" />
               </div>
-              <figcaption className="mt-4 text-center font-mono text-[11px] text-dp-muted">
-                Stock photo · {page.photo.credit} / Pexels
-              </figcaption>
+              <p className="absolute -left-4 bottom-10 rotate-[-3deg] rounded-2xl bg-dp-surface px-5 py-3.5 shadow-[0_20px_40px_-18px_rgba(12,11,13,0.45)] ring-1 ring-dp-line sm:-left-8">
+                <span className="block text-[12px] text-dp-muted">Packages from</span>
+                <span className="block text-[1.6rem] font-semibold leading-tight tracking-[-0.03em] tabular-nums text-dp-ink">{PLAN_PRICES.Starter}</span>
+                <span className="block text-[12px] text-dp-muted">Custom from {LARGER_FROM}</span>
+              </p>
+              <figcaption className="mt-4 text-right font-mono text-[11px] text-dp-muted">Stock photo · {page.photo.credit} / Pexels</figcaption>
             </figure>
           )}
         </div>
       </section>
 
-      {/* What the site needs */}
+      {/* What the site needs: big numbered rows, not boxes */}
       <section aria-labelledby="needs-heading" className="border-t border-dp-line">
-        <div className="mx-auto max-w-[1320px] px-5 py-20 sm:px-8 md:py-28">
-          <Reveal>
-            <h2 id="needs-heading" className={`max-w-[18ch] ${H2}`}>What your site needs</h2>
+        <div className="mx-auto max-w-[1320px] px-5 py-24 sm:px-8 md:py-32">
+          <Reveal className="grid gap-6 md:grid-cols-12 md:items-end">
+            <h2 id="needs-heading" className={`md:col-span-7 ${H2}`}>
+              What your site <CutoutWord word="NEEDS" />
+            </h2>
+            <p className="max-w-[40ch] text-lg leading-relaxed text-dp-muted md:col-span-5">The four things that make customers stop scrolling and get in touch.</p>
           </Reveal>
-          <ul className="mt-12 grid gap-4 sm:grid-cols-2">
+          <ol className="mt-14 border-t border-dp-ink/15 dark:border-white/15">
             {page.needs.map((n, i) => (
-              <Reveal as="li" key={n.title} delay={i * 0.05} className="rounded-[24px] border border-dp-line bg-dp-surface p-7">
-                <h3 className="text-[1.25rem] font-semibold tracking-[-0.03em]">
-                  <span aria-hidden="true" className="mr-2 text-dp-accent">★</span>
-                  {n.title}
-                </h3>
-                <p className="mt-2 leading-relaxed text-dp-muted">{n.body}</p>
+              <Reveal as="li" key={n.title} delay={i * 0.05} className="group grid gap-3 border-b border-dp-ink/15 py-8 transition-colors hover:bg-dp-soft/50 md:grid-cols-12 md:items-baseline md:gap-8 md:px-4 dark:border-white/15 dark:hover:bg-[var(--im-soft)]">
+                <span aria-hidden="true" className="dp-cut-bebas text-[2.6rem] leading-none text-dp-accent md:col-span-1">0{i + 1}</span>
+                <h3 className="text-[clamp(1.5rem,2.6vw,2.2rem)] font-semibold leading-[1.08] tracking-[-0.04em] text-dp-ink md:col-span-5">{n.title}</h3>
+                <p className="max-w-[50ch] text-[1.05rem] leading-relaxed text-dp-muted md:col-span-6">{n.body}</p>
               </Reveal>
             ))}
-          </ul>
+          </ol>
         </div>
       </section>
 
       {/* A live site for this kind of business, or the free concept when we have none yet */}
       {proof ? (
-      <section aria-labelledby="proof-heading" className="border-t border-dp-line">
-        <div className="mx-auto grid max-w-[1320px] items-center gap-12 px-5 py-20 sm:px-8 md:grid-cols-12 md:py-28">
-          <Reveal className="md:col-span-7">
-            <DeviceFrames desktop={proof.desktop} phone={proof.phone} alt={`The ${proof.name} website`} url={proof.url} />
-          </Reveal>
-          <Reveal delay={0.1} className="md:col-span-5">
-            <p className="text-[14px] text-dp-muted">Live site we built · {proof.kind}</p>
-            <h2 id="proof-heading" className="mt-3 text-[clamp(2rem,3.4vw,3rem)] font-semibold tracking-[-0.04em]">
-              {proof.name} <span aria-hidden="true" className="text-dp-accent">★</span>
-            </h2>
-            <dl className="mt-8 flex flex-col gap-6">
-              {proof.rows.map(([k, v]) => (
-                <div key={k}>
-                  <dt className="font-mono text-[12px] text-dp-accent">{k}</dt>
-                  <dd className="mt-1.5 leading-relaxed text-dp-muted">{v}</dd>
-                </div>
-              ))}
-            </dl>
-            <a href={proof.href} target="_blank" rel="noopener noreferrer" className="group mt-7 inline-flex min-h-11 items-center gap-1.5 text-[15px] font-medium text-dp-ink underline decoration-dp-line underline-offset-[6px] transition-colors hover:decoration-dp-accent">
-              Visit the live site
-              <ArrowUpRight size={16} className="transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-            </a>
-          </Reveal>
-        </div>
-      </section>
-      ) : (
-        <section aria-labelledby="proof-heading" className="border-t border-dp-line">
-          <div className="mx-auto max-w-[1320px] px-5 py-20 sm:px-8 md:py-28">
-            <Reveal className="grid gap-8 rounded-[28px] border border-dashed border-dp-line bg-dp-soft/50 p-8 sm:p-12 md:grid-cols-[1.2fr_1fr] md:items-end">
-              <div>
-                <p className="font-mono text-[12px] text-dp-accent">No case study here yet</p>
-                <h2 id="proof-heading" className="mt-3 max-w-[18ch] text-[clamp(2rem,3.4vw,3rem)] font-semibold leading-[1.05] tracking-[-0.04em]">
-                  See yours before anyone else's
-                </h2>
-                <p className="mt-5 max-w-[48ch] text-lg leading-relaxed text-dp-muted">
-                  We haven't published a site for this kind of business yet, so we won't pretend we have. Send us your brief and we'll design a free concept of your own site instead.
-                </p>
-              </div>
-              <div className="flex flex-wrap gap-3 md:justify-end">
-                <Link href="/contact?interest=mockup" className="inline-flex h-[52px] items-center gap-2 rounded-full bg-dp-cta px-7 text-[15px] font-medium text-dp-cta-fg transition-transform active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-dp-accent">
-                  Get a free concept <ArrowUpRight size={17} aria-hidden="true" />
-                </Link>
-                <Link href="/portfolio" className="inline-flex h-[52px] items-center rounded-full border border-dp-line px-7 text-[15px] font-medium text-dp-ink transition-colors hover:border-dp-ink/40">
-                  See our live work
-                </Link>
-              </div>
+        <section aria-labelledby="proof-heading" className="bg-dp-soft/60 dark:bg-[var(--im-soft)]">
+          <div className="mx-auto grid max-w-[1320px] items-center gap-12 px-5 py-24 sm:px-8 md:grid-cols-12 md:py-32">
+            <Reveal className="md:col-span-7">
+              <DeviceFrames desktop={proof.desktop} phone={proof.phone} alt={`The ${proof.name} website`} url={proof.url} />
+            </Reveal>
+            <Reveal delay={0.1} className="md:col-span-5">
+              <p className="text-[14px] text-dp-muted">Fresh out the kitchen · {proof.kind}</p>
+              <h2 id="proof-heading" className="mt-3 text-[clamp(2.2rem,3.8vw,3.4rem)] font-semibold leading-[1.02] tracking-[-0.045em]">
+                {proof.name} <span aria-hidden="true" className="text-dp-accent">★</span>
+              </h2>
+              <dl className="mt-8 flex flex-col gap-6">
+                {proof.rows.map(([k, v]) => (
+                  <div key={k} className="border-l-2 border-dp-accent pl-5">
+                    <dt className="text-[13px] font-semibold text-dp-ink">{k}</dt>
+                    <dd className="mt-1.5 leading-relaxed text-dp-muted">{v}</dd>
+                  </div>
+                ))}
+              </dl>
+              <a href={proof.href} target="_blank" rel="noopener noreferrer" className="group mt-8 inline-flex min-h-11 items-center gap-1.5 text-[15px] font-medium text-dp-ink underline decoration-dp-line underline-offset-[6px] transition-colors hover:decoration-dp-accent">
+                Visit the live site
+                <ArrowUpRight size={16} aria-hidden="true" className="transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              </a>
             </Reveal>
           </div>
         </section>
+      ) : (
+        <section aria-labelledby="proof-heading" className="px-5 sm:px-8">
+          <Reveal className="mx-auto grid max-w-[1320px] gap-10 rounded-[36px] bg-dp-cta p-8 text-dp-cta-fg sm:p-12 md:grid-cols-12 md:items-end md:p-16">
+            <div className="md:col-span-8">
+              <p className="text-[14px] opacity-75">No case study here yet, so we won't pretend</p>
+              <h2 id="proof-heading" className="mt-4 max-w-[16ch] text-[clamp(2.3rem,4.6vw,4rem)] font-semibold leading-[1] tracking-[-0.045em]">
+                See yours before anyone else's
+              </h2>
+              <p className="mt-6 max-w-[48ch] text-lg leading-relaxed opacity-80">
+                Send us your brief and we'll design a free concept of your own site, so you can judge the work on your business instead of someone else's.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-3 md:col-span-4 md:justify-end">
+              <Link href="/contact?interest=mockup" className="inline-flex h-[52px] items-center gap-2 rounded-full bg-dp-bg px-7 text-[15px] font-medium text-dp-ink transition-transform active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current">
+                Get a free concept <ArrowUpRight size={17} aria-hidden="true" />
+              </Link>
+              <Link href="/portfolio" className="inline-flex h-[52px] items-center rounded-full border border-current/30 px-7 text-[15px] font-medium transition-colors hover:border-current">
+                See our live work
+              </Link>
+            </div>
+          </Reveal>
+        </section>
       )}
 
-      {/* Which package, and questions */}
-      <section aria-labelledby="fit-heading" className="border-t border-dp-line">
-        <div className="mx-auto grid max-w-[1320px] gap-14 px-5 py-20 sm:px-8 md:grid-cols-2 md:py-28">
-          <Reveal>
-            <h2 id="fit-heading" className="text-[clamp(1.8rem,3vw,2.6rem)] font-semibold tracking-[-0.04em]">Which package fits</h2>
-            <p className="mt-5 max-w-[48ch] text-lg leading-relaxed text-dp-muted">{page.fit}</p>
-            <p className="mt-5 max-w-[48ch] leading-relaxed text-dp-muted">
+      {/* Which package: an order slip, then the questions */}
+      <section aria-labelledby="fit-heading" className={proof ? "" : "pt-8"}>
+        <div className="mx-auto grid max-w-[1320px] gap-16 px-5 py-24 sm:px-8 md:grid-cols-12 md:gap-10 md:py-32">
+          <div className="md:col-span-5">
+            <Reveal>
+              <h2 id="fit-heading" className={`scroll-mt-28 ${H2}`}>
+                Your <CutoutWord word="ORDER" />
+              </h2>
+              <p className="mt-5 max-w-[40ch] text-lg leading-relaxed text-dp-muted">The packages that suit this kind of business. Not sure? Ask us and we'll tell you honestly.</p>
+            </Reveal>
+            <Reveal delay={0.08} className="mt-10">
+              <figure className="dp-ticket relative mx-auto max-w-[440px] rotate-[-1deg] px-6 pb-10 pt-8 text-[#211A1E] sm:px-8">
+                <figcaption className="text-center">
+                  <span className="dp-cut-bebas block text-[1.9rem] leading-none tracking-[0.08em]">Order slip</span>
+                  <span className="mt-2 block font-mono text-[12px] text-[#5E5258]">{page.label}</span>
+                </figcaption>
+                <div aria-hidden="true" className="my-5 border-t-2 border-dashed border-[#211A1E]/25" />
+                <dl className="flex flex-col gap-3 font-mono text-[14px]">
+                  {plans.map((name) => (
+                    <div key={name} className="flex items-baseline gap-2">
+                      <dt className="shrink-0">{name}</dt>
+                      <span aria-hidden="true" className="min-w-4 flex-1 translate-y-[-3px] border-b-2 border-dotted border-[#211A1E]/30" />
+                      <dd className="shrink-0 font-semibold tabular-nums">{PLAN_PRICES[name]}</dd>
+                    </div>
+                  ))}
+                  <div className="flex items-baseline gap-2 text-[#5E5258]">
+                    <dt className="shrink-0">Custom build</dt>
+                    <span aria-hidden="true" className="min-w-4 flex-1 translate-y-[-3px] border-b-2 border-dotted border-[#211A1E]/20" />
+                    <dd className="shrink-0 tabular-nums">from {LARGER_FROM}</dd>
+                  </div>
+                </dl>
+                <div aria-hidden="true" className="my-5 border-t-2 border-dashed border-[#211A1E]/25" />
+                <p className="text-[14.5px] leading-relaxed">{page.fit}</p>
+                <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3">
+                  <Link href="/contact" className="inline-flex h-12 items-center gap-2 rounded-full bg-[#211A1E] px-6 text-[14px] font-medium text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#B32F68]">
+                    Get a quote <ArrowUpRight size={16} aria-hidden="true" />
+                  </Link>
+                  <Link href="/pricing" className="inline-flex min-h-11 items-center text-[14px] font-medium underline decoration-[#211A1E]/30 underline-offset-4 hover:decoration-[#B32F68]">
+                    Compare all packages
+                  </Link>
+                </div>
+              </figure>
+            </Reveal>
+            <p className="mt-8 max-w-[44ch] text-[15px] leading-relaxed text-dp-muted">
               Wondering how that compares?{" "}
-              <Link href={COST_GUIDE.path} className="text-dp-accent underline decoration-dp-line underline-offset-4 hover:decoration-dp-accent">
+              <Link href={COST_GUIDE.path} className="text-dp-ink underline decoration-dp-line underline-offset-4 hover:decoration-dp-accent">
                 See what websites cost in South Africa
               </Link>
               .
             </p>
-            <Link href="/pricing" className="group mt-8 inline-flex min-h-11 items-center gap-1.5 text-[15px] font-medium text-dp-ink underline decoration-dp-line underline-offset-[6px] hover:decoration-dp-accent">
-              Compare all packages <ArrowUpRight size={16} aria-hidden="true" />
-            </Link>
-          </Reveal>
-          <Reveal delay={0.08}>
-            <h2 className="text-[clamp(1.8rem,3vw,2.6rem)] font-semibold tracking-[-0.04em]">Questions</h2>
-            <dl className="mt-6 divide-y divide-dp-line border-y border-dp-line">
-              {page.faq.map((f) => (
-                <div key={f.q} className="py-5">
-                  <dt className="font-semibold tracking-[-0.02em] text-dp-ink">{f.q}</dt>
-                  <dd className="mt-2 leading-relaxed text-dp-muted">{f.a}</dd>
-                </div>
+          </div>
+
+          <Reveal delay={0.08} className="md:col-span-6 md:col-start-7">
+            <h2 className="text-[clamp(2rem,3.4vw,2.9rem)] font-semibold leading-[1.02] tracking-[-0.045em]">Questions people ask</h2>
+            <div className="mt-8 border-t border-dp-ink/15 dark:border-white/15">
+              {page.faq.map((f, i) => (
+                <details key={f.q} className="group border-b border-dp-ink/15 dark:border-white/15" open={i === 0}>
+                  <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-6 py-6 text-[1.2rem] font-semibold leading-snug tracking-[-0.02em] text-dp-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-dp-accent [&::-webkit-details-marker]:hidden">
+                    {f.q}
+                    <Plus size={20} aria-hidden="true" className="shrink-0 text-dp-accent transition-transform duration-300 group-open:rotate-45" />
+                  </summary>
+                  <p className="max-w-[56ch] pb-7 leading-relaxed text-dp-muted">{f.a}</p>
+                </details>
               ))}
-            </dl>
+            </div>
           </Reveal>
         </div>
       </section>
 
-      <FreeTaste testId={`${page.word.toLowerCase()}-mockup-offer`} />
+      {/* Pages without a case study already offer the free concept above, so it isn't repeated here */}
+      {proof && <FreeTaste testId={`${page.word.toLowerCase()}-mockup-offer`} />}
     </main>
   );
 }
