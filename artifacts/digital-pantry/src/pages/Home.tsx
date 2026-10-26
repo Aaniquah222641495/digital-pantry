@@ -48,8 +48,7 @@ const CHEFS = [
 
 // Case studies (PRD 4.4): client and context, the business need, what we built, and the technical
 // side next to the screenshots, with a live link. Every line checked against the live site and the
-// project records on 2026-10-26. No results or testimonials we can't verify. Stage colours echo
-// each client's own brand.
+// project records on 2026-10-26. No results or testimonials we can't verify.
 const WORK = [
   {
     name: "Stuff'd Bagels",
@@ -58,7 +57,6 @@ const WORK = [
     href: "https://stuffdbagels.netlify.app",
     desktop: "/images/work/stuffd-desktop.webp",
     phone: "/images/work/stuffd-phone.webp",
-    stage: "bg-[#DCE8F8] dark:bg-[#15213A]",
     facts: [
       ["The client", "A stuffed-bagel pop-up selling at markets and events across Cape Town."],
       ["The need", "Customers had to hunt for a WhatsApp number and scroll social media to place an order."],
@@ -73,7 +71,6 @@ const WORK = [
     href: "https://beginnersmadrasah.co.za/",
     desktop: "/images/work/madrasah-desktop.webp",
     phone: "/images/work/madrasah-phone.webp",
-    stage: "bg-[#E3EBDF] dark:bg-[#15261C]",
     facts: [
       ["The client", "Beginner-friendly Islamic classes for women and children, online and in person."],
       ["The need", "Parents and students needed one clear place for programmes, registration and answers, easy to read on a phone."],
@@ -403,49 +400,44 @@ function Work() {
           </Link>
         </Reveal>
 
-        <div className="mt-14 flex flex-col gap-24 md:gap-32">
-          {WORK.map((w, i) => (
-            <article key={w.name} aria-labelledby={`work-${i}`}>
-              <Reveal className="flex flex-wrap items-end justify-between gap-x-8 gap-y-4">
-                <div>
+        <div className="mt-16 flex flex-col gap-28 md:gap-36">
+          {WORK.map((w, i) => {
+            const flip = i % 2 === 1;
+            return (
+              <article key={w.name} aria-labelledby={`work-${i}`} className="grid items-center gap-12 md:grid-cols-12 md:gap-10">
+                <Reveal className={`md:col-span-7 ${flip ? "md:order-2" : ""}`}>
+                  <DeviceFrames desktop={w.desktop} phone={w.phone} alt={`The ${w.name} website`} url={w.url} flip={flip} />
+                </Reveal>
+                <Reveal delay={0.1} className={`md:col-span-5 ${flip ? "md:order-1 md:pr-6" : "md:pl-6"}`}>
                   <p className="text-[14px] text-dp-muted">
                     <span className="tabular-nums text-dp-accent">0{i + 1}</span>
                     <span className="mx-2 text-dp-line" aria-hidden="true">/</span>
                     {w.kind}
                   </p>
-                  <h3 id={`work-${i}`} className="mt-2 text-[clamp(2.1rem,4.4vw,3.6rem)] font-semibold leading-[1] tracking-[-0.045em]">
+                  <h3 id={`work-${i}`} className="mt-2 text-[clamp(1.9rem,3.2vw,2.75rem)] font-semibold tracking-[-0.04em]">
                     {w.name}
                   </h3>
-                </div>
-                <a
-                  href={w.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex min-h-11 items-center gap-2 rounded-full bg-dp-cta px-5 text-[15px] font-medium text-dp-cta-fg transition-transform duration-500 hover:-translate-y-0.5"
-                >
-                  Visit the live site
-                  <ArrowUpRight size={16} className="transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                </a>
-              </Reveal>
-
-              <Reveal delay={0.05} className={`mt-8 overflow-hidden rounded-[32px] px-5 pt-10 pb-8 sm:rounded-[40px] sm:px-12 sm:pb-12 sm:pt-14 lg:px-20 ${w.stage}`}>
-                <div className="mx-auto max-w-[1000px]">
-                  <DeviceFrames desktop={w.desktop} phone={w.phone} alt={`The ${w.name} website`} url={w.url} flip={i % 2 === 1} />
-                </div>
-              </Reveal>
-
-              <Reveal delay={0.1}>
-                <dl className="mt-10 grid gap-x-10 gap-y-8 border-t border-dp-line pt-8 sm:grid-cols-2 lg:grid-cols-4">
-                  {w.facts.map(([k, v]) => (
-                    <div key={k}>
-                      <dt className="text-[13px] font-semibold text-dp-accent">{k}</dt>
-                      <dd className="mt-2 text-[15.5px] leading-relaxed text-dp-muted">{v}</dd>
-                    </div>
-                  ))}
-                </dl>
-              </Reveal>
-            </article>
-          ))}
+                  <dl className="mt-7 flex flex-col gap-4">
+                    {w.facts.map(([k, v]) => (
+                      <div key={k} className="grid gap-1 sm:grid-cols-[116px_1fr] sm:gap-4">
+                        <dt className="pt-0.5 text-[13px] font-semibold text-dp-accent">{k}</dt>
+                        <dd className="text-[15px] leading-relaxed text-dp-muted">{v}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                  <a
+                    href={w.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group mt-8 inline-flex min-h-11 items-center gap-2 rounded-full bg-dp-cta px-5 text-[15px] font-medium text-dp-cta-fg transition-transform duration-500 hover:-translate-y-0.5"
+                  >
+                    Visit the live site
+                    <ArrowUpRight size={16} className="transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                  </a>
+                </Reveal>
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>
