@@ -117,8 +117,8 @@ function Hero() {
               freshly <CutoutWord word="COOKED" /> <span aria-hidden="true" className="hidden text-[0.8em] sm:inline">★</span>
             </span>
           </h1>
-          <p className="dp-rise mt-7 max-w-[44ch] text-[clamp(1.05rem,1.5vw,1.25rem)] leading-relaxed text-dp-muted" style={rise(0.18)}>
-            Custom websites for small businesses, made from scratch in Cape Town by Aaniquah and Imaan. Designed and coded around how your business works.
+          <p className="dp-rise mt-7 max-w-[46ch] text-[clamp(1.05rem,1.5vw,1.25rem)] leading-relaxed text-dp-muted" style={rise(0.18)}>
+            We design and build websites for small businesses. Your menu or services, your prices and where to find you, on a site that works on any phone and lets customers order, book or message you in one tap.
           </p>
           <div className="dp-rise mt-10 flex flex-wrap items-center gap-3" style={rise(0.3)}>
             <MagneticButton href="/contact" data-testid="button-hero-cta">
@@ -328,7 +328,7 @@ function CookingUp() {
           <h2 id="cooking-heading" className={H2}>
             What are you <CutoutWord word="COOKING" /> up?
           </h2>
-          <p className="mt-5 max-w-[46ch] text-lg leading-relaxed text-dp-muted">Pick the closest one and we'll show you what fits.</p>
+          <p className="mt-5 max-w-[52ch] text-lg leading-relaxed text-dp-muted">We build for all kinds of small businesses. Pick yours to see what your site would include and which package fits.</p>
         </Reveal>
         <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" data-testid="segment-selector">
           {SEGMENTS.map((s, i) => {
@@ -496,10 +496,10 @@ export default function Home() {
     <main>
       <Hero />
       <Ticker />
-      <Work />
-      <BuildTicket />
       <CookingUp />
+      <Work />
       <Recipe />
+      <BuildTicket />
       <Menu />
       <Chefs />
       <FreeTaste testId="home-mockup-offer" />
