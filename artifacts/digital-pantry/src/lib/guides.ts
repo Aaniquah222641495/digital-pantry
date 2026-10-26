@@ -36,7 +36,7 @@ export interface Industry {
   /** Licensed stock photo for the hero (Pexels; credits in public/images/stock/CREDITS.md). Never presented as client work. */
   photo?: { src: string; alt: string; credit: string };
   /** Short card copy for the "What are you cooking up?" selector on Home */
-  card: { title: string; body: string; tag: string };
+  card: { title: string; body: string; tag: string; /** Stock photo for the card (Pexels, see CREDITS.md); decorative, the title carries the meaning */ image: string };
 }
 
 export const FOOD: Industry = {
@@ -72,7 +72,7 @@ export const FOOD: Industry = {
     { q: "Can you update my menu after launch?", a: "Yes. The optional R120/month retainer covers menu updates, schedule changes and small edits." },
     { q: "How long does a food business website take?", a: TURNAROUND_TERMS },
   ],
-  card: { title: "Food and drinks", body: "Menus, market days and one-tap WhatsApp orders.", tag: "Bakes, pop-ups, cafes" },
+  card: { title: "Food and drinks", body: "Menus, market days and one-tap WhatsApp orders.", tag: "Bakes, pop-ups, cafes", image: "/images/stock/food-cafe-counter.webp" },
 };
 
 export const SCHOOLS: Industry = {
@@ -108,7 +108,7 @@ export const SCHOOLS: Industry = {
     { q: "Do you build websites for madrasahs and Islamic schools?", a: "Yes. Beginners Madrasah is one of our live sites, and we're happy to build for madrasahs, masjids and Islamic learning centres." },
     { q: "How long does a school website take?", a: TURNAROUND_TERMS },
   ],
-  card: { title: "Schools and tutors", body: "Programmes, registrations and answers for parents.", tag: "Madrasahs, tutors, centres" },
+  card: { title: "Schools and tutors", body: "Programmes, registrations and answers for parents.", tag: "Madrasahs, tutors, centres", image: "/images/stock/schools-textbook.webp" },
 };
 
 // The next four have no case study yet (PRD 3.3: only genuinely relevant work, no invented claims).
@@ -137,7 +137,7 @@ export const BEAUTY: Industry = {
     { q: "How long does a beauty website take?", a: TURNAROUND_TERMS },
   ],
   photo: { src: "/images/stock/beauty-nail-care.webp", alt: "A nail technician in pink gloves filing a client's nails at a salon table", credit: "Larysa Stratiichuk" },
-  card: { title: "Beauty and personal care", body: "Services, prices, your best work and one way to book.", tag: "Salons, lashes, nails" },
+  card: { title: "Beauty and personal care", body: "Services, prices, your best work and one way to book.", tag: "Salons, lashes, nails", image: "/images/stock/beauty-nail-care.webp" },
 };
 
 export const CONSULTANTS: Industry = {
@@ -162,7 +162,7 @@ export const CONSULTANTS: Industry = {
     { q: "How long does it take?", a: TURNAROUND_TERMS },
   ],
   photo: { src: "/images/stock/consultants-meeting.webp", alt: "Two women in blazers talking through a laptop meeting at an office desk", credit: "MART PRODUCTION" },
-  card: { title: "Consultants and pros", body: "Clear services, real trust signals and better enquiries.", tag: "Coaches, bookkeepers" },
+  card: { title: "Consultants and pros", body: "Clear services, real trust signals and better enquiries.", tag: "Coaches, bookkeepers", image: "/images/stock/consultants-meeting.webp" },
 };
 
 export const PRODUCT_BRANDS: Industry = {
@@ -187,7 +187,7 @@ export const PRODUCT_BRANDS: Industry = {
     { q: "How long does it take?", a: TURNAROUND_TERMS },
   ],
   photo: { src: "/images/stock/product-candles.webp", alt: "Handmade candles in glass jars on a wooden table, with spare wicks beside them", credit: "Anna Shvets" },
-  card: { title: "Product brands", body: "A catalogue, your story and a clear way to buy.", tag: "Candles, skincare, crafts" },
+  card: { title: "Product brands", body: "A catalogue, your story and a clear way to buy.", tag: "Candles, skincare, crafts", image: "/images/stock/product-candles.webp" },
 };
 
 export const TRADES: Industry = {
@@ -212,7 +212,7 @@ export const TRADES: Industry = {
     { q: "How long does it take?", a: TURNAROUND_TERMS },
   ],
   photo: { src: "/images/stock/trades-plumbing.webp", alt: "A plumber's hands tightening a pipe fitting under a counter", credit: "Anıl Karakaya" },
-  card: { title: "Trades and local services", body: "Your services, your area and fast quote requests.", tag: "Plumbers, detailers, cleaners" },
+  card: { title: "Trades and local services", body: "Your services, your area and fast quote requests.", tag: "Plumbers, detailers, cleaners", image: "/images/stock/trades-plumbing.webp" },
 };
 
 export const INDUSTRIES = [FOOD, BEAUTY, CONSULTANTS, PRODUCT_BRANDS, SCHOOLS, TRADES];

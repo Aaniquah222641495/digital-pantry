@@ -324,7 +324,7 @@ function Chefs() {
 // Only pages that exist; new segments get a card when their page ships.
 const SEGMENTS = [
   ...INDUSTRIES.map((ind) => ({ href: ind.path, ...ind.card })),
-  { href: "/pricing?for=larger", title: "Something bigger", body: "Custom builds, integrations and agency work, quoted after a short chat.", tag: "From R8 000" },
+  { href: "/pricing?for=larger", title: "Something bigger", body: "Custom builds, integrations and agency work, quoted after a short chat.", tag: "From R8 000", image: "/images/stock/custom-coding-laptop.webp" },
 ];
 
 function CookingUp() {
@@ -346,14 +346,28 @@ function CookingUp() {
               <Reveal delay={(i % 4) * 0.06} className="h-full">
                 <Link
                   href={s.href}
-                  className={`group flex h-full min-h-44 flex-col rounded-[24px] border p-6 transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-dp-accent ${big ? "border-transparent bg-dp-cta text-dp-cta-fg hover:opacity-95" : "border-dp-line bg-dp-surface hover:border-dp-accent"}`}
+                  className={`group flex h-full flex-col overflow-hidden rounded-[24px] border transition-[border-color,box-shadow] duration-500 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-dp-accent ${big ? "border-transparent bg-dp-cta text-dp-cta-fg sm:grid sm:grid-cols-2" : "border-dp-line bg-dp-surface hover:border-dp-accent hover:shadow-[0_24px_50px_-30px_rgba(179,47,104,0.55)]"}`}
                 >
-                  <span className={`font-mono text-[11px] ${big ? "opacity-80" : "text-dp-accent"}`}>{s.tag}</span>
-                  <span className={`mt-3 flex items-start justify-between gap-3 text-[1.35rem] font-semibold leading-tight tracking-[-0.03em] ${big ? "" : "text-dp-ink"}`}>
-                    {s.title}
-                    <ArrowUpRight aria-hidden="true" size={18} className="mt-1 shrink-0 transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                  <span className={`relative block overflow-hidden ${big ? "aspect-[16/9] sm:order-2 sm:aspect-auto sm:h-full" : "aspect-[16/9] sm:aspect-[4/3]"}`}>
+                    <img
+                      src={s.image}
+                      alt=""
+                      width={800}
+                      height={1000}
+                      loading="lazy"
+                      decoding="async"
+                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.05]"
+                    />
+                    <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-black/45 via-black/0 to-black/0" />
+                    <span className="absolute bottom-3 left-3 rounded-full bg-white/92 px-3 py-1 font-mono text-[11px] text-[#211A1E] backdrop-blur-sm">{s.tag}</span>
                   </span>
-                  <span className={`mt-3 max-w-[40ch] text-[15px] leading-relaxed ${big ? "opacity-80" : "text-dp-muted"}`}>{s.body}</span>
+                  <span className={`flex flex-1 flex-col ${big ? "p-7 sm:justify-center sm:p-9" : "p-6"}`}>
+                    <span className={`flex items-start justify-between gap-3 font-semibold leading-tight tracking-[-0.03em] ${big ? "text-[clamp(1.6rem,2.4vw,2.1rem)]" : "text-[1.35rem] text-dp-ink"}`}>
+                      {s.title}
+                      <ArrowUpRight aria-hidden="true" size={18} className="mt-1 shrink-0 transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                    </span>
+                    <span className={`mt-3 max-w-[40ch] text-[15px] leading-relaxed ${big ? "opacity-80" : "text-dp-muted"}`}>{s.body}</span>
+                  </span>
                 </Link>
               </Reveal>
             </li>
