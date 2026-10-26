@@ -15,6 +15,7 @@ import { H2 } from "../lib/style";
 import { useSideContact } from "../lib/contact";
 import { TURNAROUND_NOTE } from "../lib/plans";
 import { INDUSTRIES } from "../lib/guides";
+import { BuildTicket } from "../components/BuildTicket";
 
 // Imaan's pixel avatar is being made; until then her cards show a monogram.
 const IMAAN_AVATAR: string | null = "/images/imaan-cut.webp";
@@ -52,6 +53,7 @@ const WORK = [
     href: "https://stuffdbagels.netlify.app",
     desktop: "/images/work/stuffd-desktop.webp",
     phone: "/images/work/stuffd-phone.webp",
+    built: ["Menu", "This week's locations", "One-tap WhatsApp ordering", "Mobile first"],
     lines: [
       ["Before", "Customers had to hunt for a WhatsApp number and scroll social media to place an order."],
       ["Now", "A single-page ordering site with the menu, this week's spots and one-tap WhatsApp ordering."],
@@ -64,6 +66,7 @@ const WORK = [
     href: "https://beginnersmadrasah.co.za/",
     desktop: "/images/work/madrasah-desktop.webp",
     phone: "/images/work/madrasah-phone.webp",
+    built: ["Programmes", "Registration", "Testimonials", "FAQs"],
     lines: [
       ["Built", "A calm, welcoming home for programmes, registration, testimonials and FAQs."],
       ["For", "Parents and students who want clear answers on a phone, online or in person."],
@@ -111,7 +114,7 @@ function Hero() {
             Your website,
             <br />
             <span className="whitespace-nowrap">
-              freshly <CutoutWord word="COOKED" /> <span aria-hidden="true" className="text-[0.8em]">★</span>
+              freshly <CutoutWord word="COOKED" /> <span aria-hidden="true" className="hidden text-[0.8em] sm:inline">★</span>
             </span>
           </h1>
           <p className="dp-rise mt-7 max-w-[44ch] text-[clamp(1.05rem,1.5vw,1.25rem)] leading-relaxed text-dp-muted" style={rise(0.18)}>
@@ -119,12 +122,23 @@ function Hero() {
           </p>
           <div className="dp-rise mt-10 flex flex-wrap items-center gap-3" style={rise(0.3)}>
             <MagneticButton href="/contact" data-testid="button-hero-cta">
-              Let's Get Cooking
+              Get a quote
             </MagneticButton>
             <MagneticButton href="/portfolio" variant="ghost" data-testid="button-hero-portfolio">
-              See Our Work
+              See our work
             </MagneticButton>
           </div>
+          {/* Proof in the first screen: the live sites, not a claim about them */}
+          <p className="dp-rise mt-9 flex flex-wrap items-center gap-x-4 gap-y-2 text-[14px] text-dp-muted" style={rise(0.4)}>
+            <span>Live now:</span>
+            {WORK.map((w) => (
+              <a key={w.name} href={w.href} target="_blank" rel="noopener noreferrer" className="group inline-flex min-h-11 items-center gap-2 font-medium text-dp-ink">
+                <img src={w.phone} alt="" width={28} height={28} className="h-7 w-7 rounded-full border-2 border-white object-cover object-top shadow-sm dark:border-[var(--im-border)]" />
+                <span className="underline decoration-dp-line underline-offset-4 transition-colors group-hover:decoration-dp-accent">{w.name}</span>
+                <ArrowUpRight size={14} aria-hidden="true" />
+              </a>
+            ))}
+          </p>
         </div>
 
         {/* The two chefs at one counter, animated */}
@@ -379,6 +393,13 @@ function Work() {
                       </div>
                     ))}
                   </dl>
+                  <ul aria-label={`What we built for ${w.name}`} className="mt-7 flex flex-wrap gap-2">
+                    {w.built.map((b) => (
+                      <li key={b} className="rounded-full bg-dp-soft px-3.5 py-1.5 text-[13px] font-medium text-dp-ink dark:bg-[var(--im-soft)] dark:text-[var(--im-text)]">
+                        {b}
+                      </li>
+                    ))}
+                  </ul>
                   <a
                     href={w.href}
                     target="_blank"
@@ -475,11 +496,12 @@ export default function Home() {
     <main>
       <Hero />
       <Ticker />
-      <CookingUp />
-      <Chefs />
       <Work />
+      <BuildTicket />
+      <CookingUp />
       <Recipe />
       <Menu />
+      <Chefs />
       <FreeTaste testId="home-mockup-offer" />
     </main>
   );

@@ -657,3 +657,25 @@ html.dark body {
     .dp-par .dp-par-browser { animation: dp-par-browser linear both; animation-timeline: view(); }
   }
 }
+
+/* Build ticket (components/BuildTicket.tsx): a paper order ticket with torn zigzag ends that
+   prints down out of its rail when the section scrolls in. Paper stays paper on Night. */
+.dp-ticket {
+  background:
+    repeating-linear-gradient(0deg, rgba(33, 26, 30, 0.018) 0 1px, transparent 1px 4px),
+    #FFFCF6;
+  --zz: 10px;
+  -webkit-mask:
+    conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 0 100% / calc(var(--zz) * 2) 51% repeat-x,
+    conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg) 0 0 / calc(var(--zz) * 2) 51% repeat-x;
+  mask:
+    conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 0 100% / calc(var(--zz) * 2) 51% repeat-x,
+    conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg) 0 0 / calc(var(--zz) * 2) 51% repeat-x;
+}
+.dark .dp-ticket { box-shadow: 0 30px 70px -30px rgba(255, 92, 168, 0.45); }
+.dp-ticket-clip { overflow: hidden; padding-bottom: 40px; margin-bottom: -40px; }
+@media (prefers-reduced-motion: no-preference) {
+  .dp-ticket { transition: transform 1.6s var(--ease-out-expo) 0.25s; }
+  .js .dp-ticket-wrap:not(.is-in) .dp-ticket { transform: translate3d(0, -104%, 0) rotate(0deg); }
+  .js .dp-ticket-wrap:not(.is-in) { transform: none; }
+}
