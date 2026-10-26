@@ -21,7 +21,8 @@ export interface Industry {
   after: string;
   intro: string;
   needs: { title: string; body: string }[];
-  proof: {
+  /** A live site we built for this kind of business. Left out until we have a real, permitted one. */
+  proof?: {
     name: string;
     kind: string;
     url: string;
@@ -32,6 +33,8 @@ export interface Industry {
   };
   fit: string;
   faq: Faq[];
+  /** Short card copy for the "What are you cooking up?" selector on Home */
+  card: { title: string; body: string; tag: string };
 }
 
 export const FOOD: Industry = {
@@ -67,6 +70,7 @@ export const FOOD: Industry = {
     { q: "Can you update my menu after launch?", a: "Yes. The optional R120/month retainer covers menu updates, schedule changes and small edits." },
     { q: "How long does a food business website take?", a: TURNAROUND_TERMS },
   ],
+  card: { title: "Food and drinks", body: "Menus, market days and one-tap WhatsApp orders.", tag: "Bakes, pop-ups, cafes" },
 };
 
 export const SCHOOLS: Industry = {
@@ -102,9 +106,110 @@ export const SCHOOLS: Industry = {
     { q: "Do you build websites for madrasahs and Islamic schools?", a: "Yes. Beginners Madrasah is one of our live sites, and we're happy to build for madrasahs, masjids and Islamic learning centres." },
     { q: "How long does a school website take?", a: TURNAROUND_TERMS },
   ],
+  card: { title: "Schools and tutors", body: "Programmes, registrations and answers for parents.", tag: "Madrasahs, tutors, centres" },
 };
 
-export const INDUSTRIES = [FOOD, SCHOOLS];
+// The next four have no case study yet (PRD 3.3: only genuinely relevant work, no invented claims).
+// Their pages show what we'd build and offer the free concept instead. Add `proof` when a real,
+// permitted site exists.
+
+export const BEAUTY: Industry = {
+  path: "/websites-for-beauty-businesses",
+  label: "Websites for beauty businesses",
+  heading: "Websites for salons, lash and nail techs and beauty businesses in Cape Town",
+  before: "Websites for",
+  word: "BEAUTY",
+  after: "businesses",
+  intro:
+    "Salons, lash and brow studios, nail techs, spas and home-based beauty businesses. We build a site that shows your services and prices, your best work and how to book, so clients stop asking the same questions in your DMs.",
+  needs: [
+    { title: "Services and prices, clearly listed", body: "Every treatment with its price and how long it takes, easy to read on a phone." },
+    { title: "A gallery of your work", body: "Your own photos, set out so clients can see your style before they book." },
+    { title: "One clear way to book", body: "A WhatsApp button, or a link to the booking app you already use. Built-in online booking is quoted on request." },
+    { title: "Easy to find", body: "Your area, hours and directions, plus your own domain, a Google Business Profile and basic SEO on Premium and Pro." },
+  ],
+  fit: `Standard (${PLAN_PRICES.Standard}) covers your services, an about section, your location and social links. Premium (${PLAN_PRICES.Premium}) adds your own domain, a Google Business Profile and basic SEO. Pro (${PLAN_PRICES.Pro}) adds an enquiry form that saves every lead to your Google Sheet and replies straight away.`,
+  faq: [
+    { q: "Can clients book online?", a: "Yes. We can link the booking app you already use, or send clients to WhatsApp. A built-in booking setup is quoted on request." },
+    { q: "Can I update my prices later?", a: "Yes. The optional R120/month retainer covers price changes, new treatments and small edits." },
+    { q: "How long does a beauty website take?", a: TURNAROUND_TERMS },
+  ],
+  card: { title: "Beauty and personal care", body: "Services, prices, your best work and one way to book.", tag: "Salons, lashes, nails" },
+};
+
+export const CONSULTANTS: Industry = {
+  path: "/websites-for-consultants",
+  label: "Websites for consultants and professional services",
+  heading: "Websites for consultants and professional services in South Africa",
+  before: "Websites for",
+  word: "CONSULTANTS",
+  after: "and pros",
+  intro:
+    "Coaches, bookkeepers, consultants, therapists and other professionals. We build a site that explains what you do in plain words, shows why people can trust you and makes it easy to get in touch.",
+  needs: [
+    { title: "What you do, in plain words", body: "Your services, who they are for and how working with you goes, without jargon." },
+    { title: "Reasons to trust you", body: "Your background, qualifications and client words you have permission to share." },
+    { title: "Answers to the usual questions", body: "Fees or how pricing works, process and timing, so enquiries arrive better informed." },
+    { title: "Enquiries that come with context", body: "Pro adds a form that asks the right questions, saves every lead to your Google Sheet and replies straight away." },
+  ],
+  fit: `Standard (${PLAN_PRICES.Standard}) is a clear site with your services and about section. Premium (${PLAN_PRICES.Premium}) adds your own domain, a Google Business Profile and basic SEO. Pro (${PLAN_PRICES.Pro}) adds the lead form, instant alerts and an auto-reply. Bigger builds, from ${LARGER_FROM}, are quoted after a short chat.`,
+  faq: [
+    { q: "Can I use my own domain and email?", a: "Yes. You buy the domain in your own name. Premium and Pro include setting it up; email on your domain is a separate plan from your domain provider." },
+    { q: "Can the site take bookings for calls?", a: "Yes. We can link your calendar or booking app. A built-in booking setup is quoted on request." },
+    { q: "How long does it take?", a: TURNAROUND_TERMS },
+  ],
+  card: { title: "Consultants and pros", body: "Clear services, real trust signals and better enquiries.", tag: "Coaches, bookkeepers" },
+};
+
+export const PRODUCT_BRANDS: Industry = {
+  path: "/websites-for-product-brands",
+  label: "Websites for product brands",
+  heading: "Websites for small product brands in South Africa",
+  before: "Websites for",
+  word: "PRODUCT",
+  after: "brands",
+  intro:
+    "Candles, skincare, clothing, crafts and other small product brands. We build a site that tells your story, shows your products properly and gives customers a clear way to buy, whether that's WhatsApp, an order form or an online shop.",
+  needs: [
+    { title: "Your products, shown properly", body: "A catalogue with your photos, prices and the details customers ask about." },
+    { title: "A clear way to buy", body: "Order on WhatsApp, an order form, or an online shop with payments, quoted separately." },
+    { title: "Your story", body: "Who makes it, how and why, so customers remember you." },
+    { title: "Found by new customers", body: "Your own domain, a Google Business Profile and basic SEO on Premium and Pro." },
+  ],
+  fit: `Standard (${PLAN_PRICES.Standard}) or Premium (${PLAN_PRICES.Premium}) suit a catalogue with WhatsApp ordering. An online shop with payments is quoted to your product range, because it changes the build and the monthly costs.`,
+  faq: [
+    { q: "Do I need an online shop?", a: "Not always. Many small brands sell well with a catalogue and WhatsApp orders. If you want card payments and stock, we quote an online shop separately." },
+    { q: "Who takes the product photos?", a: "You supply them. Photography is available on request." },
+    { q: "How long does it take?", a: TURNAROUND_TERMS },
+  ],
+  card: { title: "Product brands", body: "A catalogue, your story and a clear way to buy.", tag: "Candles, skincare, crafts" },
+};
+
+export const TRADES: Industry = {
+  path: "/websites-for-trades-and-local-services",
+  label: "Websites for trades and local services",
+  heading: "Websites for trades and local services in Cape Town",
+  before: "Websites for",
+  word: "TRADES",
+  after: "and local services",
+  intro:
+    "Plumbers, electricians, car washes, detailers, cleaners and other local services. We build a site that says what you do and where, shows your work and gets you quote requests you can answer fast.",
+  needs: [
+    { title: "What you do and where", body: "Your services and the areas you cover, so the right customers call." },
+    { title: "Proof of your work", body: "Photos of finished jobs and any accreditation you hold." },
+    { title: "Quote requests that make sense", body: "A WhatsApp button, or on Pro a form that collects the job details, saves them to your Google Sheet and alerts you." },
+    { title: "Found when someone searches nearby", body: "A Google Business Profile, your own domain and basic SEO on Premium and Pro." },
+  ],
+  fit: `Starter (${PLAN_PRICES.Starter}) is one page with your services and a WhatsApp button. Premium (${PLAN_PRICES.Premium}) adds your own domain, a Google Business Profile and basic SEO, which matter most for local searches. Pro (${PLAN_PRICES.Pro}) adds the quote-request form and instant alerts.`,
+  faq: [
+    { q: "Will this get me to the top of Google?", a: "Nobody can promise that. We set up the basics properly: a Google Business Profile, clear service and area pages and fast loading, which give you a fair chance in local search." },
+    { q: "Can customers send photos of the job?", a: "They can send them on WhatsApp straight from the site. A form with photo upload is quoted on request." },
+    { q: "How long does it take?", a: TURNAROUND_TERMS },
+  ],
+  card: { title: "Trades and local services", body: "Your services, your area and fast quote requests.", tag: "Plumbers, detailers, cleaners" },
+};
+
+export const INDUSTRIES = [FOOD, BEAUTY, CONSULTANTS, PRODUCT_BRANDS, SCHOOLS, TRADES];
 
 /* ------------------------------------------------------------------ */
 /* Website cost guide                                                  */

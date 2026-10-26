@@ -4,7 +4,7 @@
 // Only state facts that are already on the site. Update `LAST_UPDATED` when content changes.
 
 import { BILLED_SEPARATELY_SUMMARY, MOCKUP_TERMS, TURNAROUND_TERMS } from "./lib/plans";
-import { COST_FAQ, COST_GUIDE, INDUSTRIES, type Industry } from "./lib/guides";
+import { BEAUTY, CONSULTANTS, COST_FAQ, COST_GUIDE, FOOD, PRODUCT_BRANDS, SCHOOLS, TRADES, type Industry } from "./lib/guides";
 
 export const SITE_URL = "https://digitalpantry.co.za";
 export const SITE_NAME = "The Digital Pantry";
@@ -262,14 +262,34 @@ export const PAGES: PageMeta[] = [
     jsonLd: [graph(crumbs("Privacy Notice", "/privacy"))],
   },
   industryPage(
-    INDUSTRIES[0],
+    FOOD,
     "Websites for Food Businesses in Cape Town | Digital Pantry",
     "Websites for bakeries, pop-ups, home kitchens and takeaways in Cape Town: your menu, where to find you and one-tap WhatsApp ordering. From R600.",
   ),
   industryPage(
-    INDUSTRIES[1],
+    SCHOOLS,
     "Websites for Schools and Madrasahs in Cape Town | Digital Pantry",
     "Calm websites for madrasahs, schools and learning centres: programmes, registration and FAQs parents can use on a phone. From R600.",
+  ),
+  industryPage(
+    BEAUTY,
+    "Websites for Salons and Beauty Businesses in Cape Town | Digital Pantry",
+    "Websites for salons, lash and nail techs and beauty studios in Cape Town: services and prices, a gallery of your work and one clear way to book. From R600.",
+  ),
+  industryPage(
+    CONSULTANTS,
+    "Websites for Consultants and Professional Services | Digital Pantry",
+    "Websites for coaches, bookkeepers, consultants and other professionals: clear services, trust signals and enquiries that arrive with context. From R600.",
+  ),
+  industryPage(
+    PRODUCT_BRANDS,
+    "Websites for Small Product Brands in South Africa | Digital Pantry",
+    "Websites for small product brands: a catalogue of your products, your story and a clear way to buy, from WhatsApp orders to an online shop. From R600.",
+  ),
+  industryPage(
+    TRADES,
+    "Websites for Trades and Local Services in Cape Town | Digital Pantry",
+    "Websites for plumbers, electricians, detailers, cleaners and other local services: your services, your area and quick quote requests. From R600.",
   ),
   {
     path: COST_GUIDE.path,

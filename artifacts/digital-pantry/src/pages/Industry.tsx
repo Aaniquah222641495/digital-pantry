@@ -6,7 +6,7 @@ import { Reveal } from "../components/Reveal";
 import { DeviceFrames } from "../components/DeviceFrames";
 import { FreeTaste } from "../components/FreeTaste";
 import { H1, H2 } from "../lib/style";
-import { COST_GUIDE, FOOD, SCHOOLS, type Industry } from "../lib/guides";
+import { BEAUTY, CONSULTANTS, COST_GUIDE, FOOD, PRODUCT_BRANDS, SCHOOLS, TRADES, type Industry } from "../lib/guides";
 
 // Search landing pages for one kind of business: what their site needs, a live site we built
 // for that kind of business, which package fits, and their questions. Content: src/lib/guides.ts.
@@ -62,7 +62,8 @@ function IndustryPage({ page }: { page: Industry }) {
         </div>
       </section>
 
-      {/* A live site for this kind of business */}
+      {/* A live site for this kind of business, or the free concept when we have none yet */}
+      {proof ? (
       <section aria-labelledby="proof-heading" className="border-t border-dp-line">
         <div className="mx-auto grid max-w-[1320px] items-center gap-12 px-5 py-20 sm:px-8 md:grid-cols-12 md:py-28">
           <Reveal className="md:col-span-7">
@@ -88,6 +89,31 @@ function IndustryPage({ page }: { page: Industry }) {
           </Reveal>
         </div>
       </section>
+      ) : (
+        <section aria-labelledby="proof-heading" className="border-t border-dp-line">
+          <div className="mx-auto max-w-[1320px] px-5 py-20 sm:px-8 md:py-28">
+            <Reveal className="grid gap-8 rounded-[28px] border border-dashed border-dp-line bg-dp-soft/50 p-8 sm:p-12 md:grid-cols-[1.2fr_1fr] md:items-end">
+              <div>
+                <p className="font-mono text-[12px] text-dp-accent">No case study here yet</p>
+                <h2 id="proof-heading" className="mt-3 max-w-[18ch] text-[clamp(2rem,3.4vw,3rem)] font-semibold leading-[1.05] tracking-[-0.04em]">
+                  See yours before anyone else's
+                </h2>
+                <p className="mt-5 max-w-[48ch] text-lg leading-relaxed text-dp-muted">
+                  We haven't published a site for this kind of business yet, so we won't pretend we have. Send us your brief and we'll design a free concept of your own site instead.
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-3 md:justify-end">
+                <Link href="/contact?interest=mockup" className="inline-flex h-[52px] items-center gap-2 rounded-full bg-dp-cta px-7 text-[15px] font-medium text-dp-cta-fg transition-transform active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-dp-accent">
+                  Get a free concept <ArrowUpRight size={17} aria-hidden="true" />
+                </Link>
+                <Link href="/portfolio" className="inline-flex h-[52px] items-center rounded-full border border-dp-line px-7 text-[15px] font-medium text-dp-ink transition-colors hover:border-dp-ink/40">
+                  See our live work
+                </Link>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+      )}
 
       {/* Which package, and questions */}
       <section aria-labelledby="fit-heading" className="border-t border-dp-line">
@@ -131,4 +157,20 @@ export function FoodBusinesses() {
 
 export function SchoolsAndMadrasahs() {
   return <IndustryPage page={SCHOOLS} />;
+}
+
+export function BeautyBusinesses() {
+  return <IndustryPage page={BEAUTY} />;
+}
+
+export function Consultants() {
+  return <IndustryPage page={CONSULTANTS} />;
+}
+
+export function ProductBrands() {
+  return <IndustryPage page={PRODUCT_BRANDS} />;
+}
+
+export function TradesAndLocalServices() {
+  return <IndustryPage page={TRADES} />;
 }

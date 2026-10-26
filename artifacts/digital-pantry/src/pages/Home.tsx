@@ -14,6 +14,7 @@ import { Sticker, DAY, NIGHT } from "../components/Stickers";
 import { H2 } from "../lib/style";
 import { useSideContact } from "../lib/contact";
 import { TURNAROUND_NOTE } from "../lib/plans";
+import { INDUSTRIES } from "../lib/guides";
 
 // Imaan's pixel avatar is being made; until then her cards show a monogram.
 const IMAAN_AVATAR: string | null = "/images/imaan-cut.webp";
@@ -301,11 +302,9 @@ function Chefs() {
 // "What are you cooking up?" (DPW-14): send each visitor to the page that fits their business.
 // Only pages that exist; new segments get a card when their page ships.
 const SEGMENTS = [
-  { href: "/websites-for-food-businesses", title: "Food and drinks", body: "Menus, market days and one-tap WhatsApp orders.", tag: "Bagels, bakes, coffee carts" },
-  { href: "/websites-for-schools-and-madrasahs", title: "Schools and madrasahs", body: "Programmes, registrations and answers for parents.", tag: "Classes, centres, masjids" },
-  { href: "/pricing", title: "Another small business", body: "Pick a package, from one page to a site that catches leads.", tag: "Up to 10 staff" },
-  { href: "/pricing?for=larger", title: "Something bigger", body: "Custom builds and integrations, quoted after a short chat.", tag: "From R8 000" },
-] as const;
+  ...INDUSTRIES.map((ind) => ({ href: ind.path, ...ind.card })),
+  { href: "/pricing?for=larger", title: "Something bigger", body: "Custom builds, integrations and agency work, quoted after a short chat.", tag: "From R8 000" },
+];
 
 function CookingUp() {
   return (
@@ -318,23 +317,27 @@ function CookingUp() {
           <p className="mt-5 max-w-[46ch] text-lg leading-relaxed text-dp-muted">Pick the closest one and we'll show you what fits.</p>
         </Reveal>
         <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" data-testid="segment-selector">
-          {SEGMENTS.map((s, i) => (
-            <li key={s.href}>
-              <Reveal delay={i * 0.06} className="h-full">
+          {SEGMENTS.map((s, i) => {
+            // The custom route closes the grid as a wider, inverted card, so bigger buyers can't miss it.
+            const big = s.href.includes("for=larger");
+            return (
+            <li key={s.href} className={big ? "sm:col-span-2" : ""}>
+              <Reveal delay={(i % 4) * 0.06} className="h-full">
                 <Link
                   href={s.href}
-                  className="group flex h-full min-h-44 flex-col rounded-[24px] border border-dp-line bg-dp-surface p-6 transition-colors hover:border-dp-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-dp-accent"
+                  className={`group flex h-full min-h-44 flex-col rounded-[24px] border p-6 transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-dp-accent ${big ? "border-transparent bg-dp-cta text-dp-cta-fg hover:opacity-95" : "border-dp-line bg-dp-surface hover:border-dp-accent"}`}
                 >
-                  <span className="font-mono text-[11px] text-dp-accent">{s.tag}</span>
-                  <span className="mt-3 flex items-start justify-between gap-3 text-[1.35rem] font-semibold leading-tight tracking-[-0.03em] text-dp-ink">
+                  <span className={`font-mono text-[11px] ${big ? "opacity-80" : "text-dp-accent"}`}>{s.tag}</span>
+                  <span className={`mt-3 flex items-start justify-between gap-3 text-[1.35rem] font-semibold leading-tight tracking-[-0.03em] ${big ? "" : "text-dp-ink"}`}>
                     {s.title}
                     <ArrowUpRight aria-hidden="true" size={18} className="mt-1 shrink-0 transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                   </span>
-                  <span className="mt-3 text-[15px] leading-relaxed text-dp-muted">{s.body}</span>
+                  <span className={`mt-3 max-w-[40ch] text-[15px] leading-relaxed ${big ? "opacity-80" : "text-dp-muted"}`}>{s.body}</span>
                 </Link>
               </Reveal>
             </li>
-          ))}
+            );
+          })}
         </ul>
       </div>
     </section>
