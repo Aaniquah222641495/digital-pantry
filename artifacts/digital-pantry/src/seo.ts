@@ -239,6 +239,26 @@ export const PAGES: PageMeta[] = [
     ],
   },
   {
+    path: "/business-projects",
+    title: "Custom Websites and Agency Partnerships | Digital Pantry",
+    description:
+      "Custom websites, integrations, lead systems and support for larger businesses, plus build partnerships for agencies. Fixed quote after discovery, from R8 000. Cape Town.",
+    jsonLd: [
+      graph(
+        {
+          "@type": "Service",
+          name: "Custom website development",
+          serviceType: "Custom website development",
+          provider: { "@id": ORG_ID },
+          areaServed: "ZA",
+          url: `${SITE_URL}/business-projects`,
+          offers: { "@type": "Offer", priceCurrency: "ZAR", price: "8000", description: "Custom builds from R8 000, fixed quote after discovery" },
+        },
+        crumbs("Business projects", "/business-projects"),
+      ),
+    ],
+  },
+  {
     path: "/contact",
     title: "Contact: Get a Website Quote | The Digital Pantry",
     description:

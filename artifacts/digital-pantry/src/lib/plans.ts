@@ -42,6 +42,14 @@ export const BILLED_SEPARATELY_SUMMARY =
 export const SMALL_BUSINESS_LIMIT = "up to 10 staff";
 export const LARGER_FROM = "R8 000";
 
+// What moves a custom quote. Shown on Pricing (larger tab) and the Business projects page.
+export const LARGER_DRIVERS = [
+  "How many pages and how much content",
+  "Integrations: bookings, payments, forms, your systems",
+  "Brand and design work needed",
+  "Timeline and how many people sign off",
+] as const;
+
 // Monthly retainer. USD keeps the same premium as the international packages (founder: "you choose",
 // 2026-10-24). Larger businesses get theirs quoted with the build.
 export const RETAINER = "R120";

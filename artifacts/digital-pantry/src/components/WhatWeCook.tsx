@@ -19,13 +19,13 @@ const OFFERS = [
     title: "Custom builds and integrations",
     body: "Bigger sites with more moving parts: bookings, payments, forms and links to the systems you already use. Scoped with you, then a fixed quote.",
     price: `From ${LARGER_FROM}`,
-    href: "/pricing?for=larger",
+    href: "/business-projects",
   },
   {
     title: "Agencies and designers",
-    body: "You bring the client and the design, we build it properly. Ask us how we can work together.",
+    body: "You bring the client and the design, we build it properly. Under your name or ours.",
     price: "Ask us",
-    href: "/contact?interest=larger",
+    href: "/business-projects#agencies",
   },
   {
     title: "Clients outside South Africa",

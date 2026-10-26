@@ -22,6 +22,7 @@ const PAGE_NAMES: Record<string, string> = {
   "/portfolio": "Portfolio",
   "/pricing": "Pricing",
   "/contact": "Contact",
+  "/business-projects": "Business projects",
   "/privacy": "Privacy",
   "/websites-for-food-businesses": "Websites for food businesses",
   "/websites-for-schools-and-madrasahs": "Websites for schools and madrasahs",

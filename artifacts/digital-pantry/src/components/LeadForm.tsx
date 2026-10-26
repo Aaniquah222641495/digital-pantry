@@ -42,7 +42,16 @@ const mailBtnCls =
  * so a lead is never silently lost.
  * `source` is saved with the lead so we know which page it came from.
  */
-export function LeadForm({ source = "contact-page" }: { source?: string }) {
+export function LeadForm({
+  source = "contact-page",
+  defaultInterest,
+  messagePlaceholder = "Tell us about your business and what you need.",
+}: {
+  source?: string;
+  /** Preselected option when the URL has no ?interest= (e.g. "Larger business" on the Business projects page) */
+  defaultInterest?: LeadFormValues["interest"];
+  messagePlaceholder?: string;
+}) {
   const [phase, setPhase] = useState<Phase>({ name: "form" });
   const search = useSearch();
   const headingRef = useRef<HTMLHeadingElement>(null);
@@ -60,7 +69,7 @@ export function LeadForm({ source = "contact-page" }: { source?: string }) {
 
   // Preselect from ?interest=mockup. Done after mount so the prerendered HTML matches the first render.
   useEffect(() => {
-    const wanted = interestFromQuery(search);
+    const wanted = interestFromQuery(search) ?? defaultInterest;
     if (wanted) setValue("interest", wanted);
   }, [search, setValue]);
 
@@ -209,7 +218,7 @@ export function LeadForm({ source = "contact-page" }: { source?: string }) {
         <label htmlFor="lead-message" className={labelCls}>
           Message <span className="font-normal text-dp-muted">(optional)</span>
         </label>
-        <textarea id="lead-message" rows={4} maxLength={LIMITS.message} placeholder="Tell us about your business and what you need." className={`${inputCls} resize-y`} data-testid="textarea-message" {...aria("message")} {...register("message")} />
+        <textarea id="lead-message" rows={4} maxLength={LIMITS.message} placeholder={messagePlaceholder} className={`${inputCls} resize-y`} data-testid="textarea-message" {...aria("message")} {...register("message")} />
         <FieldError id="message-error" message={err("message")} />
       </div>
 

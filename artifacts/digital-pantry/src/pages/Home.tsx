@@ -131,7 +131,7 @@ function Hero() {
           </div>
           <p className="dp-rise mt-6 text-[15px] text-dp-muted" style={rise(0.36)}>
             Bigger project, or an agency?{" "}
-            <Link href="/pricing?for=larger" className="font-medium text-dp-ink underline decoration-dp-line underline-offset-4 hover:decoration-dp-accent">
+            <Link href="/business-projects" className="font-medium text-dp-ink underline decoration-dp-line underline-offset-4 hover:decoration-dp-accent">
               Let's scope a custom build
             </Link>
           </p>
@@ -324,7 +324,7 @@ function Chefs() {
 // Only pages that exist; new segments get a card when their page ships.
 const SEGMENTS = [
   ...INDUSTRIES.map((ind) => ({ href: ind.path, ...ind.card })),
-  { href: "/pricing?for=larger", title: "Something bigger", body: "Custom builds, integrations and agency work, quoted after a short chat.", tag: "From R8 000", image: "/images/stock/custom-coding-laptop.webp" },
+  { href: "/business-projects", title: "Something bigger", body: "Custom builds, integrations and agency work, quoted after a short chat.", tag: "From R8 000", image: "/images/stock/custom-coding-laptop.webp" },
 ];
 
 function CookingUp() {
@@ -340,7 +340,7 @@ function CookingUp() {
         <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" data-testid="segment-selector">
           {SEGMENTS.map((s, i) => {
             // The custom route closes the grid as a wider, inverted card, so bigger buyers can't miss it.
-            const big = s.href.includes("for=larger");
+            const big = s.href === "/business-projects";
             return (
             <li key={s.href} className={big ? "sm:col-span-2" : ""}>
               <Reveal delay={(i % 4) * 0.06} className="h-full">

@@ -5,7 +5,7 @@ import { MagneticButton } from "../components/MagneticButton";
 import { FreeTaste } from "../components/FreeTaste";
 import { PantryShelf } from "../components/PantryShelf";
 import { Sticker, DAY, NIGHT } from "../components/Stickers";
-import { BILLED_SEPARATELY, INTL_PRICES, INTL_RETAINER, LARGER_FROM, PLAN_PRICES, RETAINER, SMALL_BUSINESS_LIMIT } from "../lib/plans";
+import { BILLED_SEPARATELY, INTL_PRICES, INTL_RETAINER, LARGER_DRIVERS, LARGER_FROM, PLAN_PRICES, RETAINER, SMALL_BUSINESS_LIMIT } from "../lib/plans";
 import { useEffect, useState } from "react";
 import { Link, useSearch } from "wouter";
 import { COST_GUIDE } from "../lib/guides";
@@ -42,12 +42,6 @@ const AUDIENCES: { id: Audience; label: string; short: string }[] = [
   { id: "intl", label: "International", short: "Priced in US dollars" },
 ];
 
-const LARGER_DRIVERS = [
-  "How many pages and how much content",
-  "Integrations: bookings, payments, forms, your systems",
-  "Brand and design work needed",
-  "Timeline and how many people sign off",
-];
 
 export default function Pricing() {
   const search = useSearch();
@@ -121,8 +115,11 @@ export default function Pricing() {
                       </li>
                     ))}
                   </ul>
-                  <div className="mt-8">
-                    <MagneticButton href="/contact?interest=larger">Request a quote</MagneticButton>
+                  <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+                    <MagneticButton href="/business-projects#brief">Send us a brief</MagneticButton>
+                    <Link href="/business-projects" className="inline-flex min-h-11 items-center text-[15px] font-medium text-dp-ink underline decoration-dp-line underline-offset-4 hover:decoration-dp-accent">
+                      How custom builds work
+                    </Link>
                   </div>
                 </div>
                 <div className="dp-stage mx-auto w-full max-w-[460px]">

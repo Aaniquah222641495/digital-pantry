@@ -11,6 +11,7 @@ import Home from "./pages/Home";
 import Portfolio from "./pages/Portfolio";
 import Pricing from "./pages/Pricing";
 import Contact from "./pages/Contact";
+import BusinessProjects from "./pages/BusinessProjects";
 import Privacy from "./pages/Privacy";
 import CostGuide from "./pages/CostGuide";
 import { BeautyBusinesses, Consultants, FoodBusinesses, ProductBrands, SchoolsAndMadrasahs, TradesAndLocalServices } from "./pages/Industry";
@@ -30,6 +31,7 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/portfolio" component={Portfolio} />
       <Route path="/pricing" component={Pricing} />
+      <Route path="/business-projects" component={BusinessProjects} />
       <Route path="/contact" component={Contact} />
       <Route path="/privacy" component={Privacy} />
       <Route path="/websites-for-food-businesses" component={FoodBusinesses} />
