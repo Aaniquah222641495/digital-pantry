@@ -97,7 +97,6 @@ function Monogram({ className = "" }: { className?: string }) {
 
 function Hero() {
   const rise = (d: number) => ({ "--d": `${d}s` }) as CSSProperties;
-  const [stuffd] = WORK;
   return (
     <section className="relative isolate overflow-hidden">
       <div
@@ -117,7 +116,7 @@ function Hero() {
             </span>
           </h1>
           <p className="dp-rise mt-8 max-w-[38ch] text-[clamp(1.15rem,1.7vw,1.4rem)] leading-[1.45] tracking-[-0.01em] text-dp-ink/80" style={rise(0.14)}>
-            We design and code websites, web apps and the systems behind them: lead capture, integrations, getting found on Google and AI search, and care after launch.
+            We design and code custom websites, web apps and the systems behind them, so customers can find you, understand what you offer and get in touch without the back-and-forth.
           </p>
           <div className="dp-rise mt-10 flex flex-wrap items-center gap-3" style={rise(0.26)}>
             <MagneticButton href="/contact" data-testid="button-hero-cta">
@@ -146,30 +145,15 @@ function Hero() {
           </div>
         </div>
 
-        {/* The kitchen, with one live client site coming out of it: proof in the first screen,
-            kept to one idea so the hero stays calm (founder 2026-10-26: "very cluttered"). */}
+        {/* The kitchen, kept to one idea so the hero stays calm (founder 2026-10-26). Live work
+            follows straight after in What we cook and Fresh out the kitchen. */}
         <div className="mx-auto w-full max-w-[720px]">
-        <div className="relative pb-[16%] pl-[9%]">
+        <div className="relative">
           <div className="dp-rise relative" style={rise(0.18)}>
             <Sticker day={DAY.star} night={NIGHT.moon} size={58} r={-10} style={{ left: "-18px", top: "-26px" }} />
             <HeroScene />
           </div>
 
-          <a
-            href={stuffd.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`${stuffd.name}, a live site we built (opens in a new tab)`}
-            className="dp-rise dp-hero-float group absolute bottom-0 left-0 z-20 w-[23%] -rotate-[6deg] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-dp-accent"
-            style={{ ...rise(0.52), "--float-d": "1.4s" } as CSSProperties}
-          >
-            <span className="block overflow-hidden rounded-[22px] border-[4px] border-[#0C0B0D] bg-[#0C0B0D] shadow-[0_30px_60px_-20px_rgba(12,11,13,0.6)] transition-transform duration-700 group-hover:-translate-y-1.5">
-              <img src={stuffd.phone} alt="" width={780} height={1688} decoding="async" className="aspect-[390/844] w-full rounded-[18px] object-cover object-top" />
-            </span>
-            <span className="absolute -bottom-3 left-1/2 inline-flex -translate-x-1/2 rotate-[6deg] items-center gap-1 whitespace-nowrap rounded-full bg-dp-surface px-3 py-1.5 text-[12px] font-medium text-dp-ink shadow-[0_10px_24px_-12px_rgba(12,11,13,0.5)]">
-              Live: {stuffd.name} <ArrowUpRight size={12} aria-hidden="true" />
-            </span>
-          </a>
 
         </div>
         </div>
