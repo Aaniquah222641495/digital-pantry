@@ -22,7 +22,7 @@ export default function Privacy() {
               Digital Pantry Web Studio · digitalpantry.co.za
             </p>
             <p className="font-mono text-[12px] text-dp-muted mb-10 pb-10 border-b border-dp-line">
-              Last updated: 22 October 2026
+              Last updated: 26 October 2026
             </p>
             <p className={pCls}>
               This explains how we look after your personal information under the Protection of Personal Information Act (POPIA).
@@ -61,14 +61,14 @@ export default function Privacy() {
             <h2 className={`${h2Cls} mt-8`}>3. Cookies and tracking</h2>
             <p className={pCls}>Our code sets no cookies and has no analytics, advertising or tracking tools. The site saves your light/dark choice in your browser's local storage (a setting called "dp-theme"). It stays on your device and we do not receive it.</p>
             <p className={pCls}>
-              The site loads fonts from Google Fonts, so Google receives your IP address when a page loads. Our host, Netlify, keeps standard technical logs (such as your IP address) to run and secure the site, under{" "}
+              The site's fonts are stored with the site itself, so loading a page does not send a request to Google or any other font service. Our host, Netlify, keeps standard technical logs (such as your IP address) to run and secure the site, under{" "}
               <a className={linkCls} href="https://www.netlify.com/privacy/" target="_blank" rel="noopener noreferrer">Netlify's own privacy policy</a>.
             </p>
 
             <h2 className={`${h2Cls} mt-8`}>4. Other companies that handle information for us</h2>
             <ul className={ulCls}>
               <li><span className={strongCls}>Netlify</span> hosts this website.</li>
-              <li><span className={strongCls}>Google</span> (Gmail, Google Sheets, Google Apps Script and Drive) holds our emails, the contact-form Sheet that receives your enquiry and our outreach Sheet, and sends the alert and confirmation emails; Google Fonts serves the site's fonts.</li>
+              <li><span className={strongCls}>Google</span> (Gmail, Google Sheets, Google Apps Script and Drive) holds our emails, the contact-form Sheet that receives your enquiry and our outreach Sheet, and sends the alert and confirmation emails. Your browser only contacts Google when you send the contact form.</li>
               <li><span className={strongCls}>WhatsApp (Meta)</span> if you message us there, or we message you.</li>
             </ul>
             <p className={pCls}>Some of these providers (Google, Netlify, Meta/WhatsApp) may store information outside South Africa. We use only established providers with their own data protection commitments.</p>

@@ -13,6 +13,7 @@ import { PantryShelf } from "../components/PantryShelf";
 import { Sticker, DAY, NIGHT } from "../components/Stickers";
 import { H2 } from "../lib/style";
 import { useSideContact } from "../lib/contact";
+import { TURNAROUND_NOTE } from "../lib/plans";
 
 // Imaan's pixel avatar is being made; until then her cards show a monogram.
 const IMAAN_AVATAR: string | null = "/images/imaan-cut.webp";
@@ -73,7 +74,7 @@ const WORK = [
 const RECIPE = [
   { img: "/images/art/aaniquah-reading.webp", imgNight: "/images/art/imaan-reading.webp", title: "Read the recipe", body: "We learn your business, your customers and how you sell, then design a free first look." },
   { img: "/images/art/aaniquah-chef.webp", imgNight: "/images/art/imaan-chef.webp", title: "Cook from scratch", body: "Clean code, mobile first and fast. No templates, nothing you don't need." },
-  { img: "/images/art/aaniquah-serving.webp", imgNight: "/images/art/imaan-serving.webp", title: "Served fresh", body: "Live on your own domain and ready for orders. Most sites take 5 to 7 business days." },
+  { img: "/images/art/aaniquah-serving.webp", imgNight: "/images/art/imaan-serving.webp", title: "Served fresh", body: "Live on your own domain and ready for orders. Sites take 5 to 7 business days.*" },
 ] as const;
 
 
@@ -112,8 +113,8 @@ function Hero() {
               freshly <CutoutWord word="COOKED" /> <span aria-hidden="true" className="text-[0.8em]">★</span>
             </span>
           </h1>
-          <p className="dp-rise mt-7 max-w-[38ch] text-[clamp(1.05rem,1.5vw,1.25rem)] leading-relaxed text-dp-muted" style={rise(0.18)}>
-            Made from scratch by Aaniquah and Imaan. No off-the-shelf ingredients. No boring templates.
+          <p className="dp-rise mt-7 max-w-[44ch] text-[clamp(1.05rem,1.5vw,1.25rem)] leading-relaxed text-dp-muted" style={rise(0.18)}>
+            Custom websites for small businesses, made from scratch in Cape Town by Aaniquah and Imaan. Designed and coded around how your business works.
           </p>
           <div className="dp-rise mt-10 flex flex-wrap items-center gap-3" style={rise(0.3)}>
             <MagneticButton href="/contact" data-testid="button-hero-cta">
@@ -388,6 +389,10 @@ function Recipe() {
             </Reveal>
           ))}
         </ol>
+        <p className="mt-6 max-w-[70ch] text-[13px] leading-relaxed text-dp-muted">
+          * {TURNAROUND_NOTE}{" "}
+          <Link href="/pricing" className="text-dp-accent underline decoration-dp-line underline-offset-4 hover:decoration-dp-accent">Full terms on Pricing</Link>.
+        </p>
       </div>
     </section>
   );
@@ -403,7 +408,7 @@ function Menu() {
             <h2 id="menu-heading" className={H2}>
               On the <CutoutWord word="MENU" />
             </h2>
-            <p className="mt-5 max-w-[40ch] text-lg leading-relaxed text-dp-muted">Clear prices. No hidden fees. Pick a jar to ask about it.</p>
+            <p className="mt-5 max-w-[40ch] text-lg leading-relaxed text-dp-muted">Once-off prices in rand. See what is and is not included on the pricing page, then pick a jar to ask about it.</p>
           </div>
           <Link href="/pricing" className="group inline-flex min-h-11 items-center gap-1.5 text-[15px] text-dp-muted transition-colors hover:text-dp-ink" data-testid="button-pricing-preview-cta">
             See full packages

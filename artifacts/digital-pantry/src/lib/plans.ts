@@ -18,6 +18,27 @@ export const INTL_PRICES = {
   Pro: "$1 800",
 } as const;
 
+// Turnaround, with the conditions from ADR-0025 (founder, 2026-10-26). Every "5 to 7 business days"
+// on the site uses TURNAROUND_TERMS or the short note below, so the promise is never unconditional.
+// Meta descriptions and JSON-LD are too short for the conditions, so they leave the number out.
+export const TURNAROUND_TERMS =
+  "Starter, Standard and Premium sites take 5 to 7 business days, counted from when your deposit is paid and all your content is in. Feedback within 2 business days keeps the date; slower feedback moves it by the same amount. Waiting on a domain registrar is not counted. Pro, e-commerce and custom builds get an estimate in the quote.";
+export const TURNAROUND_NOTE =
+  "Starter, Standard and Premium sites, counted from when your deposit is paid and all your content is in. Pro, e-commerce and custom builds are estimated in the quote.";
+
+// What a package price does not cover (DPW-4; founder-settled S4/S6, 2026-10-26). Hosting is left out
+// on purpose: it is stated only after web-finance confirms. Pricing.tsx, the FAQ (seo.ts) and
+// public/pricing.md repeat this wording, so change them together.
+export const BILLED_SEPARATELY = [
+  "Your domain name. You buy it in your own name and it is yours. A .co.za renews at about R110 a year at xneelo (checked October 2026). Premium and Pro include the setup, not the registration fee.",
+  "Email on your own domain, if you want it (a mail plan from your domain provider).",
+  "Copywriting, if you want us to write your text.",
+  "Online shops and payments (e-commerce), which are quoted separately.",
+  "Changes beyond 2 rounds of revisions, and edits beyond the retainer's small updates. We quote these in writing before we start.",
+] as const;
+export const BILLED_SEPARATELY_SUMMARY =
+  "Package prices cover the site build only. Billed separately: your domain name (you buy and own it; a .co.za renews at about R110 a year), email on your own domain, copywriting, online shops and payments, and changes beyond 2 rounds of revisions or beyond the retainer's small updates. We quote any extra work in writing first.";
+
 export const SMALL_BUSINESS_LIMIT = "up to 10 staff";
 export const LARGER_FROM = "R8 000";
 

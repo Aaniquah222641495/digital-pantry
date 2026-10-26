@@ -1,10 +1,12 @@
 import type { CSSProperties } from "react";
+import { Link } from "wouter";
 import { ArrowUpRight } from "lucide-react";
 import { CutoutWord } from "../components/CutoutWord";
 import { Reveal } from "../components/Reveal";
 import { DeviceFrames } from "../components/DeviceFrames";
 import { FreeTaste } from "../components/FreeTaste";
 import { H1 } from "../lib/style";
+import { TURNAROUND_NOTE } from "../lib/plans";
 import { OrderUp } from "../components/OrderUp";
 import { Sticker, DAY, NIGHT } from "../components/Stickers";
 
@@ -21,7 +23,7 @@ const CASES = [
     phone: "/images/work/stuffd-phone.webp",
     rows: [
       ["The problem", "Customers had to hunt for a WhatsApp number and scroll social media to place orders. No central hub, so sales slipped through the cracks."],
-      ["What we cooked", "A single-page ordering site with the menu, this week's pop-up spots and one-tap WhatsApp ordering. Customers find what they need in seconds."],
+      ["What we cooked", "A single-page ordering site with the menu, this week's pop-up spots and one-tap WhatsApp ordering."],
     ],
     stack: STACK_TAGS,
   },
@@ -62,7 +64,7 @@ export default function Portfolio() {
               {[
                 ["Served", `${CASES.length} live sites`],
                 ["Kitchen", "Cape Town"],
-                ["Usual wait", "5 to 7 days"],
+                ["Turnaround", "5 to 7 business days*"],
               ].map(([k, v], i) => (
                 <div key={k} className={`px-3 py-4 ${i > 0 ? "border-l border-dashed border-dp-line" : ""}`}>
                   <dt className="font-mono text-[11px] text-dp-accent">{k}</dt>
@@ -70,6 +72,10 @@ export default function Portfolio() {
                 </div>
               ))}
             </dl>
+            <p className="dp-rise mt-3 max-w-[460px] text-[13px] leading-relaxed text-dp-muted" style={{ "--d": "0.3s" } as CSSProperties}>
+              * {TURNAROUND_NOTE}{" "}
+              <Link href="/pricing" className="text-dp-accent underline decoration-dp-line underline-offset-4 hover:decoration-dp-accent">Full terms on Pricing</Link>.
+            </p>
           </div>
           <div className="dp-rise pt-16 md:pt-24" style={{ "--d": "0.15s" } as CSSProperties}>
             <OrderUp />

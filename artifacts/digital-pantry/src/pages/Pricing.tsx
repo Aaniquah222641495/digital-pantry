@@ -5,7 +5,7 @@ import { MagneticButton } from "../components/MagneticButton";
 import { FreeTaste } from "../components/FreeTaste";
 import { PantryShelf } from "../components/PantryShelf";
 import { Sticker, DAY, NIGHT } from "../components/Stickers";
-import { INTL_PRICES, INTL_RETAINER, LARGER_FROM, PLAN_PRICES, RETAINER, SMALL_BUSINESS_LIMIT } from "../lib/plans";
+import { BILLED_SEPARATELY, INTL_PRICES, INTL_RETAINER, LARGER_FROM, PLAN_PRICES, RETAINER, SMALL_BUSINESS_LIMIT } from "../lib/plans";
 import { useEffect, useState } from "react";
 import { Link, useSearch } from "wouter";
 import { COST_GUIDE } from "../lib/guides";
@@ -207,6 +207,26 @@ export default function Pricing() {
             </Reveal>
           ))}
         </div>
+        )}
+
+        {/* Included vs billed separately: package prices cover the build only */}
+        {audience !== "larger" && (
+          <Reveal className="mt-8 rounded-[28px] border border-dp-line bg-dp-surface p-8 sm:p-10">
+            <div data-testid="pricing-billed-separately">
+              <h2 className="text-[clamp(1.6rem,2.6vw,2.2rem)] font-semibold tracking-[-0.035em]">What the price covers, and what it doesn't</h2>
+              <p className="mt-3 max-w-[60ch] leading-relaxed text-dp-muted">
+                Each package price is for building your site, once-off. These are billed separately, and we tell you the cost before anything is bought.
+              </p>
+              <ul className="mt-6 grid gap-x-10 gap-y-3 md:grid-cols-2">
+                {BILLED_SEPARATELY.map((t) => (
+                  <li key={t} className="flex items-start gap-2.5 text-[15px] leading-relaxed">
+                    <span aria-hidden="true" className="mt-0.5 shrink-0 font-mono text-dp-accent">+</span>
+                    <span>{t}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Reveal>
         )}
 
         {/* Retainer */}
