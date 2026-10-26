@@ -184,6 +184,7 @@ const has = (re) => events.some((e) => re.test(e));
 const expected = {
   "pageview": /^pageview /,
   "package_view (intl)": /package_view .*"market":"intl"/,
+  "package_view pricing_shelf": /package_view .*"pricing_shelf"/,
   "custom_project_cta_click": /custom_project_cta_click/,
   "package_cta_click (standard)": /package_cta_click .*"standard"/,
   "enquiry_form_start": /enquiry_form_start/,

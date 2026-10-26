@@ -30,6 +30,7 @@ export type EventProps = {
   market?: Market;
   surface?:
     | "pricing"
+    | "pricing_shelf"
     | "home_shelf"
     | "mockup_band"
     | "pricing_larger"

@@ -12,7 +12,7 @@ const JARS = [
   { name: "Pro", price: PLAN_PRICES.Pro, usd: INTL_PRICES.Pro, img: "/images/pro.webp", note: "Every enquiry caught for you." },
 ] as const;
 
-type Surface = "pricing" | "home_shelf";
+type Surface = "pricing_shelf" | "home_shelf";
 
 export function PantryShelf({ link = true, currency = "ZAR", surface }: { link?: boolean; currency?: "ZAR" | "USD"; surface: Surface }) {
   const intl = currency === "USD";

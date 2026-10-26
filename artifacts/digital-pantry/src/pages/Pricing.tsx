@@ -181,7 +181,7 @@ export default function Pricing() {
               </div>
             ) : (
               <>
-                <PantryShelf currency={intl ? "USD" : "ZAR"} surface="pricing" />
+                <PantryShelf currency={intl ? "USD" : "ZAR"} surface="pricing_shelf" />
                 <p className="mt-10 max-w-[70ch] text-[14px] leading-relaxed text-dp-muted">
                   {intl
                     ? "International packages, once-off and priced in US dollars. Same kitchen, same care. We confirm payment options with your quote."
