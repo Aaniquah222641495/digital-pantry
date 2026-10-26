@@ -1,4 +1,4 @@
-import type { CSSProperties } from "react";
+import { useRef, type CSSProperties, type ReactNode } from "react";
 import { Link } from "wouter";
 import { ArrowUpRight } from "lucide-react";
 import { CutoutWord } from "../components/CutoutWord";
@@ -9,12 +9,14 @@ import { H1 } from "../lib/style";
 import { TURNAROUND_NOTE } from "../lib/plans";
 import { OrderUp } from "../components/OrderUp";
 import { Sticker, DAY, NIGHT } from "../components/Stickers";
+import { useTrackOnView, type EventProps } from "../lib/analytics";
 
 const STACK_TAGS = ["React", "TypeScript", "Tailwind", "Netlify"];
 
 const CASES = [
   {
     name: "Stuff'd Bagels",
+    caseKey: "stuffd_bagels",
     kind: "Food pop-up, Cape Town",
     url: "stuffdbagels.netlify.app",
     href: "https://stuffdbagels.netlify.app",
@@ -29,6 +31,7 @@ const CASES = [
   },
   {
     name: "Beginners Madrasah",
+    caseKey: "beginners_madrasah",
     kind: "Islamic learning for women and children",
     url: "beginnersmadrasah.co.za",
     href: "https://beginnersmadrasah.co.za/",
@@ -43,6 +46,15 @@ const CASES = [
   },
 ] as const;
 
+function CaseArticle({ caseKey, i, children }: { caseKey: NonNullable<EventProps["case"]>; i: number; children: ReactNode }) {
+  const ref = useRef<HTMLElement>(null);
+  useTrackOnView(ref, "portfolio_case_study_view", { case: caseKey });
+  return (
+    <article ref={ref} aria-labelledby={`case-${i}`} className="grid items-center gap-12 md:grid-cols-12 md:gap-12">
+      {children}
+    </article>
+  );
+}
 
 export default function Portfolio() {
   return (
@@ -87,7 +99,7 @@ export default function Portfolio() {
         {CASES.map((c, i) => {
           const flip = i % 2 === 1;
           return (
-            <article key={c.name} aria-labelledby={`case-${i}`} className="grid items-center gap-12 md:grid-cols-12 md:gap-12">
+            <CaseArticle key={c.name} caseKey={c.caseKey} i={i}>
               <Reveal className={`md:col-span-7 ${flip ? "md:order-2" : ""}`}>
                 <DeviceFrames desktop={c.desktop} phone={c.phone} alt={`The ${c.name} website`} url={c.url} flip={flip} />
               </Reveal>
@@ -128,7 +140,7 @@ export default function Portfolio() {
                   <ArrowUpRight size={16} className="transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                 </a>
               </Reveal>
-            </article>
+            </CaseArticle>
           );
         })}
       </div>

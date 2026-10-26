@@ -59,7 +59,10 @@ export default function Privacy() {
             </ul>
 
             <h2 className={`${h2Cls} mt-8`}>3. Cookies and tracking</h2>
-            <p className={pCls}>Our code sets no cookies and has no analytics, advertising or tracking tools. The site saves your light/dark choice in your browser's local storage (a setting called "dp-theme"). It stays on your device and we do not receive it.</p>
+            <p className={pCls}>
+              Our code sets no cookies and has no advertising tools. We use Umami, a privacy-focused analytics service, to count visits and a few button presses on this site: which pages are viewed, and whether a price, WhatsApp, email or form button is used. This shows us which pages help businesses reach us. Umami does not use cookies and does not store anything on your device. We never send it your name, phone number, email address, business name or message, and we do not send it the "?" part of a web address. Like any website request, your IP address reaches Umami's servers. Umami uses it briefly to work out your approximate location (such as your country) and to make an anonymous visitor code that changes every month. It does not keep the IP address in its reports, but it may appear in Umami's technical and security logs. We look only at totals and trends (pages, countries, device types, referring sites). We do not try to work out who you are, and we do not link these counts to enquiries you send us. If your browser sends a "Do Not Track" signal, we do not count your visit. Umami keeps this data for up to 6 months. Our legal basis is our legitimate interest in understanding and improving our website (POPIA section 11(1)(f)). Because these counts are anonymous, we may not be able to find your records if you ask to access or delete them; contact us and we will help where we can.
+            </p>
+            <p className={pCls}>The site saves your light/dark choice in your browser's local storage (a setting called "dp-theme"). It stays on your device and we do not receive it.</p>
             <p className={pCls}>
               The site's fonts are stored with the site itself, so loading a page does not send a request to Google or any other font service. Our host, Netlify, keeps standard technical logs (such as your IP address) to run and secure the site, under{" "}
               <a className={linkCls} href="https://www.netlify.com/privacy/" target="_blank" rel="noopener noreferrer">Netlify's own privacy policy</a>.
@@ -68,10 +71,11 @@ export default function Privacy() {
             <h2 className={`${h2Cls} mt-8`}>4. Other companies that handle information for us</h2>
             <ul className={ulCls}>
               <li><span className={strongCls}>Netlify</span> hosts this website.</li>
+              <li><span className={strongCls}>Umami</span> (Umami Software, Inc., USA) provides our visit counts, as described in section 3, under a data processing agreement that binds it to protect the information and use it only for us. Our account stores this data in Umami's EU region.</li>
               <li><span className={strongCls}>Google</span> (Gmail, Google Sheets, Google Apps Script and Drive) holds our emails, the contact-form Sheet that receives your enquiry and our outreach Sheet, and sends the alert and confirmation emails. Your browser only contacts Google when you send the contact form.</li>
               <li><span className={strongCls}>WhatsApp (Meta)</span> if you message us there, or we message you.</li>
             </ul>
-            <p className={pCls}>Some of these providers (Google, Netlify, Meta/WhatsApp) may store information outside South Africa. We use only established providers with their own data protection commitments.</p>
+            <p className={pCls}>Some of these providers (Google, Netlify, Meta/WhatsApp, Umami) may store or process information outside South Africa, including in the United States and Europe. We use only established providers, and where we send them information we rely on their data protection commitments and written agreements.</p>
 
             <h2 className={`${h2Cls} mt-8`}>5. Keeping it safe</h2>
             <p className={pCls}>Our Google account and Sheets are private and limited to us. We do not put your details in public places. If your information is ever compromised in a way that puts you at risk, we will tell you and the Information Regulator as soon as reasonably possible.</p>

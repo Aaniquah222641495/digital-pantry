@@ -11,6 +11,7 @@ export function MagneticButton({
   variant = "primary",
   size = "md",
   external = false,
+  onClick,
   ...rest
 }: {
   href: string;
@@ -18,6 +19,7 @@ export function MagneticButton({
   variant?: "primary" | "ghost";
   size?: "sm" | "md";
   external?: boolean;
+  onClick?: () => void;
   "data-testid"?: string;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -46,11 +48,11 @@ export function MagneticButton({
 
   const focus = "inline-flex rounded-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-dp-accent";
   return external ? (
-    <a href={href} target="_blank" rel="noopener noreferrer" className={focus} data-testid={rest["data-testid"]}>
+    <a href={href} target="_blank" rel="noopener noreferrer" className={focus} data-testid={rest["data-testid"]} onClick={onClick}>
       {inner}
     </a>
   ) : (
-    <Link href={href} className={focus} data-testid={rest["data-testid"]}>
+    <Link href={href} className={focus} data-testid={rest["data-testid"]} onClick={onClick}>
       {inner}
     </Link>
   );

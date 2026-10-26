@@ -13,6 +13,7 @@ import { PantryShelf } from "../components/PantryShelf";
 import { Sticker, DAY, NIGHT } from "../components/Stickers";
 import { H2 } from "../lib/style";
 import { useSideContact } from "../lib/contact";
+import { track } from "../lib/analytics";
 import { TURNAROUND_NOTE } from "../lib/plans";
 
 // Imaan's pixel avatar is being made; until then her cards show a monogram.
@@ -236,6 +237,7 @@ function Chefs() {
               href={contact.waLink}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => track("whatsapp_click", { surface: "home_chefs" })}
               className="mt-7 inline-flex h-11 items-center gap-2 rounded-full bg-[#161214] px-5 text-[14px] font-medium text-[#FFF7FA] transition-transform active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#161214]"
             >
               <span aria-hidden="true" className="h-2 w-2 rounded-full bg-[#25D366]" /> WhatsApp {contact.name}
@@ -416,7 +418,7 @@ function Menu() {
           </Link>
         </Reveal>
         <Reveal className="mt-16">
-          <PantryShelf />
+          <PantryShelf surface="home_shelf" />
         </Reveal>
         <p className="mt-12 text-[14px] text-dp-muted">For South African small businesses with up to 10 staff, once-off in rand. Larger businesses from R8 000, quoted. Abroad? See our international prices in US dollars.</p>
       </div>
