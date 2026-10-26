@@ -1,12 +1,12 @@
-import { useRef, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { usePointerVars } from "../lib/pointer";
 
-// The two chefs at one counter (pixel art). No tint over the art: the frame is a camera that
-// rests on Aaniquah's pink day side and pans across the counter to Imaan's burgundy night side
-// when the founders switch flips (founder 2026-10-26: no overlay). The image and its small
-// effects (sun, stars, sign glow, laptop shine, steam) sit on one wide layer that moves
-// together, so the effects stay on the art. Positions are percentages of the illustration.
-// Motion stops for reduced motion (index.css, "Hero scene").
+// The two chefs at one counter (pixel art). No tint over the art (founder 2026-10-26): the frame
+// is a camera. It opens wide on both founders, then glides in to whoever's side is on (Day:
+// Aaniquah's pink side, Night: Imaan's burgundy side) and pans across when the switch flips.
+// The image and its small effects (sun, stars, sign glow, laptop shine, steam) sit on one layer
+// that moves together, so the effects stay on the art. Positions are percentages of the
+// illustration. Motion stops for reduced motion (index.css, "Hero camera").
 const STARS: [number, number, number][] = [
   [86.6, 12.6, 0],
   [90.8, 20.6, 1.1],
@@ -20,11 +20,17 @@ const at = (left: number, top: number, extra: CSSProperties = {}) => ({ left: `$
 export function HeroScene() {
   const ref = useRef<HTMLDivElement>(null);
   usePointerVars(ref);
+  // Prerendered HTML shows both founders; the camera moves in once the page has settled.
+  const [focused, setFocused] = useState(false);
+  useEffect(() => {
+    const t = window.setTimeout(() => setFocused(true), 1600);
+    return () => window.clearTimeout(t);
+  }, []);
 
   return (
     <div ref={ref} className="dp-tilt [perspective:1400px]">
-      <figure className="dp-tilt-target relative isolate aspect-[1240/830] w-full overflow-hidden rounded-[30px] border-[3px] border-white bg-[#FCE8F0] shadow-[0_40px_90px_-40px_rgba(179,47,104,0.55)] dark:border-[var(--im-border)] dark:bg-[#2A0E18] dark:shadow-[0_40px_90px_-30px_rgba(255,92,168,0.35)]">
-        <div className="dp-pan absolute inset-y-0 left-[-1.3%] w-[129.04%]">
+      <figure className="dp-tilt-target relative isolate aspect-[1524/830] w-full overflow-hidden rounded-[30px] border-[3px] border-white bg-[#FCE8F0] shadow-[0_40px_90px_-40px_rgba(179,47,104,0.55)] dark:border-[var(--im-border)] dark:bg-[#2A0E18] dark:shadow-[0_40px_90px_-30px_rgba(255,92,168,0.35)]">
+        <div className={`dp-pan absolute inset-y-0 left-[-1.05%] w-[104.99%] ${focused ? "is-focused" : ""}`}>
           <img
             src="/images/hero-scene.webp"
             srcSet="/images/hero-scene-900.webp 900w, /images/hero-scene.webp 1600w"
