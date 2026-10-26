@@ -15,7 +15,7 @@ import { H2 } from "../lib/style";
 import { useSideContact } from "../lib/contact";
 import { LARGER_FROM, PLAN_PRICES, TURNAROUND_NOTE } from "../lib/plans";
 import { INDUSTRIES } from "../lib/guides";
-import { BuildTicket, MEASURED } from "../components/BuildTicket";
+import { BuildTicket } from "../components/BuildTicket";
 import { WhatWeCook } from "../components/WhatWeCook";
 
 // Imaan's pixel avatar is being made; until then her cards show a monogram.
@@ -97,18 +97,18 @@ function Monogram({ className = "" }: { className?: string }) {
 
 function Hero() {
   const rise = (d: number) => ({ "--d": `${d}s` }) as CSSProperties;
-  const [stuffd, madrasah] = WORK;
+  const [stuffd] = WORK;
   return (
     <section className="relative isolate overflow-hidden">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -right-[20%] -top-[30%] -z-10 h-[90vh] w-[70vw] rounded-full bg-[radial-gradient(closest-side,var(--dp-glow),transparent)] blur-2xl"
       />
-      <Sprinkles count={28} className="-z-10 opacity-70 dark:opacity-55" />
+      <Sprinkles count={14} className="-z-10 opacity-60 dark:opacity-45" />
       <div className="mx-auto grid min-h-[94dvh] max-w-[1320px] items-center gap-16 px-5 pb-24 pt-32 sm:px-8 lg:grid-cols-[0.92fr_1.08fr] lg:gap-12 lg:pb-20 lg:pt-28">
         <div className="relative">
           {/* Sprinkles shower onto the headline once on load */}
-          <Sprinkles mode="burst" count={55} className="-inset-x-6 -top-10 bottom-1/3 !h-auto" />
+          <Sprinkles mode="burst" count={30} className="-inset-x-6 -top-10 bottom-1/3 !h-auto" />
           <h1 className="dp-rise text-[clamp(3rem,6.6vw,6.25rem)] font-semibold leading-[0.94] tracking-[-0.06em] text-dp-ink" style={rise(0)}>
             Your website,
             <br />
@@ -116,8 +116,8 @@ function Hero() {
               freshly <CutoutWord word="COOKED" />
             </span>
           </h1>
-          <p className="dp-rise mt-8 max-w-[34ch] text-[clamp(1.15rem,1.7vw,1.4rem)] leading-[1.45] tracking-[-0.01em] text-dp-ink/80" style={rise(0.14)}>
-            Thoughtful design. Custom code. A website built around the way your business works.
+          <p className="dp-rise mt-8 max-w-[38ch] text-[clamp(1.15rem,1.7vw,1.4rem)] leading-[1.45] tracking-[-0.01em] text-dp-ink/80" style={rise(0.14)}>
+            We design and code websites, web apps and the systems behind them: lead capture, integrations, getting found on Google and AI search, and care after launch.
           </p>
           <div className="dp-rise mt-10 flex flex-wrap items-center gap-3" style={rise(0.26)}>
             <MagneticButton href="/contact" data-testid="button-hero-cta">
@@ -146,71 +146,32 @@ function Hero() {
           </div>
         </div>
 
-        {/* The kitchen, with real work coming out of it: two live client sites and this
-            site's measured scores. Proof in the first screen, not a claim about it. */}
+        {/* The kitchen, with one live client site coming out of it: proof in the first screen,
+            kept to one idea so the hero stays calm (founder 2026-10-26: "very cluttered"). */}
         <div className="mx-auto w-full max-w-[720px]">
-        <div className="relative pb-[27%] pl-[7%]">
+        <div className="relative pb-[16%] pl-[9%]">
           <div className="dp-rise relative" style={rise(0.18)}>
             <Sticker day={DAY.star} night={NIGHT.moon} size={58} r={-10} style={{ left: "-18px", top: "-26px" }} />
-            <Sticker day={DAY.sparkle} night={NIGHT.star} size={44} r={8} d={1.2} style={{ right: "-14px", top: "18%" }} />
             <HeroScene />
           </div>
-
-          <a
-            href={madrasah.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`${madrasah.name}, a live site we built (opens in a new tab)`}
-            className="dp-rise dp-hero-float group absolute bottom-0 right-[-3%] z-10 w-[47%] rotate-[2.5deg] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-dp-accent"
-            style={rise(0.42)}
-          >
-            <span className="block overflow-hidden rounded-[14px] border border-dp-line bg-dp-surface shadow-[0_40px_70px_-30px_rgba(12,11,13,0.55)] transition-transform duration-700 group-hover:-translate-y-1.5">
-              <span className="flex h-7 items-center gap-2 border-b border-dp-line px-3" aria-hidden="true">
-                <span className="flex gap-1">
-                  <span className="h-2 w-2 rounded-full bg-dp-line" />
-                  <span className="h-2 w-2 rounded-full bg-dp-line" />
-                  <span className="h-2 w-2 rounded-full bg-dp-line" />
-                </span>
-                <span className="mx-auto truncate rounded-full bg-dp-soft px-3 py-0.5 font-mono text-[10px] text-dp-muted">{madrasah.url}</span>
-              </span>
-              <img src={madrasah.desktop} alt="" width={1440} height={1600} decoding="async" className="aspect-[16/10] w-full object-cover object-top" />
-            </span>
-          </a>
 
           <a
             href={stuffd.href}
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`${stuffd.name}, a live site we built (opens in a new tab)`}
-            className="dp-rise dp-hero-float group absolute bottom-[-2%] left-0 z-20 w-[19%] -rotate-[7deg] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-dp-accent"
+            className="dp-rise dp-hero-float group absolute bottom-0 left-0 z-20 w-[23%] -rotate-[6deg] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-dp-accent"
             style={{ ...rise(0.52), "--float-d": "1.4s" } as CSSProperties}
           >
             <span className="block overflow-hidden rounded-[22px] border-[4px] border-[#0C0B0D] bg-[#0C0B0D] shadow-[0_30px_60px_-20px_rgba(12,11,13,0.6)] transition-transform duration-700 group-hover:-translate-y-1.5">
               <img src={stuffd.phone} alt="" width={780} height={1688} decoding="async" className="aspect-[390/844] w-full rounded-[18px] object-cover object-top" />
             </span>
-          </a>
-
-          {/* Measured, dated, linked to the full ticket further down */}
-          <a
-            href="#build-heading"
-            className="dp-rise absolute right-[4%] top-[-5%] z-20 hidden rotate-[3deg] items-center gap-2 rounded-full border border-dp-line bg-dp-surface px-4 py-2 font-mono text-[11.5px] text-dp-ink shadow-[0_14px_30px_-14px_rgba(12,11,13,0.45)] sm:inline-flex"
-            style={rise(0.6)}
-          >
-            <span aria-hidden="true" className="text-dp-accent">★</span>
-            Accessibility 100 · SEO 100
-            <span className="sr-only">on every page of this site, measured with Lighthouse on {MEASURED}</span>
+            <span className="absolute -bottom-3 left-1/2 inline-flex -translate-x-1/2 rotate-[6deg] items-center gap-1 whitespace-nowrap rounded-full bg-dp-surface px-3 py-1.5 text-[12px] font-medium text-dp-ink shadow-[0_10px_24px_-12px_rgba(12,11,13,0.5)]">
+              Live: {stuffd.name} <ArrowUpRight size={12} aria-hidden="true" />
+            </span>
           </a>
 
         </div>
-          <p className="dp-rise mt-6 flex flex-wrap items-center justify-end gap-x-4 gap-y-1 text-[13px] text-dp-muted" style={rise(0.6)}>
-            <span>Live now:</span>
-            {WORK.map((w) => (
-              <a key={w.name} href={w.href} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-1 font-medium text-dp-ink underline decoration-dp-line underline-offset-4 hover:decoration-dp-accent">
-                {w.name}
-                <ArrowUpRight size={13} aria-hidden="true" />
-              </a>
-            ))}
-          </p>
         </div>
       </div>
     </section>
