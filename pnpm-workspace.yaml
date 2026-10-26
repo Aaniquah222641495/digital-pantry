@@ -155,3 +155,9 @@ overrides:
   # drizzle-kit uses esbuild internally on an older version that's vulnerable, this overrides it
   "@esbuild-kit/esm-loader": "npm:tsx@^4.21.0"
   esbuild: "0.27.3"
+  # security pins (moved from package.json: pnpm 10 uses one overrides source, not both)
+  "postcss@<8.5.29": "8.5.29"
+  "nanoid@>=3.0.0 <3.3.20": "3.3.20"
+  "browserslist@<4.29.3": "4.29.3"
+  "source-map-js@<1.2.2": "1.2.2"
+  "baseline-browser-mapping@<2.11.28": "2.11.28"
