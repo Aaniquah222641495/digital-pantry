@@ -1,12 +1,15 @@
+// What we make for a business, not about us (founder 2026-10-26: "the banner should reflect
+// the business"). Only things the site already offers; the founders' story lives in Meet the Chefs.
 const PHRASES = [
-  "Women-led studio",
+  "Websites",
+  "Web apps",
+  "Lead systems",
+  "One-tap WhatsApp orders",
+  "Bookings and enquiries",
+  "Found on Google and AI search",
+  "Fast on any phone",
+  "Care after launch",
   "Built from scratch",
-  "Cape Town",
-  "Girl power",
-  "Aaniquah: GirlCode Pan-African Hackathon winner 2026",
-  "Women in STEM",
-  "Cooked to order",
-  "No boring templates",
 ];
 
 // The one marquee on the page. Pauses on hover; still for reduced motion (index.css).
