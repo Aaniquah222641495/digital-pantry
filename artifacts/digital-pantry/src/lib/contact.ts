@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "wouter";
 import { useTheme } from "./ThemeContext";
 
 // Each side shows its own founder's WhatsApp: Day = Aaniquah, Night = Imaan.
@@ -14,15 +15,36 @@ const SIDES = {
 
 export const STUDIO_EMAIL = "thedigitalpantryza@gmail.com";
 
+// Page names used in the prefilled WhatsApp message (DPW-25). The message carries the page name only:
+// no personal data, and nothing about the visitor.
+const PAGE_NAMES: Record<string, string> = {
+  "/": "Home",
+  "/portfolio": "Portfolio",
+  "/pricing": "Pricing",
+  "/contact": "Contact",
+  "/privacy": "Privacy",
+  "/websites-for-food-businesses": "Websites for food businesses",
+  "/websites-for-schools-and-madrasahs": "Websites for schools and madrasahs",
+  "/website-cost-south-africa": "website cost guide",
+};
+
+export function whatsappText(name: string, path: string): string {
+  const page = PAGE_NAMES[path.replace(/\/+$/, "") || "/"];
+  return page
+    ? `Hi ${name}, I'm on the ${page} page of the Digital Pantry website and have a question.`
+    : `Hi ${name}, I'm on the Digital Pantry website and have a question.`;
+}
+
 export function useSideContact() {
   const { theme } = useTheme();
+  const [location] = useLocation();
   const [live, setLive] = useState(false);
   useEffect(() => setLive(true), []);
   const c = SIDES[theme];
   return {
     name: c.name,
     display: live ? c.display : "",
-    waLink: live ? `https://wa.me/${c.whatsapp}` : undefined,
+    waLink: live ? `https://wa.me/${c.whatsapp}?text=${encodeURIComponent(whatsappText(c.name, location))}` : undefined,
     email: STUDIO_EMAIL,
   };
 }

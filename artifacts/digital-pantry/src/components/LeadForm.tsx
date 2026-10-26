@@ -13,12 +13,13 @@ import {
   whatsappUrl,
   type LeadFormValues,
 } from "../lib/leads";
+import { MOCKUP_FORM_NOTE } from "../lib/plans";
 import { Sprinkles } from "./Sprinkles";
 
 type Phase = { name: "form" } | { name: "sent"; values: LeadFormValues } | { name: "fallback"; values: LeadFormValues };
 
 const inputCls =
-  "w-full min-h-12 bg-dp-bg border border-dp-line focus:border-dp-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dp-accent aria-[invalid=true]:border-[#C2005F] dark:aria-[invalid=true]:border-[#FF7AB2] rounded-[14px] px-4 py-3 text-dp-ink text-base outline-none transition-colors placeholder:text-dp-muted/80";
+  "w-full min-h-12 bg-dp-bg border border-dp-line focus-visible:border-dp-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dp-accent aria-[invalid=true]:border-[#C2005F] dark:aria-[invalid=true]:border-[#FF7AB2] rounded-[14px] px-4 py-3 text-dp-ink text-base transition-colors placeholder:text-dp-muted/80";
 const labelCls = "block text-[14px] font-medium text-dp-ink mb-2";
 const errCls = "text-[#B0004F] dark:text-[#FF8DBD] text-sm mt-1.5";
 
@@ -199,7 +200,7 @@ export function LeadForm({ source = "contact-page" }: { source?: string }) {
         <FieldError id="interest-error" message={err("interest")} />
         {interest === "Free mock-up" && (
           <p className="text-dp-muted text-sm mt-2" data-testid="mockup-note">
-            A free preview of your site, with no obligation to go ahead.
+            {MOCKUP_FORM_NOTE}
           </p>
         )}
       </div>

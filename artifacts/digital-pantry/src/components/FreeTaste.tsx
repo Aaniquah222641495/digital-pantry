@@ -1,5 +1,6 @@
 import { Link } from "wouter";
 import { ArrowUpRight } from "lucide-react";
+import { MOCKUP_BAND } from "../lib/plans";
 import { Reveal } from "./Reveal";
 
 // "Free mock-up" offer band, shared by Home, Pricing and Portfolio.
@@ -13,7 +14,10 @@ export function FreeTaste({ testId }: { testId: string }) {
             Get a free taste first. <span aria-hidden="true" className="dark:text-[#FFD43B] dark:[text-shadow:0_0_16px_rgba(255,212,59,0.45)]">★</span>
           </h2>
           <p className="mt-5 max-w-[44ch] text-lg leading-relaxed text-[#463E44] dark:text-[var(--im-muted)]">
-            Tell us about your business and we'll design a free mock-up of your site. You see it before you decide, with no obligation to go ahead.
+            Tell us about your business and we'll design a free concept of your site. You see it before you decide, with no obligation to go ahead.
+          </p>
+          <p className="mt-3 max-w-[52ch] text-[15px] leading-relaxed text-[#463E44] dark:text-[var(--im-muted)]" data-testid={`${testId}-terms`}>
+            {MOCKUP_BAND}
           </p>
           <Link
             href="/contact?interest=mockup"
