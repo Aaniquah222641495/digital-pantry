@@ -16,6 +16,7 @@ import { useSideContact } from "../lib/contact";
 import { TURNAROUND_NOTE } from "../lib/plans";
 import { INDUSTRIES } from "../lib/guides";
 import { BuildTicket } from "../components/BuildTicket";
+import { WhatWeCook } from "../components/WhatWeCook";
 
 // Imaan's pixel avatar is being made; until then her cards show a monogram.
 const IMAAN_AVATAR: string | null = "/images/imaan-cut.webp";
@@ -118,7 +119,7 @@ function Hero() {
             </span>
           </h1>
           <p className="dp-rise mt-7 max-w-[46ch] text-[clamp(1.05rem,1.5vw,1.25rem)] leading-relaxed text-dp-muted" style={rise(0.18)}>
-            We design and build websites for small businesses. Your menu or services, your prices and where to find you, on a site that works on any phone and lets customers order, book or message you in one tap.
+            Thoughtful design. Custom code. Websites built around the way your business works, from a first site for a small business to custom builds and integrations for bigger teams.
           </p>
           <div className="dp-rise mt-10 flex flex-wrap items-center gap-3" style={rise(0.3)}>
             <MagneticButton href="/contact" data-testid="button-hero-cta">
@@ -128,6 +129,12 @@ function Hero() {
               See our work
             </MagneticButton>
           </div>
+          <p className="dp-rise mt-6 text-[15px] text-dp-muted" style={rise(0.36)}>
+            Bigger project, or an agency?{" "}
+            <Link href="/pricing?for=larger" className="font-medium text-dp-ink underline decoration-dp-line underline-offset-4 hover:decoration-dp-accent">
+              Let's scope a custom build
+            </Link>
+          </p>
           {/* Proof in the first screen: the live sites, not a claim about them */}
           <p className="dp-rise mt-9 flex flex-wrap items-center gap-x-4 gap-y-2 text-[14px] text-dp-muted" style={rise(0.4)}>
             <span>Live now:</span>
@@ -328,7 +335,7 @@ function CookingUp() {
           <h2 id="cooking-heading" className={H2}>
             What are you <CutoutWord word="COOKING" /> up?
           </h2>
-          <p className="mt-5 max-w-[52ch] text-lg leading-relaxed text-dp-muted">We build for all kinds of small businesses. Pick yours to see what your site would include and which package fits.</p>
+          <p className="mt-5 max-w-[52ch] text-lg leading-relaxed text-dp-muted">Running a small business? Pick yours to see what your site would include and which package fits.</p>
         </Reveal>
         <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" data-testid="segment-selector">
           {SEGMENTS.map((s, i) => {
@@ -496,6 +503,7 @@ export default function Home() {
     <main>
       <Hero />
       <Ticker />
+      <WhatWeCook />
       <CookingUp />
       <Work />
       <Recipe />
