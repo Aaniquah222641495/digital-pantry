@@ -16,7 +16,8 @@ function IndustryPage({ page }: { page: Industry }) {
     <main>
       <section className="relative isolate overflow-hidden">
         <div aria-hidden="true" className="pointer-events-none absolute -right-[15%] -top-[30%] -z-10 h-[80vh] w-[60vw] rounded-full bg-[radial-gradient(closest-side,var(--dp-glow),transparent)] blur-2xl" />
-        <div className="mx-auto max-w-[1320px] px-5 pb-16 pt-36 sm:px-8 md:pb-24 md:pt-40">
+        <div className={`mx-auto max-w-[1320px] px-5 pb-16 pt-36 sm:px-8 md:pb-24 md:pt-40 ${page.photo ? "md:grid md:grid-cols-12 md:items-center md:gap-10" : ""}`}>
+          <div className={page.photo ? "md:col-span-7" : ""}>
           <nav aria-label="Breadcrumb" className="dp-rise mb-3 font-mono text-[12px] text-dp-muted">
             <Link href="/" className="inline-block py-3 underline decoration-dp-line underline-offset-4 hover:text-dp-ink">Home</Link>
             <span aria-hidden="true" className="mx-2">/</span>
@@ -39,6 +40,17 @@ function IndustryPage({ page }: { page: Industry }) {
               See prices
             </Link>
           </div>
+          </div>
+          {page.photo && (
+            <figure className="dp-rise mx-auto mt-14 w-[min(100%,420px)] md:col-span-5 md:mt-0" style={{ "--d": "0.25s" } as CSSProperties}>
+              <div className="rotate-[2deg] rounded-[30px] border-[3px] border-white bg-dp-surface p-2 shadow-[0_30px_60px_-30px_rgba(179,47,104,0.55)] dark:border-[var(--im-border)]">
+                <img src={page.photo.src} alt={page.photo.alt} width={800} height={1000} fetchPriority="high" className="aspect-[4/5] w-full rounded-[24px] object-cover" />
+              </div>
+              <figcaption className="mt-4 text-center font-mono text-[11px] text-dp-muted">
+                Stock photo · {page.photo.credit} / Pexels
+              </figcaption>
+            </figure>
+          )}
         </div>
       </section>
 

@@ -33,6 +33,8 @@ export interface Industry {
   };
   fit: string;
   faq: Faq[];
+  /** Licensed stock photo for the hero (Pexels; credits in public/images/stock/CREDITS.md). Never presented as client work. */
+  photo?: { src: string; alt: string; credit: string };
   /** Short card copy for the "What are you cooking up?" selector on Home */
   card: { title: string; body: string; tag: string };
 }
@@ -134,6 +136,7 @@ export const BEAUTY: Industry = {
     { q: "Can I update my prices later?", a: "Yes. The optional R120/month retainer covers price changes, new treatments and small edits." },
     { q: "How long does a beauty website take?", a: TURNAROUND_TERMS },
   ],
+  photo: { src: "/images/stock/beauty-nail-care.webp", alt: "A nail technician in pink gloves filing a client's nails at a salon table", credit: "Larysa Stratiichuk" },
   card: { title: "Beauty and personal care", body: "Services, prices, your best work and one way to book.", tag: "Salons, lashes, nails" },
 };
 
@@ -142,8 +145,8 @@ export const CONSULTANTS: Industry = {
   label: "Websites for consultants and professional services",
   heading: "Websites for consultants and professional services in South Africa",
   before: "Websites for",
-  word: "CONSULTANTS",
-  after: "and pros",
+  word: "PROS",
+  after: "and consultants",
   intro:
     "Coaches, bookkeepers, consultants, therapists and other professionals. We build a site that explains what you do in plain words, shows why people can trust you and makes it easy to get in touch.",
   needs: [
@@ -158,6 +161,7 @@ export const CONSULTANTS: Industry = {
     { q: "Can the site take bookings for calls?", a: "Yes. We can link your calendar or booking app. A built-in booking setup is quoted on request." },
     { q: "How long does it take?", a: TURNAROUND_TERMS },
   ],
+  photo: { src: "/images/stock/consultants-meeting.webp", alt: "Two women in blazers talking through a laptop meeting at an office desk", credit: "MART PRODUCTION" },
   card: { title: "Consultants and pros", body: "Clear services, real trust signals and better enquiries.", tag: "Coaches, bookkeepers" },
 };
 
@@ -182,6 +186,7 @@ export const PRODUCT_BRANDS: Industry = {
     { q: "Who takes the product photos?", a: "You supply them. Photography is available on request." },
     { q: "How long does it take?", a: TURNAROUND_TERMS },
   ],
+  photo: { src: "/images/stock/product-candles.webp", alt: "Handmade candles in glass jars on a wooden table, with spare wicks beside them", credit: "Anna Shvets" },
   card: { title: "Product brands", body: "A catalogue, your story and a clear way to buy.", tag: "Candles, skincare, crafts" },
 };
 
@@ -206,6 +211,7 @@ export const TRADES: Industry = {
     { q: "Can customers send photos of the job?", a: "They can send them on WhatsApp straight from the site. A form with photo upload is quoted on request." },
     { q: "How long does it take?", a: TURNAROUND_TERMS },
   ],
+  photo: { src: "/images/stock/trades-plumbing.webp", alt: "A plumber's hands tightening a pipe fitting under a counter", credit: "Anıl Karakaya" },
   card: { title: "Trades and local services", body: "Your services, your area and fast quote requests.", tag: "Plumbers, detailers, cleaners" },
 };
 
