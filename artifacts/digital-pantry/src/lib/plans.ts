@@ -55,11 +55,10 @@ export const LARGER_DRIVERS = [
 export const RETAINER = "R120";
 export const INTL_RETAINER = "$90";
 
-// Free mock-up terms (DPW-7; ADR-0025, founder 2026-10-26). The band, the form note, the FAQ,
-// pricing.md and llms.txt all say the same thing, so change them together.
+// Free mock-up terms (DPW-7; ADR-0025, founder 2026-10-26). The form note, the FAQ, pricing.md and
+// llms.txt all say the same thing, so change them together. The offer band (FreeTaste.tsx) shows
+// only the short facts and links to the FAQ (founder 2026-10-26: "too much information").
 // Excluded until the deposit is paid: development, a live link, source files, revisions.
-export const MOCKUP_BAND =
-  "One free concept per business, for qualified enquiries. You get phone and desktop videos and a quote PDF within 5 business days of your brief. It's a mock-up, not a working site: nothing goes live and nothing is editable until the deposit is paid.";
 export const MOCKUP_FORM_NOTE =
   "One free concept per business, for qualified enquiries: phone and desktop videos and a quote PDF within 5 business days of your brief. Nothing goes live or is editable until the deposit is paid.";
 export const MOCKUP_TERMS =
