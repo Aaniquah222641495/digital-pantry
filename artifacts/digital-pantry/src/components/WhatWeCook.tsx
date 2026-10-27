@@ -34,8 +34,8 @@ const offers = (market: Market): Offer[] => [
     art: { src: "/images/art/aaniquah-serving.webp", w: 600, h: 600, cls: "w-[44%] max-w-[260px]" },
   },
   {
-    title: "Custom builds and integrations",
-    body: "Web apps and bigger sites: bookings, payments, forms and links to the systems you already use. Fixed quote after a chat.",
+    title: "Online shops and bigger builds",
+    body: "Online shops, bookings, payments and bigger sites. Fixed quote after a chat.",
     price: "Ask for a quote",
     href: "/contact?interest=larger",
     span: "lg:col-span-5",
@@ -61,7 +61,7 @@ export function WhatWeCook() {
             What we <CutoutWord word="COOK" />
           </h2>
           <p className="max-w-[44ch] text-lg leading-relaxed text-dp-muted md:col-span-5">
-            Websites, web apps and the systems behind them, designed and coded from scratch.
+            Websites for small businesses, designed and coded from scratch.
           </p>
         </Reveal>
         <ul className="mt-14 grid gap-4 lg:grid-cols-12">

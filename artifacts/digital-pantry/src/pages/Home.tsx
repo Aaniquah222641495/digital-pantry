@@ -119,7 +119,7 @@ function Hero() {
             </span>
           </h1>
           <p className="dp-rise mt-8 max-w-[38ch] text-[clamp(1.15rem,1.7vw,1.4rem)] leading-[1.45] tracking-[-0.01em] text-dp-ink/80" style={rise(0.14)}>
-            We design and code custom websites, web apps and the systems behind them, so customers can find you, understand what you offer and get in touch without the back-and-forth.
+            We design and build websites for small businesses, from scratch, so customers can find you, see what you offer and get in touch in one tap.
           </p>
           <div className="dp-rise mt-10 flex flex-wrap items-center gap-3" style={rise(0.26)}>
             <MagneticButton href="/contact" data-testid="button-hero-cta">

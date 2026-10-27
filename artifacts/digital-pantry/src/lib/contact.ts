@@ -9,7 +9,7 @@ import { useTheme } from "./ThemeContext";
 // visitor's browser. Text stays on the same line, so nothing shifts when they appear. Wrap any
 // visible number in data-nosnippet so Google, which does run JavaScript, keeps it out of results.
 const SIDES = {
-  light: { name: "Aaniquah", whatsapp: "27724111011", display: "072 411 1011" },
+  light: { name: "Aaniquah", whatsapp: "27724111011", display: "+27 72 411 1011" },
   dark: { name: "Imaan", whatsapp: "27797027491", display: "079 702 7491" },
 } as const;
 

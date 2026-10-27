@@ -66,7 +66,7 @@ function Jar({ j, i, link, intl, surface, toCards }: { j: (typeof JARS)[number];
           }`}
         >
           {popular && (
-            <span className="absolute -right-3 -top-3 rounded-full bg-[#FFD43B] px-2 py-0.5 text-[11px] font-semibold text-[#161214] shadow-sm">Popular ★</span>
+            <span className="absolute -right-3 -top-3 rounded-full bg-[#FFD43B] px-2 py-0.5 text-[11px] font-semibold text-[#161214] shadow-sm">Our pick ★</span>
           )}
           {toCards ? (
             <p className="text-[clamp(1.3rem,2vw,1.6rem)] font-semibold tracking-[-0.04em]">{j.name}</p>

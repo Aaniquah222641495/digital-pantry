@@ -63,9 +63,9 @@ export const INTL_RETAINER = "$90";
 // only the short facts and links to the FAQ (founder 2026-10-26: "too much information").
 // Excluded until the deposit is paid: development, a live link, source files, revisions.
 export const MOCKUP_FORM_NOTE =
-  "One free concept per business, for qualified enquiries: phone and desktop videos and a quote PDF within 5 business days of your brief. Nothing goes live or is editable until the deposit is paid.";
+  "One free mock-up per business, for qualified enquiries: phone and desktop videos and a quote PDF within 5 business days of your brief. Nothing goes live or is editable until the deposit is paid.";
 export const MOCKUP_TERMS =
-  "One free concept per business, for qualified enquiries: a real business, with the decision-maker, open to a paid build. You get a mock-up pack (phone and desktop videos and a quote PDF), not a working site, within 5 business days of your brief. Development, a live link, source files and revisions start once the deposit is paid, and the concept and files stay ours until the agreed fee is paid.";
+  "One free mock-up per business, for qualified enquiries: a real business, with the decision-maker, open to a paid build. You get a mock-up pack (phone and desktop videos and a quote PDF), not a working site, within 5 business days of your brief. Development, a live link, source files and revisions start once the deposit is paid, and the concept and files stay ours until the agreed fee is paid.";
 
 // Local / International switch (header). Copy that carries a price writes a token such as {Starter} or
 // {retainer}; priced() fills it for the visitor's market. The prerendered HTML and the structured data

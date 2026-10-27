@@ -60,7 +60,6 @@ function IndustryPage({ page }: { page: Industry }) {
                 <span className="block text-[12px] text-dp-muted">Packages from</span>
                 <span className="block text-[1.6rem] font-semibold leading-tight tracking-[-0.03em] tabular-nums text-dp-ink">{priceFor("Starter", market)}</span>
               </p>
-              <figcaption className="mt-4 text-right font-mono text-[11px] text-dp-muted">Stock photo · {page.photo.credit} / Pexels</figcaption>
             </figure>
           )}
         </div>
@@ -117,17 +116,17 @@ function IndustryPage({ page }: { page: Industry }) {
         <section aria-labelledby="proof-heading" className="px-5 sm:px-8">
           <Reveal className="mx-auto grid max-w-[1320px] gap-10 rounded-[36px] bg-dp-cta p-8 text-dp-cta-fg sm:p-12 md:grid-cols-12 md:items-end md:p-16">
             <div className="md:col-span-8">
-              <p className="text-[14px] opacity-75">Free concept, no obligation</p>
+              <p className="text-[14px] opacity-75">Free mock-up, no obligation</p>
               <h2 id="proof-heading" className="mt-4 max-w-[16ch] text-[clamp(2.3rem,4.6vw,4rem)] font-semibold leading-[1] tracking-[-0.045em]">
                 See yours before anyone else's
               </h2>
               <p className="mt-6 max-w-[48ch] text-lg leading-relaxed opacity-80">
-                Send us your brief and we'll design a free concept of your own site.
+                Send us your brief and we'll design a free mock-up of your own site.
               </p>
             </div>
             <div className="flex flex-wrap gap-3 md:col-span-4 md:justify-end">
               <Link href="/contact?interest=mockup" className="inline-flex h-[52px] items-center gap-2 rounded-full bg-dp-bg px-7 text-[15px] font-medium text-dp-ink transition-transform active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current">
-                Get a free concept <ArrowUpRight size={17} aria-hidden="true" />
+                Get a free mock-up <ArrowUpRight size={17} aria-hidden="true" />
               </Link>
               <Link href="/portfolio" className="inline-flex h-[52px] items-center rounded-full border border-current/30 px-7 text-[15px] font-medium transition-colors hover:border-current">
                 See our live work
@@ -160,7 +159,7 @@ function IndustryPage({ page }: { page: Industry }) {
                       <dt className="shrink-0">
                         <Link href={`/contact?interest=${name.toLowerCase()}`} className="underline decoration-[#211A1E]/25 underline-offset-4 hover:decoration-[#B32F68] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#B32F68]">
                           {name}
-                          <span className="sr-only"> package: get a quote</span>
+                          <span className="sr-only"> package: choose it</span>
                         </Link>
                       </dt>
                       <span aria-hidden="true" className="min-w-4 flex-1 translate-y-[-3px] border-b-2 border-dotted border-[#211A1E]/30" />

@@ -44,7 +44,7 @@ function PlanCard({ p }: { p: (typeof PLANS)[number] }) {
   return (
     <div ref={ref} id={`card-${pkg}`} data-testid={`card-pricing-${p.name.toLowerCase()}`} className="flex h-full scroll-mt-32 flex-col">
       {p.popular && (
-        <span className="absolute -top-3 left-8 rounded-full bg-[#FFD43B] px-3 py-1 text-[12px] font-semibold text-[#161214]">Most popular ★</span>
+        <span className="absolute -top-3 left-8 rounded-full bg-[#FFD43B] px-3 py-1 text-[12px] font-semibold text-[#161214]">Our pick ★</span>
       )}
       <p className={`text-[15px] ${p.popular ? "opacity-75" : "text-dp-muted"}`}>{p.name}</p>
       <p className="mt-1 text-[clamp(2.6rem,4vw,3.25rem)] font-semibold tracking-[-0.05em]">{intl ? p.usd : p.price}</p>
