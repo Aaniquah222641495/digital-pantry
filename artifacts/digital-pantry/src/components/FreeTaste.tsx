@@ -15,10 +15,10 @@ export function FreeTaste({ testId }: { testId: string }) {
         <div aria-hidden="true" className="pointer-events-none absolute -bottom-1/2 -right-1/4 h-[140%] w-[70%] rounded-full bg-[radial-gradient(closest-side,#FFA7D2,transparent)] dark:bg-[radial-gradient(closest-side,rgba(255,92,168,0.45),transparent)]" />
         <div className="relative">
           <h2 id={`${testId}-heading`} className="text-[clamp(2.4rem,5.2vw,4.5rem)] font-semibold leading-[1] tracking-[-0.045em]">
-            Get a free taste first. <span aria-hidden="true" className="dark:text-[#FFD43B] dark:[text-shadow:0_0_16px_rgba(255,212,59,0.45)]">★</span>
+            Get a free mock-up first. <span aria-hidden="true" className="dark:text-[#FFD43B] dark:[text-shadow:0_0_16px_rgba(255,212,59,0.45)]">★</span>
           </h2>
           <p className="mt-5 max-w-[40ch] text-lg leading-relaxed text-[#463E44] dark:text-[var(--im-muted)]">
-            See a concept of your own site before you decide anything.
+            See a mock-up of your own site before you decide anything.
           </p>
           <ul className="mt-6 flex flex-wrap gap-2" data-testid={`${testId}-terms`}>
             {FACTS.map((f) => (
