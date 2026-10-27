@@ -25,7 +25,10 @@ export interface Industry {
     name: string;
     kind: string;
     url: string;
-    href: string;
+    /** Left out for concept designs: there is no live site to visit. */
+    href?: string;
+    /** True for our own concept designs. The page then says so and shows no live-site link. */
+    concept?: boolean;
     desktop: string;
     phone: string;
     rows: [string, string][];
@@ -73,9 +76,9 @@ export const FOOD: Industry = {
   card: { title: "Food and drinks", body: "Menus, market days and one-tap WhatsApp orders.", tag: "Bakes, pop-ups, cafes", image: "/images/stock/food-cafe-counter.webp" },
 };
 
-// The next three have no case study yet (PRD 3.3: only genuinely relevant work, no invented claims).
+// The next three have no live case study yet (PRD 3.3: only genuinely relevant work, no invented claims).
 // Their pages show what we'd build and offer the free concept instead. Add `proof` when a real,
-// permitted site exists.
+// permitted site exists. Nails and beauty shows our own concept design, labelled as one (founder 2026-10-27).
 
 // Nails first (founder 2026-10-27); the URL stays /websites-for-beauty-businesses so nothing breaks.
 export const BEAUTY: Industry = {
@@ -91,6 +94,18 @@ export const BEAUTY: Industry = {
     { title: "A gallery of your work", body: "Your own photos, so clients see your style before they book." },
     { title: "One clear way to book", body: "A WhatsApp button, or a link to the booking app you already use." },
   ],
+  proof: {
+    name: "Saltbush & Linen",
+    kind: "Beauty studio, Cape Town (concept)",
+    url: "concept design",
+    concept: true,
+    desktop: "/images/work/concept-beauty-desktop.webp",
+    phone: "/images/work/concept-beauty-phone.webp",
+    rows: [
+      ["The brief", "A calm website for a beauty studio: treatments, prices and an easy way to book."],
+      ["What we designed", "A menu you tap through, and a booking request that opens in WhatsApp already written."],
+    ],
+  },
   fit: "Standard ({Standard}) covers your services, an about section, your location and social links. Premium ({Premium}) adds a Google Business Profile and basic SEO. Pro ({Pro}) adds an enquiry form that saves every lead to your Google Sheet and replies straight away.",
   faq: [
     { q: "Can clients book online?", a: "Yes. We can link the booking app you already use, or send clients to WhatsApp. A built-in booking setup is quoted on request." },

@@ -90,10 +90,10 @@ function IndustryPage({ page }: { page: Industry }) {
         <section aria-labelledby="proof-heading" className="bg-dp-soft/60 dark:bg-[var(--im-soft)]">
           <div className="mx-auto grid max-w-[1320px] items-center gap-12 px-5 py-24 sm:px-8 md:grid-cols-12 md:py-32">
             <Reveal className="md:col-span-7">
-              <DeviceFrames desktop={proof.desktop} phone={proof.phone} alt={`The ${proof.name} website`} url={proof.url} />
+              <DeviceFrames desktop={proof.desktop} phone={proof.phone} alt={proof.concept ? `A concept design for ${proof.name}` : `The ${proof.name} website`} url={proof.url} />
             </Reveal>
             <Reveal delay={0.1} className="md:col-span-5">
-              <p className="text-[14px] text-dp-muted">Fresh out the kitchen · {proof.kind}</p>
+              <p className="text-[14px] text-dp-muted">{proof.concept ? "Our concept design" : "Fresh out the kitchen"} · {proof.kind}</p>
               <h2 id="proof-heading" className="mt-3 text-[clamp(2.2rem,3.8vw,3.4rem)] font-semibold leading-[1.02] tracking-[-0.045em]">
                 {proof.name} <span aria-hidden="true" className="text-dp-accent">★</span>
               </h2>
@@ -105,10 +105,12 @@ function IndustryPage({ page }: { page: Industry }) {
                   </div>
                 ))}
               </dl>
+              {proof.href && (
               <a href={proof.href} target="_blank" rel="noopener noreferrer" className="group mt-8 inline-flex min-h-11 items-center gap-1.5 text-[15px] font-medium text-dp-ink underline decoration-dp-line underline-offset-[6px] transition-colors hover:decoration-dp-accent">
                 Visit the live site
                 <ArrowUpRight size={16} aria-hidden="true" className="transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
               </a>
+              )}
             </Reveal>
           </div>
         </section>
