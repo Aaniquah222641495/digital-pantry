@@ -1,5 +1,5 @@
 // The single source for every studio question and answer (DPW-9). The /faq page shows all of them,
-// Pricing shows the ones flagged `onPricing`, and the FAQPage structured data on /faq (src/seo.ts)
+// Pricing links here instead of repeating them (founder 2026-10-27), and the FAQPage structured data on /faq (src/seo.ts)
 // is built from the same list, so the visible text and the markup match word for word.
 // Every answer reads from src/lib/plans.ts or a recorded decision; do not type a price here by hand.
 // Sources: plans.ts terms, ADR-0024 amendment (2026-10-26), ADR-0025, PROJECT.md S4/S6, finance check 2026-10-26.
@@ -20,8 +20,6 @@ export interface FaqItem {
   id: string;
   q: string;
   a: string;
-  /** Also shown on Pricing, which links to /faq for the rest. */
-  onPricing?: boolean;
 }
 export interface FaqGroup {
   id: string;
@@ -45,26 +43,22 @@ export const FAQ_GROUPS: FaqGroup[] = [
         id: "deposit",
         q: "How do I pay?",
         a: "Every package starts with a 50% deposit, plus your domain registration fee if you need a new domain. The other 50% is due when your site goes live. We send an invoice for each.",
-        onPricing: true,
       },
-      { id: "not-included", q: "What is not included in the price?", a: BILLED_SEPARATELY_SUMMARY, onPricing: true },
+      { id: "not-included", q: "What is not included in the price?", a: BILLED_SEPARATELY_SUMMARY },
       {
         id: "bigger-companies",
         q: "Do these prices apply to bigger companies?",
         a: `No. The rand packages are for South African small businesses with ${SMALL_BUSINESS_LIMIT}. Larger businesses get a custom quote, from ${LARGER_FROM}.`,
-        onPricing: true,
       },
       {
         id: "international",
         q: "Do you work with international clients?",
         a: `Yes. International packages are priced in US dollars: Starter ${INTL_PRICES.Starter}, Standard ${INTL_PRICES.Standard}, Premium ${INTL_PRICES.Premium} and Pro ${INTL_PRICES.Pro}, once-off.`,
-        onPricing: true,
       },
       {
         id: "pro-monthly",
         q: "Does Pro have monthly fees?",
         a: "No. Your lead system runs on free Google tools that you own. Every enquiry lands in your inbox and your own Sheet.",
-        onPricing: true,
       },
     ],
   },
@@ -135,11 +129,9 @@ export const FAQ_GROUPS: FaqGroup[] = [
         id: "changes-later",
         q: "What if I need changes later?",
         a: `That's what the ${RETAINER}/month retainer is for (${INTL_RETAINER}/month for international clients). Small edits, big peace of mind.`,
-        onPricing: true,
       },
     ],
   },
 ];
 
 export const ALL_FAQ: FaqItem[] = FAQ_GROUPS.flatMap((g) => g.items);
-export const PRICING_FAQ: FaqItem[] = ALL_FAQ.filter((f) => f.onPricing);

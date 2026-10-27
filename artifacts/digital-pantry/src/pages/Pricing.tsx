@@ -10,8 +10,7 @@ import { DOMAIN_FEE, EXTRAS, INCLUDED_ALWAYS, INTL_PRICES, INTL_RETAINER, LARGER
 import { useEffect, useState } from "react";
 import { Link, useSearch } from "wouter";
 import { COST_GUIDE } from "../lib/guides";
-import { H1, H2 } from "../lib/style";
-import { PRICING_FAQ } from "../lib/faq";
+import { H1 } from "../lib/style";
 
 const PLANS = [
   {
@@ -289,39 +288,28 @@ export default function Pricing() {
         </Reveal>
       </section>
 
-      {/* The money questions as a text-message thread; the rest live on /faq (src/lib/faq.ts) */}
       {audience === "small" && <BusinessPicker />}
 
-      <section aria-labelledby="faq-heading" className="border-t border-dp-line">
-        <div className="mx-auto grid max-w-[1320px] gap-14 px-5 py-24 sm:px-8 md:grid-cols-[1fr_1.2fr] md:py-32">
-          <Reveal className="md:sticky md:top-32 md:self-start">
-            <h2 id="faq-heading" className={H2}>
+      {/* Questions live on /faq (one place, founder 2026-10-27); Pricing stays about choosing a jar */}
+      <Reveal className="mx-auto max-w-[1320px] px-5 pb-20 sm:px-8 md:pb-24">
+        <div className="flex flex-col items-start gap-5 rounded-[28px] bg-dp-surface p-7 sm:p-9 md:flex-row md:items-center md:justify-between" data-testid="pricing-faq-pointer">
+          <div>
+            <h2 className="text-[clamp(1.5rem,2.4vw,2rem)] font-semibold tracking-[-0.035em]">
               Got questions? We'll <CutoutWord word="DISH" /> it out.
             </h2>
-            <p className="mt-5 max-w-[36ch] text-lg leading-relaxed text-dp-muted">Still hungry for answers? WhatsApp us and a real person replies.</p>
-            <p className="mt-4 max-w-[36ch] leading-relaxed text-dp-muted">
-              Comparing quotes?{" "}
+            <p className="mt-2 max-w-[52ch] leading-relaxed text-dp-muted">
+              Deposits, domains, hosting, revisions and more, answered plainly. Comparing quotes?{" "}
               <Link href={COST_GUIDE.path} className="text-dp-accent underline decoration-dp-line underline-offset-4 hover:decoration-dp-accent">
-                See what websites cost in South Africa
+                See what websites cost
               </Link>
               .
             </p>
-            <div className="mt-8">
-              <MagneticButton href="/faq" variant="ghost" data-testid="pricing-more-questions">
-                More questions
-              </MagneticButton>
-            </div>
-          </Reveal>
-          <div className="flex flex-col gap-6">
-            {PRICING_FAQ.map((f, i) => (
-              <Reveal key={f.q} delay={i * 0.05} className="flex flex-col gap-2">
-                <p className="max-w-[85%] self-start rounded-[22px] rounded-bl-md border border-dp-line bg-dp-surface px-5 py-3.5 text-[15px]">{f.q}</p>
-                <p className="max-w-[85%] self-end rounded-[22px] rounded-br-md bg-dp-cta px-5 py-3.5 text-[15px] leading-relaxed text-dp-cta-fg">{f.a}</p>
-              </Reveal>
-            ))}
           </div>
+          <MagneticButton href="/faq" variant="ghost" data-testid="pricing-more-questions">
+            Read the FAQ
+          </MagneticButton>
         </div>
-      </section>
+      </Reveal>
 
       <FreeTaste testId="pricing-mockup-offer" />
     </main>

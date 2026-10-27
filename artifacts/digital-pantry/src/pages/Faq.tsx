@@ -52,16 +52,17 @@ export default function Faq() {
                 className="inline-flex min-h-11 items-center rounded-full border border-dp-line bg-dp-surface px-5 text-[15px] font-medium text-dp-ink transition-colors hover:border-dp-ink/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dp-accent"
               >
                 {g.title}
+                <span className="ml-2 rounded-full bg-dp-soft px-2 py-0.5 text-[12px] tabular-nums text-dp-muted">{g.items.length}</span>
               </a>
             ))}
           </nav>
         </div>
-        <Sticker day={DAY.sparkle} night={NIGHT.star} size={48} r={10} style={{ right: "8%", top: "26%" }} />
+        <Sticker day={DAY.sparkle} night={NIGHT.star} size={48} r={10} className="max-md:hidden" style={{ right: "8%", top: "26%" }} />
       </section>
 
       <div className="mx-auto max-w-[1320px] px-5 pb-20 sm:px-8 md:pb-28">
-        {FAQ_GROUPS.map((g) => (
-          <section key={g.id} id={g.id} aria-labelledby={`${g.id}-heading`} className="grid scroll-mt-28 gap-6 border-t border-dp-line py-12 md:grid-cols-12 md:gap-10 md:py-16">
+        {FAQ_GROUPS.map((g, gi) => (
+          <section key={g.id} id={g.id} aria-labelledby={`${g.id}-heading`} className="grid scroll-mt-28 gap-6 py-10 md:grid-cols-12 md:gap-10 md:py-14">
             <Reveal className="md:col-span-4">
               <div className="md:sticky md:top-32">
                 <h2 id={`${g.id}-heading`} className="text-[clamp(1.9rem,3.2vw,2.7rem)] font-semibold leading-[1.02] tracking-[-0.045em]">
@@ -70,23 +71,30 @@ export default function Faq() {
                 <p className="mt-3 max-w-[30ch] leading-relaxed text-dp-muted">{g.blurb}</p>
               </div>
             </Reveal>
-            <div className="md:col-span-8">
-              <div className="border-t border-dp-ink/15 dark:border-white/15">
-                {g.items.map((f) => (
-                  <details key={f.id} id={f.id} className="group scroll-mt-28 border-b border-dp-ink/15 dark:border-white/15">
-                    <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-6 py-5 text-[1.15rem] font-semibold leading-snug tracking-[-0.02em] text-dp-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-dp-accent [&::-webkit-details-marker]:hidden">
-                      {f.q}
-                      <Plus size={20} aria-hidden="true" className="shrink-0 text-dp-accent transition-transform duration-300 group-open:rotate-45" />
-                    </summary>
-                    <p className="max-w-[60ch] pb-6 leading-relaxed text-dp-muted">{f.a}</p>
-                  </details>
-                ))}
-              </div>
+            <div className="flex flex-col gap-3 md:col-span-8">
+              {g.items.map((f, i) => (
+                <details
+                  key={f.id}
+                  id={f.id}
+                  open={gi === 0 && i === 0}
+                  className="group scroll-mt-28 rounded-[22px] bg-dp-surface shadow-[0_14px_30px_-24px_rgba(22,18,20,0.35)] transition-shadow open:shadow-[0_24px_44px_-26px_var(--dp-glow)]"
+                >
+                  <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-6 rounded-[22px] px-6 py-5 text-[1.08rem] font-semibold leading-snug tracking-[-0.02em] text-dp-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dp-accent [&::-webkit-details-marker]:hidden">
+                    {f.q}
+                    <span aria-hidden="true" className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-dp-soft text-dp-accent transition-colors group-open:bg-dp-cta group-open:text-dp-cta-fg">
+                      <Plus size={18} className="transition-transform duration-300 group-open:rotate-45" />
+                    </span>
+                  </summary>
+                  <div className="flex justify-end px-4 pb-5 sm:px-6">
+                    <p className="max-w-[88%] rounded-[22px] rounded-br-md bg-dp-cta px-5 py-3.5 text-[15px] leading-relaxed text-dp-cta-fg">{f.a}</p>
+                  </div>
+                </details>
+              ))}
             </div>
           </section>
         ))}
 
-        <div className="border-t border-dp-line pt-10">
+        <div className="pt-6">
         <p className="max-w-[60ch] leading-relaxed text-dp-muted">
           Comparing quotes?{" "}
           <Link href={COST_GUIDE.path} className="text-dp-accent underline decoration-dp-line underline-offset-4 hover:decoration-dp-accent">
