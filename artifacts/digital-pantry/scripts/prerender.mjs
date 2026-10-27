@@ -38,7 +38,7 @@ for (const page of [...PAGES, NOT_FOUND]) {
   // states them in plain text (src/lib/faq.ts). Pricing has no custom-quote number any more (it says
   // "ask us"), so R8 000 is checked on /faq too, where the bigger-companies answer states it.
   const mustShow = {
-    "/pricing": ["R600", "R1 000", "R1 600", "R2 500", "R120"],
+    "/pricing": ["R600", "R1 000", "R1 600", "R2 500", "R150"],
     "/faq": ["R8 000", "$450", "$750", "$1 200", "$1 800", "$90"],
   }[page.path];
   for (const price of mustShow ?? []) {

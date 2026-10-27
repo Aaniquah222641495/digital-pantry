@@ -55,7 +55,7 @@ export const LARGER_FROM = "R8 000";
 
 // Monthly retainer. USD keeps the same premium as the international packages (founder: "you choose",
 // 2026-10-24). Larger businesses get theirs quoted with the build.
-export const RETAINER = "R120";
+export const RETAINER = "R150";
 export const INTL_RETAINER = "$90";
 
 // Free mock-up terms (DPW-7; ADR-0025, founder 2026-10-26). The form note, the FAQ, pricing.md and

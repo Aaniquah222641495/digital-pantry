@@ -145,7 +145,7 @@ export const PAGES: PageMeta[] = [
     path: "/pricing",
     title: "Website Prices in South Africa from R600 | Digital Pantry",
     description:
-      "Small business website packages: Starter R600, Standard R1 000, Premium R1 600, Pro R2 500 with lead automation. Optional R120/month for updates ($90/month internationally).",
+      "Small business website packages: Starter R600, Standard R1 000, Premium R1 600, Pro R2 500 with lead automation. Optional R150/month for updates ($90/month internationally).",
     jsonLd: [
       graph(
         {
@@ -179,7 +179,7 @@ export const PAGES: PageMeta[] = [
                 "@type": "Offer",
                 name: "Monthly retainer",
                 description: "Menu updates, schedule changes and small edits.",
-                priceSpecification: { "@type": "UnitPriceSpecification", price: 120, priceCurrency: "ZAR", unitText: "MONTH" },
+                priceSpecification: { "@type": "UnitPriceSpecification", price: 150, priceCurrency: "ZAR", unitText: "MONTH" },
                 url: `${SITE_URL}/pricing`,
               },
               {

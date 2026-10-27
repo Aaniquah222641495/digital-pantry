@@ -45,7 +45,7 @@ Package prices cover the site build only, once-off. These are billed separately,
 ## Turnaround
 Starter, Standard and Premium sites take 5 to 7 business days, counted from when the deposit is paid and all content is in. Feedback within 2 business days keeps the date; slower feedback moves it by the same amount. Domain registrar waits are not counted. Pro, e-commerce and custom builds get an estimate in the quote.
 
-## Retainer: R120 per month (optional)
+## Retainer: R150 per month (optional)
 - Menu updates, schedule changes and small edits
 - International clients: $90 per month. Larger businesses: quoted with the build.
 
