@@ -12,7 +12,7 @@ export function WhatsAppBubble() {
         rel="noopener noreferrer"
         aria-label={`Chat with ${c.name} on WhatsApp`}
         onClick={() => track("whatsapp_click", { surface: "bubble" })}
-        className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 rounded-full shadow-lg transition-transform duration-200 hover:scale-110 active:scale-95"
+        className="dp-wa-bubble fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 rounded-full shadow-lg transition-transform duration-200 hover:scale-110 active:scale-95"
         style={{ backgroundColor: "#25D366" }}
       >
         <svg

@@ -377,7 +377,7 @@ body { background: var(--dp-bg); color: var(--dp-ink); font-feature-settings: "s
   opacity: 0.035;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E");
 }
-.dark .dp-grain::before { opacity: 0.08; }
+.dark .dp-grain::before { opacity: 0.05; }
 /* Night sky: plum glows that stay put while the page scrolls. */
 html.dark body {
   background:
@@ -387,15 +387,7 @@ html.dark body {
     var(--dp-bg);
   background-attachment: fixed;
 }
-/* Night: a soft vignette, like a candlelit room. */
-.dark .dp-grain::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 59;
-  pointer-events: none;
-  background: radial-gradient(ellipse at center, transparent 60%, rgba(8, 2, 10, 0.4) 100%);
-}
+/* Night's candlelit vignette lives in the body background (see Night depth below), never as an overlay on top of the content. */
 
 /* Imaan's spaced lowercase (her signature) for small labels on Night. */
 .dark .dp-tag { text-transform: lowercase; letter-spacing: 0.32em; }
@@ -472,8 +464,8 @@ html.dp-theme-shift, html.dp-theme-shift * {
   }
 }
 
-/* Night ticker: Imaan's quiet spaced lowercase instead of the Bebas shout. */
-.dark .dp-ticker-text { font-family: var(--app-font-sans); font-size: clamp(0.85rem, 1.1vw, 1rem); font-weight: 400; text-transform: lowercase; letter-spacing: 0.4em; }
+/* Night ticker: Imaan's quiet lowercase (normal tracking so it reads at speed) instead of the Bebas shout. */
+.dark .dp-ticker-text { font-family: var(--app-font-sans); font-size: clamp(0.95rem, 1.25vw, 1.1rem); font-weight: 400; text-transform: lowercase; letter-spacing: 0.02em; }
 
 /* "No handoffs" card: code and design slide together when the card reveals. */
 .dp-venn-a, .dp-venn-b { transition: transform 1.2s var(--ease-out-expo) 0.15s; }
@@ -514,6 +506,7 @@ html.dp-theme-shift, html.dp-theme-shift * {
 /* ── Night depth (2026-10-23): light, layers and stage lighting so Imaan's room feels premium. ── */
 html.dark body {
   background:
+    radial-gradient(ellipse at center, transparent 60%, rgba(8, 2, 10, 0.4) 100%),
     radial-gradient(1200px 820px at 92% -10%, var(--im-sky-a), transparent 60%),
     radial-gradient(1000px 760px at -15% 30%, var(--im-sky-pink), transparent 62%),
     radial-gradient(1100px 800px at 110% 80%, var(--im-sky-b), transparent 60%),
@@ -570,7 +563,7 @@ html.dark body {
 /* Pixel icing lettering for the brand words in headings (components/CutoutWord.tsx).
    Real text in Jersey 10 (OFL, chosen for legibility): stepped fill like pixel shading, pixel
    sprinkles in the top band, thin hard black outline, die-cut sticker edge. No blur on the letters.
-   Day = Aaniquah's pink icing with a white edge. Night = Imaan's silver icing with a wine edge. */
+   Day = Aaniquah's pink icing with a white edge. Night = the same pink icing with a wine edge, so it still pops off the dark. */
 .dp-pixel-word {
   font-family: "Jersey 10", ui-monospace, monospace;
   font-weight: 400;
@@ -594,7 +587,7 @@ html.dark body {
     drop-shadow(0 0.06em 0 rgba(179, 47, 104, 0.3));
 }
 .dark .dp-pixel-word {
-  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='10' shape-rendering='crispEdges'><rect x='1' y='1' width='2' height='1' fill='%23FFD43B'/><rect x='5' y='0' width='2' height='1' fill='%23FFFFFF'/><rect x='3' y='4' width='2' height='1' fill='%235BC0EB'/><rect x='7' y='3' width='2' height='1' fill='%23FF5CA8'/><rect x='0' y='6' width='2' height='1' fill='%23FFFFFF'/><rect x='5' y='6' width='2' height='1' fill='%23FFD43B'/><rect x='9' y='1' width='2' height='1' fill='%235BC0EB'/><rect x='10' y='5' width='2' height='1' fill='%23FFFFFF'/><rect x='8' y='7' width='2' height='1' fill='%23FFD43B'/><rect x='2' y='8' width='2' height='1' fill='%23FF5CA8'/></svg>"), linear-gradient(180deg, #FFFFFF 0 30%, #E6E2EC 30% 68%, #B3ADC0 68% 100%);
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='10' shape-rendering='crispEdges'><rect x='1' y='1' width='2' height='1' fill='%23FFD43B'/><rect x='5' y='0' width='2' height='1' fill='%23FFFFFF'/><rect x='3' y='4' width='2' height='1' fill='%235BC0EB'/><rect x='7' y='3' width='2' height='1' fill='%23FF5CA8'/><rect x='0' y='6' width='2' height='1' fill='%23FFFFFF'/><rect x='5' y='6' width='2' height='1' fill='%23FFD43B'/><rect x='9' y='1' width='2' height='1' fill='%235BC0EB'/><rect x='10' y='5' width='2' height='1' fill='%23FFFFFF'/><rect x='8' y='7' width='2' height='1' fill='%23FFD43B'/><rect x='2' y='8' width='2' height='1' fill='%23FF5CA8'/></svg>"), linear-gradient(180deg, #FFD9EA 0 30%, #FFA7D2 30% 68%, #FF6FB3 68% 100%);
   filter:
     drop-shadow(0.03em 0 0 #161214) drop-shadow(-0.03em 0 0 #161214) drop-shadow(0 0.03em 0 #161214) drop-shadow(0 -0.03em 0 #161214)
     drop-shadow(0 0.04em 0 #161214)
@@ -685,3 +678,14 @@ html.dark body {
   @keyframes dp-hero-float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -8px; } }
   .dp-hero-float > span { animation: dp-hero-float 6s ease-in-out infinite; animation-delay: var(--float-d, 0s); }
 }
+
+/* ── Dark polish (2026-10-27) ─────────────────────────────────────────── */
+/* Form fields: a visible edge (3:1 against the card, WCAG 1.4.11). Focus keeps the accent border above. */
+.dark .dp-field:not([aria-invalid="true"]) { border-color: #8F7A82; }
+.dark .dp-field { background-color: #12050A; }
+/* Outline buttons: the faint hairline is fine for cards, not for a button edge. */
+.dark .dp-outline-btn { border-color: #9C818B; }
+.dark .dp-outline-btn:hover { border-color: var(--im-accent); }
+
+/* The floating WhatsApp button steps aside while the mobile menu is open (set by Navbar). */
+html[data-menu-open] .dp-wa-bubble { display: none; }

@@ -39,23 +39,24 @@ const offers = (market: Market): Offer[] => [
     price: "Ask for a quote",
     href: "/contact?interest=larger",
     span: "lg:col-span-5",
-    tone: "ink",
+    tone: "soft",
     art: { src: "/images/art/imaan-serving.webp", w: 600, h: 600, cls: "w-[34%] max-w-[170px]" },
   },
 ];
 
 const TONE: Record<Offer["tone"], string> = {
-  pink: "bg-[#FDD2DE] text-[#161214] dark:bg-[var(--im-surface)] dark:text-[var(--im-text)] dark:ring-1 dark:ring-[var(--im-border)]",
+  // The main offer is the one bright card; the secondary stays quiet in both themes (founder review 2026-10-27).
+  pink: "bg-[#FFA7D2] text-[#161214] shadow-[0_30px_70px_-40px_rgba(255,92,168,0.7)]",
   ink: "bg-dp-cta text-dp-cta-fg",
   plain: "bg-dp-surface text-dp-ink ring-1 ring-dp-line",
-  soft: "bg-dp-soft text-dp-ink ring-1 ring-dp-line dark:bg-[var(--im-soft)]",
+  soft: "bg-dp-soft text-dp-ink ring-1 ring-dp-line dark:bg-[var(--im-surface)] dark:ring-[var(--im-border)]",
 };
 
 export function WhatWeCook() {
   const { market } = useMarket();
   return (
     <section aria-labelledby="cook-heading" className="border-t border-dp-line">
-      <div className="mx-auto max-w-[1320px] px-5 py-24 sm:px-8 md:py-32">
+      <div className="mx-auto max-w-[1320px] px-5 pb-16 pt-20 sm:px-8 md:pb-20 md:pt-24">
         <Reveal className="grid gap-6 md:grid-cols-12 md:items-end">
           <h2 id="cook-heading" className={`md:col-span-7 ${H2}`}>
             What we <CutoutWord word="COOK" />

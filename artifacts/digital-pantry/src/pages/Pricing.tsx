@@ -73,7 +73,7 @@ function PlanCard({ p }: { p: (typeof PLANS)[number] }) {
             href={intl ? "/contact?interest=international" : `/contact?interest=${p.name.toLowerCase()}`}
             data-testid={`button-pricing-${p.name.toLowerCase()}`}
             onClick={() => track("package_cta_click", { package: pkg, market, surface: "pricing" })}
-            className="inline-flex h-12 w-full items-center justify-center rounded-full border border-dp-line text-[15px] font-medium text-dp-ink transition-colors hover:border-dp-ink/40 active:scale-[0.98]"
+            className="dp-outline-btn inline-flex h-12 w-full items-center justify-center rounded-full border border-dp-line text-[15px] font-medium text-dp-ink transition-colors hover:border-dp-ink/40 active:scale-[0.98]"
           >
             Choose {p.name}
           </a>
@@ -206,7 +206,7 @@ export default function Pricing() {
             <a
               href="/contact"
               data-testid="button-retainer-cta"
-              className="inline-flex h-12 items-center rounded-full border border-dp-line px-6 text-[15px] font-medium text-dp-ink transition-colors hover:border-dp-ink/40"
+              className="dp-outline-btn inline-flex h-12 items-center rounded-full border border-dp-line px-6 text-[15px] font-medium text-dp-ink transition-colors hover:border-dp-ink/40"
             >
               Add the retainer
             </a>

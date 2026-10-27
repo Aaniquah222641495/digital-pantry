@@ -28,9 +28,9 @@ export function FounderSwitch({ compact = false }: { compact?: boolean }) {
             onClick={() => !active && toggle()}
             className={`relative z-10 inline-flex h-8 items-center gap-1.5 rounded-full text-[13px] font-medium transition-colors duration-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dp-accent ${
               compact ? "w-9 justify-center" : "px-3"
-            } ${active ? "text-dp-cta-fg" : "text-dp-muted hover:text-dp-ink"}`}
+            } ${active ? "text-dp-cta-fg dark:font-semibold dark:text-dp-ink" : "text-dp-muted hover:text-dp-ink"}`}
           >
-            <span aria-hidden="true" className={`absolute inset-0 -z-10 rounded-full bg-dp-cta transition-[opacity,transform] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${active ? "scale-100 opacity-100" : "scale-75 opacity-0"}`} />
+            <span aria-hidden="true" className={`absolute inset-0 -z-10 rounded-full bg-dp-cta dark:bg-[rgba(255,167,210,0.16)] dark:ring-1 dark:ring-inset dark:ring-[var(--im-accent)] transition-[opacity,transform] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${active ? "scale-100 opacity-100" : "scale-75 opacity-0"}`} />
             <Icon size={14} strokeWidth={2} aria-hidden="true" />
             {!compact && <span>{name}</span>}
           </button>

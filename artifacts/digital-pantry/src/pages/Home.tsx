@@ -111,17 +111,17 @@ function Hero() {
         <div className="relative">
           {/* Sprinkles shower onto the headline once on load */}
           <Sprinkles mode="burst" count={30} className="-inset-x-6 -top-10 bottom-1/3 !h-auto" />
-          <h1 className="dp-rise text-[clamp(3rem,6.6vw,6.25rem)] font-semibold leading-[0.94] tracking-[-0.06em] text-dp-ink" style={rise(0)}>
+          <h1 data-no-sprinkle className="dp-rise text-[clamp(3rem,6.6vw,6.25rem)] font-semibold leading-[0.94] tracking-[-0.06em] text-dp-ink" style={rise(0)}>
             Your website,
             <br />
             <span className="whitespace-nowrap">
               freshly <CutoutWord word="COOKED" />
             </span>
           </h1>
-          <p className="dp-rise mt-8 max-w-[38ch] text-[clamp(1.15rem,1.7vw,1.4rem)] leading-[1.45] tracking-[-0.01em] text-dp-ink/80" style={rise(0.14)}>
+          <p data-no-sprinkle className="dp-rise mt-8 max-w-[38ch] text-[clamp(1.15rem,1.7vw,1.4rem)] leading-[1.45] tracking-[-0.01em] text-dp-ink/80" style={rise(0.14)}>
             We design and build websites for small businesses, from scratch, so customers can find you, see what you offer and get in touch in one tap.
           </p>
-          <div className="dp-rise mt-10 flex flex-wrap items-center gap-3" style={rise(0.26)}>
+          <div data-no-sprinkle className="dp-rise mt-10 flex flex-wrap items-center gap-3" style={rise(0.26)}>
             <MagneticButton href="/contact" data-testid="button-hero-cta">
               Get a quote
             </MagneticButton>
@@ -281,14 +281,16 @@ function Chefs() {
           </ol>
         </Reveal>
 
-        <Reveal delay={0.12} className="relative overflow-hidden rounded-[32px] bg-[#FFD43B] p-8 text-[#161214] sm:p-12 md:col-span-6">
-          <Sprinkles count={20} className="opacity-90" />
+        <Reveal delay={0.12} className="relative overflow-hidden rounded-[32px] bg-[#FFD43B] p-8 text-[#161214] sm:p-12 md:col-span-6 dark:bg-[#2A2008] dark:text-[var(--im-text)] dark:ring-1 dark:ring-[rgba(255,212,59,0.3)]">
+          {/* Night: a deep gold-brown band with a warm glow, so yellow stays an accent and not a floodlight. */}
+          <div aria-hidden="true" className="pointer-events-none absolute -right-20 -top-24 hidden h-72 w-72 rounded-full bg-[radial-gradient(closest-side,rgba(255,212,59,0.28),transparent)] dark:block" />
+          <Sprinkles count={20} className="opacity-90 dark:opacity-70" />
           <div className="relative grid items-end gap-6 md:grid-cols-[1.4fr_1fr]">
-            <h3 className="text-[clamp(2.2rem,4.6vw,4rem)] font-semibold leading-[0.98] tracking-[-0.05em]">
+            <h3 data-no-sprinkle className="text-[clamp(2.2rem,4.6vw,4rem)] font-semibold leading-[0.98] tracking-[-0.05em]">
               Women-led. Made from <CutoutWord word="SCRATCH" tone="on-yellow" />
             </h3>
-            <p className="max-w-[40ch] text-[17px] leading-relaxed text-[#3A3328]">
-              Every site starts from your brand and your customers, never a template. Girl power is kind of the whole point here. ★
+            <p data-no-sprinkle className="max-w-[40ch] text-[17px] leading-relaxed text-[#3A3328] dark:text-[var(--im-muted)]">
+              Every site starts from your brand and your customers, never a template. Girl power is kind of the whole point here. <span aria-hidden="true" className="dark:text-[#FFD43B]">★</span>
             </p>
           </div>
         </Reveal>
@@ -300,7 +302,7 @@ function Chefs() {
 function Work() {
   return (
     <section aria-labelledby="work-heading" className="border-t border-dp-line">
-      <div className="mx-auto max-w-[1320px] px-5 py-24 sm:px-8 md:py-32">
+      <div className="mx-auto max-w-[1320px] px-5 pb-16 pt-20 sm:px-8 md:pb-20 md:pt-24">
         <Reveal className="flex flex-wrap items-end justify-between gap-6">
           <h2 id="work-heading" className={H2}>
             Fresh out the <CutoutWord word="KITCHEN" />
@@ -311,7 +313,7 @@ function Work() {
           </Link>
         </Reveal>
 
-        <div className="mt-16 flex flex-col gap-28 md:gap-36">
+        <div className="mt-14 flex flex-col gap-24 md:mt-16 md:gap-28">
           {WORK.map((w, i) => {
             const flip = i % 2 === 1;
             return (
@@ -368,7 +370,7 @@ function Recipe() {
   );
   return (
     <section aria-labelledby="recipe-heading" className="relative border-t border-dp-line bg-dp-soft/50">
-      <div className="mx-auto max-w-[1320px] px-5 py-24 sm:px-8 md:py-32">
+      <div className="mx-auto max-w-[1320px] px-5 pb-20 pt-16 sm:px-8 md:pb-24 md:pt-20">
         <Reveal className="flex flex-wrap items-end justify-between gap-6">
           <h2 id="recipe-heading" className={H2}>
             The <CutoutWord word="RECIPE" />
@@ -378,7 +380,7 @@ function Recipe() {
 
         {/* Bento: step 1 tall on the left, steps 2 and 3 stacked on the right */}
         <ol className="mt-14 grid gap-5 md:grid-cols-[1.1fr_1fr] md:grid-rows-2">
-          <Reveal as="li" className="relative flex flex-col overflow-hidden rounded-[32px] border border-dp-line bg-dp-surface p-8 sm:p-10 md:row-span-2">
+          <Reveal as="li" early className="relative flex flex-col overflow-hidden rounded-[32px] border border-dp-line bg-dp-surface p-8 sm:p-10 md:row-span-2">
             <span className="font-mono text-[13px] text-dp-accent">Step 1</span>
             <h3 className="mt-3 text-[clamp(1.8rem,3vw,2.6rem)] font-semibold tracking-[-0.04em]">{first.title}</h3>
             <p className="mt-3 max-w-[42ch] leading-relaxed text-dp-muted">{first.body}</p>

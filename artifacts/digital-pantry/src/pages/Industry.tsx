@@ -46,7 +46,7 @@ function IndustryPage({ page }: { page: Industry }) {
               <Link href="/contact" className="inline-flex h-[52px] items-center gap-2 rounded-full bg-dp-cta px-7 text-[15px] font-medium text-dp-cta-fg transition-transform active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-dp-accent">
                 Get a quote <ArrowUpRight size={17} aria-hidden="true" />
               </Link>
-              <a href="#fit-heading" className="inline-flex h-[52px] items-center rounded-full border border-dp-line px-7 text-[15px] font-medium text-dp-ink transition-colors hover:border-dp-ink/40">
+              <a href="#fit-heading" className="dp-outline-btn inline-flex h-[52px] items-center rounded-full border border-dp-line px-7 text-[15px] font-medium text-dp-ink transition-colors hover:border-dp-ink/40">
                 Which package fits
               </a>
             </div>

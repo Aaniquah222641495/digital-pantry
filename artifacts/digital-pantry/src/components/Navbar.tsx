@@ -39,8 +39,11 @@ export function Navbar() {
   useEffect(() => setMenuOpen(false), [location]);
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
+    // Lets the floating WhatsApp button step aside while the mobile menu is open.
+    document.documentElement.toggleAttribute("data-menu-open", menuOpen);
     return () => {
       document.body.style.overflow = "";
+      document.documentElement.removeAttribute("data-menu-open");
     };
   }, [menuOpen]);
 
