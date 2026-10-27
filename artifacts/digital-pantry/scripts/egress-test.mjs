@@ -107,7 +107,14 @@ await settle();
 await scrollThrough();
 // International prices now come from the header's Local / International switch (no Pricing tab).
 await page.locator('[data-testid="market-intl"]:visible').first().click();
-await page.evaluate(() => window.scrollTo(0, 0));
+// Scroll back up with the wheel: the smooth-scroll library ignores window.scrollTo.
+{
+  const h = await page.evaluate(() => document.body.scrollHeight);
+  for (let y = 0; y < h; y += 400) {
+    await page.mouse.wheel(0, -400);
+    await page.waitForTimeout(60);
+  }
+}
 await settle();
 await scrollThrough();
 await page.locator('[data-testid="market-za"]:visible').first().click();
