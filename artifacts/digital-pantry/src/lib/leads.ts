@@ -2,7 +2,6 @@
 // fallbacks. The limits below are repeated in apps-script/Code.gs (the server checks them
 // again). If you change one, change both.
 import { z } from "zod";
-import { LARGER_FROM, PLAN_PRICES } from "./plans";
 
 export const WHATSAPP_NUMBER = "27724111011";
 export const CONTACT_EMAIL = "thedigitalpantryza@gmail.com";
@@ -10,11 +9,12 @@ export const CONTACT_EMAIL = "thedigitalpantryza@gmail.com";
 export const LIMITS = { name: 80, businessName: 100, email: 254, message: 1000 } as const;
 
 export const INTEREST_OPTIONS = [
-  { value: "Starter", label: `Starter (${PLAN_PRICES.Starter})` },
-  { value: "Standard", label: `Standard (${PLAN_PRICES.Standard})` },
-  { value: "Premium", label: `Premium (${PLAN_PRICES.Premium})` },
-  { value: "Pro", label: `Pro (${PLAN_PRICES.Pro}, with lead automation)` },
-  { value: "Larger business", label: `A larger business (custom quote, from ${LARGER_FROM})` },
+  // Labels carry price tokens; LeadForm fills them for the Local / International switch.
+  { value: "Starter", label: "Starter ({Starter})" },
+  { value: "Standard", label: "Standard ({Standard})" },
+  { value: "Premium", label: "Premium ({Premium})" },
+  { value: "Pro", label: "Pro ({Pro}, with lead automation)" },
+  { value: "Larger business", label: "A larger business (custom quote)" },
   { value: "International", label: "International client (USD packages)" },
   { value: "Free mock-up", label: "A free mock-up of my site" },
   { value: "Not sure yet", label: "Not sure yet" },

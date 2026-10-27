@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { Link } from "wouter";
 import { track, useTrackOnView, type Package } from "../lib/analytics";
 import { INTL_PRICES, PLAN_PRICES } from "../lib/plans";
+import { useMarket } from "../lib/MarketContext";
 
 // The four packages as jars standing on one wooden pantry shelf, each with a hanging price tag.
 // Used on Home ("On the MENU") and as the Pricing page header.
@@ -15,8 +16,8 @@ const JARS = [
 type Surface = "pricing_shelf" | "home_shelf";
 
 // toCards: on Pricing the cards below carry the prices, so each jar shows its name and jumps to its card.
-export function PantryShelf({ link = true, currency = "ZAR", surface, toCards = false }: { link?: boolean; currency?: "ZAR" | "USD"; surface: Surface; toCards?: boolean }) {
-  const intl = currency === "USD";
+export function PantryShelf({ link = true, surface, toCards = false }: { link?: boolean; surface: Surface; toCards?: boolean }) {
+  const { intl } = useMarket();
   return (
     <div className="relative">
       <ul className="relative z-10 grid grid-cols-2 gap-x-4 gap-y-16 md:grid-cols-4 md:gap-y-0">
@@ -37,9 +38,9 @@ export function PantryShelf({ link = true, currency = "ZAR", surface, toCards = 
 }
 
 function Jar({ j, i, link, intl, surface, toCards }: { j: (typeof JARS)[number]; i: number; link: boolean; intl: boolean; surface: Surface; toCards: boolean }) {
+  const market = intl ? "intl" : "za";
   const ref = useRef<HTMLLIElement>(null);
   const pkg = j.name.toLowerCase() as Package;
-  const market = intl ? "intl" : "za";
   useTrackOnView(ref, "package_view", { package: pkg, market, surface }, market);
   const popular = "popular" in j;
   const tag = (

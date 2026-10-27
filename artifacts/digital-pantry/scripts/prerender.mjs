@@ -32,12 +32,14 @@ for (const page of [...PAGES, NOT_FOUND]) {
   const routePath = page === NOT_FOUND ? "/this-page-does-not-exist" : page.path;
   const body = await render(routePath);
   if (body.includes("<script")) throw new Error(`Inline script in ${page.path}: it would break the CSP`);
-  // Guard: structured-data prices must match what the site shows. Rand prices are on Pricing's first
-  // view; the dollar prices sit behind its International tab, so they are checked on /faq, which
-  // shows them in full in the server HTML (Pricing stopped repeating the FAQ, 2026-10-27).
+  // Guard: structured-data prices must match what the site shows. The server HTML is always Local, so
+  // rand prices are checked on Pricing. The dollar prices only show on Pricing once a visitor flips the
+  // Local / International switch, so they are checked on /faq, whose "international clients" answer
+  // states them in plain text (src/lib/faq.ts). Pricing has no custom-quote number any more (it says
+  // "ask us"), so R8 000 is checked on /faq too, where the bigger-companies answer states it.
   const mustShow = {
-    "/pricing": ["R600", "R1 000", "R1 600", "R2 500", "R120", "R8 000"],
-    "/faq": ["$450", "$750", "$1 200", "$1 800", "$90"],
+    "/pricing": ["R600", "R1 000", "R1 600", "R2 500", "R120"],
+    "/faq": ["R8 000", "$450", "$750", "$1 200", "$1 800", "$90"],
   }[page.path];
   for (const price of mustShow ?? []) {
     if (!body.includes(price)) throw new Error(`${page.path} no longer shows ${price}: update src/seo.ts and public/pricing.md`);

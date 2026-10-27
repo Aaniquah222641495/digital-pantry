@@ -22,15 +22,11 @@ const PAGE_NAMES: Record<string, string> = {
   "/portfolio": "Portfolio",
   "/pricing": "Pricing",
   "/contact": "Contact",
-  "/business-projects": "Business projects",
   "/privacy": "Privacy",
   "/websites-for-food-businesses": "Websites for food businesses",
-  "/websites-for-schools-and-madrasahs": "Websites for schools and madrasahs",
-  "/websites-for-beauty-businesses": "Websites for beauty businesses",
-  "/websites-for-consultants": "Websites for consultants",
+  "/websites-for-beauty-businesses": "Websites for nails and beauty",
   "/websites-for-product-brands": "Websites for product brands",
   "/websites-for-trades-and-local-services": "Websites for trades and local services",
-  "/website-cost-south-africa": "website cost guide",
 };
 
 export function whatsappText(name: string, path: string): string {

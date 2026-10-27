@@ -4,3 +4,9 @@
 
 # Browsers and crawlers ask for /favicon.ico by default.
 /favicon.ico  /favicon.png  200
+
+# Pages removed in the 2026-10-27 lean-site restructure (permanent, so search engines move to the new page).
+/website-cost-south-africa  /pricing  301
+/business-projects  /contact  301
+/websites-for-schools-and-madrasahs  /portfolio  301
+/websites-for-consultants  /pricing  301

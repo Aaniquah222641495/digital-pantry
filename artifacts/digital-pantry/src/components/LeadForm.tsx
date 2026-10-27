@@ -14,6 +14,7 @@ import {
   type LeadFormValues,
 } from "../lib/leads";
 import { MOCKUP_FORM_NOTE } from "../lib/plans";
+import { useMarket } from "../lib/MarketContext";
 import { interestValue, track, type EventProps } from "../lib/analytics";
 import { Sprinkles } from "./Sprinkles";
 
@@ -49,12 +50,13 @@ export function LeadForm({
   messagePlaceholder = "Tell us about your business and what you need.",
 }: {
   source?: string;
-  /** Preselected option when the URL has no ?interest= (e.g. "Larger business" on the Business projects page) */
+  /** Preselected option when the URL has no ?interest= (e.g. "Larger business") */
   defaultInterest?: LeadFormValues["interest"];
   messagePlaceholder?: string;
 }) {
   const [phase, setPhase] = useState<Phase>({ name: "form" });
   const search = useSearch();
+  const { money } = useMarket();
   const headingRef = useRef<HTMLHeadingElement>(null);
   const started = useRef(false);
   // Analytics gets the page name only, from a fixed list (ADR-0026).
@@ -220,7 +222,7 @@ export function LeadForm({
           <select id="lead-interest" defaultValue="" className={`${inputCls} appearance-none pr-11 cursor-pointer`} data-testid="select-interest" {...aria("interest")} {...register("interest")}>
             <option value="" disabled>Choose one</option>
             {INTEREST_OPTIONS.map((o) => (
-              <option key={o.value} value={o.value}>{o.label}</option>
+              <option key={o.value} value={o.value}>{money(o.label)}</option>
             ))}
           </select>
           <ChevronDown size={18} aria-hidden="true" className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-dp-muted" />

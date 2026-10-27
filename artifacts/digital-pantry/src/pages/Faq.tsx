@@ -5,7 +5,7 @@ import { CutoutWord } from "../components/CutoutWord";
 import { FreeTaste } from "../components/FreeTaste";
 import { Reveal } from "../components/Reveal";
 import { Sticker, DAY, NIGHT } from "../components/Stickers";
-import { COST_GUIDE } from "../lib/guides";
+import { useMarket } from "../lib/MarketContext";
 import { FAQ_GROUPS } from "../lib/faq";
 import { H1 } from "../lib/style";
 
@@ -24,6 +24,7 @@ function openFromHash() {
 }
 
 export default function Faq() {
+  const { intl, money } = useMarket();
   useEffect(() => {
     openFromHash();
     window.addEventListener("hashchange", openFromHash);
@@ -42,7 +43,7 @@ export default function Faq() {
             </span>
           </h1>
           <p className="dp-rise mt-7 max-w-[46ch] text-[clamp(1.1rem,1.6vw,1.3rem)] leading-[1.5] text-dp-ink/80" style={{ "--d": "0.12s" } as CSSProperties}>
-            Prices, how we work, your domain and hosting, and what happens after launch. Plain answers, no fine print hiding.
+            Prices, how we work, your domain and hosting, and what happens after launch.
           </p>
           <nav aria-label="Question groups" className="dp-rise mt-9 flex flex-wrap gap-2" style={{ "--d": "0.2s" } as CSSProperties}>
             {FAQ_GROUPS.map((g) => (
@@ -86,7 +87,7 @@ export default function Faq() {
                     </span>
                   </summary>
                   <div className="flex justify-end px-4 pb-5 sm:px-6">
-                    <p className="max-w-[88%] rounded-[22px] rounded-br-md bg-dp-cta px-5 py-3.5 text-[15px] leading-relaxed text-dp-cta-fg">{f.a}</p>
+                    <p className="max-w-[88%] rounded-[22px] rounded-br-md bg-dp-cta px-5 py-3.5 text-[15px] leading-relaxed text-dp-cta-fg">{money(intl && f.aIntl ? f.aIntl : f.a)}</p>
                   </div>
                 </details>
               ))}
@@ -94,13 +95,8 @@ export default function Faq() {
           </section>
         ))}
 
-        <div className="pt-6">
-        <p className="max-w-[60ch] leading-relaxed text-dp-muted">
-          Comparing quotes?{" "}
-          <Link href={COST_GUIDE.path} className="text-dp-accent underline decoration-dp-line underline-offset-4 hover:decoration-dp-accent">
-            See what websites cost in South Africa
-          </Link>
-          . Or see the{" "}
+        <p className="pt-6 max-w-[60ch] leading-relaxed text-dp-muted">
+          See the{" "}
           <Link href="/pricing" className="text-dp-accent underline decoration-dp-line underline-offset-4 hover:decoration-dp-accent">
             packages
           </Link>
@@ -110,7 +106,6 @@ export default function Faq() {
           </Link>
           .
         </p>
-        </div>
       </div>
 
       <FreeTaste testId="faq-mockup-offer" />

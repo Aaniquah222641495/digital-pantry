@@ -102,11 +102,10 @@ await page.goto(`${base}/?utm_source=test&fbclid=1234567890`, { waitUntil: "load
 await settle();
 await scrollThrough();
 
-await page.goto(`${base}/pricing?for=intl`, { waitUntil: "load" });
+await page.goto(`${base}/pricing`, { waitUntil: "load" });
 await settle();
 await scrollThrough();
-await page.getByRole("tab", { name: /Larger business/ }).click();
-await page.getByRole("link", { name: /Request a quote/ }).click();
+await page.getByRole("link", { name: /custom quote/ }).click();
 await settle();
 
 await page.goto(`${base}/pricing`, { waitUntil: "load" });

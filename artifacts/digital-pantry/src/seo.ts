@@ -4,7 +4,8 @@
 // Only state facts that are already on the site. Update `LAST_UPDATED` when content changes.
 
 import { ALL_FAQ } from "./lib/faq";
-import { BEAUTY, CONSULTANTS, COST_FAQ, COST_GUIDE, FOOD, PRODUCT_BRANDS, SCHOOLS, TRADES, type Industry } from "./lib/guides";
+import { BEAUTY, FOOD, PRODUCT_BRANDS, TRADES, type Industry } from "./lib/guides";
+import { priced } from "./lib/plans";
 
 export const SITE_URL = "https://digitalpantry.co.za";
 export const SITE_NAME = "The Digital Pantry";
@@ -119,7 +120,7 @@ const industryPage = (p: Industry, title: string, description: string): PageMeta
         offers: { "@type": "AggregateOffer", lowPrice: 600, highPrice: 2500, priceCurrency: "ZAR", url: `${SITE_URL}/pricing` },
         url: `${SITE_URL}${p.path}`,
       },
-      faqPage(p.faq),
+      faqPage(p.faq.map((f) => ({ q: f.q, a: priced(f.a, "za") }))),
       crumbs(p.label, p.path),
     ),
   ],
@@ -172,7 +173,7 @@ export const PAGES: PageMeta[] = [
                 price: p.price,
                 priceCurrency: "USD",
                 eligibleRegion: { "@type": "Place", name: "Outside South Africa" },
-                url: `${SITE_URL}/pricing?for=intl`,
+                url: `${SITE_URL}/pricing`,
               })),
               {
                 "@type": "Offer",
@@ -187,7 +188,7 @@ export const PAGES: PageMeta[] = [
                 description: "Menu updates, schedule changes and small edits.",
                 priceSpecification: { "@type": "UnitPriceSpecification", price: 90, priceCurrency: "USD", unitText: "MONTH" },
                 eligibleRegion: { "@type": "Place", name: "Outside South Africa" },
-                url: `${SITE_URL}/pricing?for=intl`,
+                url: `${SITE_URL}/pricing`,
               },
             ],
           },
@@ -236,26 +237,6 @@ export const PAGES: PageMeta[] = [
     ],
   },
   {
-    path: "/business-projects",
-    title: "Custom Websites and Agency Partnerships | Digital Pantry",
-    description:
-      "Custom websites, integrations, lead systems and support for larger businesses, plus build partnerships for agencies. Fixed quote after discovery, from R8 000. Cape Town.",
-    jsonLd: [
-      graph(
-        {
-          "@type": "Service",
-          name: "Custom website development",
-          serviceType: "Custom website development",
-          provider: { "@id": ORG_ID },
-          areaServed: "ZA",
-          url: `${SITE_URL}/business-projects`,
-          offers: { "@type": "Offer", priceCurrency: "ZAR", price: "8000", description: "Custom builds from R8 000, fixed quote after discovery" },
-        },
-        crumbs("Business projects", "/business-projects"),
-      ),
-    ],
-  },
-  {
     path: "/contact",
     title: "Contact: Get a Website Quote | The Digital Pantry",
     description:
@@ -284,19 +265,9 @@ export const PAGES: PageMeta[] = [
     "Websites for bakeries, pop-ups, home kitchens and takeaways in Cape Town: your menu, where to find you and one-tap WhatsApp ordering. From R600.",
   ),
   industryPage(
-    SCHOOLS,
-    "Websites for Schools and Madrasahs in Cape Town | Digital Pantry",
-    "Calm websites for madrasahs, schools and learning centres: programmes, registration and FAQs parents can use on a phone. From R600.",
-  ),
-  industryPage(
     BEAUTY,
-    "Websites for Salons and Beauty Businesses in Cape Town | Digital Pantry",
-    "Websites for salons, lash and nail techs and beauty studios in Cape Town: services and prices, a gallery of your work and one clear way to book. From R600.",
-  ),
-  industryPage(
-    CONSULTANTS,
-    "Websites for Consultants and Professional Services | Digital Pantry",
-    "Websites for coaches, bookkeepers, consultants and other professionals: clear services, trust signals and enquiries that arrive with context. From R600.",
+    "Websites for Nail Techs and Beauty Businesses in Cape Town | Digital Pantry",
+    "Websites for nail techs, lash and brow studios and salons in Cape Town: services and prices, a gallery of your work and one clear way to book. From R600.",
   ),
   industryPage(
     PRODUCT_BRANDS,
@@ -308,29 +279,6 @@ export const PAGES: PageMeta[] = [
     "Websites for Trades and Local Services in Cape Town | Digital Pantry",
     "Websites for plumbers, electricians, detailers, cleaners and other local services: your services, your area and quick quote requests. From R600.",
   ),
-  {
-    path: COST_GUIDE.path,
-    title: "How Much Does a Website Cost in South Africa? (2026) | Digital Pantry",
-    description:
-      "2026 website prices in South Africa: template sites, small business sites, custom builds, what changes the price and the yearly costs people forget.",
-    jsonLd: [
-      graph(
-        {
-          "@type": "Article",
-          headline: COST_GUIDE.heading,
-          datePublished: COST_GUIDE.published,
-          dateModified: COST_GUIDE.published,
-          author: { "@id": PERSON_ID },
-          publisher: { "@id": ORG_ID },
-          image: OG_IMAGE,
-          mainEntityOfPage: `${SITE_URL}${COST_GUIDE.path}`,
-          inLanguage: "en-ZA",
-        },
-        faqPage(COST_FAQ),
-        crumbs("Website costs", COST_GUIDE.path),
-      ),
-    ],
-  },
 ];
 
 export const NOT_FOUND: PageMeta = {

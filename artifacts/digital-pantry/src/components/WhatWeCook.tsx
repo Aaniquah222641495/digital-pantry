@@ -3,7 +3,8 @@ import { ArrowUpRight } from "lucide-react";
 import { CutoutWord } from "./CutoutWord";
 import { Reveal } from "./Reveal";
 import { H2 } from "../lib/style";
-import { INTL_PRICES, LARGER_FROM, PLAN_PRICES } from "../lib/plans";
+import { priceFor, type Market } from "../lib/plans";
+import { useMarket } from "../lib/MarketContext";
 
 // The studio's full range, straight after the hero (PRD 1, 4.2, 4.8): small-business sites are one
 // offer, not the whole studio. A menu board of mixed sizes, each offer with its own look, so it
@@ -20,11 +21,13 @@ type Offer = {
   big?: string;
 };
 
-const OFFERS: Offer[] = [
+// Two offers: ready-made packages, and custom work quoted after a chat. The agencies and the
+// USD cards were cut (founder 2026-10-27): the header switch now shows dollar prices everywhere.
+const offers = (market: Market): Offer[] => [
   {
     title: "Small business websites",
     body: "From one page with a WhatsApp button to a site that catches every lead. Fixed packages, clear prices.",
-    price: `From ${PLAN_PRICES.Starter}`,
+    price: `From ${priceFor("Starter", market)}`,
     href: "/pricing",
     span: "lg:col-span-7",
     tone: "pink",
@@ -33,29 +36,11 @@ const OFFERS: Offer[] = [
   {
     title: "Custom builds and integrations",
     body: "Web apps and bigger sites: bookings, payments, forms and links to the systems you already use. Fixed quote after a chat.",
-    price: `From ${LARGER_FROM}`,
-    href: "/business-projects",
+    price: "Ask for a quote",
+    href: "/contact?interest=larger",
     span: "lg:col-span-5",
     tone: "ink",
     art: { src: "/images/art/imaan-serving.webp", w: 600, h: 600, cls: "w-[34%] max-w-[170px]" },
-  },
-  {
-    title: "Agencies and designers",
-    body: "You bring the client and the design, we build it properly. Under your name or ours.",
-    price: "Let's talk",
-    href: "/business-projects#agencies",
-    span: "lg:col-span-5",
-    tone: "plain",
-    art: { src: "/images/art/launch-day.webp", w: 1600, h: 894, cls: "w-[48%] sm:w-[62%] max-w-[320px]" },
-  },
-  {
-    title: "Clients outside South Africa",
-    body: "The same kitchen and the same care, with packages priced in US dollars.",
-    price: "Packages in USD",
-    href: "/pricing?for=intl",
-    span: "lg:col-span-7",
-    tone: "soft",
-    big: `From ${INTL_PRICES.Starter}`,
   },
 ];
 
@@ -67,6 +52,7 @@ const TONE: Record<Offer["tone"], string> = {
 };
 
 export function WhatWeCook() {
+  const { market } = useMarket();
   return (
     <section aria-labelledby="cook-heading" className="border-t border-dp-line">
       <div className="mx-auto max-w-[1320px] px-5 py-24 sm:px-8 md:py-32">
@@ -75,11 +61,11 @@ export function WhatWeCook() {
             What we <CutoutWord word="COOK" />
           </h2>
           <p className="max-w-[44ch] text-lg leading-relaxed text-dp-muted md:col-span-5">
-            Websites, web apps and the systems behind them, designed and coded from scratch. Pick the table you're sitting at.
+            Websites, web apps and the systems behind them, designed and coded from scratch.
           </p>
         </Reveal>
         <ul className="mt-14 grid gap-4 lg:grid-cols-12">
-          {OFFERS.map((o, i) => (
+          {offers(market).map((o, i) => (
             <Reveal as="li" key={o.title} delay={(i % 2) * 0.06} className={o.span}>
               <Link
                 href={o.href}

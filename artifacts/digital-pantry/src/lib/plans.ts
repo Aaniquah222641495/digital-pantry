@@ -53,14 +53,6 @@ export const BILLED_SEPARATELY_SUMMARY =
 export const SMALL_BUSINESS_LIMIT = "up to 10 staff";
 export const LARGER_FROM = "R8 000";
 
-// What moves a custom quote. Shown on Pricing (larger tab) and the Business projects page.
-export const LARGER_DRIVERS = [
-  "How many pages and how much content",
-  "Integrations: bookings, payments, forms, your systems",
-  "Brand and design work needed",
-  "Timeline and how many people sign off",
-] as const;
-
 // Monthly retainer. USD keeps the same premium as the international packages (founder: "you choose",
 // 2026-10-24). Larger businesses get theirs quoted with the build.
 export const RETAINER = "R120";
@@ -74,3 +66,13 @@ export const MOCKUP_FORM_NOTE =
   "One free concept per business, for qualified enquiries: phone and desktop videos and a quote PDF within 5 business days of your brief. Nothing goes live or is editable until the deposit is paid.";
 export const MOCKUP_TERMS =
   "One free concept per business, for qualified enquiries: a real business, with the decision-maker, open to a paid build. You get a mock-up pack (phone and desktop videos and a quote PDF), not a working site, within 5 business days of your brief. Development, a live link, source files and revisions start once the deposit is paid, and the concept and files stay ours until the agreed fee is paid.";
+
+// Local / International switch (header). Copy that carries a price writes a token such as {Starter} or
+// {retainer}; priced() fills it for the visitor's market. The prerendered HTML and the structured data
+// always use "za", so what crawlers read matches what a first-time local visitor sees.
+export type Market = "za" | "intl";
+export type PlanName = keyof typeof PLAN_PRICES;
+export const priceFor = (name: PlanName, market: Market) => (market === "intl" ? INTL_PRICES[name] : PLAN_PRICES[name]);
+export const retainerFor = (market: Market) => (market === "intl" ? INTL_RETAINER : RETAINER);
+export const priced = (text: string, market: Market) =>
+  text.replace(/\{(Starter|Standard|Premium|Pro|retainer)\}/g, (_, k: string) => (k === "retainer" ? retainerFor(market) : priceFor(k as PlanName, market)));

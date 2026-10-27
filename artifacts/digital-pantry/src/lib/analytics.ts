@@ -22,7 +22,8 @@ export const EVENTS = [
 export type EventName = (typeof EVENTS)[number];
 
 export type Package = "starter" | "standard" | "premium" | "pro";
-export type Market = "za" | "intl";
+export type { Market } from "./plans";
+import type { Market } from "./plans";
 
 export type EventProps = {
   segment?: "food" | "schools";
