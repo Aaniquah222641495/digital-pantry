@@ -259,7 +259,7 @@ export default function Pricing() {
       </section>
 
       {/* FAQ as a text-message thread: the client asks, we answer */}
-      {audience !== "larger" && <BusinessPicker />}
+      {audience === "small" && <BusinessPicker />}
 
       <section aria-labelledby="faq-heading" className="border-t border-dp-line">
         <div className="mx-auto grid max-w-[1320px] gap-14 px-5 py-24 sm:px-8 md:grid-cols-[1fr_1.2fr] md:py-32">

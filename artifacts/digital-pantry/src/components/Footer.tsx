@@ -1,4 +1,4 @@
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { Logo } from "./Navbar";
 import { MagneticButton } from "./MagneticButton";
 import { Reveal } from "./Reveal";
@@ -19,6 +19,8 @@ const NAV_LINKS = [
 
 export function Footer() {
   const contact = useSideContact();
+  // On Contact the form is right above, so a button back to the same page is a dead end.
+  const [location] = useLocation();
   return (
     <footer className="relative overflow-hidden border-t border-dp-line">
       <div className="mx-auto max-w-[1320px] px-5 pb-10 pt-24 sm:px-8 md:pt-32">
@@ -26,9 +28,11 @@ export function Footer() {
           <h2 className="max-w-[14ch] text-[clamp(2.6rem,7vw,6.5rem)] font-semibold leading-[0.95] tracking-[-0.05em] text-dp-ink">
             Coded in <span className="text-dp-accent">Pink.</span> Built to Perform.
           </h2>
+          {location !== "/contact" && (
           <MagneticButton href="/contact" data-testid="footer-cta">
             Let's Get Cooking
           </MagneticButton>
+          )}
         </Reveal>
 
         <div className="mt-20 grid gap-10 border-t border-dp-line pt-10 sm:grid-cols-2 md:grid-cols-[1.4fr_1fr_1.2fr_1.2fr]">

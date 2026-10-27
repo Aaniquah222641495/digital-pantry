@@ -62,8 +62,8 @@ export const FOOD: Industry = {
     desktop: "/images/work/stuffd-desktop.webp",
     phone: "/images/work/stuffd-phone.webp",
     rows: [
-      ["The problem", "Customers had to hunt for a WhatsApp number and scroll social media to place orders. No central hub, so sales slipped through the cracks."],
-      ["What we cooked", "A single-page ordering site with the menu, this week's pop-up spots and one-tap WhatsApp ordering."],
+      ["The need", "Customers had to hunt for a WhatsApp number and scroll social media to place an order."],
+      ["What we built", "One mobile-first page with the menu, this week's pickup spots and an order form that sends the order to WhatsApp."],
     ],
   },
   fit: `Starter (${PLAN_PRICES.Starter}) is one page with your menu and a WhatsApp button, which is all many food businesses need. Premium (${PLAN_PRICES.Premium}) adds your own domain, a Google Business Profile and basic SEO.`,
@@ -99,8 +99,8 @@ export const SCHOOLS: Industry = {
     desktop: "/images/work/madrasah-desktop.webp",
     phone: "/images/work/madrasah-phone.webp",
     rows: [
-      ["The brief", "A warm, safe-feeling home online for a beginner-friendly Islamic learning space, online and in person."],
-      ["What we cooked", "Programmes, registration, testimonials and FAQs on one calm site that parents can use easily on a phone."],
+      ["The need", "Parents and students needed one clear place for programmes, registration and answers, easy to read on a phone."],
+      ["What we built", "A 12-page site on their own domain: a page for every programme, registration, testimonials and FAQs."],
     ],
   },
   fit: `A one-page site starts at ${PLAN_PRICES.Starter} (Starter). Premium (${PLAN_PRICES.Premium}) adds your own domain, a Google Business Profile and basic SEO. Pro (${PLAN_PRICES.Pro}) adds a form that saves every registration to your Google Sheet and alerts you straight away.`,
