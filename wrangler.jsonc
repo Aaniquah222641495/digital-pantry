@@ -10,5 +10,8 @@
     "not_found_handling": "404-page",
     // /pricing serves pricing.html; /pricing.html forwards to /pricing.
     "html_handling": "auto-trailing-slash"
-  }
+  },
+  // Branch previews (`npx wrangler preview` in Workers Builds). Empty is enough: assets and
+  // compatibility settings above apply to previews too.
+  "previews": {}
 }
