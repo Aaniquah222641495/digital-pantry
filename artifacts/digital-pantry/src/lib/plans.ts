@@ -29,15 +29,23 @@ export const TURNAROUND_NOTE =
 // What a package price does not cover (DPW-4; founder-settled S4/S6, 2026-10-26). Hosting is left out
 // on purpose: it is stated only after web-finance confirms. Pricing.tsx, the FAQ (seo.ts) and
 // public/pricing.md repeat this wording, so change them together.
-export const BILLED_SEPARATELY = [
-  "Your domain name. We register it for you, in your name, so it is yours; you pay the registration and yearly renewal. A .co.za renews at about R110 a year at xneelo (checked October 2026). Every package includes the setup, not the registration fee.",
-  "Email on your own domain, if you want it (a mail plan from your domain provider).",
-  "Copywriting, if you want us to write your text.",
-  "Online shops and payments (e-commerce), which are quoted separately.",
-  "Changes beyond 2 rounds of revisions, and edits beyond the retainer's small updates. We quote these in writing before we start.",
+// Plain words for the client: no registrar names (founder 2026-10-27).
+export const INCLUDED_ALWAYS = [
+  "Your site, designed and built from scratch",
+  "Looks right on phones, tablets and laptops",
+  "Your own domain connected",
+  "2 rounds of revisions",
 ] as const;
+export const EXTRAS = [
+  { name: "Domain name", cost: "R100 to R150/yr", note: "Your web address. We register it in your name, so it's yours." },
+  { name: "Email on your domain", cost: "optional", note: "Like hello@yourbusiness.co.za. Small monthly fee, quoted first." },
+  { name: "Writing your text", cost: "quoted", note: "Rather not write it yourself? We can." },
+  { name: "Online shop and payments", cost: "quoted", note: "Priced to your products." },
+  { name: "Extra changes", cost: "quoted", note: "After the 2 revision rounds, or bigger than the retainer's small edits." },
+] as const;
+export const BILLED_SEPARATELY = EXTRAS.map((e) => `${e.name} (${e.cost}): ${e.note}`);
 export const BILLED_SEPARATELY_SUMMARY =
-  "Package prices cover the site build only. Billed separately: your domain name (we register it in your name; you own it and pay its registration and renewals, a .co.za is about R110 a year), email on your own domain, copywriting, online shops and payments, and changes beyond 2 rounds of revisions or beyond the retainer's small updates. We quote any extra work in writing first.";
+  "Package prices cover the site build only. Billed separately: your domain name (we register it in your name, so you own it; about R100 to R150 a year), email on your own domain, copywriting, online shops and payments, and changes beyond 2 rounds of revisions or beyond the retainer's small updates. We quote any extra work in writing first.";
 
 export const SMALL_BUSINESS_LIMIT = "up to 10 staff";
 export const LARGER_FROM = "R8 000";

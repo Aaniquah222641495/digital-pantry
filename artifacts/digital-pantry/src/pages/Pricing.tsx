@@ -6,7 +6,7 @@ import { FreeTaste } from "../components/FreeTaste";
 import { PantryShelf } from "../components/PantryShelf";
 import { BusinessPicker } from "../components/BusinessPicker";
 import { Sticker, DAY, NIGHT } from "../components/Stickers";
-import { BILLED_SEPARATELY, INTL_PRICES, INTL_RETAINER, LARGER_DRIVERS, LARGER_FROM, PLAN_PRICES, RETAINER, SMALL_BUSINESS_LIMIT } from "../lib/plans";
+import { EXTRAS, INCLUDED_ALWAYS, INTL_PRICES, INTL_RETAINER, LARGER_DRIVERS, LARGER_FROM, PLAN_PRICES, RETAINER, SMALL_BUSINESS_LIMIT } from "../lib/plans";
 import { useEffect, useState } from "react";
 import { Link, useSearch } from "wouter";
 import { COST_GUIDE } from "../lib/guides";
@@ -207,23 +207,43 @@ export default function Pricing() {
         </div>
         )}
 
-        {/* Included vs billed separately: package prices cover the build only */}
+        {/* What every package includes, and the extras on their own slip (plain words, no registrar names) */}
         {audience !== "larger" && (
-          <Reveal className="mt-8 rounded-[28px] border border-dp-line bg-dp-surface p-8 sm:p-10">
+          <Reveal className="mt-8 grid items-start gap-10 rounded-[28px] border border-dp-line bg-dp-surface p-5 sm:p-10 lg:grid-cols-[1fr_1.15fr] lg:gap-14">
             <div data-testid="pricing-billed-separately">
-              <h2 className="text-[clamp(1.6rem,2.6vw,2.2rem)] font-semibold tracking-[-0.035em]">What the price covers, and what it doesn't</h2>
-              <p className="mt-3 max-w-[60ch] leading-relaxed text-dp-muted">
-                Each package price is for building your site, once-off. These are billed separately, and we tell you the cost before anything is bought.
+              <h2 className="text-[clamp(1.6rem,2.6vw,2.2rem)] font-semibold tracking-[-0.035em]">What the price covers</h2>
+              <p className="mt-3 max-w-[44ch] leading-relaxed text-dp-muted">
+                One price for your site, paid once. A few things are extra, and you always see the cost before we buy anything.
               </p>
-              <ul className="mt-6 grid gap-x-10 gap-y-3 md:grid-cols-2">
-                {BILLED_SEPARATELY.map((t) => (
+              <p className="mt-8 font-mono text-[13px] text-dp-accent">In every package</p>
+              <ul className="mt-4 flex flex-col gap-3">
+                {INCLUDED_ALWAYS.map((t) => (
                   <li key={t} className="flex items-start gap-2.5 text-[15px] leading-relaxed">
-                    <span aria-hidden="true" className="mt-0.5 shrink-0 font-mono text-dp-accent">+</span>
+                    <Check size={16} strokeWidth={2.5} aria-hidden="true" className="mt-1 shrink-0 text-dp-accent" />
                     <span>{t}</span>
                   </li>
                 ))}
               </ul>
             </div>
+            <figure className="dp-ticket relative w-full px-5 pb-10 pt-8 sm:rotate-[0.6deg] sm:px-8 text-[#211A1E]">
+              <figcaption className="text-center">
+                <span className="dp-cut-bebas block text-[1.7rem] leading-none tracking-[0.08em]">Extras</span>
+                <span className="mt-2 block font-mono text-[12px] text-[#5E5258]">Only if you need them</span>
+              </figcaption>
+              <div aria-hidden="true" className="my-5 border-t-2 border-dashed border-[#211A1E]/25" />
+              <ul className="flex flex-col gap-4">
+                {EXTRAS.map((e) => (
+                  <li key={e.name}>
+                    <div className="flex flex-wrap items-baseline gap-x-2 font-mono text-[13px] sm:text-[14px]">
+                      <span className="font-semibold">{e.name}</span>
+                      <span aria-hidden="true" className="min-w-4 flex-1 translate-y-[-3px] border-b-2 border-dotted border-[#211A1E]/25" />
+                      <span className="ml-auto text-right">{e.cost}</span>
+                    </div>
+                    <p className="mt-1 text-[14px] leading-snug text-[#5E5258]">{e.note}</p>
+                  </li>
+                ))}
+              </ul>
+            </figure>
           </Reveal>
         )}
 

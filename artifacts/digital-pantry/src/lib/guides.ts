@@ -245,7 +245,6 @@ export const COST_SOURCES: { name: string; href: string }[] = [
   { name: "Clevex", href: "https://clevex.co.za/website-design-prices-south-africa" },
   { name: "Blacksnow", href: "https://blacksnowgroup.co.za/website-design-costs-in-south-africa-2026/" },
   { name: "Advertising Solutions", href: "https://advertisingsolutions.co.za/website-design-cost-south-africa/" },
-  { name: "xneelo (mailbox pricing)", href: "https://xneelo.co.za/help-centre/email/can-i-order-additional-mailboxes-to-my-current-web-hosting-package/" },
 ];
 
 export const COST_DRIVERS: { title: string; body: string }[] = [
@@ -256,9 +255,9 @@ export const COST_DRIVERS: { title: string; body: string }[] = [
 ];
 
 export const COST_EXTRAS: { title: string; body: string }[] = [
-  { title: "Your domain name", body: "A .co.za address is a yearly cost. Ours renews at R110 a year with xneelo (October 2026)." },
+  { title: "Your domain name", body: "A .co.za address is a yearly cost. Expect about R100 to R150 a year." },
   { title: "Hosting", body: "A simple, fast site can run on a free hosting plan. Online shops and booking systems usually come with monthly fees." },
-  { title: "Email on your domain", body: "An address like hello@yourbusiness.co.za usually needs a mail plan. xneelo, for example, charges R9 a month for an extra mailbox." },
+  { title: "Email on your domain", body: "An address like hello@yourbusiness.co.za usually needs a mail plan, a small monthly fee." },
   { title: "Updates after launch", body: "Menus, prices and timetables change. Ask whether updates are included, charged per job or covered by a monthly plan." },
 ];
 
