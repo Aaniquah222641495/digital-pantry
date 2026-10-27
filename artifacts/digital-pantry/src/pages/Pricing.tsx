@@ -103,7 +103,7 @@ export default function Pricing() {
           <div className="dp-rise mt-14 md:mt-16" style={{ "--d": "0.2s" } as React.CSSProperties}>
             <PantryShelf surface="pricing_shelf" toCards />
             <p className="mt-10 max-w-[70ch] text-[14px] leading-relaxed text-dp-muted">
-              {intl ? "Once-off prices in US dollars." : `Once-off prices in rand, for South African businesses with ${SMALL_BUSINESS_LIMIT}.`} Bigger business?{" "}
+              {intl ? "Once-off prices in US dollars." : `Once-off prices in rand, for South African businesses with ${SMALL_BUSINESS_LIMIT}.`} Need an online shop, or a bigger business?{" "}
               <Link
                 href="/contact?interest=larger"
                 onClick={() => track("custom_project_cta_click", { surface: "pricing_larger" })}
