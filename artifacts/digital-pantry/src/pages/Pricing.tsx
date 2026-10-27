@@ -162,7 +162,7 @@ export default function Pricing() {
                   <p className="text-[15px] font-semibold tabular-nums">{DOMAIN_FEE}</p>
                 </div>
                 <p className="mt-2 max-w-[46ch] text-[14px] leading-relaxed text-dp-muted">
-                  Like yourbusiness.co.za. We register it in your name and set it up.
+                  Like yourbusiness.co.za. We register it in your name and set it up. After year one, we renew it for you on the retainer, or you renew it yourself.
                 </p>
               </div>
             </div>

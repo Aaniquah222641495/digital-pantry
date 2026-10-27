@@ -44,7 +44,8 @@ export const EXTRAS = [
   { name: "Extra changes", cost: "quoted", note: "After the 2 revision rounds, or bigger than the retainer's small edits." },
 ] as const;
 // Every site goes live on its own domain (founder 2026-10-27: a must, it looks professional).
-// The yearly fee is paid by the client on top of the package; we register it in their name.
+// Package prices exclude the domain (founder 2026-10-27): we register it in the client's name, they pay the fee.
+// After year one: on the retainer we renew it (at cost); otherwise the client renews it.
 export const DOMAIN_FEE = "R100 to R150 a year";
 export const BILLED_SEPARATELY = EXTRAS.map((e) => `${e.name} (${e.cost}): ${e.note}`);
 export const BILLED_SEPARATELY_SUMMARY =
