@@ -1,17 +1,12 @@
-# The old Netlify address forwards to the real domain (deploy previews have their own hosts, so they are unaffected).
-https://thedigitalpantry.netlify.app/*  https://digitalpantry.co.za/:splat  301!
-
-# Each page is a prerendered HTML file (scripts/prerender.mjs). Serve it at the clean URL with 200.
-/pricing     /pricing.html    200
-/portfolio   /portfolio.html  200
-/contact     /contact.html    200
-/privacy     /privacy.html    200
-/websites-for-food-businesses        /websites-for-food-businesses.html        200
-/websites-for-schools-and-madrasahs  /websites-for-schools-and-madrasahs.html  200
-/website-cost-south-africa           /website-cost-south-africa.html           200
+# Cloudflare Pages (ADR-0029). Pages serves each prerendered page (pricing.html) at its clean URL
+# (/pricing) and the top-level 404.html with a real 404 status by itself, so no rules are needed
+# for those. The old thedigitalpantry.netlify.app address keeps redirecting from Netlify's side.
 
 # Browsers and crawlers ask for /favicon.ico by default.
 /favicon.ico  /favicon.png  200
 
-# Anything else: the prerendered 404 page with a real 404 status.
-/*           /404.html        404
+# Pages removed in the 2026-10-27 lean-site restructure (permanent, so search engines move to the new page).
+/website-cost-south-africa  /pricing  301
+/business-projects  /contact  301
+/websites-for-schools-and-madrasahs  /portfolio  301
+/websites-for-consultants  /pricing  301

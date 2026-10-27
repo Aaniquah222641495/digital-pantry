@@ -3,12 +3,13 @@
 // browser (RouteMeta keeps the tab title and tags right when visitors click between pages).
 // Only state facts that are already on the site. Update `LAST_UPDATED` when content changes.
 
-import { BILLED_SEPARATELY_SUMMARY, MOCKUP_TERMS, TURNAROUND_TERMS } from "./lib/plans";
-import { COST_FAQ, COST_GUIDE, INDUSTRIES, type Industry } from "./lib/guides";
+import { ALL_FAQ } from "./lib/faq";
+import { BEAUTY, FOOD, PRODUCT_BRANDS, TRADES, type Industry } from "./lib/guides";
+import { priced } from "./lib/plans";
 
 export const SITE_URL = "https://digitalpantry.co.za";
 export const SITE_NAME = "The Digital Pantry";
-export const LAST_UPDATED = "2026-10-26";
+export const LAST_UPDATED = "2026-10-27";
 const OG_IMAGE = `${SITE_URL}/og-card.jpg`; // 1200x630 link-preview card (WhatsApp, LinkedIn, X)
 // Email is the contact we publish to search engines and AI assistants (founder, 2026-10-24).
 // The founders' WhatsApp numbers stay on the pages for visitors but are left out of this data.
@@ -35,24 +36,10 @@ const INTL_PLANS = [
 ];
 
 const PLANS = [
-  { name: "Starter", price: 600, includes: "Single page, menu section, WhatsApp button, mobile responsive." },
+  { name: "Starter", price: 600, includes: "Single page, menu section, WhatsApp button, mobile responsive, your own domain connected (domain billed separately)." },
   { name: "Standard", price: 1000, includes: "Everything in Starter plus locations, about section and social links." },
-  { name: "Premium", price: 1600, includes: "Everything in Standard plus custom domain setup, Google Business setup, basic SEO setup and 1 month of updates." },
+  { name: "Premium", price: 1600, includes: "Everything in Standard plus Google Business setup, basic SEO setup and 1 month of updates." },
   { name: "Pro", price: 2500, includes: "Everything in Premium plus a lead capture form with instant alerts, leads saved to your Google Sheet, an auto-reply to every enquiry and a WhatsApp follow-up button, tested before handover." },
-];
-
-// Shown on the pricing page (Pricing.tsx imports this) and used for FAQPage structured data,
-// so the two always match word for word, as Google requires.
-export const FAQ = [
-  { q: "Do I need to know how to code?", a: "No! That's literally our job. You handle the business, we handle the website." },
-  { q: "Do I keep my WhatsApp number?", a: "Yes! We just add a click-to-WhatsApp button on your site. Easy." },
-  { q: "How long does it take?", a: TURNAROUND_TERMS },
-  { q: "What do I get in the free mock-up?", a: MOCKUP_TERMS },
-  { q: "What is not included in the price?", a: BILLED_SEPARATELY_SUMMARY },
-  { q: "Do these prices apply to bigger companies?", a: "No. The rand packages are for South African small businesses with up to 10 staff. Larger businesses get a custom quote, from R8 000." },
-  { q: "Do you work with international clients?", a: "Yes. International packages are priced in US dollars: Starter $450, Standard $750, Premium $1 200 and Pro $1 800, once-off." },
-  { q: "What if I need changes later?", a: "That's what the R120/month retainer is for ($90/month for international clients). Small edits, big peace of mind." },
-  { q: "Does Pro have monthly fees?", a: "No. Your lead system runs on free Google tools that you own. Every enquiry lands in your inbox and your own Sheet." },
 ];
 
 const business = {
@@ -133,7 +120,7 @@ const industryPage = (p: Industry, title: string, description: string): PageMeta
         offers: { "@type": "AggregateOffer", lowPrice: 600, highPrice: 2500, priceCurrency: "ZAR", url: `${SITE_URL}/pricing` },
         url: `${SITE_URL}${p.path}`,
       },
-      faqPage(p.faq),
+      faqPage(p.faq.map((f) => ({ q: f.q, a: priced(f.a, "za") }))),
       crumbs(p.label, p.path),
     ),
   ],
@@ -158,7 +145,7 @@ export const PAGES: PageMeta[] = [
     path: "/pricing",
     title: "Website Prices in South Africa from R600 | Digital Pantry",
     description:
-      "Small business website packages: Starter R600, Standard R1 000, Premium R1 600, Pro R2 500 with lead automation. Optional R120/month for updates ($90/month internationally).",
+      "Small business website packages: Starter R600, Standard R1 000, Premium R1 600, Pro R2 500 with lead automation. Optional R150/month for updates ($90/month internationally).",
     jsonLd: [
       graph(
         {
@@ -186,13 +173,13 @@ export const PAGES: PageMeta[] = [
                 price: p.price,
                 priceCurrency: "USD",
                 eligibleRegion: { "@type": "Place", name: "Outside South Africa" },
-                url: `${SITE_URL}/pricing?for=intl`,
+                url: `${SITE_URL}/pricing`,
               })),
               {
                 "@type": "Offer",
                 name: "Monthly retainer",
                 description: "Menu updates, schedule changes and small edits.",
-                priceSpecification: { "@type": "UnitPriceSpecification", price: 120, priceCurrency: "ZAR", unitText: "MONTH" },
+                priceSpecification: { "@type": "UnitPriceSpecification", price: 150, priceCurrency: "ZAR", unitText: "MONTH" },
                 url: `${SITE_URL}/pricing`,
               },
               {
@@ -201,16 +188,27 @@ export const PAGES: PageMeta[] = [
                 description: "Menu updates, schedule changes and small edits.",
                 priceSpecification: { "@type": "UnitPriceSpecification", price: 90, priceCurrency: "USD", unitText: "MONTH" },
                 eligibleRegion: { "@type": "Place", name: "Outside South Africa" },
-                url: `${SITE_URL}/pricing?for=intl`,
+                url: `${SITE_URL}/pricing`,
               },
             ],
           },
         },
-        {
-          "@type": "FAQPage",
-          mainEntity: FAQ.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
-        },
+        // No FAQPage here: Pricing shows only some of the questions, and the full FAQPage (word for word
+        // with the visible text) lives on /faq, so the same questions aren't marked up on two pages.
         crumbs("Pricing", "/pricing"),
+      ),
+    ],
+  },
+  {
+    path: "/faq",
+    title: "Website FAQ: Prices, Domain, Hosting | Digital Pantry",
+    description:
+      "Straight answers on website prices, how we work, your domain and hosting, who owns your site, revisions and changes after launch. Cape Town web studio.",
+    jsonLd: [
+      graph(
+        { "@type": "WebPage", "@id": `${SITE_URL}/faq#page`, url: `${SITE_URL}/faq`, name: "Website questions answered", about: { "@id": ORG_ID }, inLanguage: "en-ZA" },
+        faqPage(ALL_FAQ),
+        crumbs("FAQ", "/faq"),
       ),
     ],
   },
@@ -262,38 +260,25 @@ export const PAGES: PageMeta[] = [
     jsonLd: [graph(crumbs("Privacy Notice", "/privacy"))],
   },
   industryPage(
-    INDUSTRIES[0],
+    FOOD,
     "Websites for Food Businesses in Cape Town | Digital Pantry",
     "Websites for bakeries, pop-ups, home kitchens and takeaways in Cape Town: your menu, where to find you and one-tap WhatsApp ordering. From R600.",
   ),
   industryPage(
-    INDUSTRIES[1],
-    "Websites for Schools and Madrasahs in Cape Town | Digital Pantry",
-    "Calm websites for madrasahs, schools and learning centres: programmes, registration and FAQs parents can use on a phone. From R600.",
+    BEAUTY,
+    "Websites for Nail Techs and Beauty Businesses in Cape Town | Digital Pantry",
+    "Websites for nail techs, lash and brow studios and salons in Cape Town: services and prices, a gallery of your work and one clear way to book. From R600.",
   ),
-  {
-    path: COST_GUIDE.path,
-    title: "How Much Does a Website Cost in South Africa? (2026) | Digital Pantry",
-    description:
-      "2026 website prices in South Africa: template sites, small business sites, custom builds, what changes the price and the yearly costs people forget.",
-    jsonLd: [
-      graph(
-        {
-          "@type": "Article",
-          headline: COST_GUIDE.heading,
-          datePublished: COST_GUIDE.published,
-          dateModified: COST_GUIDE.published,
-          author: { "@id": PERSON_ID },
-          publisher: { "@id": ORG_ID },
-          image: OG_IMAGE,
-          mainEntityOfPage: `${SITE_URL}${COST_GUIDE.path}`,
-          inLanguage: "en-ZA",
-        },
-        faqPage(COST_FAQ),
-        crumbs("Website costs", COST_GUIDE.path),
-      ),
-    ],
-  },
+  industryPage(
+    PRODUCT_BRANDS,
+    "Websites for Small Product Brands in South Africa | Digital Pantry",
+    "Websites for small product brands: a catalogue of your products, your story and a clear way to buy, from WhatsApp orders to an online shop. From R600.",
+  ),
+  industryPage(
+    TRADES,
+    "Websites for Trades and Local Services in Cape Town | Digital Pantry",
+    "Websites for plumbers, electricians, detailers, cleaners and other local services: your services, your area and quick quote requests. From R600.",
+  ),
 ];
 
 export const NOT_FOUND: PageMeta = {

@@ -102,11 +102,24 @@ await page.goto(`${base}/?utm_source=test&fbclid=1234567890`, { waitUntil: "load
 await settle();
 await scrollThrough();
 
-await page.goto(`${base}/pricing?for=intl`, { waitUntil: "load" });
+await page.goto(`${base}/pricing`, { waitUntil: "load" });
 await settle();
 await scrollThrough();
-await page.getByRole("tab", { name: /Larger business/ }).click();
-await page.getByRole("link", { name: /Request a quote/ }).click();
+// International prices now come from the header's Local / International switch (no Pricing tab).
+await page.locator('[data-testid="market-intl"]:visible').first().click();
+// Scroll back up with the wheel: the smooth-scroll library ignores window.scrollTo.
+{
+  const h = await page.evaluate(() => document.body.scrollHeight);
+  for (let y = 0; y < h; y += 400) {
+    await page.mouse.wheel(0, -400);
+    await page.waitForTimeout(60);
+  }
+}
+await settle();
+await scrollThrough();
+await page.locator('[data-testid="market-za"]:visible').first().click();
+await settle();
+await page.getByRole("link", { name: /custom quote/ }).click();
 await settle();
 
 await page.goto(`${base}/pricing`, { waitUntil: "load" });

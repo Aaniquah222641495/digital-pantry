@@ -1,13 +1,14 @@
 # Pricing: The Digital Pantry (Cape Town, South Africa)
 
 Custom small business websites, built from scratch. The rand packages below are for South African small businesses with up to 10 staff. Larger businesses get a custom quote from R8 000. International clients have their own packages in US dollars (see the end of this file). All prices in South African rand (ZAR), once-off unless stated.
-Last updated: 2026-10-26. Source page: https://digitalpantry.co.za/pricing
+Last updated: 2026-10-27. Source page: https://digitalpantry.co.za/pricing
 
 ## Starter: R600
 - Single page
 - Menu section
 - WhatsApp button
 - Mobile responsive
+- Your own domain connected (domain billed separately)
 
 ## Standard: R1 000 (most popular)
 - Everything in Starter
@@ -17,7 +18,6 @@ Last updated: 2026-10-26. Source page: https://digitalpantry.co.za/pricing
 
 ## Premium: R1 600
 - Everything in Standard
-- Custom domain setup
 - Google Business setup
 - Basic SEO setup
 - 1 month of updates
@@ -31,9 +31,12 @@ Last updated: 2026-10-26. Source page: https://digitalpantry.co.za/pricing
 - Tested before handover
 - No monthly fees: runs on free Google tools the client owns
 
-## Billed separately (not in the package prices)
+## Your domain (every site needs one)
+Every site goes live on its own domain, like yourbusiness.co.za. We register it in your name, so it's yours, and connect it in every package. You pay the domain fee: about R100 to R150 a year.
+
+## Extras (not in the package prices, only if you want them)
 Package prices cover the site build only, once-off. These are billed separately, and we quote the cost before anything is bought:
-- Your domain name. You buy it in your own name and it is yours. A .co.za renews at about R110 a year at xneelo (checked October 2026). Premium and Pro include the setup, not the registration fee.
+- Branding design: a logo, colours and fonts made for your business (quoted).
 - Email on your own domain, if you want it (a mail plan from your domain provider).
 - Copywriting, if you want us to write your text.
 - Online shops and payments (e-commerce), which are quoted separately.
@@ -42,7 +45,7 @@ Package prices cover the site build only, once-off. These are billed separately,
 ## Turnaround
 Starter, Standard and Premium sites take 5 to 7 business days, counted from when the deposit is paid and all content is in. Feedback within 2 business days keeps the date; slower feedback moves it by the same amount. Domain registrar waits are not counted. Pro, e-commerce and custom builds get an estimate in the quote.
 
-## Retainer: R120 per month (optional)
+## Retainer: R150 per month (optional)
 - Menu updates, schedule changes and small edits
 - International clients: $90 per month. Larger businesses: quoted with the build.
 
@@ -51,6 +54,9 @@ Starter, Standard and Premium sites take 5 to 7 business days, counted from when
 - You get a mock-up pack (phone and desktop videos and a quote PDF), not a working site, within 5 business days of your brief.
 - Development, a live link, source files and revisions start once the deposit is paid. The concept and files stay ours until the agreed fee is paid.
 - No obligation to go ahead. Ask on the contact page: https://digitalpantry.co.za/contact?interest=mockup
+
+## More questions
+Process, domain, hosting, ownership, revisions and changes after launch: https://digitalpantry.co.za/faq
 
 ## Contact
 - Email: thedigitalpantryza@gmail.com

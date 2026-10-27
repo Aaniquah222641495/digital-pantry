@@ -1,4 +1,4 @@
-# Netlify headers. Security headers on every response (STANDARDS non-negotiable).
+# Cloudflare Pages headers (same syntax as Netlify; ADR-0029). Security headers on every response (STANDARDS non-negotiable).
 /*
   Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self' https://script.google.com https://script.googleusercontent.com https://gateway.umami.is; frame-ancestors 'none'; base-uri 'self'; form-action 'self' mailto:; object-src 'none'; upgrade-insecure-requests
   X-Content-Type-Options: nosniff

@@ -24,8 +24,9 @@ const PAGE_NAMES: Record<string, string> = {
   "/contact": "Contact",
   "/privacy": "Privacy",
   "/websites-for-food-businesses": "Websites for food businesses",
-  "/websites-for-schools-and-madrasahs": "Websites for schools and madrasahs",
-  "/website-cost-south-africa": "website cost guide",
+  "/websites-for-beauty-businesses": "Websites for nails and beauty",
+  "/websites-for-product-brands": "Websites for product brands",
+  "/websites-for-trades-and-local-services": "Websites for trades and local services",
 };
 
 export function whatsappText(name: string, path: string): string {

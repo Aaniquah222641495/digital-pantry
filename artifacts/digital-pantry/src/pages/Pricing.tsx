@@ -4,20 +4,20 @@ import { Reveal } from "../components/Reveal";
 import { MagneticButton } from "../components/MagneticButton";
 import { FreeTaste } from "../components/FreeTaste";
 import { PantryShelf } from "../components/PantryShelf";
+import { BusinessPicker } from "../components/BusinessPicker";
 import { Sticker, DAY, NIGHT } from "../components/Stickers";
-import { BILLED_SEPARATELY, INTL_PRICES, INTL_RETAINER, LARGER_FROM, PLAN_PRICES, RETAINER, SMALL_BUSINESS_LIMIT } from "../lib/plans";
-import { useEffect, useRef, useState } from "react";
+import { DOMAIN_FEE, EXTRAS, INCLUDED_ALWAYS, INTL_PRICES, PLAN_PRICES, SMALL_BUSINESS_LIMIT, retainerFor } from "../lib/plans";
+import { useRef } from "react";
+import { useMarket } from "../lib/MarketContext";
 import { track, useTrackOnView, type Package } from "../lib/analytics";
-import { Link, useSearch } from "wouter";
-import { COST_GUIDE } from "../lib/guides";
-import { H1, H2 } from "../lib/style";
-import { FAQ } from "../seo";
+import { Link } from "wouter";
+import { H1 } from "../lib/style";
 
 const PLANS = [
   {
     name: "Starter", price: PLAN_PRICES.Starter, usd: INTL_PRICES.Starter, popular: false, img: "/images/starter.webp",
     line: "A one-page site that gets you found.",
-    features: ["Single page", "Menu section", "WhatsApp button", "Mobile responsive"],
+    features: ["Single page", "Menu section", "WhatsApp button", "Mobile responsive", "Your own domain connected"],
   },
   {
     name: "Standard", price: PLAN_PRICES.Standard, usd: INTL_PRICES.Standard, popular: true, img: "/images/standard.webp",
@@ -26,8 +26,8 @@ const PLANS = [
   },
   {
     name: "Premium", price: PLAN_PRICES.Premium, usd: INTL_PRICES.Premium, popular: false, img: "/images/premium.webp",
-    line: "Your own domain, and Google knows you exist.",
-    features: ["Everything in Standard", "Custom domain setup", "Google Business setup", "Basic SEO setup", "1 month of updates"],
+    line: "Google knows you exist, and locals can find you.",
+    features: ["Everything in Standard", "Google Business setup", "Basic SEO setup", "1 month of updates"],
   },
   {
     name: "Pro", price: PLAN_PRICES.Pro, usd: INTL_PRICES.Pro, popular: false, img: "/images/pro.webp",
@@ -36,20 +36,13 @@ const PLANS = [
   },
 ] as const;
 
-type Audience = "small" | "larger" | "intl";
-const AUDIENCES: { id: Audience; label: string; short: string }[] = [
-  { id: "small", label: "Small business", short: "South Africa, " + SMALL_BUSINESS_LIMIT },
-  { id: "larger", label: "Larger business", short: "Custom builds" },
-  { id: "intl", label: "International", short: "Priced in US dollars" },
-];
-
-function PlanCard({ p, intl }: { p: (typeof PLANS)[number]; intl: boolean }) {
+function PlanCard({ p }: { p: (typeof PLANS)[number] }) {
+  const { intl, market } = useMarket();
   const ref = useRef<HTMLDivElement>(null);
   const pkg = p.name.toLowerCase() as Package;
-  const market = intl ? "intl" : "za";
   useTrackOnView(ref, "package_view", { package: pkg, market, surface: "pricing" }, market);
   return (
-    <div ref={ref} data-testid={`card-pricing-${p.name.toLowerCase()}`} className="flex h-full flex-col">
+    <div ref={ref} id={`card-${pkg}`} data-testid={`card-pricing-${p.name.toLowerCase()}`} className="flex h-full scroll-mt-32 flex-col">
       {p.popular && (
         <span className="absolute -top-3 left-8 rounded-full bg-[#FFD43B] px-3 py-1 text-[12px] font-semibold text-[#161214]">Most popular ★</span>
       )}
@@ -90,28 +83,9 @@ function PlanCard({ p, intl }: { p: (typeof PLANS)[number]; intl: boolean }) {
   );
 }
 
-const LARGER_DRIVERS = [
-  "How many pages and how much content",
-  "Integrations: bookings, payments, forms, your systems",
-  "Brand and design work needed",
-  "Timeline and how many people sign off",
-];
 
 export default function Pricing() {
-  const search = useSearch();
-  const [audience, setAudience] = useState<Audience>("small");
-  useEffect(() => {
-    const f = new URLSearchParams(search).get("for");
-    if (f === "larger" || f === "intl" || f === "small") setAudience(f);
-  }, [search]);
-  const choose = (a: Audience) => {
-    setAudience(a);
-    const url = new URL(window.location.href);
-    if (a === "small") url.searchParams.delete("for");
-    else url.searchParams.set("for", a);
-    window.history.replaceState(null, "", url);
-  };
-  const intl = audience === "intl";
+  const { intl, market } = useMarket();
   return (
     <main>
       {/* Header + the pantry shelf of jars */}
@@ -123,92 +97,33 @@ export default function Pricing() {
             On the <CutoutWord word="MENU" /> <span aria-hidden="true" className="text-[0.8em]">★</span>
           </h1>
           <p className="dp-rise mt-6 max-w-[40ch] text-[clamp(1.05rem,1.5vw,1.25rem)] leading-relaxed text-dp-muted" style={{ "--d": "0.12s" } as React.CSSProperties}>
-            Website prices for small businesses, larger businesses and clients abroad. Pick your table, then your jar.
+            Website prices for small businesses. Pick your jar.
           </p>
 
-          {/* Who is ordering? */}
-          <div role="tablist" aria-label="Choose who the prices are for" className="dp-rise mt-10 grid w-full grid-cols-1 gap-2 rounded-[22px] sm:inline-grid sm:w-auto border border-dp-line bg-dp-surface p-1.5 sm:grid-cols-3" style={{ "--d": "0.18s" } as React.CSSProperties}>
-            {AUDIENCES.map((a) => {
-              const on = audience === a.id;
-              return (
-                <button
-                  key={a.id}
-                  type="button"
-                  role="tab"
-                  id={`tab-${a.id}`}
-                  aria-selected={on}
-                  aria-controls="audience-panel"
-                  onClick={() => choose(a.id)}
-                  className={`rounded-[16px] px-5 py-3 text-left transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dp-accent ${
-                    on ? "bg-dp-cta text-dp-cta-fg shadow-[0_10px_24px_-12px_var(--dp-glow)]" : "text-dp-ink hover:bg-dp-soft"
-                  }`}
-                >
-                  <span className="block text-[15px] font-semibold">{a.label}</span>
-                  <span className={`block text-[12px] ${on ? "opacity-80" : "text-dp-muted"}`}>{a.short}</span>
-                </button>
-              );
-            })}
-          </div>
-
-          <div id="audience-panel" role="tabpanel" aria-labelledby={`tab-${audience}`} className="dp-rise mt-14 md:mt-16" style={{ "--d": "0.24s" } as React.CSSProperties}>
-            {audience === "larger" ? (
-              <div className="grid items-center gap-10 rounded-[32px] border border-dp-line bg-dp-surface p-8 sm:p-12 md:grid-cols-[1.1fr_1fr]">
-                <div>
-                  <p className="font-mono text-[13px] text-dp-accent">Larger business</p>
-                  <h2 className="mt-3 text-[clamp(2rem,3.6vw,3rem)] font-semibold leading-[1.02] tracking-[-0.045em]">
-                    Custom builds from <span className="text-dp-accent">{LARGER_FROM}</span>
-                  </h2>
-                  <p className="mt-4 max-w-[44ch] leading-relaxed text-dp-muted">
-                    More than {SMALL_BUSINESS_LIMIT.replace("up to ", "")}, more pages or more moving parts? We scope it with you and send a fixed quote.
-                  </p>
-                  <ul className="mt-6 flex flex-col gap-2.5">
-                    {LARGER_DRIVERS.map((d) => (
-                      <li key={d} className="flex items-start gap-2.5 text-[15px]">
-                        <Check size={16} strokeWidth={2.5} aria-hidden="true" className="mt-0.5 shrink-0 text-dp-accent" />
-                        {d}
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="mt-8">
-                    <MagneticButton href="/contact?interest=larger" onClick={() => track("custom_project_cta_click", { surface: "pricing_larger" })}>
-                      Request a quote
-                    </MagneticButton>
-                  </div>
-                </div>
-                <div className="dp-stage mx-auto w-full max-w-[460px]">
-                  <img src="/images/art/launch-day.webp" alt="" width={1600} height={893} loading="lazy" className="w-full object-contain" />
-                </div>
-              </div>
-            ) : (
-              <>
-                <PantryShelf currency={intl ? "USD" : "ZAR"} surface="pricing_shelf" />
-                <p className="mt-10 max-w-[70ch] text-[14px] leading-relaxed text-dp-muted">
-                  {intl
-                    ? "International packages, once-off and priced in US dollars. Same kitchen, same care. We confirm payment options with your quote."
-                    : `Small-business prices for South African businesses with ${SMALL_BUSINESS_LIMIT}, once-off and in rand.`}
-                </p>
-              </>
-            )}
+          <div className="dp-rise mt-14 md:mt-16" style={{ "--d": "0.2s" } as React.CSSProperties}>
+            <PantryShelf surface="pricing_shelf" toCards />
+            <p className="mt-10 max-w-[70ch] text-[14px] leading-relaxed text-dp-muted">
+              {intl ? "Once-off prices in US dollars." : `Once-off prices in rand, for South African businesses with ${SMALL_BUSINESS_LIMIT}.`} Need an online shop, or a bigger business?{" "}
+              <Link
+                href="/contact?interest=larger"
+                onClick={() => track("custom_project_cta_click", { surface: "pricing_larger" })}
+                className="text-dp-accent underline decoration-dp-line underline-offset-4 hover:decoration-dp-accent"
+              >
+                Ask us for a custom quote.
+              </Link>
+            </p>
+            <BusinessPicker />
           </div>
         </div>
         <Sticker day={DAY.sparkle} night={NIGHT.star} size={48} r={10} style={{ right: "8%", top: "22%" }} />
         <Sticker day={DAY.donut} night={NIGHT.moon} size={66} r={-8} d={0.8} className="max-md:hidden" style={{ right: "18%", top: "12%" }} />
       </section>
 
-      {audience !== "larger" && (
-      <Reveal className="mx-auto flex max-w-[1320px] flex-wrap items-end justify-between gap-6 px-5 pb-8 pt-10 sm:px-8">
+      <Reveal className="mx-auto max-w-[1320px] px-5 pb-8 pt-10 sm:px-8">
         <h2 className="text-[clamp(1.8rem,3vw,2.6rem)] font-semibold tracking-[-0.04em]">What's in each jar</h2>
-        <p className="max-w-[46ch] rounded-[16px] border border-dp-line bg-dp-surface px-5 py-3 text-[14px] leading-relaxed text-dp-muted">
-          <span className="font-medium text-dp-ink">{intl ? "Prices in US dollars." : `For businesses with ${SMALL_BUSINESS_LIMIT}.`}</span> Bigger business?{" "}
-          <button type="button" onClick={() => choose("larger")} className="text-dp-accent underline decoration-dp-line underline-offset-4 hover:decoration-dp-accent">
-            Custom builds from {LARGER_FROM}.
-          </button>
-        </p>
       </Reveal>
-      )}
 
       <section aria-label="Packages" className="mx-auto max-w-[1320px] px-5 pb-24 sm:px-8 md:pb-32">
-        {audience !== "larger" && (
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
           {PLANS.map((p, i) => (
             <Reveal
@@ -218,31 +133,59 @@ export default function Pricing() {
                 p.popular ? "border-transparent bg-dp-cta text-dp-cta-fg shadow-[0_30px_60px_-30px_var(--dp-glow)]" : "border-dp-line bg-dp-surface"
               }`}
             >
-              <PlanCard p={p} intl={intl} />
+              <PlanCard p={p} />
             </Reveal>
           ))}
         </div>
-        )}
 
-        {/* Included vs billed separately: package prices cover the build only */}
-        {audience !== "larger" && (
-          <Reveal className="mt-8 rounded-[28px] border border-dp-line bg-dp-surface p-8 sm:p-10">
+        {/* What every package includes, and the extras on their own slip (plain words, no registrar names) */}
+        <Reveal className="mt-8 grid items-start gap-10 rounded-[28px] border border-dp-line bg-dp-surface p-5 sm:p-10 lg:grid-cols-[1fr_1.15fr] lg:gap-14">
             <div data-testid="pricing-billed-separately">
-              <h2 className="text-[clamp(1.6rem,2.6vw,2.2rem)] font-semibold tracking-[-0.035em]">What the price covers, and what it doesn't</h2>
-              <p className="mt-3 max-w-[60ch] leading-relaxed text-dp-muted">
-                Each package price is for building your site, once-off. These are billed separately, and we tell you the cost before anything is bought.
+              <h2 className="text-[clamp(1.6rem,2.6vw,2.2rem)] font-semibold tracking-[-0.035em]">What the price covers</h2>
+              <p className="mt-3 max-w-[44ch] leading-relaxed text-dp-muted">
+                One price for your site, plus your domain. Extras only if you want them, quoted first.
               </p>
-              <ul className="mt-6 grid gap-x-10 gap-y-3 md:grid-cols-2">
-                {BILLED_SEPARATELY.map((t) => (
+              <p className="mt-8 font-mono text-[13px] text-dp-accent">In every package</p>
+              <ul className="mt-4 flex flex-col gap-3">
+                {INCLUDED_ALWAYS.map((t) => (
                   <li key={t} className="flex items-start gap-2.5 text-[15px] leading-relaxed">
-                    <span aria-hidden="true" className="mt-0.5 shrink-0 font-mono text-dp-accent">+</span>
+                    <Check size={16} strokeWidth={2.5} aria-hidden="true" className="mt-1 shrink-0 text-dp-accent" />
                     <span>{t}</span>
                   </li>
                 ))}
               </ul>
+              {/* The domain is not optional: every site gets its own (founder 2026-10-27) */}
+              <div className="mt-8 rounded-[20px] bg-dp-soft/70 p-5 sm:p-6">
+                <p className="font-mono text-[13px] text-dp-accent">Every site needs</p>
+                <div className="mt-2 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                  <p className="text-[17px] font-semibold tracking-[-0.01em]">Your own domain</p>
+                  <p className="text-[15px] font-semibold tabular-nums">{DOMAIN_FEE}</p>
+                </div>
+                <p className="mt-2 max-w-[46ch] text-[14px] leading-relaxed text-dp-muted">
+                  Like yourbusiness.co.za. We register it in your name and set it up.
+                </p>
+              </div>
             </div>
+            <figure className="dp-ticket relative w-full px-5 pb-10 pt-8 sm:rotate-[0.6deg] sm:px-8 text-[#211A1E]">
+              <figcaption className="text-center">
+                <span className="dp-cut-bebas block text-[1.7rem] leading-none tracking-[0.08em]">Extras</span>
+                <span className="mt-2 block font-mono text-[12px] text-[#5E5258]">Only if you need them</span>
+              </figcaption>
+              <div aria-hidden="true" className="my-5 border-t-2 border-dashed border-[#211A1E]/25" />
+              <ul className="flex flex-col gap-4">
+                {EXTRAS.map((e) => (
+                  <li key={e.name}>
+                    <div className="flex flex-wrap items-baseline gap-x-2 font-mono text-[13px] sm:text-[14px]">
+                      <span className="font-semibold">{e.name}</span>
+                      <span aria-hidden="true" className="min-w-4 flex-1 translate-y-[-3px] border-b-2 border-dotted border-[#211A1E]/25" />
+                      <span className="ml-auto text-right">{e.cost}</span>
+                    </div>
+                    <p className="mt-1 text-[14px] leading-snug text-[#5E5258]">{e.note}</p>
+                  </li>
+                ))}
+              </ul>
+            </figure>
           </Reveal>
-        )}
 
         {/* Retainer */}
         <Reveal className="mt-8 grid items-center gap-8 rounded-[28px] border border-dp-line bg-dp-soft/60 p-8 sm:p-10 md:grid-cols-[auto_1fr_auto]">
@@ -252,18 +195,14 @@ export default function Pricing() {
               Keep your pantry stocked <span aria-hidden="true" className="text-dp-accent">★</span>
             </h2>
             <p className="mt-2 max-w-[52ch] leading-relaxed text-dp-muted">
-              Menu updates, schedule changes and small edits after launch, so your site always tastes fresh.
+              Menu updates, schedule changes and small edits after launch.
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-5">
-            {audience === "larger" ? (
-              <p className="max-w-[16ch] text-[1.1rem] font-semibold leading-snug">Quoted with your build</p>
-            ) : (
-              <p className="text-[2.4rem] font-semibold tracking-[-0.05em]">
-                {intl ? INTL_RETAINER : RETAINER}
-                <span className="text-[1rem] font-normal text-dp-muted"> /month</span>
-              </p>
-            )}
+            <p className="text-[2.4rem] font-semibold tracking-[-0.05em]">
+              {retainerFor(market)}
+              <span className="text-[1rem] font-normal text-dp-muted"> /month</span>
+            </p>
             <a
               href="/contact"
               data-testid="button-retainer-cta"
@@ -275,37 +214,22 @@ export default function Pricing() {
         </Reveal>
       </section>
 
-      {/* FAQ as a text-message thread: the client asks, we answer */}
-      <section aria-labelledby="faq-heading" className="border-t border-dp-line">
-        <div className="mx-auto grid max-w-[1320px] gap-14 px-5 py-24 sm:px-8 md:grid-cols-[1fr_1.2fr] md:py-32">
-          <Reveal className="md:sticky md:top-32 md:self-start">
-            <h2 id="faq-heading" className={H2}>
+      {/* Questions live on /faq (one place, founder 2026-10-27); Pricing stays about choosing a jar */}
+      <Reveal className="mx-auto max-w-[1320px] px-5 pb-20 sm:px-8 md:pb-24">
+        <div className="flex flex-col items-start gap-5 rounded-[28px] bg-dp-surface p-7 sm:p-9 md:flex-row md:items-center md:justify-between" data-testid="pricing-faq-pointer">
+          <div>
+            <h2 className="text-[clamp(1.5rem,2.4vw,2rem)] font-semibold tracking-[-0.035em]">
               Got questions? We'll <CutoutWord word="DISH" /> it out.
             </h2>
-            <p className="mt-5 max-w-[36ch] text-lg leading-relaxed text-dp-muted">Still hungry for answers? WhatsApp us and a real person replies.</p>
-            <p className="mt-4 max-w-[36ch] leading-relaxed text-dp-muted">
-              Comparing quotes?{" "}
-              <Link href={COST_GUIDE.path} className="text-dp-accent underline decoration-dp-line underline-offset-4 hover:decoration-dp-accent">
-                See what websites cost in South Africa
-              </Link>
-              .
+            <p className="mt-2 max-w-[52ch] leading-relaxed text-dp-muted">
+              Deposits, domains, hosting, revisions and more, answered plainly.
             </p>
-            <div className="mt-8">
-              <MagneticButton href="/contact" variant="ghost">
-                Ask us anything
-              </MagneticButton>
-            </div>
-          </Reveal>
-          <div className="flex flex-col gap-6">
-            {FAQ.map((f, i) => (
-              <Reveal key={f.q} delay={i * 0.05} className="flex flex-col gap-2">
-                <p className="max-w-[85%] self-start rounded-[22px] rounded-bl-md border border-dp-line bg-dp-surface px-5 py-3.5 text-[15px]">{f.q}</p>
-                <p className="max-w-[85%] self-end rounded-[22px] rounded-br-md bg-dp-cta px-5 py-3.5 text-[15px] leading-relaxed text-dp-cta-fg">{f.a}</p>
-              </Reveal>
-            ))}
           </div>
+          <MagneticButton href="/faq" variant="ghost" data-testid="pricing-more-questions">
+            Read the FAQ
+          </MagneticButton>
         </div>
-      </section>
+      </Reveal>
 
       <FreeTaste testId="pricing-mockup-offer" />
     </main>

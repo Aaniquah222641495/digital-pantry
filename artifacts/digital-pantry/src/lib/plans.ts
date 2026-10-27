@@ -29,30 +29,50 @@ export const TURNAROUND_NOTE =
 // What a package price does not cover (DPW-4; founder-settled S4/S6, 2026-10-26). Hosting is left out
 // on purpose: it is stated only after web-finance confirms. Pricing.tsx, the FAQ (seo.ts) and
 // public/pricing.md repeat this wording, so change them together.
-export const BILLED_SEPARATELY = [
-  "Your domain name. You buy it in your own name and it is yours. A .co.za renews at about R110 a year at xneelo (checked October 2026). Premium and Pro include the setup, not the registration fee.",
-  "Email on your own domain, if you want it (a mail plan from your domain provider).",
-  "Copywriting, if you want us to write your text.",
-  "Online shops and payments (e-commerce), which are quoted separately.",
-  "Changes beyond 2 rounds of revisions, and edits beyond the retainer's small updates. We quote these in writing before we start.",
+// Plain words for the client: no registrar names (founder 2026-10-27).
+export const INCLUDED_ALWAYS = [
+  "Your site, designed and built from scratch",
+  "Looks right on phones, tablets and laptops",
+  "Your own domain connected",
+  "2 rounds of revisions",
 ] as const;
+export const EXTRAS = [
+  { name: "Email on your domain", cost: "optional", note: "Like hello@yourbusiness.co.za. Small monthly fee, quoted first." },
+  { name: "Branding design", cost: "quoted", note: "A logo, colours and fonts made for your business." },
+  { name: "Writing your text", cost: "quoted", note: "Rather not write it yourself? We can." },
+  { name: "Online shop and payments", cost: "quoted", note: "Priced to your products." },
+  { name: "Extra changes", cost: "quoted", note: "After the 2 revision rounds, or bigger than the retainer's small edits." },
+] as const;
+// Every site goes live on its own domain (founder 2026-10-27: a must, it looks professional).
+// The yearly fee is paid by the client on top of the package; we register it in their name.
+export const DOMAIN_FEE = "R100 to R150 a year";
+export const BILLED_SEPARATELY = EXTRAS.map((e) => `${e.name} (${e.cost}): ${e.note}`);
 export const BILLED_SEPARATELY_SUMMARY =
-  "Package prices cover the site build only. Billed separately: your domain name (you buy and own it; a .co.za renews at about R110 a year), email on your own domain, copywriting, online shops and payments, and changes beyond 2 rounds of revisions or beyond the retainer's small updates. We quote any extra work in writing first.";
+  "Package prices cover the site build only. Every site needs its own domain: we register it in your name and you pay its fee, about R100 to R150 a year. Extras, only if you want them: branding design, email on your own domain, copywriting, online shops and payments, and changes beyond 2 rounds of revisions or beyond the retainer's small updates. We quote any extra work in writing first.";
 
 export const SMALL_BUSINESS_LIMIT = "up to 10 staff";
 export const LARGER_FROM = "R8 000";
 
 // Monthly retainer. USD keeps the same premium as the international packages (founder: "you choose",
 // 2026-10-24). Larger businesses get theirs quoted with the build.
-export const RETAINER = "R120";
+export const RETAINER = "R150";
 export const INTL_RETAINER = "$90";
 
-// Free mock-up terms (DPW-7; ADR-0025, founder 2026-10-26). The band, the form note, the FAQ,
-// pricing.md and llms.txt all say the same thing, so change them together.
+// Free mock-up terms (DPW-7; ADR-0025, founder 2026-10-26). The form note, the FAQ, pricing.md and
+// llms.txt all say the same thing, so change them together. The offer band (FreeTaste.tsx) shows
+// only the short facts and links to the FAQ (founder 2026-10-26: "too much information").
 // Excluded until the deposit is paid: development, a live link, source files, revisions.
-export const MOCKUP_BAND =
-  "One free concept per business, for qualified enquiries. You get phone and desktop videos and a quote PDF within 5 business days of your brief. It's a mock-up, not a working site: nothing goes live and nothing is editable until the deposit is paid.";
 export const MOCKUP_FORM_NOTE =
   "One free concept per business, for qualified enquiries: phone and desktop videos and a quote PDF within 5 business days of your brief. Nothing goes live or is editable until the deposit is paid.";
 export const MOCKUP_TERMS =
   "One free concept per business, for qualified enquiries: a real business, with the decision-maker, open to a paid build. You get a mock-up pack (phone and desktop videos and a quote PDF), not a working site, within 5 business days of your brief. Development, a live link, source files and revisions start once the deposit is paid, and the concept and files stay ours until the agreed fee is paid.";
+
+// Local / International switch (header). Copy that carries a price writes a token such as {Starter} or
+// {retainer}; priced() fills it for the visitor's market. The prerendered HTML and the structured data
+// always use "za", so what crawlers read matches what a first-time local visitor sees.
+export type Market = "za" | "intl";
+export type PlanName = keyof typeof PLAN_PRICES;
+export const priceFor = (name: PlanName, market: Market) => (market === "intl" ? INTL_PRICES[name] : PLAN_PRICES[name]);
+export const retainerFor = (market: Market) => (market === "intl" ? INTL_RETAINER : RETAINER);
+export const priced = (text: string, market: Market) =>
+  text.replace(/\{(Starter|Standard|Premium|Pro|retainer)\}/g, (_, k: string) => (k === "retainer" ? retainerFor(market) : priceFor(k as PlanName, market)));

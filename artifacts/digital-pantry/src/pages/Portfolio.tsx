@@ -5,6 +5,7 @@ import { CutoutWord } from "../components/CutoutWord";
 import { Reveal } from "../components/Reveal";
 import { DeviceFrames } from "../components/DeviceFrames";
 import { FreeTaste } from "../components/FreeTaste";
+import { BuildTicket } from "../components/BuildTicket";
 import { H1 } from "../lib/style";
 import { TURNAROUND_NOTE } from "../lib/plans";
 import { OrderUp } from "../components/OrderUp";
@@ -13,6 +14,8 @@ import { useTrackOnView, type EventProps } from "../lib/analytics";
 
 const STACK_TAGS = ["React", "TypeScript", "Tailwind", "Netlify"];
 
+// Case studies (PRD 4.4): client, need, what we built and the technical side, checked against the
+// live sites and project records on 2026-10-26. Home shows the short version.
 const CASES = [
   {
     name: "Stuff'd Bagels",
@@ -24,8 +27,10 @@ const CASES = [
     desktop: "/images/work/stuffd-desktop.webp",
     phone: "/images/work/stuffd-phone.webp",
     rows: [
-      ["The problem", "Customers had to hunt for a WhatsApp number and scroll social media to place orders. No central hub, so sales slipped through the cracks."],
-      ["What we cooked", "A single-page ordering site with the menu, this week's pop-up spots and one-tap WhatsApp ordering."],
+      ["The client", "A stuffed-bagel pop-up selling at markets and events across Cape Town."],
+      ["The need", "Customers had to hunt for a WhatsApp number and scroll social media to place an order."],
+      ["What we built", "One mobile-first page with the menu, this week's pickup spots and an order form."],
+      ["Under the hood", "The form writes the order, pickup spot and total into a WhatsApp message, so it arrives ready to confirm."],
     ],
     stack: STACK_TAGS,
   },
@@ -39,8 +44,10 @@ const CASES = [
     desktop: "/images/work/madrasah-desktop.webp",
     phone: "/images/work/madrasah-phone.webp",
     rows: [
-      ["The brief", "A warm, safe-feeling home online for a beginner-friendly Islamic learning space, online and in person."],
-      ["What we cooked", "Programmes, registration, testimonials and FAQs on one calm site that parents can use easily on a phone."],
+      ["The client", "Beginner-friendly Islamic classes for women and children, online and in person."],
+      ["The need", "Parents and students needed one clear place for programmes, registration and answers, easy to read on a phone."],
+      ["What we built", "A 12-page site on their own domain: a page for every programme, registration, testimonials and FAQs."],
+      ["Under the hood", "Every page is pre-built for speed, with structured data for Google and AI search and strict security headers."],
     ],
     stack: STACK_TAGS,
   },
@@ -114,7 +121,7 @@ export default function Portfolio() {
                 <h2 id={`case-${i}`} className="mt-3 text-[clamp(2rem,3.4vw,3rem)] font-semibold tracking-[-0.04em]">
                   {c.name} <span aria-hidden="true" className="text-dp-accent">★</span>
                 </h2>
-                <dl className="mt-8 flex flex-col gap-6">
+                <dl className="mt-8 flex flex-col gap-5">
                   {c.rows.map(([k, v]) => (
                     <div key={k}>
                       <dt className="font-mono text-[12px] text-dp-accent">{k}</dt>
@@ -146,6 +153,7 @@ export default function Portfolio() {
       </div>
 
 
+      <BuildTicket />
       <FreeTaste testId="portfolio-mockup-offer" />
     </main>
   );

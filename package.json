@@ -8,6 +8,7 @@
     "typecheck": "pnpm -r --if-present run typecheck"
   },
   "private": true,
+  "packageManager": "pnpm@10.34.7",
   "devDependencies": {
     "prettier": "^3.9.10",
     "typescript": "~5.9.3"

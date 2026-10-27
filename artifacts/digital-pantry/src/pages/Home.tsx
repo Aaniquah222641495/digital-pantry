@@ -9,12 +9,12 @@ import { Ticker } from "../components/Ticker";
 import { FreeTaste } from "../components/FreeTaste";
 import { Sprinkles } from "../components/Sprinkles";
 import { HeroScene } from "../components/HeroScene";
-import { PantryShelf } from "../components/PantryShelf";
 import { Sticker, DAY, NIGHT } from "../components/Stickers";
 import { H2 } from "../lib/style";
 import { useSideContact } from "../lib/contact";
 import { track } from "../lib/analytics";
 import { TURNAROUND_NOTE } from "../lib/plans";
+import { WhatWeCook } from "../components/WhatWeCook";
 
 // Imaan's pixel avatar is being made; until then her cards show a monogram.
 const IMAAN_AVATAR: string | null = "/images/imaan-cut.webp";
@@ -44,6 +44,9 @@ const CHEFS = [
 ] as const;
 
 
+// Case studies (PRD 4.4, full version on Portfolio; Home shows the need and what we built): client and context, the business need, what we built, and the technical
+// side next to the screenshots, with a live link. Every line checked against the live site and the
+// project records on 2026-10-26. No results or testimonials we can't verify.
 const WORK = [
   {
     name: "Stuff'd Bagels",
@@ -52,9 +55,11 @@ const WORK = [
     href: "https://stuffdbagels.netlify.app",
     desktop: "/images/work/stuffd-desktop.webp",
     phone: "/images/work/stuffd-phone.webp",
-    lines: [
-      ["Before", "Customers had to hunt for a WhatsApp number and scroll social media to place an order."],
-      ["Now", "A single-page ordering site with the menu, this week's spots and one-tap WhatsApp ordering."],
+    facts: [
+      ["The client", "A stuffed-bagel pop-up selling at markets and events across Cape Town."],
+      ["The need", "Customers had to hunt for a WhatsApp number and scroll social media to place an order."],
+      ["What we built", "One mobile-first page with the menu, this week's pickup spots and an order form."],
+      ["Under the hood", "The form writes the order, pickup spot and total into a WhatsApp message, so it arrives ready to confirm."],
     ],
   },
   {
@@ -64,9 +69,11 @@ const WORK = [
     href: "https://beginnersmadrasah.co.za/",
     desktop: "/images/work/madrasah-desktop.webp",
     phone: "/images/work/madrasah-phone.webp",
-    lines: [
-      ["Built", "A calm, welcoming home for programmes, registration, testimonials and FAQs."],
-      ["For", "Parents and students who want clear answers on a phone, online or in person."],
+    facts: [
+      ["The client", "Beginner-friendly Islamic classes for women and children, online and in person."],
+      ["The need", "Parents and students needed one clear place for programmes, registration and answers, easy to read on a phone."],
+      ["What we built", "A 12-page site on their own domain: a page for every programme, registration, testimonials and FAQs."],
+      ["Under the hood", "Every page is pre-built for speed, with structured data for Google and AI search and strict security headers."],
     ],
   },
 ] as const;
@@ -99,40 +106,42 @@ function Hero() {
         aria-hidden="true"
         className="pointer-events-none absolute -right-[20%] -top-[30%] -z-10 h-[90vh] w-[70vw] rounded-full bg-[radial-gradient(closest-side,var(--dp-glow),transparent)] blur-2xl"
       />
-      <Sprinkles count={28} className="-z-10 opacity-70 dark:opacity-55" />
-      <div className="mx-auto grid min-h-[92dvh] max-w-[1320px] items-center gap-14 px-5 pb-14 pt-28 sm:px-8 md:grid-cols-[0.95fr_1.05fr] md:gap-12 md:pt-24">
+      <Sprinkles count={14} className="-z-10 opacity-60 dark:opacity-45" />
+      <div className="mx-auto grid min-h-[94dvh] max-w-[1320px] items-center gap-16 px-5 pb-24 pt-32 sm:px-8 lg:grid-cols-[0.92fr_1.08fr] lg:gap-12 lg:pb-20 lg:pt-28">
         <div className="relative">
           {/* Sprinkles shower onto the headline once on load */}
-          <Sprinkles mode="burst" count={55} className="-inset-x-6 -top-10 bottom-1/3 !h-auto" />
-          <p className="dp-rise dp-tag mb-6 inline-flex items-center gap-2 rounded-full border border-dp-line px-3.5 py-1.5 text-[13px] text-dp-muted" style={rise(0)}>
-            <span aria-hidden="true" className="text-dp-accent">★</span> A women-led web studio in Cape Town
-          </p>
-          <h1 className="dp-rise text-[clamp(2.6rem,6.4vw,5.75rem)] font-semibold leading-[0.98] tracking-[-0.055em] text-dp-ink" style={rise(0.06)}>
+          <Sprinkles mode="burst" count={30} className="-inset-x-6 -top-10 bottom-1/3 !h-auto" />
+          <h1 className="dp-rise text-[clamp(3rem,6.6vw,6.25rem)] font-semibold leading-[0.94] tracking-[-0.06em] text-dp-ink" style={rise(0)}>
             Your website,
             <br />
             <span className="whitespace-nowrap">
-              freshly <CutoutWord word="COOKED" /> <span aria-hidden="true" className="text-[0.8em]">★</span>
+              freshly <CutoutWord word="COOKED" />
             </span>
           </h1>
-          <p className="dp-rise mt-7 max-w-[44ch] text-[clamp(1.05rem,1.5vw,1.25rem)] leading-relaxed text-dp-muted" style={rise(0.18)}>
-            Custom websites for small businesses, made from scratch in Cape Town by Aaniquah and Imaan. Designed and coded around how your business works.
+          <p className="dp-rise mt-8 max-w-[38ch] text-[clamp(1.15rem,1.7vw,1.4rem)] leading-[1.45] tracking-[-0.01em] text-dp-ink/80" style={rise(0.14)}>
+            We design and code custom websites, web apps and the systems behind them, so customers can find you, understand what you offer and get in touch without the back-and-forth.
           </p>
-          <div className="dp-rise mt-10 flex flex-wrap items-center gap-3" style={rise(0.3)}>
+          <div className="dp-rise mt-10 flex flex-wrap items-center gap-3" style={rise(0.26)}>
             <MagneticButton href="/contact" data-testid="button-hero-cta">
-              Let's Get Cooking
+              Get a quote
             </MagneticButton>
             <MagneticButton href="/portfolio" variant="ghost" data-testid="button-hero-portfolio">
-              See Our Work
+              See our work
             </MagneticButton>
           </div>
         </div>
 
-        {/* The two chefs at one counter, animated */}
-        <div className="dp-rise relative mx-auto w-full max-w-[720px]" style={rise(0.2)}>
-          <Sticker day={DAY.star} night={NIGHT.moon} size={58} r={-10} style={{ left: "-18px", top: "-26px" }} />
-          <Sticker day={DAY.sparkle} night={NIGHT.star} size={44} r={8} d={1.2} style={{ right: "-14px", top: "18%" }} />
-          <Sticker day={DAY.mug} night={NIGHT.stylus} size={62} r={6} d={0.6} style={{ right: "6%", bottom: "-30px" }} />
-          <HeroScene />
+        {/* The kitchen, kept to one idea so the hero stays calm (founder 2026-10-26). Live work
+            follows straight after in What we cook and Fresh out the kitchen. */}
+        <div className="mx-auto w-full max-w-[720px]">
+        <div className="relative">
+          <div className="dp-rise relative" style={rise(0.18)}>
+            <Sticker day={DAY.star} night={NIGHT.moon} size={58} r={-10} style={{ left: "-18px", top: "-26px" }} />
+            <HeroScene />
+          </div>
+
+
+        </div>
         </div>
       </div>
     </section>
@@ -226,7 +235,7 @@ function Chefs() {
       {/* Promises as colour blocks: blush, ink, butter. */}
       <div className="mt-5 grid gap-5 md:grid-cols-6">
         {/* You talk to the chefs: an illustrative chat thread (not a real client conversation). */}
-        <Reveal className="dp-chat relative grid gap-8 overflow-hidden rounded-[32px] bg-[#FDD2DE] p-8 text-[#161214] sm:p-10 md:col-span-4 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+        <Reveal className="dp-chat relative grid gap-8 overflow-hidden rounded-[32px] bg-[#FDD2DE] p-8 text-[#161214] sm:p-10 md:col-span-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div aria-hidden="true" className="pointer-events-none absolute -bottom-24 -left-16 h-64 w-64 rounded-full bg-[radial-gradient(closest-side,#FFA7D2,transparent)]" />
           <div className="relative">
             <h3 className="text-[clamp(1.8rem,3vw,2.6rem)] font-semibold leading-[1] tracking-[-0.04em]">You talk to the chefs.</h3>
@@ -272,18 +281,6 @@ function Chefs() {
           </ol>
         </Reveal>
 
-        {/* No handoffs: her design and her partner's code meet in the middle as the card scrolls in. */}
-        <Reveal delay={0.08} className="dp-venn relative flex flex-col overflow-hidden rounded-[32px] bg-[var(--im-surface)] p-8 text-[var(--im-text)] sm:p-10 md:col-span-2">
-          <div aria-hidden="true" className="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-[radial-gradient(closest-side,var(--im-glow-strong),transparent)]" />
-          <div aria-hidden="true" className="relative mx-auto flex h-36 w-full max-w-[260px] items-center justify-center">
-            <span className="dp-venn-a absolute grid h-32 w-32 place-items-center rounded-full bg-[#FFA7D2] pr-8 text-[13px] font-semibold text-[#161214] mix-blend-screen">code</span>
-            <span className="dp-venn-b absolute grid h-32 w-32 place-items-center rounded-full bg-[var(--im-deep)] pl-8 text-[13px] font-semibold text-[var(--im-text)] mix-blend-screen">design</span>
-            <span className="dp-venn-star absolute z-10 grid h-9 w-9 place-items-center rounded-full bg-[#FFD43B] text-[15px] text-[#161214] shadow-[0_8px_20px_-6px_rgba(0,0,0,0.6)]">★</span>
-          </div>
-          <h3 className="mt-8 text-[clamp(1.5rem,2.2vw,1.9rem)] font-semibold leading-[1.05] tracking-[-0.035em]">No handoffs.</h3>
-          <p className="mt-3 leading-relaxed text-[var(--im-muted)]">Design and code happen side by side, so nothing gets lost between how it looks and how it works.</p>
-        </Reveal>
-
         <Reveal delay={0.12} className="relative overflow-hidden rounded-[32px] bg-[#FFD43B] p-8 text-[#161214] sm:p-12 md:col-span-6">
           <Sprinkles count={20} className="opacity-90" />
           <div className="relative grid items-end gap-6 md:grid-cols-[1.4fr_1fr]">
@@ -318,20 +315,24 @@ function Work() {
           {WORK.map((w, i) => {
             const flip = i % 2 === 1;
             return (
-              <article key={w.name} className="grid items-center gap-12 md:grid-cols-12 md:gap-10">
+              <article key={w.name} aria-labelledby={`work-${i}`} className="grid items-center gap-12 md:grid-cols-12 md:gap-10">
                 <Reveal className={`md:col-span-7 ${flip ? "md:order-2" : ""}`}>
                   <DeviceFrames desktop={w.desktop} phone={w.phone} alt={`The ${w.name} website`} url={w.url} flip={flip} />
                 </Reveal>
                 <Reveal delay={0.1} className={`md:col-span-5 ${flip ? "md:order-1 md:pr-6" : "md:pl-6"}`}>
-                  <p className="text-[14px] text-dp-muted">{w.kind}</p>
-                  <h3 className="mt-2 text-[clamp(1.9rem,3.2vw,2.75rem)] font-semibold tracking-[-0.04em]">
-                    {w.name} <span aria-hidden="true" className="text-dp-accent">★</span>
+                  <p className="text-[14px] text-dp-muted">
+                    <span className="tabular-nums text-dp-accent">0{i + 1}</span>
+                    <span className="mx-2 text-dp-line" aria-hidden="true">/</span>
+                    {w.kind}
+                  </p>
+                  <h3 id={`work-${i}`} className="mt-2 text-[clamp(1.9rem,3.2vw,2.75rem)] font-semibold tracking-[-0.04em]">
+                    {w.name}
                   </h3>
-                  <dl className="mt-8 flex flex-col gap-5">
-                    {w.lines.map(([k, v]) => (
-                      <div key={k} className="grid grid-cols-[72px_1fr] gap-4">
-                        <dt className="pt-0.5 font-mono text-[12px] text-dp-accent">{k}</dt>
-                        <dd className="leading-relaxed text-dp-muted">{v}</dd>
+                  <dl className="mt-7 flex flex-col gap-4">
+                    {w.facts.filter(([k]) => k === "The need" || k === "What we built").map(([k, v]) => (
+                      <div key={k} className="grid gap-1 sm:grid-cols-[116px_1fr] sm:gap-4">
+                        <dt className="pt-0.5 text-[13px] font-semibold text-dp-accent">{k}</dt>
+                        <dd className="text-[15px] leading-relaxed text-dp-muted">{v}</dd>
                       </div>
                     ))}
                   </dl>
@@ -339,11 +340,14 @@ function Work() {
                     href={w.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group mt-7 inline-flex min-h-11 items-center gap-1.5 text-[15px] font-medium text-dp-ink underline decoration-dp-line underline-offset-[6px] transition-colors hover:decoration-dp-accent"
+                    className="group mt-8 inline-flex min-h-11 items-center gap-2 rounded-full bg-dp-cta px-5 text-[15px] font-medium text-dp-cta-fg transition-transform duration-500 hover:-translate-y-0.5"
                   >
                     Visit the live site
                     <ArrowUpRight size={16} className="transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                   </a>
+                  <Link href="/portfolio" className="ml-5 inline-flex min-h-11 items-center text-[15px] font-medium text-dp-ink underline decoration-dp-line underline-offset-[6px] hover:decoration-dp-accent">
+                    Full case study
+                  </Link>
                 </Reveal>
               </article>
             );
@@ -400,41 +404,15 @@ function Recipe() {
   );
 }
 
-function Menu() {
-  return (
-    <section aria-labelledby="menu-heading" className="relative border-t border-dp-line">
-      <Sticker day={DAY.donut} night={NIGHT.mug} size={64} r={-12} d={0.4} style={{ right: "6%", top: "24px" }} />
-      <div className="mx-auto max-w-[1320px] px-5 py-24 sm:px-8 md:py-32">
-        <Reveal className="flex flex-wrap items-end justify-between gap-6">
-          <div>
-            <h2 id="menu-heading" className={H2}>
-              On the <CutoutWord word="MENU" />
-            </h2>
-            <p className="mt-5 max-w-[40ch] text-lg leading-relaxed text-dp-muted">Once-off prices in rand. See what is and is not included on the pricing page, then pick a jar to ask about it.</p>
-          </div>
-          <Link href="/pricing" className="group inline-flex min-h-11 items-center gap-1.5 text-[15px] text-dp-muted transition-colors hover:text-dp-ink" data-testid="button-pricing-preview-cta">
-            See full packages
-            <ArrowUpRight size={16} className="transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-          </Link>
-        </Reveal>
-        <Reveal className="mt-16">
-          <PantryShelf surface="home_shelf" />
-        </Reveal>
-        <p className="mt-12 text-[14px] text-dp-muted">For South African small businesses with up to 10 staff, once-off in rand. Larger businesses from R8 000, quoted. Abroad? See our international prices in US dollars.</p>
-      </div>
-    </section>
-  );
-}
-
 export default function Home() {
   return (
     <main>
       <Hero />
       <Ticker />
-      <Chefs />
+      <WhatWeCook />
       <Work />
       <Recipe />
-      <Menu />
+      <Chefs />
       <FreeTaste testId="home-mockup-offer" />
     </main>
   );

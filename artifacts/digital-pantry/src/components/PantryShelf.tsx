@@ -2,25 +2,27 @@ import { useRef } from "react";
 import { Link } from "wouter";
 import { track, useTrackOnView, type Package } from "../lib/analytics";
 import { INTL_PRICES, PLAN_PRICES } from "../lib/plans";
+import { useMarket } from "../lib/MarketContext";
 
 // The four packages as jars standing on one wooden pantry shelf, each with a hanging price tag.
 // Used on Home ("On the MENU") and as the Pricing page header.
 const JARS = [
   { name: "Starter", price: PLAN_PRICES.Starter, usd: INTL_PRICES.Starter, img: "/images/starter.webp", note: "One page, a menu and WhatsApp." },
   { name: "Standard", price: PLAN_PRICES.Standard, usd: INTL_PRICES.Standard, img: "/images/standard.webp", note: "The full shop window.", popular: true },
-  { name: "Premium", price: PLAN_PRICES.Premium, usd: INTL_PRICES.Premium, img: "/images/premium.webp", note: "Your domain, Google and SEO." },
+  { name: "Premium", price: PLAN_PRICES.Premium, usd: INTL_PRICES.Premium, img: "/images/premium.webp", note: "Google Business and basic SEO." },
   { name: "Pro", price: PLAN_PRICES.Pro, usd: INTL_PRICES.Pro, img: "/images/pro.webp", note: "Every enquiry caught for you." },
 ] as const;
 
 type Surface = "pricing_shelf" | "home_shelf";
 
-export function PantryShelf({ link = true, currency = "ZAR", surface }: { link?: boolean; currency?: "ZAR" | "USD"; surface: Surface }) {
-  const intl = currency === "USD";
+// toCards: on Pricing the cards below carry the prices, so each jar shows its name and jumps to its card.
+export function PantryShelf({ link = true, surface, toCards = false }: { link?: boolean; surface: Surface; toCards?: boolean }) {
+  const { intl } = useMarket();
   return (
     <div className="relative">
       <ul className="relative z-10 grid grid-cols-2 gap-x-4 gap-y-16 md:grid-cols-4 md:gap-y-0">
         {JARS.map((j, i) => (
-          <Jar key={j.name} j={j} i={i} link={link} intl={intl} surface={surface} />
+          <Jar key={j.name} j={j} i={i} link={link} intl={intl} surface={surface} toCards={toCards} />
         ))}
       </ul>
       {/* Desktop: one long wooden shelf behind the jars, sitting under their bases */}
@@ -35,10 +37,10 @@ export function PantryShelf({ link = true, currency = "ZAR", surface }: { link?:
   );
 }
 
-function Jar({ j, i, link, intl, surface }: { j: (typeof JARS)[number]; i: number; link: boolean; intl: boolean; surface: Surface }) {
+function Jar({ j, i, link, intl, surface, toCards }: { j: (typeof JARS)[number]; i: number; link: boolean; intl: boolean; surface: Surface; toCards: boolean }) {
+  const market = intl ? "intl" : "za";
   const ref = useRef<HTMLLIElement>(null);
   const pkg = j.name.toLowerCase() as Package;
-  const market = intl ? "intl" : "za";
   useTrackOnView(ref, "package_view", { package: pkg, market, surface }, market);
   const popular = "popular" in j;
   const tag = (
@@ -66,8 +68,14 @@ function Jar({ j, i, link, intl, surface }: { j: (typeof JARS)[number]; i: numbe
           {popular && (
             <span className="absolute -right-3 -top-3 rounded-full bg-[#FFD43B] px-2 py-0.5 text-[11px] font-semibold text-[#161214] shadow-sm">Popular ★</span>
           )}
-          <p className={`text-[13px] ${popular ? "opacity-80" : "text-dp-muted"}`}>{j.name}</p>
-          <p className="text-[clamp(1.6rem,2.4vw,2.1rem)] font-semibold tracking-[-0.05em]">{intl ? j.usd : j.price}</p>
+          {toCards ? (
+            <p className="text-[clamp(1.3rem,2vw,1.6rem)] font-semibold tracking-[-0.04em]">{j.name}</p>
+          ) : (
+            <>
+              <p className={`text-[13px] ${popular ? "opacity-80" : "text-dp-muted"}`}>{j.name}</p>
+              <p className="text-[clamp(1.6rem,2.4vw,2.1rem)] font-semibold tracking-[-0.05em]">{intl ? j.usd : j.price}</p>
+            </>
+          )}
           <p className={`mt-0.5 max-w-[17ch] text-[13px] leading-snug ${popular ? "opacity-80" : "text-dp-muted"}`}>{j.note}</p>
         </div>
       </div>
@@ -75,7 +83,12 @@ function Jar({ j, i, link, intl, surface }: { j: (typeof JARS)[number]; i: numbe
   );
   return (
     <li ref={ref} className="group" style={{ transitionDelay: `${i * 60}ms` }}>
-      {link ? (
+      {toCards ? (
+        <a href={`#card-${pkg}`} className="block rounded-[20px] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-dp-accent">
+          {tag}
+          <span className="sr-only"> See what is in this package.</span>
+        </a>
+      ) : link ? (
         <Link href={intl ? "/contact?interest=international" : `/contact?interest=${j.name.toLowerCase()}`} className="block rounded-[20px] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-dp-accent"
           onClick={() => track("package_cta_click", { package: pkg, market, surface })}
         >
