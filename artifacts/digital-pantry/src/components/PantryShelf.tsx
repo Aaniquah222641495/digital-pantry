@@ -10,7 +10,8 @@ const JARS = [
   { name: "Pro", price: PLAN_PRICES.Pro, usd: INTL_PRICES.Pro, img: "/images/pro.webp", note: "Every enquiry caught for you." },
 ] as const;
 
-export function PantryShelf({ link = true, currency = "ZAR" }: { link?: boolean; currency?: "ZAR" | "USD" }) {
+// toCards: on Pricing the cards below carry the prices, so each jar shows its name and jumps to its card.
+export function PantryShelf({ link = true, currency = "ZAR", toCards = false }: { link?: boolean; currency?: "ZAR" | "USD"; toCards?: boolean }) {
   const intl = currency === "USD";
   return (
     <div className="relative">
@@ -42,8 +43,12 @@ export function PantryShelf({ link = true, currency = "ZAR" }: { link?: boolean;
                   {popular && (
                     <span className="absolute -right-3 -top-3 rounded-full bg-[#FFD43B] px-2 py-0.5 text-[11px] font-semibold text-[#161214] shadow-sm">Popular ★</span>
                   )}
-                  <p className={`text-[13px] ${popular ? "opacity-80" : "text-dp-muted"}`}>{j.name}</p>
-                  <p className="text-[clamp(1.6rem,2.4vw,2.1rem)] font-semibold tracking-[-0.05em]">{intl ? j.usd : j.price}</p>
+                  {!toCards && <p className={`text-[13px] ${popular ? "opacity-80" : "text-dp-muted"}`}>{j.name}</p>}
+                  {toCards ? (
+                    <p className="text-[clamp(1.3rem,2vw,1.6rem)] font-semibold tracking-[-0.04em]">{j.name}</p>
+                  ) : (
+                    <p className="text-[clamp(1.6rem,2.4vw,2.1rem)] font-semibold tracking-[-0.05em]">{intl ? j.usd : j.price}</p>
+                  )}
                   <p className={`mt-0.5 max-w-[17ch] text-[13px] leading-snug ${popular ? "opacity-80" : "text-dp-muted"}`}>{j.note}</p>
                 </div>
               </div>
@@ -51,7 +56,12 @@ export function PantryShelf({ link = true, currency = "ZAR" }: { link?: boolean;
           );
           return (
             <li key={j.name} className="group" style={{ transitionDelay: `${i * 60}ms` }}>
-              {link ? (
+              {toCards ? (
+                <a href={`#card-${j.name.toLowerCase()}`} className="block rounded-[20px] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-dp-accent">
+                  {tag}
+                  <span className="sr-only"> See what is in this package.</span>
+                </a>
+              ) : link ? (
                 <Link href={intl ? "/contact?interest=international" : `/contact?interest=${j.name.toLowerCase()}`} className="block rounded-[20px] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-dp-accent">
                   {tag}
                   {/* The visible words stay in the link's name (voice control users say what they see) */}

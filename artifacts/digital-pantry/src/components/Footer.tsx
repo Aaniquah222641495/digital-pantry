@@ -5,6 +5,10 @@ import { Reveal } from "./Reveal";
 import { useSideContact } from "../lib/contact";
 import { COST_GUIDE, INDUSTRIES } from "../lib/guides";
 
+// Pages that already end on the free-taste band (FreeTaste.tsx), plus Contact (form right above):
+// a second big button here would be a repeated ending. Keep in step with where FreeTaste is used.
+const ENDS_WITH_CTA = new Set(["/", "/pricing", "/portfolio", "/contact", COST_GUIDE.path, ...INDUSTRIES.filter((p) => p.proof).map((p) => p.path)]);
+
 // Guides for search visitors: linked from every page so Google finds and weighs them.
 const GUIDE_LINKS = [...INDUSTRIES.map((p) => ({ label: p.label, href: p.path })), { label: "What websites cost", href: COST_GUIDE.path }];
 
@@ -19,7 +23,6 @@ const NAV_LINKS = [
 
 export function Footer() {
   const contact = useSideContact();
-  // On Contact the form is right above, so a button back to the same page is a dead end.
   const [location] = useLocation();
   return (
     <footer className="relative overflow-hidden border-t border-dp-line">
@@ -28,7 +31,7 @@ export function Footer() {
           <h2 className="max-w-[14ch] text-[clamp(2.6rem,7vw,6.5rem)] font-semibold leading-[0.95] tracking-[-0.05em] text-dp-ink">
             Coded in <span className="text-dp-accent">Pink.</span> Built to Perform.
           </h2>
-          {location !== "/contact" && (
+          {!ENDS_WITH_CTA.has(location.replace(/\/$/, "") || "/") && (
           <MagneticButton href="/contact" data-testid="footer-cta">
             Let's Get Cooking
           </MagneticButton>

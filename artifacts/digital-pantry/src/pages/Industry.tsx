@@ -156,7 +156,12 @@ function IndustryPage({ page }: { page: Industry }) {
                 <dl className="flex flex-col gap-3 font-mono text-[14px]">
                   {plans.map((name) => (
                     <div key={name} className="flex items-baseline gap-2">
-                      <dt className="shrink-0">{name}</dt>
+                      <dt className="shrink-0">
+                        <Link href={`/contact?interest=${name.toLowerCase()}`} className="underline decoration-[#211A1E]/25 underline-offset-4 hover:decoration-[#B32F68] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#B32F68]">
+                          {name}
+                          <span className="sr-only"> package: get a quote</span>
+                        </Link>
+                      </dt>
                       <span aria-hidden="true" className="min-w-4 flex-1 translate-y-[-3px] border-b-2 border-dotted border-[#211A1E]/30" />
                       <dd className="shrink-0 font-semibold tabular-nums">{PLAN_PRICES[name]}</dd>
                     </div>

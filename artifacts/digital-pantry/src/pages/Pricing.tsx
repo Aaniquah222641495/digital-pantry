@@ -129,7 +129,7 @@ export default function Pricing() {
               </div>
             ) : (
               <>
-                <PantryShelf currency={intl ? "USD" : "ZAR"} />
+                <PantryShelf currency={intl ? "USD" : "ZAR"} toCards />
                 <p className="mt-10 max-w-[70ch] text-[14px] leading-relaxed text-dp-muted">
                   {intl
                     ? "International packages, once-off and priced in US dollars. Same kitchen, same care. We confirm payment options with your quote."
@@ -166,7 +166,7 @@ export default function Pricing() {
                 p.popular ? "border-transparent bg-dp-cta text-dp-cta-fg shadow-[0_30px_60px_-30px_var(--dp-glow)]" : "border-dp-line bg-dp-surface"
               }`}
             >
-              <div data-testid={`card-pricing-${p.name.toLowerCase()}`} className="flex h-full flex-col">
+              <div id={`card-${p.name.toLowerCase()}`} data-testid={`card-pricing-${p.name.toLowerCase()}`} className="flex h-full scroll-mt-32 flex-col">
                 {p.popular && (
                   <span className="absolute -top-3 left-8 rounded-full bg-[#FFD43B] px-3 py-1 text-[12px] font-semibold text-[#161214]">Most popular ★</span>
                 )}
