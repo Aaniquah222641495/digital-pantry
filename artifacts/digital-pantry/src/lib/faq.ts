@@ -96,12 +96,12 @@ export const FAQ_GROUPS: FaqGroup[] = [
       {
         id: "domain",
         q: "How does my domain name work?",
-        a: "We register your domain for you, in your name, so you are the owner. You pay its yearly fee: a .co.za is about R100 to R150 a year, depending on the registrar (R110 at xneelo, checked October 2026). We tell you the cost before anything is bought. Premium and Pro include the domain setup, not the registration fee.",
+        a: "We register your domain for you, in your name, so you are the owner. You pay the registration and every yearly renewal, on top of your package and any maintenance fee: a .co.za is about R100 to R150 a year, depending on the registrar (R110 at xneelo, checked October 2026). We tell you the cost before anything is bought. Premium and Pro include the domain setup, not the registration fee.",
       },
       {
         id: "hosting",
         q: "Who looks after my hosting, and what does it cost?",
-        a: "We set up and look after your hosting. Today that is R0 a month, on a free plan. Free plans have limits set by the host, which can change, and no uptime guarantee. If a site ever outgrows its plan, a paid plan starts at about US$9 a month, and we tell you before that happens.",
+        a: "We set up and look after your hosting. Today that is R0 a month, on a free plan. Free plans have limits set by the host, which can change, and no uptime guarantee. If a site ever outgrows the free plan, we tell you the cost before anything changes.",
       },
       {
         id: "email",

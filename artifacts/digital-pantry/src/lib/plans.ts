@@ -30,14 +30,14 @@ export const TURNAROUND_NOTE =
 // on purpose: it is stated only after web-finance confirms. Pricing.tsx, the FAQ (seo.ts) and
 // public/pricing.md repeat this wording, so change them together.
 export const BILLED_SEPARATELY = [
-  "Your domain name. You buy it in your own name and it is yours. A .co.za renews at about R110 a year at xneelo (checked October 2026). Premium and Pro include the setup, not the registration fee.",
+  "Your domain name. We register it for you, in your name, so it is yours; you pay the registration and yearly renewal. A .co.za renews at about R110 a year at xneelo (checked October 2026). Premium and Pro include the setup, not the registration fee.",
   "Email on your own domain, if you want it (a mail plan from your domain provider).",
   "Copywriting, if you want us to write your text.",
   "Online shops and payments (e-commerce), which are quoted separately.",
   "Changes beyond 2 rounds of revisions, and edits beyond the retainer's small updates. We quote these in writing before we start.",
 ] as const;
 export const BILLED_SEPARATELY_SUMMARY =
-  "Package prices cover the site build only. Billed separately: your domain name (you buy and own it; a .co.za renews at about R110 a year), email on your own domain, copywriting, online shops and payments, and changes beyond 2 rounds of revisions or beyond the retainer's small updates. We quote any extra work in writing first.";
+  "Package prices cover the site build only. Billed separately: your domain name (we register it in your name; you own it and pay its registration and renewals, a .co.za is about R110 a year), email on your own domain, copywriting, online shops and payments, and changes beyond 2 rounds of revisions or beyond the retainer's small updates. We quote any extra work in writing first.";
 
 export const SMALL_BUSINESS_LIMIT = "up to 10 staff";
 export const LARGER_FROM = "R8 000";
