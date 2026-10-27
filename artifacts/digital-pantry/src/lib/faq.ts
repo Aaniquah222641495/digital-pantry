@@ -47,7 +47,7 @@ export const FAQ_GROUPS: FaqGroup[] = [
       {
         id: "deposit",
         q: "How do I pay?",
-        a: "Every package starts with a 50% deposit, plus your domain registration fee if you need a new domain. The other 50% is due when your site goes live. We send an invoice for each.",
+        a: "Every package starts with a 50% deposit. The other 50% is due when your site goes live. We send an invoice for each.",
       },
       { id: "not-included", q: "What is not included in the price?", a: BILLED_SEPARATELY_SUMMARY },
       {
@@ -102,7 +102,7 @@ export const FAQ_GROUPS: FaqGroup[] = [
       {
         id: "domain",
         q: "How does my domain name work?",
-        a: "Every site goes live on its own domain, like yourbusiness.co.za. We register it in your name, so you are the owner, and set it up. You pay the registration and every yearly renewal: a .co.za is about R100 to R150 a year. We tell you the cost before anything is bought.",
+        a: "Every site goes live on its own domain, like yourbusiness.co.za, because it looks professional. You register it in your own name with a domain provider, so you are the owner, and you renew it every year: a .co.za is about R100 to R150 a year. We connect it to your site. Keep your details current and renew on time, or the site goes offline.",
       },
       {
         id: "hosting",
