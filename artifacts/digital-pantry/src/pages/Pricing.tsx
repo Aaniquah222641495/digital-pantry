@@ -17,7 +17,7 @@ const PLANS = [
   {
     name: "Starter", price: PLAN_PRICES.Starter, usd: INTL_PRICES.Starter, popular: false, img: "/images/starter.webp",
     line: "A one-page site that gets you found.",
-    features: ["Single page", "Menu section", "WhatsApp button", "Mobile responsive"],
+    features: ["Single page", "Menu section", "WhatsApp button", "Mobile responsive", "Your own domain connected"],
   },
   {
     name: "Standard", price: PLAN_PRICES.Standard, usd: INTL_PRICES.Standard, popular: true, img: "/images/standard.webp",
@@ -26,8 +26,8 @@ const PLANS = [
   },
   {
     name: "Premium", price: PLAN_PRICES.Premium, usd: INTL_PRICES.Premium, popular: false, img: "/images/premium.webp",
-    line: "Your own domain, and Google knows you exist.",
-    features: ["Everything in Standard", "Custom domain setup", "Google Business setup", "Basic SEO setup", "1 month of updates"],
+    line: "Google knows you exist, and locals can find you.",
+    features: ["Everything in Standard", "Google Business setup", "Basic SEO setup", "1 month of updates"],
   },
   {
     name: "Pro", price: PLAN_PRICES.Pro, usd: INTL_PRICES.Pro, popular: false, img: "/images/pro.webp",

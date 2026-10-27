@@ -52,7 +52,7 @@ export const FOOD: Industry = {
     { title: "Your menu, easy to read on a phone", body: "Prices and photos customers can scroll through, with no PDF to download." },
     { title: "Where and when to find you", body: "Market days, pop-up spots and opening hours, kept up to date when they change." },
     { title: "One-tap WhatsApp ordering", body: "Customers tap once and land in a chat with you. You keep your number and take orders the way you already do." },
-    { title: "Found on Google", body: "Premium and Pro include your own domain, a Google Business Profile and basic SEO, so people nearby can find you." },
+    { title: "Found on Google", body: "Every package goes live on your own domain; Premium and Pro add a Google Business Profile and basic SEO, so people nearby can find you." },
   ],
   proof: {
     name: "Stuff'd Bagels",
@@ -66,7 +66,7 @@ export const FOOD: Industry = {
       ["What we built", "One mobile-first page with the menu, this week's pickup spots and an order form that sends the order to WhatsApp."],
     ],
   },
-  fit: `Starter (${PLAN_PRICES.Starter}) is one page with your menu and a WhatsApp button, which is all many food businesses need. Premium (${PLAN_PRICES.Premium}) adds your own domain, a Google Business Profile and basic SEO.`,
+  fit: `Starter (${PLAN_PRICES.Starter}) is one page with your menu and a WhatsApp button, which is all many food businesses need. Premium (${PLAN_PRICES.Premium}) adds a Google Business Profile and basic SEO.`,
   faq: [
     { q: "Can customers order without an online shop?", a: "Yes. The site sends them to your WhatsApp with one tap, so you take orders the way you already do and don't pay for an online shop." },
     { q: "Can you update my menu after launch?", a: "Yes. The optional R120/month retainer covers menu updates, schedule changes and small edits." },
@@ -103,7 +103,7 @@ export const SCHOOLS: Industry = {
       ["What we built", "A 12-page site on their own domain: a page for every programme, registration, testimonials and FAQs."],
     ],
   },
-  fit: `A one-page site starts at ${PLAN_PRICES.Starter} (Starter). Premium (${PLAN_PRICES.Premium}) adds your own domain, a Google Business Profile and basic SEO. Pro (${PLAN_PRICES.Pro}) adds a form that saves every registration to your Google Sheet and alerts you straight away.`,
+  fit: `A one-page site starts at ${PLAN_PRICES.Starter} (Starter). Premium (${PLAN_PRICES.Premium}) adds a Google Business Profile and basic SEO. Pro (${PLAN_PRICES.Pro}) adds a form that saves every registration to your Google Sheet and alerts you straight away.`,
   faq: [
     { q: "Can parents register online?", a: "Yes. Pro includes a form that saves every registration to your own Google Sheet and emails you straight away. Smaller packages use a WhatsApp button instead." },
     { q: "Do you build websites for madrasahs and Islamic schools?", a: "Yes. Beginners Madrasah is one of our live sites, and we're happy to build for madrasahs, masjids and Islamic learning centres." },
@@ -130,9 +130,9 @@ export const BEAUTY: Industry = {
     { title: "Services and prices, clearly listed", body: "Every treatment with its price and how long it takes, easy to read on a phone." },
     { title: "A gallery of your work", body: "Your own photos, set out so clients can see your style before they book." },
     { title: "One clear way to book", body: "A WhatsApp button, or a link to the booking app you already use. Built-in online booking is quoted on request." },
-    { title: "Easy to find", body: "Your area, hours and directions, plus your own domain, a Google Business Profile and basic SEO on Premium and Pro." },
+    { title: "Easy to find", body: "Your area, hours and directions, on your own domain, plus a Google Business Profile and basic SEO on Premium and Pro." },
   ],
-  fit: `Standard (${PLAN_PRICES.Standard}) covers your services, an about section, your location and social links. Premium (${PLAN_PRICES.Premium}) adds your own domain, a Google Business Profile and basic SEO. Pro (${PLAN_PRICES.Pro}) adds an enquiry form that saves every lead to your Google Sheet and replies straight away.`,
+  fit: `Standard (${PLAN_PRICES.Standard}) covers your services, an about section, your location and social links. Premium (${PLAN_PRICES.Premium}) adds a Google Business Profile and basic SEO. Pro (${PLAN_PRICES.Pro}) adds an enquiry form that saves every lead to your Google Sheet and replies straight away.`,
   faq: [
     { q: "Can clients book online?", a: "Yes. We can link the booking app you already use, or send clients to WhatsApp. A built-in booking setup is quoted on request." },
     { q: "Can I update my prices later?", a: "Yes. The optional R120/month retainer covers price changes, new treatments and small edits." },
@@ -157,9 +157,9 @@ export const CONSULTANTS: Industry = {
     { title: "Answers to the usual questions", body: "Fees or how pricing works, process and timing, so enquiries arrive better informed." },
     { title: "Enquiries that come with context", body: "Pro adds a form that asks the right questions, saves every lead to your Google Sheet and replies straight away." },
   ],
-  fit: `Standard (${PLAN_PRICES.Standard}) is a clear site with your services and about section. Premium (${PLAN_PRICES.Premium}) adds your own domain, a Google Business Profile and basic SEO. Pro (${PLAN_PRICES.Pro}) adds the lead form, instant alerts and an auto-reply. Bigger builds, from ${LARGER_FROM}, are quoted after a short chat.`,
+  fit: `Standard (${PLAN_PRICES.Standard}) is a clear site with your services and about section. Premium (${PLAN_PRICES.Premium}) adds a Google Business Profile and basic SEO. Pro (${PLAN_PRICES.Pro}) adds the lead form, instant alerts and an auto-reply. Bigger builds, from ${LARGER_FROM}, are quoted after a short chat.`,
   faq: [
-    { q: "Can I use my own domain and email?", a: "Yes. You buy the domain in your own name. Premium and Pro include setting it up; email on your domain is a separate plan from your domain provider." },
+    { q: "Can I use my own domain and email?", a: "Yes. We register the domain for you, in your name, and every package includes setting it up; email on your domain is a separate plan from your domain provider." },
     { q: "Can the site take bookings for calls?", a: "Yes. We can link your calendar or booking app. A built-in booking setup is quoted on request." },
     { q: "How long does it take?", a: TURNAROUND_TERMS },
   ],
@@ -180,7 +180,7 @@ export const PRODUCT_BRANDS: Industry = {
     { title: "Your products, shown properly", body: "A catalogue with your photos, prices and the details customers ask about." },
     { title: "A clear way to buy", body: "Order on WhatsApp, an order form, or an online shop with payments, quoted separately." },
     { title: "Your story", body: "Who makes it, how and why, so customers remember you." },
-    { title: "Found by new customers", body: "Your own domain, a Google Business Profile and basic SEO on Premium and Pro." },
+    { title: "Found by new customers", body: "Your own domain on every package, plus a Google Business Profile and basic SEO on Premium and Pro." },
   ],
   fit: `Standard (${PLAN_PRICES.Standard}) or Premium (${PLAN_PRICES.Premium}) suit a catalogue with WhatsApp ordering. An online shop with payments is quoted to your product range, because it changes the build and the monthly costs.`,
   faq: [
@@ -205,9 +205,9 @@ export const TRADES: Industry = {
     { title: "What you do and where", body: "Your services and the areas you cover, so the right customers call." },
     { title: "Proof of your work", body: "Photos of finished jobs and any accreditation you hold." },
     { title: "Quote requests that make sense", body: "A WhatsApp button, or on Pro a form that collects the job details, saves them to your Google Sheet and alerts you." },
-    { title: "Found when someone searches nearby", body: "A Google Business Profile, your own domain and basic SEO on Premium and Pro." },
+    { title: "Found when someone searches nearby", body: "Your own domain on every package, plus a Google Business Profile and basic SEO on Premium and Pro." },
   ],
-  fit: `Starter (${PLAN_PRICES.Starter}) is one page with your services and a WhatsApp button. Premium (${PLAN_PRICES.Premium}) adds your own domain, a Google Business Profile and basic SEO, which matter most for local searches. Pro (${PLAN_PRICES.Pro}) adds the quote-request form and instant alerts.`,
+  fit: `Starter (${PLAN_PRICES.Starter}) is one page with your services and a WhatsApp button. Premium (${PLAN_PRICES.Premium}) adds a Google Business Profile and basic SEO, which matter most for local searches. Pro (${PLAN_PRICES.Pro}) adds the quote-request form and instant alerts.`,
   faq: [
     { q: "Will this get me to the top of Google?", a: "Nobody can promise that. We set up the basics properly: a Google Business Profile, clear service and area pages and fast loading, which give you a fair chance in local search." },
     { q: "Can customers send photos of the job?", a: "They can send them on WhatsApp straight from the site. A form with photo upload is quoted on request." },

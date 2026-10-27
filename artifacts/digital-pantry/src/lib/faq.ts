@@ -41,6 +41,12 @@ export const FAQ_GROUPS: FaqGroup[] = [
         q: "How much does a website cost?",
         a: `Our small business packages are once-off and in rand: Starter ${PLAN_PRICES.Starter}, Standard ${PLAN_PRICES.Standard}, Premium ${PLAN_PRICES.Premium} and Pro ${PLAN_PRICES.Pro}, for South African businesses with ${SMALL_BUSINESS_LIMIT}. Each price covers the build of your site.`,
       },
+      {
+        id: "deposit",
+        q: "How do I pay?",
+        a: "Every package starts with a 50% deposit, plus your domain registration fee if you need a new domain. The other 50% is due when your site goes live. We send an invoice for each.",
+        onPricing: true,
+      },
       { id: "not-included", q: "What is not included in the price?", a: BILLED_SEPARATELY_SUMMARY, onPricing: true },
       {
         id: "bigger-companies",
@@ -77,7 +83,7 @@ export const FAQ_GROUPS: FaqGroup[] = [
       {
         id: "what-we-need",
         q: "What do you need from me?",
-        a: "Your content: the text, menu or prices and photos that go on your site. The days for your build start counting once your deposit is paid and all of it is in. If you would rather not write your own text, we can write it for you, billed separately.",
+        a: "Your content: your logo, the text, menu or prices and photos that go on your site. The days for your build start counting once your deposit is paid and all of it is in. If you would rather not write your own text, we can write it for you, billed separately.",
       },
       { id: "coding", q: "Do I need to know how to code?", a: "No! That's literally our job. You handle the business, we handle the website." },
       { id: "whatsapp", q: "Do I keep my WhatsApp number?", a: "Yes! We just add a click-to-WhatsApp button on your site. Easy." },
@@ -96,7 +102,7 @@ export const FAQ_GROUPS: FaqGroup[] = [
       {
         id: "domain",
         q: "How does my domain name work?",
-        a: "We register your domain for you, in your name, so you are the owner. You pay the registration and every yearly renewal, on top of your package and any maintenance fee: a .co.za is about R100 to R150 a year, depending on the registrar (R110 at xneelo, checked October 2026). We tell you the cost before anything is bought. Premium and Pro include the domain setup, not the registration fee.",
+        a: "We register your domain for you, in your name, so you are the owner. You pay the registration and every yearly renewal, on top of your package and any maintenance fee: a .co.za is about R100 to R150 a year, depending on the registrar (R110 at xneelo, checked October 2026). We tell you the cost before anything is bought. Every package includes setting it up, not the registration fee.",
       },
       {
         id: "hosting",
@@ -118,7 +124,7 @@ export const FAQ_GROUPS: FaqGroup[] = [
       {
         id: "revisions",
         q: "How many rounds of revisions are included?",
-        a: "Every package includes 2 rounds of revisions. Anything beyond that is quoted in writing before we start, so there are no surprises.",
+        a: "Every package includes 2 rounds of revisions. A round is one list of changes, sent together in one message; we make them all, then you check the result. Anything beyond that is quoted in writing before we start, so there are no surprises.",
       },
       {
         id: "extra-work",

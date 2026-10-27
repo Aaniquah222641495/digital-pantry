@@ -30,7 +30,7 @@ export const TURNAROUND_NOTE =
 // on purpose: it is stated only after web-finance confirms. Pricing.tsx, the FAQ (seo.ts) and
 // public/pricing.md repeat this wording, so change them together.
 export const BILLED_SEPARATELY = [
-  "Your domain name. We register it for you, in your name, so it is yours; you pay the registration and yearly renewal. A .co.za renews at about R110 a year at xneelo (checked October 2026). Premium and Pro include the setup, not the registration fee.",
+  "Your domain name. We register it for you, in your name, so it is yours; you pay the registration and yearly renewal. A .co.za renews at about R110 a year at xneelo (checked October 2026). Every package includes the setup, not the registration fee.",
   "Email on your own domain, if you want it (a mail plan from your domain provider).",
   "Copywriting, if you want us to write your text.",
   "Online shops and payments (e-commerce), which are quoted separately.",

@@ -6,7 +6,7 @@ import { INTL_PRICES, PLAN_PRICES } from "../lib/plans";
 const JARS = [
   { name: "Starter", price: PLAN_PRICES.Starter, usd: INTL_PRICES.Starter, img: "/images/starter.webp", note: "One page, a menu and WhatsApp." },
   { name: "Standard", price: PLAN_PRICES.Standard, usd: INTL_PRICES.Standard, img: "/images/standard.webp", note: "The full shop window.", popular: true },
-  { name: "Premium", price: PLAN_PRICES.Premium, usd: INTL_PRICES.Premium, img: "/images/premium.webp", note: "Your domain, Google and SEO." },
+  { name: "Premium", price: PLAN_PRICES.Premium, usd: INTL_PRICES.Premium, img: "/images/premium.webp", note: "Google Business and basic SEO." },
   { name: "Pro", price: PLAN_PRICES.Pro, usd: INTL_PRICES.Pro, img: "/images/pro.webp", note: "Every enquiry caught for you." },
 ] as const;
 

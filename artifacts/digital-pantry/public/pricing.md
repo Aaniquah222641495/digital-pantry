@@ -8,6 +8,7 @@ Last updated: 2026-10-26. Source page: https://digitalpantry.co.za/pricing
 - Menu section
 - WhatsApp button
 - Mobile responsive
+- Your own domain connected (domain billed separately)
 
 ## Standard: R1 000 (most popular)
 - Everything in Starter
@@ -17,7 +18,6 @@ Last updated: 2026-10-26. Source page: https://digitalpantry.co.za/pricing
 
 ## Premium: R1 600
 - Everything in Standard
-- Custom domain setup
 - Google Business setup
 - Basic SEO setup
 - 1 month of updates
@@ -33,7 +33,7 @@ Last updated: 2026-10-26. Source page: https://digitalpantry.co.za/pricing
 
 ## Billed separately (not in the package prices)
 Package prices cover the site build only, once-off. These are billed separately, and we quote the cost before anything is bought:
-- Your domain name. We register it for you, in your name, so it is yours; you pay the registration and yearly renewal. A .co.za renews at about R110 a year at xneelo (checked October 2026). Premium and Pro include the setup, not the registration fee.
+- Your domain name. We register it for you, in your name, so it is yours; you pay the registration and yearly renewal. A .co.za renews at about R110 a year at xneelo (checked October 2026). Every package includes the setup, not the registration fee.
 - Email on your own domain, if you want it (a mail plan from your domain provider).
 - Copywriting, if you want us to write your text.
 - Online shops and payments (e-commerce), which are quoted separately.
