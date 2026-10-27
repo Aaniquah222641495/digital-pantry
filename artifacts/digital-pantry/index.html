@@ -12,6 +12,9 @@
     <meta name="theme-color" content="#0C0B0D" media="(prefers-color-scheme: dark)" />
     <meta name="theme-color" content="#FFF7FA" media="(prefers-color-scheme: light)" />
     <script src="/theme-init.js"></script>
+    <!-- Cookieless visit counts (ADR-0026). The guard must come first (deferred scripts run in order): it scrubs every payload. -->
+    <script defer src="/js/u-guard.js"></script>
+    <script defer src="/js/u.js" data-website-id="be3096e6-5b3b-4cf6-86a4-a9da33bc96a2" data-domains="digitalpantry.co.za" data-exclude-search="true" data-exclude-hash="true" data-do-not-track="true" data-before-send="dpUmamiScrub"></script>
   </head>
   <body>
     <div id="root"></div>

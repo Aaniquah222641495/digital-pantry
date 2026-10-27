@@ -14,6 +14,7 @@ import {
   type LeadFormValues,
 } from "../lib/leads";
 import { MOCKUP_FORM_NOTE } from "../lib/plans";
+import { interestValue, track, type EventProps } from "../lib/analytics";
 import { Sprinkles } from "./Sprinkles";
 
 type Phase = { name: "form" } | { name: "sent"; values: LeadFormValues } | { name: "fallback"; values: LeadFormValues };
@@ -55,6 +56,9 @@ export function LeadForm({
   const [phase, setPhase] = useState<Phase>({ name: "form" });
   const search = useSearch();
   const headingRef = useRef<HTMLHeadingElement>(null);
+  const started = useRef(false);
+  // Analytics gets the page name only, from a fixed list (ADR-0026).
+  const sourceProp: EventProps["source"] = source === "contact-page" ? source : undefined;
 
   const {
     register,
@@ -86,6 +90,12 @@ export function LeadForm({
       return;
     }
     const result = await submitLead(values, source);
+    if (result.status === "sent") {
+      track("enquiry_form_success", { source: sourceProp, interest: interestValue(values.interest) });
+      if (values.interest === "Free mock-up") track("free_mockup_request", { source: sourceProp });
+    } else {
+      track("enquiry_form_error", { source: sourceProp, reason: result.reason });
+    }
     setPhase(result.status === "sent" ? { name: "sent", values } : { name: "fallback", values });
   };
 
@@ -113,6 +123,7 @@ export function LeadForm({
           rel="noopener noreferrer"
           className={waBtnCls}
           data-testid="button-lead-whatsapp"
+          onClick={() => track("whatsapp_click", { surface: "form_sent" })}
         >
           <MessageCircle size={20} aria-hidden="true" />
           Chat on WhatsApp
@@ -140,11 +151,12 @@ export function LeadForm({
             rel="noopener noreferrer"
             className={waBtnCls}
             data-testid="button-fallback-whatsapp"
+            onClick={() => track("whatsapp_click", { surface: "form_fallback" })}
           >
             <MessageCircle size={20} aria-hidden="true" />
             Send on WhatsApp
           </a>
-          <a href={mailtoUrl(values)} className={mailBtnCls} data-testid="button-fallback-email">
+          <a href={mailtoUrl(values)} className={mailBtnCls} data-testid="button-fallback-email" onClick={() => track("email_click", { surface: "form_fallback" })}>
             <Mail size={20} aria-hidden="true" />
             Send by email
           </a>
@@ -168,7 +180,14 @@ export function LeadForm({
   });
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} noValidate className={`${cardCls} p-6 md:p-8 space-y-5`} data-testid="lead-form">
+    <form
+      onSubmit={handleSubmit(onSubmit, () => track("enquiry_form_error", { source: sourceProp, reason: "validation" }))}
+      onFocusCapture={() => {
+        if (started.current) return;
+        started.current = true;
+        track("enquiry_form_start", { source: sourceProp });
+      }}
+      noValidate className={`${cardCls} p-6 md:p-8 space-y-5`} data-testid="lead-form">
       <div className="grid sm:grid-cols-2 gap-5">
         <div>
           <label htmlFor="lead-name" className={labelCls}>Your name</label>

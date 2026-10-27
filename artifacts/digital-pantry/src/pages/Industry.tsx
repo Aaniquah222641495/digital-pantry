@@ -8,6 +8,7 @@ import { FreeTaste } from "../components/FreeTaste";
 import { H1, H2 } from "../lib/style";
 import { LARGER_FROM, PLAN_PRICES } from "../lib/plans";
 import { BEAUTY, CONSULTANTS, COST_GUIDE, FOOD, PRODUCT_BRANDS, SCHOOLS, TRADES, type Industry } from "../lib/guides";
+import { useTrackOnMount } from "../lib/analytics";
 
 // Search landing pages for one kind of business: what their site needs, a live site we built
 // for that kind of business, which package fits, and their questions. Content: src/lib/guides.ts.
@@ -224,10 +225,12 @@ function IndustryPage({ page }: { page: Industry }) {
 }
 
 export function FoodBusinesses() {
+  useTrackOnMount("segment_page_view", { segment: "food" });
   return <IndustryPage page={FOOD} />;
 }
 
 export function SchoolsAndMadrasahs() {
+  useTrackOnMount("segment_page_view", { segment: "schools" });
   return <IndustryPage page={SCHOOLS} />;
 }
 

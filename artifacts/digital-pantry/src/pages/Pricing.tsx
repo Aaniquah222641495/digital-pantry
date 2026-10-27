@@ -7,7 +7,8 @@ import { PantryShelf } from "../components/PantryShelf";
 import { BusinessPicker } from "../components/BusinessPicker";
 import { Sticker, DAY, NIGHT } from "../components/Stickers";
 import { DOMAIN_FEE, EXTRAS, INCLUDED_ALWAYS, INTL_PRICES, INTL_RETAINER, LARGER_DRIVERS, LARGER_FROM, PLAN_PRICES, RETAINER, SMALL_BUSINESS_LIMIT } from "../lib/plans";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { track, useTrackOnView, type Package } from "../lib/analytics";
 import { Link, useSearch } from "wouter";
 import { COST_GUIDE } from "../lib/guides";
 import { H1 } from "../lib/style";
@@ -41,6 +42,53 @@ const AUDIENCES: { id: Audience; label: string; short: string }[] = [
   { id: "larger", label: "Larger business", short: "Custom builds" },
   { id: "intl", label: "International", short: "Priced in US dollars" },
 ];
+
+function PlanCard({ p, intl }: { p: (typeof PLANS)[number]; intl: boolean }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const pkg = p.name.toLowerCase() as Package;
+  const market = intl ? "intl" : "za";
+  useTrackOnView(ref, "package_view", { package: pkg, market, surface: "pricing" }, market);
+  return (
+    <div ref={ref} id={`card-${pkg}`} data-testid={`card-pricing-${p.name.toLowerCase()}`} className="flex h-full scroll-mt-32 flex-col">
+      {p.popular && (
+        <span className="absolute -top-3 left-8 rounded-full bg-[#FFD43B] px-3 py-1 text-[12px] font-semibold text-[#161214]">Most popular ★</span>
+      )}
+      <p className={`text-[15px] ${p.popular ? "opacity-75" : "text-dp-muted"}`}>{p.name}</p>
+      <p className="mt-1 text-[clamp(2.6rem,4vw,3.25rem)] font-semibold tracking-[-0.05em]">{intl ? p.usd : p.price}</p>
+      <p className={`text-[13px] ${p.popular ? "opacity-70" : "text-dp-muted"}`}>once-off</p>
+      <p className={`mt-5 leading-relaxed ${p.popular ? "opacity-85" : "text-dp-muted"}`}>{p.line}</p>
+      <ul className="mt-6 flex flex-1 flex-col gap-2.5">
+        {p.features.map((f) => (
+          <li key={f} className="flex items-start gap-2.5 text-[15px]">
+            <Check size={16} strokeWidth={2.5} aria-hidden="true" className={`mt-0.5 shrink-0 ${p.popular ? "" : "text-dp-accent"}`} />
+            <span>{f}</span>
+          </li>
+        ))}
+      </ul>
+      <div className="mt-8">
+        {p.popular ? (
+          <a
+            href={intl ? "/contact?interest=international" : `/contact?interest=${p.name.toLowerCase()}`}
+            data-testid={`button-pricing-${p.name.toLowerCase()}`}
+            onClick={() => track("package_cta_click", { package: pkg, market, surface: "pricing" })}
+            className="inline-flex h-12 w-full items-center justify-center rounded-full bg-dp-bg text-[15px] font-medium text-dp-ink transition-transform active:scale-[0.98]"
+          >
+            Choose {p.name}
+          </a>
+        ) : (
+          <a
+            href={intl ? "/contact?interest=international" : `/contact?interest=${p.name.toLowerCase()}`}
+            data-testid={`button-pricing-${p.name.toLowerCase()}`}
+            onClick={() => track("package_cta_click", { package: pkg, market, surface: "pricing" })}
+            className="inline-flex h-12 w-full items-center justify-center rounded-full border border-dp-line text-[15px] font-medium text-dp-ink transition-colors hover:border-dp-ink/40 active:scale-[0.98]"
+          >
+            Choose {p.name}
+          </a>
+        )}
+      </div>
+    </div>
+  );
+}
 
 
 export default function Pricing() {
@@ -115,11 +163,10 @@ export default function Pricing() {
                       </li>
                     ))}
                   </ul>
-                  <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
-                    <MagneticButton href="/business-projects#brief">Send us a brief</MagneticButton>
-                    <Link href="/business-projects" className="inline-flex min-h-11 items-center text-[15px] font-medium text-dp-ink underline decoration-dp-line underline-offset-4 hover:decoration-dp-accent">
-                      How custom builds work
-                    </Link>
+                  <div className="mt-8">
+                    <MagneticButton href="/contact?interest=larger" onClick={() => track("custom_project_cta_click", { surface: "pricing_larger" })}>
+                      Request a quote
+                    </MagneticButton>
                   </div>
                 </div>
                 <div className="dp-stage mx-auto w-full max-w-[460px]">
@@ -128,7 +175,7 @@ export default function Pricing() {
               </div>
             ) : (
               <>
-                <PantryShelf currency={intl ? "USD" : "ZAR"} toCards />
+                <PantryShelf currency={intl ? "USD" : "ZAR"} surface="pricing_shelf" toCards />
                 <p className="mt-10 max-w-[70ch] text-[14px] leading-relaxed text-dp-muted">
                   {intl
                     ? "International packages, once-off and priced in US dollars. Same kitchen, same care. We confirm payment options with your quote."
@@ -166,42 +213,7 @@ export default function Pricing() {
                 p.popular ? "border-transparent bg-dp-cta text-dp-cta-fg shadow-[0_30px_60px_-30px_var(--dp-glow)]" : "border-dp-line bg-dp-surface"
               }`}
             >
-              <div id={`card-${p.name.toLowerCase()}`} data-testid={`card-pricing-${p.name.toLowerCase()}`} className="flex h-full scroll-mt-32 flex-col">
-                {p.popular && (
-                  <span className="absolute -top-3 left-8 rounded-full bg-[#FFD43B] px-3 py-1 text-[12px] font-semibold text-[#161214]">Most popular ★</span>
-                )}
-                <p className={`text-[15px] ${p.popular ? "opacity-75" : "text-dp-muted"}`}>{p.name}</p>
-                <p className="mt-1 text-[clamp(2.6rem,4vw,3.25rem)] font-semibold tracking-[-0.05em]">{intl ? p.usd : p.price}</p>
-                <p className={`text-[13px] ${p.popular ? "opacity-70" : "text-dp-muted"}`}>once-off</p>
-                <p className={`mt-5 leading-relaxed ${p.popular ? "opacity-85" : "text-dp-muted"}`}>{p.line}</p>
-                <ul className="mt-6 flex flex-1 flex-col gap-2.5">
-                  {p.features.map((f) => (
-                    <li key={f} className="flex items-start gap-2.5 text-[15px]">
-                      <Check size={16} strokeWidth={2.5} aria-hidden="true" className={`mt-0.5 shrink-0 ${p.popular ? "" : "text-dp-accent"}`} />
-                      <span>{f}</span>
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-8">
-                  {p.popular ? (
-                    <a
-                      href={intl ? "/contact?interest=international" : `/contact?interest=${p.name.toLowerCase()}`}
-                      data-testid={`button-pricing-${p.name.toLowerCase()}`}
-                      className="inline-flex h-12 w-full items-center justify-center rounded-full bg-dp-bg text-[15px] font-medium text-dp-ink transition-transform active:scale-[0.98]"
-                    >
-                      Choose {p.name}
-                    </a>
-                  ) : (
-                    <a
-                      href={intl ? "/contact?interest=international" : `/contact?interest=${p.name.toLowerCase()}`}
-                      data-testid={`button-pricing-${p.name.toLowerCase()}`}
-                      className="inline-flex h-12 w-full items-center justify-center rounded-full border border-dp-line text-[15px] font-medium text-dp-ink transition-colors hover:border-dp-ink/40 active:scale-[0.98]"
-                    >
-                      Choose {p.name}
-                    </a>
-                  )}
-                </div>
-              </div>
+              <PlanCard p={p} intl={intl} />
             </Reveal>
           ))}
         </div>

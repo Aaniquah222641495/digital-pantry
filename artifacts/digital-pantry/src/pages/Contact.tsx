@@ -5,14 +5,15 @@ import { Reveal } from "../components/Reveal";
 import { LeadForm } from "../components/LeadForm";
 import { H1 } from "../lib/style";
 import { useSideContact } from "../lib/contact";
+import { track } from "../lib/analytics";
 import { Sticker, DAY, NIGHT } from "../components/Stickers";
 
 
 export default function Contact() {
   const contact = useSideContact();
   const QUICK_CONTACTS = [
-    { icon: MessageCircle, label: `WhatsApp ${contact.name}`, sub: contact.display ? `${contact.display}, fastest reply` : "Fastest reply", href: contact.waLink, testId: "button-contact-whatsapp", iconCls: "bg-[#25D366]/15 text-[#1F8A50] dark:text-[#5BD38E]" },
-    { icon: Mail, label: "Email", sub: contact.email, href: `mailto:${contact.email}`, testId: "button-contact-email", iconCls: "bg-dp-soft text-dp-accent" },
+    { icon: MessageCircle, label: `WhatsApp ${contact.name}`, sub: contact.display ? `${contact.display}, fastest reply` : "Fastest reply", href: contact.waLink, testId: "button-contact-whatsapp", event: "whatsapp_click" as const, iconCls: "bg-[#25D366]/15 text-[#1F8A50] dark:text-[#5BD38E]" },
+    { icon: Mail, label: "Email", sub: contact.email, href: `mailto:${contact.email}`, testId: "button-contact-email", event: "email_click" as const, iconCls: "bg-dp-soft text-dp-accent" },
   ];
   return (
     <main>
@@ -47,6 +48,7 @@ export default function Contact() {
                   target={c.href?.startsWith("http") ? "_blank" : undefined}
                   rel={c.href?.startsWith("http") ? "noopener noreferrer" : undefined}
                   data-testid={c.testId}
+                  onClick={() => track(c.event, { surface: "contact_card" })}
                   className="group flex items-center gap-4 rounded-[20px] border border-dp-line bg-dp-surface/70 p-4 pr-5 transition-colors hover:border-dp-ink/30"
                 >
                   <span className={`grid h-11 w-11 shrink-0 place-items-center rounded-full ${c.iconCls}`}>

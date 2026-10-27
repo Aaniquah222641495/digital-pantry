@@ -3,6 +3,7 @@ import { Logo } from "./Navbar";
 import { MagneticButton } from "./MagneticButton";
 import { Reveal } from "./Reveal";
 import { useSideContact } from "../lib/contact";
+import { track } from "../lib/analytics";
 import { COST_GUIDE, INDUSTRIES } from "../lib/guides";
 
 // Pages that already end on the free-taste band (FreeTaste.tsx), plus Contact (form right above):
@@ -64,10 +65,10 @@ export function Footer() {
           </nav>
 
           <div className="flex flex-col text-[15px]">
-            <a href={contact.waLink} className="w-fit py-1.5 text-dp-muted transition-colors duration-300 hover:text-dp-ink" data-testid="footer-link-whatsapp">
+            <a href={contact.waLink} className="w-fit py-1.5 text-dp-muted transition-colors duration-300 hover:text-dp-ink" data-testid="footer-link-whatsapp" onClick={() => track("whatsapp_click", { surface: "footer" })}>
               WhatsApp {contact.name} <span data-nosnippet="">{contact.display}</span>
             </a>
-            <a href="mailto:thedigitalpantryza@gmail.com" className="w-fit py-1.5 text-dp-muted transition-colors duration-300 hover:text-dp-ink" data-testid="footer-link-email">
+            <a href="mailto:thedigitalpantryza@gmail.com" className="w-fit py-1.5 text-dp-muted transition-colors duration-300 hover:text-dp-ink" data-testid="footer-link-email" onClick={() => track("email_click", { surface: "footer" })}>
               thedigitalpantryza@gmail.com
             </a>
             <p className="py-1.5 text-dp-muted">Cape Town, South Africa</p>
