@@ -105,6 +105,13 @@ await scrollThrough();
 await page.goto(`${base}/pricing`, { waitUntil: "load" });
 await settle();
 await scrollThrough();
+// International prices now come from the header's Local / International switch (no Pricing tab).
+await page.locator('[data-testid="market-intl"]:visible').first().click();
+await page.evaluate(() => window.scrollTo(0, 0));
+await settle();
+await scrollThrough();
+await page.locator('[data-testid="market-za"]:visible').first().click();
+await settle();
 await page.getByRole("link", { name: /custom quote/ }).click();
 await settle();
 
