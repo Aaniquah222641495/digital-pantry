@@ -32,11 +32,15 @@ for (const page of [...PAGES, NOT_FOUND]) {
   const routePath = page === NOT_FOUND ? "/this-page-does-not-exist" : page.path;
   const body = await render(routePath);
   if (body.includes("<script")) throw new Error(`Inline script in ${page.path}: it would break the CSP`);
-  if (page.path === "/pricing") {
-    // Guard: structured-data prices must match what the page shows.
-    for (const price of ["R600", "R1 000", "R1 600", "R2 500", "R120", "$450", "$750", "$1 200", "$1 800", "R8 000", "$90"]) {
-      if (!body.includes(price)) throw new Error(`Pricing page no longer shows ${price}: update src/seo.ts and public/pricing.md`);
-    }
+  // Guard: structured-data prices must match what the site shows. Rand prices are on Pricing's first
+  // view; the dollar prices sit behind its International tab, so they are checked on /faq, which
+  // shows them in full in the server HTML (Pricing stopped repeating the FAQ, 2026-10-27).
+  const mustShow = {
+    "/pricing": ["R600", "R1 000", "R1 600", "R2 500", "R120", "R8 000"],
+    "/faq": ["$450", "$750", "$1 200", "$1 800", "$90"],
+  }[page.path];
+  for (const price of mustShow ?? []) {
+    if (!body.includes(price)) throw new Error(`${page.path} no longer shows ${price}: update src/seo.ts and public/pricing.md`);
   }
   const html = template
     .replace(/<!--seo-->[\s\S]*?<!--\/seo-->/, `${preloads}\n    ${headHtml(page)}`)

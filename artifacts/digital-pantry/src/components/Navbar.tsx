@@ -8,6 +8,7 @@ const NAV_LINKS = [
   { label: "Portfolio", href: "/portfolio" },
   { label: "Pricing", href: "/pricing" },
   { label: "Business projects", href: "/business-projects" },
+  { label: "FAQ", href: "/faq" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -76,7 +77,9 @@ export function Navbar() {
           </nav>
 
           <div className="hidden items-center gap-3 lg:flex">
-            <FounderSwitch />
+            {/* Five links since FAQ joined (2026-10-27): the compact switch keeps the CTA on screen at laptop width */}
+            <span className="xl:hidden"><FounderSwitch compact /></span>
+            <span className="hidden xl:block"><FounderSwitch /></span>
             <MagneticButton href="/contact" data-testid="nav-cta" size="sm">
               Let's Get Cooking
             </MagneticButton>
