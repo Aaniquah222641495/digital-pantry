@@ -6,7 +6,7 @@ import { FreeTaste } from "../components/FreeTaste";
 import { PantryShelf } from "../components/PantryShelf";
 import { BusinessPicker } from "../components/BusinessPicker";
 import { Sticker, DAY, NIGHT } from "../components/Stickers";
-import { EXTRAS, INCLUDED_ALWAYS, INTL_PRICES, INTL_RETAINER, LARGER_DRIVERS, LARGER_FROM, PLAN_PRICES, RETAINER, SMALL_BUSINESS_LIMIT } from "../lib/plans";
+import { DOMAIN_FEE, EXTRAS, INCLUDED_ALWAYS, INTL_PRICES, INTL_RETAINER, LARGER_DRIVERS, LARGER_FROM, PLAN_PRICES, RETAINER, SMALL_BUSINESS_LIMIT } from "../lib/plans";
 import { useEffect, useState } from "react";
 import { Link, useSearch } from "wouter";
 import { COST_GUIDE } from "../lib/guides";
@@ -213,7 +213,7 @@ export default function Pricing() {
             <div data-testid="pricing-billed-separately">
               <h2 className="text-[clamp(1.6rem,2.6vw,2.2rem)] font-semibold tracking-[-0.035em]">What the price covers</h2>
               <p className="mt-3 max-w-[44ch] leading-relaxed text-dp-muted">
-                One price for your site, paid once. A few things are extra, and you always see the cost before we buy anything.
+                One price for your site, paid once, plus your domain. Extras only if you want them, and you always see the cost first.
               </p>
               <p className="mt-8 font-mono text-[13px] text-dp-accent">In every package</p>
               <ul className="mt-4 flex flex-col gap-3">
@@ -224,6 +224,17 @@ export default function Pricing() {
                   </li>
                 ))}
               </ul>
+              {/* The domain is not optional: every site gets its own (founder 2026-10-27) */}
+              <div className="mt-8 rounded-[20px] bg-dp-soft/70 p-5 sm:p-6">
+                <p className="font-mono text-[13px] text-dp-accent">Every site needs</p>
+                <div className="mt-2 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                  <p className="text-[17px] font-semibold tracking-[-0.01em]">Your own domain</p>
+                  <p className="text-[15px] font-semibold tabular-nums">{DOMAIN_FEE}</p>
+                </div>
+                <p className="mt-2 max-w-[46ch] text-[14px] leading-relaxed text-dp-muted">
+                  Like yourbusiness.co.za. It looks professional and it's yours: we register it in your name and set it up.
+                </p>
+              </div>
             </div>
             <figure className="dp-ticket relative w-full px-5 pb-10 pt-8 sm:rotate-[0.6deg] sm:px-8 text-[#211A1E]">
               <figcaption className="text-center">

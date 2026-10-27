@@ -31,9 +31,12 @@ Last updated: 2026-10-26. Source page: https://digitalpantry.co.za/pricing
 - Tested before handover
 - No monthly fees: runs on free Google tools the client owns
 
-## Billed separately (not in the package prices)
+## Your domain (every site needs one)
+Every site goes live on its own domain, like yourbusiness.co.za. We register it in your name, so it's yours, and connect it in every package. You pay the domain fee: about R100 to R150 a year.
+
+## Extras (not in the package prices, only if you want them)
 Package prices cover the site build only, once-off. These are billed separately, and we quote the cost before anything is bought:
-- Domain name: about R100 to R150 a year. We register it in your name, so it's yours. Every package includes connecting it.
+- Branding design: a logo, colours and fonts made for your business (quoted).
 - Email on your own domain, if you want it (a mail plan from your domain provider).
 - Copywriting, if you want us to write your text.
 - Online shops and payments (e-commerce), which are quoted separately.
