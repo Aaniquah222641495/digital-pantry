@@ -6,6 +6,7 @@ https://thedigitalpantry.netlify.app/*  https://digitalpantry.co.za/:splat  301!
 /portfolio   /portfolio.html  200
 /contact     /contact.html    200
 /privacy     /privacy.html    200
+/faq         /faq.html        200
 /websites-for-food-businesses        /websites-for-food-businesses.html        200
 /websites-for-schools-and-madrasahs  /websites-for-schools-and-madrasahs.html  200
 /website-cost-south-africa           /website-cost-south-africa.html           200

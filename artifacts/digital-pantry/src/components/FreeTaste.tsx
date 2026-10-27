@@ -4,7 +4,7 @@ import { Reveal } from "./Reveal";
 
 // "Free mock-up" offer band, shared by Home, Pricing, Portfolio, the cost guide and the industry
 // pages with a case study. Kept short on purpose (founder 2026-10-26: "too much information"):
-// the full terms (ADR-0025) live in the Pricing FAQ (MOCKUP_TERMS) and the contact form note.
+// the full terms (ADR-0025) live in the FAQ page (MOCKUP_TERMS in plans.ts) and the contact form note.
 const FACTS = ["One per business", "Ready in 5 business days", "No obligation"];
 
 export function FreeTaste({ testId }: { testId: string }) {
@@ -35,7 +35,7 @@ export function FreeTaste({ testId }: { testId: string }) {
               Get My Free Mock-up
               <ArrowUpRight size={17} aria-hidden="true" />
             </Link>
-            <a href="/pricing#faq-heading" className="inline-flex min-h-11 items-center text-[14px] text-[#463E44] underline decoration-[#161214]/25 underline-offset-4 hover:text-[#161214] dark:text-[var(--im-muted)] dark:decoration-white/25 dark:hover:text-[var(--im-text)]">
+            <a href="/faq#free-mock-up" className="inline-flex min-h-11 items-center text-[14px] text-[#463E44] underline decoration-[#161214]/25 underline-offset-4 hover:text-[#161214] dark:text-[var(--im-muted)] dark:decoration-white/25 dark:hover:text-[var(--im-text)]">
               The fine print
             </a>
           </div>

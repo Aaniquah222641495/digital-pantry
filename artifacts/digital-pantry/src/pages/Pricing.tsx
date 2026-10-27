@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import { Link, useSearch } from "wouter";
 import { COST_GUIDE } from "../lib/guides";
 import { H1, H2 } from "../lib/style";
-import { FAQ } from "../seo";
+import { PRICING_FAQ } from "../lib/faq";
 
 const PLANS = [
   {
@@ -258,7 +258,7 @@ export default function Pricing() {
         </Reveal>
       </section>
 
-      {/* FAQ as a text-message thread: the client asks, we answer */}
+      {/* The money questions as a text-message thread; the rest live on /faq (src/lib/faq.ts) */}
       {audience === "small" && <BusinessPicker />}
 
       <section aria-labelledby="faq-heading" className="border-t border-dp-line">
@@ -276,13 +276,13 @@ export default function Pricing() {
               .
             </p>
             <div className="mt-8">
-              <MagneticButton href="/contact" variant="ghost">
-                Ask us anything
+              <MagneticButton href="/faq" variant="ghost" data-testid="pricing-more-questions">
+                More questions
               </MagneticButton>
             </div>
           </Reveal>
           <div className="flex flex-col gap-6">
-            {FAQ.map((f, i) => (
+            {PRICING_FAQ.map((f, i) => (
               <Reveal key={f.q} delay={i * 0.05} className="flex flex-col gap-2">
                 <p className="max-w-[85%] self-start rounded-[22px] rounded-bl-md border border-dp-line bg-dp-surface px-5 py-3.5 text-[15px]">{f.q}</p>
                 <p className="max-w-[85%] self-end rounded-[22px] rounded-br-md bg-dp-cta px-5 py-3.5 text-[15px] leading-relaxed text-dp-cta-fg">{f.a}</p>

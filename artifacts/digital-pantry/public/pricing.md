@@ -52,6 +52,9 @@ Starter, Standard and Premium sites take 5 to 7 business days, counted from when
 - Development, a live link, source files and revisions start once the deposit is paid. The concept and files stay ours until the agreed fee is paid.
 - No obligation to go ahead. Ask on the contact page: https://digitalpantry.co.za/contact?interest=mockup
 
+## More questions
+Process, domain, hosting, ownership, revisions and changes after launch: https://digitalpantry.co.za/faq
+
 ## Contact
 - Email: thedigitalpantryza@gmail.com
 - Enquiry form: https://digitalpantry.co.za/contact

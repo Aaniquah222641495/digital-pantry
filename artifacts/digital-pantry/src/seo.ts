@@ -3,12 +3,12 @@
 // browser (RouteMeta keeps the tab title and tags right when visitors click between pages).
 // Only state facts that are already on the site. Update `LAST_UPDATED` when content changes.
 
-import { BILLED_SEPARATELY_SUMMARY, MOCKUP_TERMS, TURNAROUND_TERMS } from "./lib/plans";
+import { ALL_FAQ } from "./lib/faq";
 import { BEAUTY, CONSULTANTS, COST_FAQ, COST_GUIDE, FOOD, PRODUCT_BRANDS, SCHOOLS, TRADES, type Industry } from "./lib/guides";
 
 export const SITE_URL = "https://digitalpantry.co.za";
 export const SITE_NAME = "The Digital Pantry";
-export const LAST_UPDATED = "2026-10-26";
+export const LAST_UPDATED = "2026-10-27";
 const OG_IMAGE = `${SITE_URL}/og-card.jpg`; // 1200x630 link-preview card (WhatsApp, LinkedIn, X)
 // Email is the contact we publish to search engines and AI assistants (founder, 2026-10-24).
 // The founders' WhatsApp numbers stay on the pages for visitors but are left out of this data.
@@ -39,20 +39,6 @@ const PLANS = [
   { name: "Standard", price: 1000, includes: "Everything in Starter plus locations, about section and social links." },
   { name: "Premium", price: 1600, includes: "Everything in Standard plus custom domain setup, Google Business setup, basic SEO setup and 1 month of updates." },
   { name: "Pro", price: 2500, includes: "Everything in Premium plus a lead capture form with instant alerts, leads saved to your Google Sheet, an auto-reply to every enquiry and a WhatsApp follow-up button, tested before handover." },
-];
-
-// Shown on the pricing page (Pricing.tsx imports this) and used for FAQPage structured data,
-// so the two always match word for word, as Google requires.
-export const FAQ = [
-  { q: "Do I need to know how to code?", a: "No! That's literally our job. You handle the business, we handle the website." },
-  { q: "Do I keep my WhatsApp number?", a: "Yes! We just add a click-to-WhatsApp button on your site. Easy." },
-  { q: "How long does it take?", a: TURNAROUND_TERMS },
-  { q: "What do I get in the free mock-up?", a: MOCKUP_TERMS },
-  { q: "What is not included in the price?", a: BILLED_SEPARATELY_SUMMARY },
-  { q: "Do these prices apply to bigger companies?", a: "No. The rand packages are for South African small businesses with up to 10 staff. Larger businesses get a custom quote, from R8 000." },
-  { q: "Do you work with international clients?", a: "Yes. International packages are priced in US dollars: Starter $450, Standard $750, Premium $1 200 and Pro $1 800, once-off." },
-  { q: "What if I need changes later?", a: "That's what the R120/month retainer is for ($90/month for international clients). Small edits, big peace of mind." },
-  { q: "Does Pro have monthly fees?", a: "No. Your lead system runs on free Google tools that you own. Every enquiry lands in your inbox and your own Sheet." },
 ];
 
 const business = {
@@ -206,11 +192,22 @@ export const PAGES: PageMeta[] = [
             ],
           },
         },
-        {
-          "@type": "FAQPage",
-          mainEntity: FAQ.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
-        },
+        // No FAQPage here: Pricing shows only some of the questions, and the full FAQPage (word for word
+        // with the visible text) lives on /faq, so the same questions aren't marked up on two pages.
         crumbs("Pricing", "/pricing"),
+      ),
+    ],
+  },
+  {
+    path: "/faq",
+    title: "Website FAQ: Prices, Domain, Hosting | Digital Pantry",
+    description:
+      "Straight answers on website prices, how we work, your domain and hosting, who owns your site, revisions and changes after launch. Cape Town web studio.",
+    jsonLd: [
+      graph(
+        { "@type": "WebPage", "@id": `${SITE_URL}/faq#page`, url: `${SITE_URL}/faq`, name: "Website questions answered", about: { "@id": ORG_ID }, inLanguage: "en-ZA" },
+        faqPage(ALL_FAQ),
+        crumbs("FAQ", "/faq"),
       ),
     ],
   },

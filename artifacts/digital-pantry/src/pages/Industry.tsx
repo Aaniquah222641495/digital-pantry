@@ -206,6 +206,13 @@ function IndustryPage({ page }: { page: Industry }) {
                 </details>
               ))}
             </div>
+            <p className="mt-6 text-[15px] text-dp-muted">
+              More answers on prices, domains and hosting?{" "}
+              <Link href="/faq" className="text-dp-ink underline decoration-dp-line underline-offset-4 hover:decoration-dp-accent">
+                Read the full FAQ
+              </Link>
+              .
+            </p>
           </Reveal>
         </div>
       </section>

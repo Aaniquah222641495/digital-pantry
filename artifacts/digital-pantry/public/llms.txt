@@ -14,7 +14,8 @@ Brand line: "Coded in Pink. Built to Perform." Based in Cape Town, Western Cape,
 
 ## Pages
 - [Home](https://digitalpantry.co.za/): who we are, the two founders, recent work, process and prices
-- [Pricing](https://digitalpantry.co.za/pricing): all packages, what each includes, FAQ
+- [Pricing](https://digitalpantry.co.za/pricing): all packages, what each includes, the money questions
+- [FAQ](https://digitalpantry.co.za/faq): prices, how we work from first chat to launch, domain, hosting and ownership, revisions and changes after launch
 - [Pricing (plain text)](https://digitalpantry.co.za/pricing.md): the same prices in a machine-readable file
 - [Portfolio](https://digitalpantry.co.za/portfolio): live client sites (STUFF'D Bagels, Beginners Madrasah)
 - [Business projects](https://digitalpantry.co.za/business-projects): custom websites, integrations, lead systems and support for larger businesses, and build partnerships for agencies; fixed quote after discovery, from R8 000

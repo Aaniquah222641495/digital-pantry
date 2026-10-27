@@ -7,7 +7,7 @@ import { COST_GUIDE, INDUSTRIES } from "../lib/guides";
 
 // Pages that already end on the free-taste band (FreeTaste.tsx), plus Contact (form right above):
 // a second big button here would be a repeated ending. Keep in step with where FreeTaste is used.
-const ENDS_WITH_CTA = new Set(["/", "/pricing", "/portfolio", "/contact", COST_GUIDE.path, ...INDUSTRIES.filter((p) => p.proof).map((p) => p.path)]);
+const ENDS_WITH_CTA = new Set(["/", "/pricing", "/portfolio", "/faq", "/contact", COST_GUIDE.path, ...INDUSTRIES.filter((p) => p.proof).map((p) => p.path)]);
 
 // Guides for search visitors: linked from every page so Google finds and weighs them.
 const GUIDE_LINKS = [...INDUSTRIES.map((p) => ({ label: p.label, href: p.path })), { label: "What websites cost", href: COST_GUIDE.path }];
@@ -16,6 +16,7 @@ const NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "Portfolio", href: "/portfolio" },
   { label: "Pricing", href: "/pricing" },
+  { label: "FAQ", href: "/faq" },
   { label: "Business projects", href: "/business-projects" },
   { label: "Contact", href: "/contact" },
   { label: "Privacy", href: "/privacy" },
