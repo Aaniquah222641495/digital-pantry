@@ -134,6 +134,7 @@ export default function Pricing() {
                     ? "International packages, once-off and priced in US dollars. Same kitchen, same care. We confirm payment options with your quote."
                     : `Small-business prices for South African businesses with ${SMALL_BUSINESS_LIMIT}, once-off and in rand.`}
                 </p>
+                {audience === "small" && <BusinessPicker />}
               </>
             )}
           </div>
@@ -287,8 +288,6 @@ export default function Pricing() {
           </div>
         </Reveal>
       </section>
-
-      {audience === "small" && <BusinessPicker />}
 
       {/* Questions live on /faq (one place, founder 2026-10-27); Pricing stays about choosing a jar */}
       <Reveal className="mx-auto max-w-[1320px] px-5 pb-20 sm:px-8 md:pb-24">
