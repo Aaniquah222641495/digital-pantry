@@ -12,7 +12,7 @@ import { Sticker, DAY, NIGHT } from "../components/Stickers";
 export default function Contact() {
   const contact = useSideContact();
   const QUICK_CONTACTS = [
-    { icon: MessageCircle, label: `WhatsApp ${contact.name}`, sub: contact.display ? `${contact.display}, fastest reply` : "Fastest reply", href: contact.waLink, testId: "button-contact-whatsapp", event: "whatsapp_click" as const, iconCls: "bg-[#25D366]/15 text-[#1F8A50] dark:text-[#5BD38E]" },
+    { icon: MessageCircle, label: `WhatsApp ${contact.name}`, sub: "Fastest reply", href: contact.waLink, testId: "button-contact-whatsapp", event: "whatsapp_click" as const, iconCls: "bg-[#25D366]/15 text-[#1F8A50] dark:text-[#5BD38E]" },
     { icon: Mail, label: "Email", sub: contact.email, href: `mailto:${contact.email}`, testId: "button-contact-email", event: "email_click" as const, iconCls: "bg-dp-soft text-dp-accent" },
   ];
   return (

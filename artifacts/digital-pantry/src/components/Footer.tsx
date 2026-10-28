@@ -65,7 +65,7 @@ export function Footer() {
 
           <div className="flex flex-col text-[15px]">
             <a href={contact.waLink} className="w-fit py-1.5 text-dp-muted transition-colors duration-300 hover:text-dp-ink" data-testid="footer-link-whatsapp" onClick={() => track("whatsapp_click", { surface: "footer" })}>
-              WhatsApp {contact.name} <span data-nosnippet="">{contact.display}</span>
+              WhatsApp {contact.name}
             </a>
             <a href="mailto:thedigitalpantryza@gmail.com" className="w-fit py-1.5 text-dp-muted transition-colors duration-300 hover:text-dp-ink" data-testid="footer-link-email" onClick={() => track("email_click", { surface: "footer" })}>
               thedigitalpantryza@gmail.com
