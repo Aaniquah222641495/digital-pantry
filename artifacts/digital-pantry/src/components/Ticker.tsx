@@ -2,8 +2,7 @@
 // the business"). Only things the site already offers; the founders' story lives in Meet the Chefs.
 const PHRASES = [
   "Websites",
-  "Web apps",
-  "Lead systems",
+  "Every enquiry caught",
   "One-tap WhatsApp orders",
   "Bookings and enquiries",
   "Found on Google and AI search",

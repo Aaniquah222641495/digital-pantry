@@ -44,7 +44,7 @@ function PlanCard({ p }: { p: (typeof PLANS)[number] }) {
   return (
     <div ref={ref} id={`card-${pkg}`} data-testid={`card-pricing-${p.name.toLowerCase()}`} className="flex h-full scroll-mt-32 flex-col">
       {p.popular && (
-        <span className="absolute -top-3 left-8 rounded-full bg-[#FFD43B] px-3 py-1 text-[12px] font-semibold text-[#161214]">Most popular ★</span>
+        <span className="absolute -top-3 left-8 rounded-full bg-[#FFD43B] px-3 py-1 text-[12px] font-semibold text-[#161214]">Our pick ★</span>
       )}
       <p className={`text-[15px] ${p.popular ? "opacity-75" : "text-dp-muted"}`}>{p.name}</p>
       <p className="mt-1 text-[clamp(2.6rem,4vw,3.25rem)] font-semibold tracking-[-0.05em]">{intl ? p.usd : p.price}</p>
@@ -73,7 +73,7 @@ function PlanCard({ p }: { p: (typeof PLANS)[number] }) {
             href={intl ? "/contact?interest=international" : `/contact?interest=${p.name.toLowerCase()}`}
             data-testid={`button-pricing-${p.name.toLowerCase()}`}
             onClick={() => track("package_cta_click", { package: pkg, market, surface: "pricing" })}
-            className="inline-flex h-12 w-full items-center justify-center rounded-full border border-dp-line text-[15px] font-medium text-dp-ink transition-colors hover:border-dp-ink/40 active:scale-[0.98]"
+            className="dp-outline-btn inline-flex h-12 w-full items-center justify-center rounded-full border border-dp-line text-[15px] font-medium text-dp-ink transition-colors hover:border-dp-ink/40 active:scale-[0.98]"
           >
             Choose {p.name}
           </a>
@@ -162,7 +162,7 @@ export default function Pricing() {
                   <p className="text-[15px] font-semibold tabular-nums">{DOMAIN_FEE}</p>
                 </div>
                 <p className="mt-2 max-w-[46ch] text-[14px] leading-relaxed text-dp-muted">
-                  Like yourbusiness.co.za. We register it in your name and set it up.
+                  Like yourbusiness.co.za. We register it in your name and set it up. After year one, we renew it for you on the retainer, or you renew it yourself.
                 </p>
               </div>
             </div>
@@ -206,7 +206,7 @@ export default function Pricing() {
             <a
               href="/contact"
               data-testid="button-retainer-cta"
-              className="inline-flex h-12 items-center rounded-full border border-dp-line px-6 text-[15px] font-medium text-dp-ink transition-colors hover:border-dp-ink/40"
+              className="dp-outline-btn inline-flex h-12 items-center rounded-full border border-dp-line px-6 text-[15px] font-medium text-dp-ink transition-colors hover:border-dp-ink/40"
             >
               Add the retainer
             </a>

@@ -44,7 +44,7 @@ export type EventProps = {
   source?: "contact-page";
   interest?: "starter" | "standard" | "premium" | "pro" | "larger" | "international" | "free_mockup" | "not_sure";
   reason?: "no-endpoint" | "rejected" | "network" | "validation";
-  case?: "stuffd_bagels" | "beginners_madrasah";
+  case?: "stuffd_bagels" | "beginners_madrasah" | "concept_beauty";
 };
 export const PROP_KEYS = ["segment", "package", "market", "surface", "source", "interest", "reason", "case"] as const;
 

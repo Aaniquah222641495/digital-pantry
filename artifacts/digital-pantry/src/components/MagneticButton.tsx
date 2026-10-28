@@ -29,7 +29,7 @@ export function MagneticButton({
   const look =
     variant === "primary"
       ? "bg-dp-cta text-dp-cta-fg shadow-[0_10px_30px_-12px_var(--dp-glow)] hover:shadow-[0_16px_40px_-10px_var(--dp-glow)]"
-      : "border border-dp-line text-dp-ink hover:border-dp-ink/40";
+      : "dp-outline-btn border border-dp-line text-dp-ink hover:border-dp-ink/40";
 
   const inner = (
     <span

@@ -3,6 +3,11 @@ import { useEffect, useRef } from "react";
 // Falling sprinkles, the bakery side of the pantry. Drawn on one canvas (cheap), paused when
 // off screen or the tab is hidden, and not drawn at all for visitors who ask for reduced motion.
 // mode "drift": a slow, endless fall behind a section. mode "burst": one celebratory shower.
+// Sprinkles never cross text: any element inside the canvas's parent marked data-no-sprinkle
+// (headlines, paragraphs, buttons) keeps a clear zone around each of its lines, and sprinkles
+// fade out as they near it.
+const CLEAR = 10; // px of breathing room around a line of text
+const FEATHER = 26; // px over which a sprinkle fades in again beyond that
 const COLORS = ["#FFA7D2", "#E8508A", "#FFD43B", "#FFFFFF", "#FDD2DE", "#B32F68"];
 // Night (Imaan's room): slow silver and hot-pink flecks, like stars in her night sky.
 const NIGHT = ["#E9E3EE", "#FF5CA8", "#FFA7D2", "#FFFFFF", "#C9C6D3", "#FF5CA8"];
@@ -30,6 +35,32 @@ export function Sprinkles({ mode = "drift", count = 46, className = "" }: { mode
     };
     resize();
 
+    const root = canvas.parentElement;
+    const range = document.createRange();
+    const zones = (): number[][] => {
+      if (!root) return [];
+      const cb = canvas.getBoundingClientRect();
+      const out: number[][] = [];
+      root.querySelectorAll("[data-no-sprinkle]").forEach((el) => {
+        range.selectNodeContents(el);
+        for (const q of Array.from(range.getClientRects())) {
+          if (q.width > 1 && q.height > 1) out.push([q.left - cb.left, q.top - cb.top, q.right - cb.left, q.bottom - cb.top]);
+        }
+      });
+      return out;
+    };
+    // 0 on or near text, ramping to 1 a little further out.
+    const visibility = (x: number, y: number, r: number, zs: number[][]) => {
+      let a = 1;
+      for (const z of zs) {
+        const dx = Math.max(z[0] - x, 0, x - z[2]);
+        const dy = Math.max(z[1] - y, 0, y - z[3]);
+        const d = Math.hypot(dx, dy) - r - CLEAR;
+        if (d < a * FEATHER) a = Math.max(0, d / FEATHER);
+      }
+      return a;
+    };
+
     const make = (startAbove: boolean): Sprinkle => ({
       x: Math.random() * w,
       y: startAbove ? -20 - Math.random() * h * (mode === "burst" ? 0.6 : 1) : Math.random() * h,
@@ -51,6 +82,7 @@ export function Sprinkles({ mode = "drift", count = 46, className = "" }: { mode
       if (now - last < 32) { frame = requestAnimationFrame(draw); return; } // ~30 fps is plenty for sprinkles
       last = now;
       ctx.clearRect(0, 0, w, h);
+      const zs = zones();
       const night = document.documentElement.classList.contains("dark");
       const pace = night && mode === "drift" ? 0.55 : 1;
       for (let k = 0; k < items.length; k++) {
@@ -60,7 +92,10 @@ export function Sprinkles({ mode = "drift", count = 46, className = "" }: { mode
         s.x += s.vx + Math.sin((s.y + s.len) * 0.01) * 0.15;
         s.rot += s.vr;
         if (mode === "drift" && s.y > h + 20) Object.assign(s, make(true), { y: -20 });
+        const vis = zs.length ? visibility(s.x, s.y, s.len / 2, zs) : 1;
+        if (vis <= 0.02) continue;
         ctx.save();
+        ctx.globalAlpha = vis;
         ctx.translate(s.x, s.y);
         ctx.rotate(s.rot);
         ctx.fillStyle = night ? NIGHT[k % NIGHT.length] : s.color;

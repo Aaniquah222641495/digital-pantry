@@ -21,7 +21,7 @@ import { Sprinkles } from "./Sprinkles";
 type Phase = { name: "form" } | { name: "sent"; values: LeadFormValues } | { name: "fallback"; values: LeadFormValues };
 
 const inputCls =
-  "w-full min-h-12 bg-dp-bg border border-dp-line focus-visible:border-dp-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dp-accent aria-[invalid=true]:border-[#C2005F] dark:aria-[invalid=true]:border-[#FF7AB2] rounded-[14px] px-4 py-3 text-dp-ink text-base transition-colors placeholder:text-dp-muted/80";
+  "dp-field w-full min-h-12 bg-dp-bg border border-dp-line focus-visible:border-dp-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dp-accent aria-[invalid=true]:border-[#C2005F] dark:aria-[invalid=true]:border-[#FF7AB2] rounded-[14px] px-4 py-3 text-dp-ink text-base transition-colors placeholder:text-dp-muted/80";
 const labelCls = "block text-[14px] font-medium text-dp-ink mb-2";
 const errCls = "text-[#B0004F] dark:text-[#FF8DBD] text-sm mt-1.5";
 
@@ -36,7 +36,7 @@ function FieldError({ id, message }: { id: string; message?: string }) {
 const waBtnCls =
   "inline-flex items-center justify-center gap-2 min-h-12 rounded-full bg-[#1FA855] hover:bg-[#188a45] text-white font-body font-semibold px-6 py-3 text-base transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1FA855]";
 const mailBtnCls =
-  "inline-flex items-center justify-center gap-2 min-h-12 rounded-full border border-dp-line text-dp-ink hover:border-dp-ink/40 font-body font-semibold px-6 py-3 text-base transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dp-accent";
+  "dp-outline-btn inline-flex items-center justify-center gap-2 min-h-12 rounded-full border border-dp-line text-dp-ink hover:border-dp-ink/40 font-body font-semibold px-6 py-3 text-base transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dp-accent";
 
 /**
  * The lead form. Sends to the Google Apps Script endpoint (VITE_LEADS_ENDPOINT, see apps-script/).
@@ -110,16 +110,17 @@ export function LeadForm({
       <div className={`${cardCls} relative overflow-hidden p-8 md:p-10 text-center`} data-testid="lead-success">
         <Sprinkles mode="burst" count={90} />
         <div className="text-5xl mb-3 text-[#E0B000] dark:text-[#FFD43B]" aria-hidden="true">★</div>
-        <h3 ref={headingRef} tabIndex={-1} className="font-semibold tracking-[-0.03em] text-dp-ink text-2xl md:text-3xl mb-3 outline-none">
+        <h3 data-no-sprinkle ref={headingRef} tabIndex={-1} className="font-semibold tracking-[-0.03em] text-dp-ink text-2xl md:text-3xl mb-3 outline-none">
           Thanks, {values.name.split(" ")[0]}. It's in the pantry!
         </h3>
-        <p className="text-dp-muted text-base mb-2">
+        <p data-no-sprinkle className="text-dp-muted text-base mb-2">
           Your enquiry about {values.interest === "Free mock-up" ? "a free mock-up" : values.interest === "Not sure yet" ? "our websites" : `the ${values.interest} package`} has been sent. We'll reply to {values.email} or on {values.phone}.
         </p>
-        <p className="text-dp-muted text-sm mb-7">
+        <p data-no-sprinkle className="text-dp-muted text-sm mb-7">
           A short confirmation email is on its way. If you can't see it, check your spam folder.
         </p>
         <a
+          data-no-sprinkle
           href={whatsappUrl(values, "after-send")}
           target="_blank"
           rel="noopener noreferrer"
@@ -130,7 +131,7 @@ export function LeadForm({
           <MessageCircle size={20} aria-hidden="true" />
           Chat on WhatsApp
         </a>
-        <p className="font-body text-dp-muted text-xs mt-3">Optional. Handy if it's urgent.</p>
+        <p data-no-sprinkle className="font-body text-dp-muted text-xs mt-3">Optional. Handy if it's urgent.</p>
       </div>
     );
   }

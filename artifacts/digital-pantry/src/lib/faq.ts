@@ -102,7 +102,7 @@ export const FAQ_GROUPS: FaqGroup[] = [
       {
         id: "domain",
         q: "How does my domain name work?",
-        a: "Every site goes live on its own domain, like yourbusiness.co.za. We register it in your name, so you are the owner, and set it up. You pay the registration and every yearly renewal: a .co.za is about R100 to R150 a year. We tell you the cost before anything is bought.",
+        a: "Every site goes live on its own domain, like yourbusiness.co.za. We register it in your name, so you are the owner, and set it up. You pay the domain fee on top of your package: a .co.za is about R100 to R150 a year, and we tell you the cost before anything is bought. After the first year, we renew it for you if you're on the retainer (you pay the renewal at cost). If not, you renew it yourself, on time, or the site goes offline.",
       },
       {
         id: "hosting",

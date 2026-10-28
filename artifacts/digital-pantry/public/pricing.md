@@ -32,7 +32,7 @@ Last updated: 2026-10-27. Source page: https://digitalpantry.co.za/pricing
 - No monthly fees: runs on free Google tools the client owns
 
 ## Your domain (every site needs one)
-Every site goes live on its own domain, like yourbusiness.co.za. We register it in your name, so it's yours, and connect it in every package. You pay the domain fee: about R100 to R150 a year.
+Every site goes live on its own domain, like yourbusiness.co.za. We register it in your name, so it's yours, and connect it in every package. You pay the domain fee on top of the package: about R100 to R150 a year. After the first year we renew it for you if you're on the retainer (renewal at cost); otherwise you renew it yourself.
 
 ## Extras (not in the package prices, only if you want them)
 Package prices cover the site build only, once-off. These are billed separately, and we quote the cost before anything is bought:
@@ -50,7 +50,7 @@ Starter, Standard and Premium sites take 5 to 7 business days, counted from when
 - International clients: $90 per month. Larger businesses: quoted with the build.
 
 ## Free mock-up
-- One free concept per business, for qualified enquiries: a real business, with the decision-maker, open to a paid build.
+- One free mock-up per business, for qualified enquiries: a real business, with the decision-maker, open to a paid build.
 - You get a mock-up pack (phone and desktop videos and a quote PDF), not a working site, within 5 business days of your brief.
 - Development, a live link, source files and revisions start once the deposit is paid. The concept and files stay ours until the agreed fee is paid.
 - No obligation to go ahead. Ask on the contact page: https://digitalpantry.co.za/contact?interest=mockup

@@ -50,7 +50,7 @@ export default function Faq() {
               <a
                 key={g.id}
                 href={`#${g.id}`}
-                className="inline-flex min-h-11 items-center rounded-full border border-dp-line bg-dp-surface px-5 text-[15px] font-medium text-dp-ink transition-colors hover:border-dp-ink/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dp-accent"
+                className="dp-outline-btn inline-flex min-h-11 items-center rounded-full border border-dp-line bg-dp-surface px-5 text-[15px] font-medium text-dp-ink transition-colors hover:border-dp-ink/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dp-accent"
               >
                 {g.title}
                 <span className="ml-2 rounded-full bg-dp-soft px-2 py-0.5 text-[12px] tabular-nums text-dp-muted">{g.items.length}</span>

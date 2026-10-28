@@ -5,18 +5,30 @@ import { CutoutWord } from "../components/CutoutWord";
 import { Reveal } from "../components/Reveal";
 import { DeviceFrames } from "../components/DeviceFrames";
 import { FreeTaste } from "../components/FreeTaste";
-import { BuildTicket } from "../components/BuildTicket";
 import { H1 } from "../lib/style";
 import { TURNAROUND_NOTE } from "../lib/plans";
 import { OrderUp } from "../components/OrderUp";
 import { Sticker, DAY, NIGHT } from "../components/Stickers";
 import { useTrackOnView, type EventProps } from "../lib/analytics";
 
-const STACK_TAGS = ["React", "TypeScript", "Tailwind", "Netlify"];
 
 // Case studies (PRD 4.4): client, need, what we built and the technical side, checked against the
 // live sites and project records on 2026-10-26. Home shows the short version.
-const CASES = [
+type Case = {
+  name: string;
+  caseKey: NonNullable<EventProps["case"]>;
+  kind: string;
+  /** Only live client sites have these; the concept has none, so no link and no "Live" badge. */
+  url?: string;
+  href?: string;
+  testId?: string;
+  concept?: boolean;
+  desktop: string;
+  phone: string;
+  rows: readonly (readonly [string, string])[];
+};
+
+const CASES: readonly Case[] = [
   {
     name: "Stuff'd Bagels",
     caseKey: "stuffd_bagels",
@@ -32,7 +44,6 @@ const CASES = [
       ["What we built", "One mobile-first page with the menu, this week's pickup spots and an order form."],
       ["Under the hood", "The form writes the order, pickup spot and total into a WhatsApp message, so it arrives ready to confirm."],
     ],
-    stack: STACK_TAGS,
   },
   {
     name: "Beginners Madrasah",
@@ -49,9 +60,21 @@ const CASES = [
       ["What we built", "A 12-page site on their own domain: a page for every programme, registration, testimonials and FAQs."],
       ["Under the hood", "Every page is pre-built for speed, with structured data for Google and AI search and strict security headers."],
     ],
-    stack: STACK_TAGS,
   },
-] as const;
+  {
+    name: "Saltbush & Linen",
+    caseKey: "concept_beauty",
+    kind: "Beauty studio, Cape Town (concept)",
+    concept: true,
+    desktop: "/images/work/concept-beauty-desktop.webp",
+    phone: "/images/work/concept-beauty-phone.webp",
+    rows: [
+      ["The brief", "A calm website for a beauty studio: treatments, prices and an easy way to book."],
+      ["What we designed", "A soft green look with a script wordmark, a menu you tap through and a booking request that opens in WhatsApp."],
+      ["Under the hood", "A client picks a treatment and a time, and the request lands in your WhatsApp ready to confirm."],
+    ],
+  },
+];
 
 function CaseArticle({ caseKey, i, children }: { caseKey: NonNullable<EventProps["case"]>; i: number; children: ReactNode }) {
   const ref = useRef<HTMLElement>(null);
@@ -79,9 +102,8 @@ export default function Portfolio() {
               Websites built in Cape Town, from scratch. Here's what we've been cooking. <span aria-hidden="true" className="text-dp-accent">★</span>
             </p>
             {/* Order ticket strip: facts only */}
-            <dl className="dp-rise mt-10 grid max-w-[460px] grid-cols-3 overflow-hidden rounded-[18px] border border-dp-line bg-dp-surface text-center" style={{ "--d": "0.24s" } as CSSProperties}>
+            <dl className="dp-rise mt-10 grid max-w-[460px] grid-cols-2 overflow-hidden rounded-[18px] border border-dp-line bg-dp-surface text-center" style={{ "--d": "0.24s" } as CSSProperties}>
               {[
-                ["Served", `${CASES.length} live sites`],
                 ["Kitchen", "Cape Town"],
                 ["Turnaround", "5 to 7 business days*"],
               ].map(([k, v], i) => (
@@ -108,13 +130,13 @@ export default function Portfolio() {
           return (
             <CaseArticle key={c.name} caseKey={c.caseKey} i={i}>
               <Reveal className={`md:col-span-7 ${flip ? "md:order-2" : ""}`}>
-                <DeviceFrames desktop={c.desktop} phone={c.phone} alt={`The ${c.name} website`} url={c.url} flip={flip} />
+                <DeviceFrames desktop={c.desktop} phone={c.phone} alt={`${c.concept ? "A concept design for " : "The "}${c.name}${c.concept ? "" : " website"}`} url={c.url ?? "concept design"} flip={flip} />
               </Reveal>
               <Reveal delay={0.1} className={`md:col-span-5 ${flip ? "md:order-1" : ""}`}>
                 <p className="flex items-center gap-2 text-[14px] text-dp-muted">
                   <span className="inline-flex items-center gap-1.5 rounded-full border border-dp-line px-2.5 py-0.5 text-[12px] font-medium text-dp-ink">
-                    <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-[#2FB36A] shadow-[0_0_8px_#2FB36A]" />
-                    Live
+                    <span aria-hidden="true" className={`h-1.5 w-1.5 rounded-full ${c.concept ? "bg-dp-accent" : "bg-[#2FB36A] shadow-[0_0_8px_#2FB36A]"}`} />
+                    {c.concept ? "Concept" : "Live"}
                   </span>
                   {c.kind}
                 </p>
@@ -129,13 +151,7 @@ export default function Portfolio() {
                     </div>
                   ))}
                 </dl>
-                <ul className="mt-7 flex flex-wrap gap-2" aria-label="Built with">
-                  {c.stack.map((t) => (
-                    <li key={t} className="rounded-full border border-dp-line px-3 py-1 font-mono text-[12px] text-dp-muted" data-testid={i === 0 ? `tag-stack-${t.toLowerCase()}` : undefined}>
-                      {t}
-                    </li>
-                  ))}
-                </ul>
+                {c.href && (
                 <a
                   href={c.href}
                   target="_blank"
@@ -146,6 +162,7 @@ export default function Portfolio() {
                   Visit the live site
                   <ArrowUpRight size={16} className="transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                 </a>
+                )}
               </Reveal>
             </CaseArticle>
           );
@@ -153,7 +170,6 @@ export default function Portfolio() {
       </div>
 
 
-      <BuildTicket />
       <FreeTaste testId="portfolio-mockup-offer" />
     </main>
   );
