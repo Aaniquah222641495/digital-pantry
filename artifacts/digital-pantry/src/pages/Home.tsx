@@ -52,7 +52,8 @@ const WORK = [
     name: "Stuff'd Bagels",
     kind: "Food pop-up, Cape Town",
     url: "stuffdbagels.netlify.app",
-    href: "https://stuffdbagels.netlify.app",
+    // Our copy of the final, client-approved version, until stuffdbagels.co.za exists (founder 2026-10-28; public/work/).
+    href: "/work/stuffd-bagels/",
     desktop: "/images/work/stuffd-desktop-v2.webp",
     phone: "/images/work/stuffd-phone-v2.webp",
     facts: [
@@ -351,7 +352,7 @@ function Work() {
                     rel="noopener noreferrer"
                     className="group mt-8 inline-flex min-h-11 items-center gap-2 rounded-full bg-dp-cta px-5 text-[15px] font-medium text-dp-cta-fg transition-transform duration-500 hover:-translate-y-0.5"
                   >
-                    Visit the live site
+                    {w.href.startsWith("/work/") ? "See the site" : "Visit the live site"}
                     <ArrowUpRight size={16} className="transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                   </a>
                   <Link href="/portfolio" className="ml-5 inline-flex min-h-11 items-center text-[15px] font-medium text-dp-ink underline decoration-dp-line underline-offset-[6px] hover:decoration-dp-accent">

@@ -1,5 +1,5 @@
 // Browser check for every page (DPW-18). Serves the built site with its real CSP and opens each page
-// from the sitemap (plus the 404 page and the public concepts) at phone and desktop size, in Night
+// from the sitemap (plus the 404 page, the public concepts and the client-site copies in /work/) at phone and desktop size, in Night
 // and Day. Fails on console or CSP errors, page errors, failed requests to our own site, sideways
 // scroll, broken images, or any axe violation (WCAG 2 A/AA). Nothing leaves this machine: analytics
 // and the leads endpoint are answered locally.
@@ -45,7 +45,9 @@ const base = `http://${HOST}:${server.address().port}`;
 const sitemap = await readFile(path.join(dist, "sitemap.xml"), "utf8");
 const paths = [...sitemap.matchAll(/<loc>https:\/\/[^/]+(\/[^<]*)<\/loc>/g)].map((m) => m[1]);
 paths.push("/404");
-for (const c of await readdir(path.join(dist, "concepts")).catch(() => [])) paths.push(`/concepts/${c}/`);
+for (const dir of ["concepts", "work"]) {
+  for (const c of await readdir(path.join(dist, dir)).catch(() => [])) paths.push(`/${dir}/${c}/`);
+}
 
 const VIEWPORTS = [{ name: "phone", width: 393, height: 852 }, { name: "desktop", width: 1440, height: 900 }];
 const THEMES = ["dark", "light"];
