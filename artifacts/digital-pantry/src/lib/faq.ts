@@ -64,7 +64,7 @@ export const FAQ_GROUPS: FaqGroup[] = [
       {
         id: "pro-monthly",
         q: "Does Pro have monthly fees?",
-        a: "Not for the lead system. It runs on free Google tools that you own, so every enquiry lands in your inbox and your own Sheet whether or not you stay on care. Like every new site, Pro starts on care at {retainer}/month for hosting and small edits.",
+        a: "Not for the lead system. It runs on free Google tools that you own, so every enquiry lands in your inbox and your own Sheet whether or not you stay on care. Like every new site, Pro starts on care at {retainer}/month for hosting and small edits, or we hand the site over to you free of charge.",
       },
     ],
   },
