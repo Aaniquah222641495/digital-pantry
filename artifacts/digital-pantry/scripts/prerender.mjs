@@ -20,6 +20,12 @@ if (!template.includes("<!--seo-->") || !template.includes('<div id="root"></div
 // Preload the fonts used at the top of every page (body sans and the pixel lettering), so text
 // paints in its final font and doesn't jump when the font arrives (layout shift).
 const assets = await readdir(path.join(out, "assets"));
+
+// The lead form must ship with its endpoint, or every enquiry silently falls back (2026-10-28).
+const bundles = await Promise.all(assets.filter((f) => f.endsWith(".js")).map((f) => readFile(path.join(out, "assets", f), "utf8")));
+if (!bundles.some((js) => /https:\/\/script\.google\.com\/macros\/s\/[\w-]+\/exec/.test(js))) {
+  throw new Error("No lead form endpoint in the built JavaScript: check DEFAULT_ENDPOINT in src/lib/leads.ts");
+}
 const preloads = [/^geist-latin-wght-normal-.*\.woff2$/, /^jersey-10-latin-400-normal-.*\.woff2$/]
   .map((re) => assets.find((f) => re.test(f)))
   .filter(Boolean)

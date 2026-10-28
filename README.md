@@ -35,7 +35,7 @@ NODE_ENV=production PORT=3000 BASE_PATH=/ pnpm --filter @workspace/digital-pantr
 
 - `src/components/LeadForm.tsx` (used on Contact), rules and request code in `src/lib/leads.ts`. The "Free mock-up" bands on Home and Pricing link to `/contact?interest=mockup`.
 - The backend is `apps-script/Code.gs`. Click-by-click set-up, quotas and how the browser talks to it: `apps-script/README.md`.
-- **Netlify variable:** `VITE_LEADS_ENDPOINT` = the Apps Script web app URL (`https://script.google.com/macros/s/.../exec`). It is baked in at build time, so redeploy after changing it. No secrets are involved, the URL is public by design. Without it the form shows the WhatsApp / email fallback. See `artifacts/digital-pantry/.env.example`.
+- **Endpoint:** the Apps Script web app URL lives in `src/lib/leads.ts` (`DEFAULT_ENDPOINT`; public by design, no secret), so the form works on any host. The build fails if it is missing. `VITE_LEADS_ENDPOINT` overrides it at build time (e.g. a test deployment). If you redeploy the Apps Script as a new web app, update `DEFAULT_ENDPOINT`.
 - The field limits and the phone rule live in two places, `src/lib/leads.ts` and `apps-script/Code.gs`. Change both together.
 - Never submit real leads while testing: mock the endpoint (Playwright `page.route`) or use your own details.
 
