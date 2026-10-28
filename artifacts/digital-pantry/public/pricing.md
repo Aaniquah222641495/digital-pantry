@@ -5,7 +5,7 @@ Last updated: 2026-10-27. Source page: https://digitalpantry.co.za/pricing
 
 ## Starter: R600
 - Single page
-- Menu section
+- Menu or services section
 - WhatsApp button
 - Mobile responsive
 - Your own domain connected (domain billed separately)

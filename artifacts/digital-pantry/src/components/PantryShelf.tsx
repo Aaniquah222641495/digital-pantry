@@ -7,7 +7,7 @@ import { useMarket } from "../lib/MarketContext";
 // The four packages as jars standing on one wooden pantry shelf, each with a hanging price tag.
 // Used on Home ("On the MENU") and as the Pricing page header.
 const JARS = [
-  { name: "Starter", price: PLAN_PRICES.Starter, usd: INTL_PRICES.Starter, img: "/images/starter.webp", note: "One page, a menu and WhatsApp." },
+  { name: "Starter", price: PLAN_PRICES.Starter, usd: INTL_PRICES.Starter, img: "/images/starter.webp", note: "One page, your menu or services and WhatsApp." },
   { name: "Standard", price: PLAN_PRICES.Standard, usd: INTL_PRICES.Standard, img: "/images/standard.webp", note: "The full shop window.", popular: true },
   { name: "Premium", price: PLAN_PRICES.Premium, usd: INTL_PRICES.Premium, img: "/images/premium.webp", note: "Google Business and basic SEO." },
   { name: "Pro", price: PLAN_PRICES.Pro, usd: INTL_PRICES.Pro, img: "/images/pro.webp", note: "Every enquiry caught for you." },

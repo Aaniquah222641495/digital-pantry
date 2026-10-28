@@ -4,6 +4,7 @@ import { Reveal } from "../components/Reveal";
 import { MagneticButton } from "../components/MagneticButton";
 import { FreeTaste } from "../components/FreeTaste";
 import { PantryShelf } from "../components/PantryShelf";
+import { MarketSwitch } from "../components/MarketSwitch";
 import { BusinessPicker } from "../components/BusinessPicker";
 import { Sticker, DAY, NIGHT } from "../components/Stickers";
 import { DOMAIN_FEE, EXTRAS, INCLUDED_ALWAYS, INTL_PRICES, PLAN_PRICES, SMALL_BUSINESS_LIMIT, retainerFor } from "../lib/plans";
@@ -17,7 +18,7 @@ const PLANS = [
   {
     name: "Starter", price: PLAN_PRICES.Starter, usd: INTL_PRICES.Starter, popular: false, img: "/images/starter.webp",
     line: "A one-page site that gets you found.",
-    features: ["Single page", "Menu section", "WhatsApp button", "Mobile responsive", "Your own domain connected"],
+    features: ["Single page", "Menu or services section", "WhatsApp button", "Mobile responsive", "Your own domain connected"],
   },
   {
     name: "Standard", price: PLAN_PRICES.Standard, usd: INTL_PRICES.Standard, popular: true, img: "/images/standard.webp",
@@ -97,8 +98,12 @@ export default function Pricing() {
             On the <CutoutWord word="MENU" /> <span aria-hidden="true" className="text-[0.8em]">★</span>
           </h1>
           <p className="dp-rise mt-6 max-w-[40ch] text-[clamp(1.05rem,1.5vw,1.25rem)] leading-relaxed text-dp-muted" style={{ "--d": "0.12s" } as React.CSSProperties}>
-            Website prices for small businesses. Pick your jar.
+            Website prices for small businesses, from {intl ? INTL_PRICES.Starter : PLAN_PRICES.Starter} once-off. Pick your jar.
           </p>
+          {/* The header's Local / International switch is hidden below lg, so phones get it here */}
+          <div className="dp-rise mt-6 lg:hidden" style={{ "--d": "0.16s" } as React.CSSProperties}>
+            <MarketSwitch />
+          </div>
 
           <div className="dp-rise mt-14 md:mt-16" style={{ "--d": "0.2s" } as React.CSSProperties}>
             <PantryShelf surface="pricing_shelf" toCards />
@@ -143,7 +148,7 @@ export default function Pricing() {
             <div data-testid="pricing-billed-separately">
               <h2 className="text-[clamp(1.6rem,2.6vw,2.2rem)] font-semibold tracking-[-0.035em]">What the price covers</h2>
               <p className="mt-3 max-w-[44ch] leading-relaxed text-dp-muted">
-                One price for your site, plus your domain. Extras only if you want them, quoted first.
+                One price for your site, plus your domain. You pay 50% to start and the rest when your site goes live. Extras only if you want them, quoted first.
               </p>
               <p className="mt-8 font-mono text-[13px] text-dp-accent">In every package</p>
               <ul className="mt-4 flex flex-col gap-3">

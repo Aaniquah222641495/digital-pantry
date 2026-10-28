@@ -129,6 +129,13 @@ function Hero() {
               See our work
             </MagneticButton>
           </div>
+          <p data-no-sprinkle className="dp-rise mt-6 text-[15px] text-dp-muted" style={rise(0.32)}>
+            Not sure yet?{" "}
+            <Link href="/contact?interest=mockup" data-testid="link-hero-mockup" className="font-medium text-dp-ink underline decoration-dp-line underline-offset-4 transition-colors hover:decoration-dp-accent">
+              Get a free mock-up first
+            </Link>
+            .
+          </p>
         </div>
 
         {/* The kitchen, kept to one idea so the hero stays calm (founder 2026-10-26). Live work
