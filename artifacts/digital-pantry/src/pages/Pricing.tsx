@@ -32,7 +32,7 @@ const PLANS = [
   },
   {
     name: "Pro", price: PLAN_PRICES.Pro, usd: INTL_PRICES.Pro, popular: false, img: "/images/pro.webp",
-    line: "Every enquiry caught, saved and answered.",
+    line: "Every enquiry lands in your Google Sheet, you get an email straight away, and your customer gets a reply within seconds.",
     features: ["Everything in Premium", "Lead capture form + instant alerts", "Leads saved to your Google Sheet", "Auto-reply to every enquiry", "WhatsApp follow-up button", "Tested before handover"],
   },
 ] as const;
@@ -59,6 +59,16 @@ function PlanCard({ p }: { p: (typeof PLANS)[number] }) {
           </li>
         ))}
       </ul>
+      {/* Our own contact form runs on the same Apps Script lead system (apps-script/Code.gs), so it doubles as a demo */}
+      {p.name === "Pro" && (
+        <p className="mt-6 rounded-[16px] bg-dp-soft/70 p-4 text-[14px] leading-relaxed text-dp-muted">
+          Our own enquiry form runs on this system.{" "}
+          <Link href="/contact" className="font-medium text-dp-ink underline decoration-dp-line underline-offset-4 hover:decoration-dp-accent">
+            Send us a message
+          </Link>{" "}
+          and you'll get the same instant reply your customers would.
+        </p>
+      )}
       <div className="mt-8">
         {p.popular ? (
           <a

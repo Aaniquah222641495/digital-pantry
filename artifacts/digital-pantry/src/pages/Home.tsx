@@ -120,7 +120,7 @@ function Hero() {
             </span>
           </h1>
           <p data-no-sprinkle className="dp-rise mt-8 max-w-[38ch] text-[clamp(1.15rem,1.7vw,1.4rem)] leading-[1.45] tracking-[-0.01em] text-dp-ink/80" style={rise(0.14)}>
-            We design and build websites for small businesses, from scratch, so customers can find you, see what you offer and get in touch in one tap.
+            We design and build websites for small businesses in Cape Town, from a one-page site with a WhatsApp button to one that saves and answers every enquiry for you.
           </p>
           <div data-no-sprinkle className="dp-rise mt-10 flex flex-wrap items-center gap-3" style={rise(0.26)}>
             <MagneticButton href="/contact" data-testid="button-hero-cta">
