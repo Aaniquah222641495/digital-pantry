@@ -117,10 +117,10 @@ export function LeadForm({
           Thanks, {values.name.split(" ")[0]}. It's in the pantry!
         </h3>
         <p data-no-sprinkle className="text-dp-muted text-base mb-2">
-          We've got your enquiry about {interestPhrase(values, "studio")}. We'll reply on {values.phone}{values.email ? ` or to ${values.email}` : ""}.
+          We've got your enquiry about {interestPhrase(values, "studio")}. We'll reply within 24 hours on {values.phone}{values.email ? ` or to ${values.email}` : ""}.
         </p>
         <p data-no-sprinkle className="text-dp-muted text-sm mb-7">
-          {values.email ? "A short confirmation email is on its way. If you can't see it, check your spam folder." : "Keep your phone close: we reply on WhatsApp or by call."}
+          {values.email ? "A short confirmation email is on its way. If you can't see it, check your spam folder." : "Keep your phone close: we'll WhatsApp or call you."}
         </p>
         <a
           data-no-sprinkle
@@ -266,6 +266,8 @@ export function LeadForm({
         <label htmlFor="lead-company-site">Leave this field empty</label>
         <input id="lead-company-site" type="text" tabIndex={-1} autoComplete="off" data-testid="input-honeypot" {...register("companySite")} />
       </div>
+
+      <p className="text-center text-sm text-dp-muted" data-testid="reply-time">We reply within 24 hours.</p>
 
       <button
         type="submit"
