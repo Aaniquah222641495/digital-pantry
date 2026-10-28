@@ -59,6 +59,7 @@ const context = await browser.newContext({ viewport: { width: 1280, height: 900 
 const page = await context.newPage();
 
 const sends = [];
+const leadPosts = [];
 const otherHosts = new Set();
 const cspErrors = [];
 page.on("console", (m) => {
@@ -70,6 +71,12 @@ await context.route("**/*", async (route) => {
   if (url.hostname === "gateway.umami.is") {
     sends.push({ raw: req.postData() ?? "", headers: req.headers() });
     return route.fulfill({ status: 200, contentType: "application/json", headers: { "Access-Control-Allow-Origin": "*" }, body: "{}" });
+  }
+  // The leads endpoint is mocked: a test must never write to the real Sheet. It answers "not saved",
+  // so the form shows its fallback and the test can check those clicks too.
+  if (url.hostname === "script.google.com" || url.hostname === "script.googleusercontent.com") {
+    leadPosts.push(req.method());
+    return route.fulfill({ status: 200, contentType: "application/json", headers: { "Access-Control-Allow-Origin": "*" }, body: '{"ok":false}' });
   }
   if (!ALLOWED_HOSTS.has(url.hostname) && url.protocol.startsWith("http")) {
     otherHosts.add(url.hostname);
@@ -129,7 +136,7 @@ await page.getByTestId("button-pricing-standard").click();
 await page.waitForURL(/\/contact/);
 await settle();
 
-// Form: invalid send first, then a full one. The build has no leads endpoint, so it falls back.
+// Form: invalid send first, then a full one. The mocked endpoint says "not saved", so it falls back.
 await page.getByTestId("input-name").fill(VISITOR.name);
 await page.getByTestId("button-submit").click();
 await settle();
@@ -202,7 +209,7 @@ const expected = {
   "package_cta_click (standard)": /package_cta_click .*"standard"/,
   "enquiry_form_start": /enquiry_form_start/,
   "enquiry_form_error validation": /enquiry_form_error .*validation/,
-  "enquiry_form_error no-endpoint": /enquiry_form_error .*no-endpoint/,
+  "enquiry_form_error rejected": /enquiry_form_error .*rejected/,
   "whatsapp_click form_fallback": /whatsapp_click .*form_fallback/,
   "email_click form_fallback": /email_click .*form_fallback/,
   "email_click contact_card": /email_click .*contact_card/,
@@ -211,6 +218,7 @@ const expected = {
   "portfolio_case_study_view": /portfolio_case_study_view/,
 };
 for (const [label, re] of Object.entries(expected)) if (!has(re)) errors.push(`expected event not seen: ${label}`);
+if (!leadPosts.includes("POST")) errors.push("the form never posted to the (mocked) leads endpoint");
 if (otherHosts.size) errors.push(`requests to unapproved hosts: ${[...otherHosts].join(", ")}`);
 if (cspErrors.length) errors.push(`CSP errors: ${cspErrors.join(" | ")}`);
 if (guardDrops.some((d) => !d)) errors.push(`guard let a bad payload through: ${JSON.stringify(guardDrops)}`);

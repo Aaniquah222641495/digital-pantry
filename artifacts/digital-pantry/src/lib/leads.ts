@@ -80,9 +80,12 @@ export const leadSchema = z.object({
 
 export type LeadFormValues = z.infer<typeof leadSchema>;
 
-// Netlify build variable. Must look like an Apps Script web app URL, or we treat it as missing
-// so a typo can never send leads somewhere else.
-const rawEndpoint = (import.meta.env.VITE_LEADS_ENDPOINT as string | undefined)?.trim();
+// The live Apps Script web app (public by design, no secret). Kept in code so the form works on
+// any host: the Cloudflare move dropped Netlify's build variable and the form fell back for hours
+// (2026-10-28). VITE_LEADS_ENDPOINT still overrides it, e.g. for a test deployment. Either must look
+// like an Apps Script web app URL, or we treat it as missing so a typo can never send leads elsewhere.
+const DEFAULT_ENDPOINT = "https://script.google.com/macros/s/AKfycbzevDhzAEXUtTEHDU2lyVb4Hg6evHy0vqHwnSZXF7ufqUB79nFdXrHD1k22kMVhatgA/exec";
+const rawEndpoint = (import.meta.env.VITE_LEADS_ENDPOINT as string | undefined)?.trim() || DEFAULT_ENDPOINT;
 export const LEADS_ENDPOINT =
   rawEndpoint && /^https:\/\/script\.google\.com\/macros\/s\/[\w-]+\/exec$/.test(rawEndpoint) ? rawEndpoint : undefined;
 
