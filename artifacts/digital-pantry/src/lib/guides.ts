@@ -25,9 +25,9 @@ export interface Industry {
     name: string;
     kind: string;
     url: string;
-    /** Left out for concept designs: there is no live site to visit. */
+    /** The live site, or for a concept design its clickable build under /concepts/. */
     href?: string;
-    /** True for our own concept designs. The page then says so and shows no live-site link. */
+    /** True for our own concept designs. The page then says so, and the link reads "Try the concept". */
     concept?: boolean;
     desktop: string;
     phone: string;
@@ -98,6 +98,7 @@ export const BEAUTY: Industry = {
     name: "Saltbush & Linen",
     kind: "Beauty studio, Cape Town (concept)",
     url: "concept design",
+    href: "/concepts/saltbush-linen/",
     concept: true,
     desktop: "/images/work/concept-beauty-desktop.webp",
     phone: "/images/work/concept-beauty-phone.webp",

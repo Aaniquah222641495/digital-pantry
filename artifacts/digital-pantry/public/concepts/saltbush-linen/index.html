@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en-ZA">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Saltbush &amp; Linen (concept)</title>
+  <meta name="description" content="A concept website design by Digital Pantry for a fictional beauty studio.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="beauty.css">
+  <link rel="stylesheet" href="concept.css">
+  <link rel="icon" href="data:,">
+  <!-- config first, so the chosen type option (config.typeset) is known before any font is requested -->
+  <script src="config.js"></script>
+</head>
+<body class="beauty">
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="mock-banner" role="note" data-bind="bannerNote">First-draft website mock-up. Photos are sample images. Colours, logo, treatments, prices and hours are placeholders.</div>
+
+  <div class="page">
+    <header class="site-header">
+      <div class="wrap bar">
+        <a class="brand" href="#top" data-logo></a>
+        <nav aria-label="Main"><ul>
+          <li><a href="#services">Treatments</a></li>
+          <li><a href="#book">Book</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#hours">Hours</a></li>
+        </ul></nav>
+        <a class="btn small" href="#book">Request a booking</a>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- 1. Hero: an aubergine panel with the copy, and one portrait cut into tall rounded strips -->
+      <div class="stage" id="top">
+        <div class="wrap">
+          <div class="stage-panel">
+            <div class="stage-copy">
+              <p class="kicker" data-bind="tagline"></p>
+              <h1 data-bind="name" data-script-word></h1>
+              <p class="badge" data-bind="badge" data-optional></p>
+              <p class="lead" data-bind="intro"></p>
+              <div class="btn-row">
+                <a class="btn light" href="#book">Request a booking</a>
+                <a class="btn ghost" href="#services">See treatments</a>
+              </div>
+            </div>
+            <div class="stage-strips" data-strips="hero"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Treatments (interactive menu) -->
+      <section id="services">
+        <div class="wrap">
+          <div class="section-head">
+            <h2>Treatments</h2>
+            <p data-bind="servicesNote">Sample treatments and prices. Pick a treatment to request a time.</p>
+          </div>
+          <div class="menu" data-menu data-book="Request this treatment"></div>
+        </div>
+      </section>
+
+      <!-- 2b. Request a booking -->
+      <section id="book" aria-labelledby="book-h">
+        <div class="wrap">
+          <div class="panel book-grid">
+            <div class="book-copy">
+              <h2 id="book-h" data-bind="booking.title">Request a booking</h2>
+              <p data-bind="booking.text">Choose a treatment, a day and a time. Your request opens in WhatsApp, already written.</p>
+              <p class="credit" data-bind="booking.note" data-optional></p>
+            </div>
+            <form class="book-form" data-booking novalidate>
+              <div class="field">
+                <label for="bk-treatment">Treatment</label>
+                <select id="bk-treatment" name="treatment" required aria-describedby="bk-treatment-err">
+                  <option value="">Choose a treatment</option>
+                </select>
+                <p class="field-error" id="bk-treatment-err" data-error="treatment" hidden></p>
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label for="bk-date">Preferred date</label>
+                  <input id="bk-date" name="date" type="date" required aria-describedby="bk-date-err">
+                  <p class="field-error" id="bk-date-err" data-error="date" hidden></p>
+                </div>
+                <div class="field">
+                  <label for="bk-time">Preferred time</label>
+                  <select id="bk-time" name="time" required aria-describedby="bk-time-err">
+                    <option value="">Choose a time</option>
+                  </select>
+                  <p class="field-error" id="bk-time-err" data-error="time" hidden></p>
+                </div>
+              </div>
+              <div class="book-preview" data-booking-preview hidden>
+                <p class="book-preview-label">Your message</p>
+                <p data-booking-message></p>
+              </div>
+              <div class="book-send">
+                <button class="btn" type="submit">Send request on WhatsApp</button>
+                <p class="hint" data-bind="booking.confirmNote">We'll confirm your time on WhatsApp.</p>
+              </div>
+              <p class="form-status" role="status" data-booking-status></p>
+              <p class="book-alt">Just have a question? <a data-wa>Message us on WhatsApp</a></p>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Why book here: facts only -->
+      <section id="why" aria-labelledby="why-h">
+        <div class="wrap">
+          <div class="panel why">
+            <div class="why-copy">
+              <h2 id="why-h" data-bind="why.title">Why book with us</h2>
+              <p class="why-intro" data-bind="why.intro" data-optional></p>
+              <hr class="rule">
+              <ul class="why-points" data-why></ul>
+              <a class="btn" href="#book" data-bind="why.button">Request a booking</a>
+            </div>
+            <div class="collage" data-img-box>
+              <figure class="c1"><img data-img="images.why1"></figure>
+              <figure class="c2"><img data-img="images.why2"></figure>
+              <figure class="c3"><img data-img="images.why3"></figure>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. Call to action band: tilted photo, heading, hairline, four short facts, a light button -->
+      <section id="cta" aria-labelledby="cta-h">
+        <div class="wrap">
+          <div class="cta">
+            <div class="cta-art" data-img-box>
+              <div class="cta-tilt"><img data-img="images.cta"></div>
+            </div>
+            <div class="cta-copy">
+              <h2 id="cta-h" data-bind="cta.title">Ready to book?</h2>
+              <p class="cta-text" data-bind="cta.text"></p>
+              <div class="rule-dots on-dark" aria-hidden="true"></div>
+              <ul class="cta-list" data-ticks aria-label="Booking at a glance"></ul>
+              <a class="btn light" href="#book" data-bind="cta.button">Request a booking</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. FAQ -->
+      <section id="faq" aria-labelledby="faq-h">
+        <div class="wrap">
+          <div class="faq-head">
+            <h2 id="faq-h" data-bind="faq.title">Questions, answered</h2>
+            <p data-bind="faq.note" data-optional></p>
+          </div>
+          <div class="faq-grid">
+            <div class="faq" data-faq></div>
+            <figure class="faq-photo" data-img-box><img data-img="images.faq"></figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. Insights: three sample article cards (she has no blog yet). Each is labelled "Sample article". -->
+      <section id="insights" aria-labelledby="insights-h">
+        <div class="wrap">
+          <div class="ins-head">
+            <h2 id="insights-h" data-bind="insights.title">Our Latest Insights</h2>
+            <p data-bind="insights.note" data-optional></p>
+          </div>
+          <ul class="icards" data-insights></ul>
+        </div>
+      </section>
+
+      <!-- 8. About: a tilted photo on an offset block, then label, heading, text, hairline, two facts, a button -->
+      <section id="about" aria-labelledby="about-h">
+        <div class="wrap about">
+          <div class="about-art">
+            <figure class="about-img" data-img-box><img data-img="images.about"></figure>
+            <p class="credit about-note" data-bind="aboutPhotoNote" data-optional></p>
+          </div>
+          <div class="about-copy">
+            <p class="tlabel" data-bind="aboutLabel" data-optional></p>
+            <h2 id="about-h" data-bind="aboutTitle">About</h2>
+            <div class="about-text" data-render="paragraphs" data-source="about"></div>
+            <div class="rule-dots" aria-hidden="true"></div>
+            <dl class="facts" data-facts></dl>
+            <a class="btn" href="#services" data-bind="aboutButton">See treatments</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8b. Opening hours and Find us -->
+      <section id="hours">
+        <div class="wrap">
+          <div class="panel visit">
+            <div class="visit-hours">
+              <h2>Opening hours</h2>
+              <div class="hours-card">
+                <div data-render="hours" data-source="hours"></div>
+              </div>
+              <p class="credit" data-bind="hoursNote" data-optional></p>
+            </div>
+            <div class="visit-find">
+              <h2>Find us</h2>
+              <p><span data-bind="area"></span><br><span class="credit" data-bind="addressNote" data-optional></span></p>
+              <a class="btn" href="#book">Request a booking</a>
+              <p class="visit-alt"><a data-wa>Message us on WhatsApp</a></p>
+              <ul class="contact" data-contact aria-label="Contact details and social links"></ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- 9. Footer: soft panel, then an aubergine bar -->
+    <footer class="site-foot">
+      <div class="foot-panel">
+        <div class="foot-grid">
+          <div class="foot-brand">
+            <div class="foot-mark" data-logo aria-hidden="true"></div>
+            <p class="foot-blurb" data-foot-blurb></p>
+            <p class="credit">Concept design by Digital Pantry. Sample photos and prices.</p>
+          </div>
+          <nav class="foot-col" aria-labelledby="fn-h">
+            <h2 class="foot-h" id="fn-h">Navigation</h2>
+            <ul>
+              <li><a href="#services">Treatments</a></li>
+              <li><a href="#book">Request a booking</a></li>
+                  <li><a href="#faq">Questions</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#hours">Hours and location</a></li>
+            </ul>
+          </nav>
+          <nav class="foot-col" aria-labelledby="ft-h">
+            <h2 class="foot-h" id="ft-h">Treatments</h2>
+            <ul data-foot-treatments></ul>
+          </nav>
+          <div class="foot-col foot-cont" aria-labelledby="fc-h">
+            <h2 class="foot-h" id="fc-h">Contacts</h2>
+            <ul class="foot-contacts" data-foot-contacts></ul>
+          </div>
+        </div>
+        <p class="foot-privacy" id="privacy-notice" tabindex="-1">Placeholder: a privacy notice is written for the real site. This page collects nothing; the booking form only opens your own WhatsApp.</p>
+      </div>
+      <div class="foot-bar">
+        <p>&copy; 2026 <span data-bind="name"></span></p>
+        <a href="#privacy-notice">Privacy notice</a>
+        <p class="foot-credit">Concept design by <a href="https://digitalpantry.co.za/">Digital Pantry</a></p>
+      </div>
+    </footer>
+  </div>
+
+  <div class="sticky-cta"><a class="btn" href="#book">Request a booking</a></div>
+  <script src="mockup.js"></script>
+  <script src="beauty.js"></script>
+  <script src="concept.js"></script>
+</body>
+</html>
