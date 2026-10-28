@@ -9,9 +9,11 @@
     "serve": "vite preview --config vite.config.ts --host 0.0.0.0",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "check:analytics": "node scripts/check-analytics.mjs",
-    "test:egress": "node scripts/egress-test.mjs"
+    "test:egress": "node scripts/egress-test.mjs",
+    "test:browser": "node scripts/browser-check.mjs"
   },
   "devDependencies": {
+    "@axe-core/playwright": "4.14.0",
     "@fontsource-variable/geist": "5.3.0",
     "@fontsource-variable/geist-mono": "5.3.0",
     "@fontsource/bebas-neue": "5.3.0",

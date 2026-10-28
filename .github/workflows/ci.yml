@@ -34,6 +34,8 @@ jobs:
         run: pnpm --filter @workspace/digital-pantry exec playwright install --with-deps chromium
       - name: Analytics egress test (no personal data leaves the page)
         run: pnpm --filter @workspace/digital-pantry run test:egress
+      - name: Browser check (every page, phone and desktop, Night and Day, axe)
+        run: pnpm --filter @workspace/digital-pantry run test:browser
       - name: Audit dependencies (high and critical)
         run: pnpm audit --audit-level high
         continue-on-error: true
