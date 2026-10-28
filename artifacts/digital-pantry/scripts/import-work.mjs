@@ -7,6 +7,7 @@
 // - copies the build, minus host files (_headers, _redirects, robots.txt, sitemap.xml, llms.txt, *.md, 404.html);
 // - prefixes root paths in HTML, JS and CSS ("/ig/a.jpg" -> "/work/<slug>/ig/a.jpg") for files in the copy;
 // - points calls to the client's own API ("/api/<name>") at a static "null" file, as our site has no API;
+// - adds the studio's "Want a website like this?" card (public/showcase.js and .css);
 // - drops files nothing references, so the copy stays small.
 // The copy is noindex (public/_headers), and its canonical still names the client's own site.
 import { cp, mkdir, readdir, readFile, rm, stat, writeFile } from "node:fs/promises";
@@ -52,6 +53,11 @@ for (const f of code) {
   s = s.replace(ownRe, (_, q, p) => `${q}${base}${p}`);
   s = s.replace(apiRe, (_, q, name) => (apis.add(name), `${q}${base}/api/${name}.json${q}`));
   await writeFile(f, s);
+}
+// The studio's "Want a website like this?" card (public/showcase.*), on every page of the copy.
+for (const f of code.filter((f) => f.endsWith(".html"))) {
+  const s = await readFile(f, "utf8");
+  if (!s.includes("/showcase.js")) await writeFile(f, s.replace("</head>", '<link rel="stylesheet" href="/showcase.css"><script src="/showcase.js" defer></script></head>'));
 }
 for (const name of apis) {
   await mkdir(path.join(dest, "api"), { recursive: true });

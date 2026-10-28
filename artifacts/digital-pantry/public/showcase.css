@@ -1,0 +1,25 @@
+/* "Want a website like this?" card on the sites we host as examples (/work/*, /concepts/*).
+   Plain CSS with its own dp-showcase prefix so it never clashes with the client site's styles. */
+.dp-showcase {
+  position: fixed; left: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 2147483000;
+  max-width: 460px; padding: 14px 14px 14px 16px; border-radius: 18px;
+  background: #161214; color: #fff; box-shadow: 0 18px 40px -12px rgba(0,0,0,.45);
+  font: 15px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  display: flex; gap: 12px; align-items: center;
+  opacity: 0; transform: translateY(12px); transition: opacity .35s ease, transform .35s ease;
+}
+.dp-showcase.is-open { opacity: 1; transform: none; }
+.dp-showcase p { margin: 0; flex: 1 1 auto; min-width: 0; }
+.dp-showcase small { display: block; color: rgba(255,255,255,.72); font-size: 13px; }
+.dp-showcase a {
+  color: #161214; background: #FF8FC1; border-radius: 999px; padding: 10px 14px; white-space: nowrap;
+  font-weight: 600; text-decoration: none; font-size: 14px;
+}
+.dp-showcase a:hover { background: #ffa6cf; }
+.dp-showcase button {
+  flex: none; width: 32px; height: 32px; border: 0; border-radius: 999px; cursor: pointer;
+  background: rgba(255,255,255,.12); color: #fff; font: 18px/1 system-ui, sans-serif;
+}
+.dp-showcase a:focus-visible, .dp-showcase button:focus-visible { outline: 2px solid #FFD43B; outline-offset: 2px; }
+@media (max-width: 480px) { .dp-showcase { right: 84px; max-width: none; flex-wrap: wrap; } }
+@media (prefers-reduced-motion: reduce) { .dp-showcase { transition: none; transform: none; } }

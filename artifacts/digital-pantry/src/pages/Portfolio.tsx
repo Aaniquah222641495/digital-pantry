@@ -134,7 +134,7 @@ export default function Portfolio() {
           return (
             <CaseArticle key={c.name} caseKey={c.caseKey} i={i}>
               <Reveal className={`md:col-span-7 ${flip ? "md:order-2" : ""}`}>
-                <DeviceFrames desktop={c.desktop} phone={c.phone} alt={`${c.concept ? "A concept design for " : "The "}${c.name}${c.concept ? "" : " website"}`} url={c.url ?? "concept design"} flip={flip} />
+                <DeviceFrames desktop={c.desktop} phone={c.phone} alt={`${c.concept ? "A concept design for " : "The "}${c.name}${c.concept ? "" : " website"}`} href={c.href} url={c.url ?? "concept design"} flip={flip} />
               </Reveal>
               <Reveal delay={0.1} className={`md:col-span-5 ${flip ? "md:order-1" : ""}`}>
                 <p className="flex items-center gap-2 text-[14px] text-dp-muted">
