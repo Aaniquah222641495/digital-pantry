@@ -59,12 +59,12 @@ export const FAQ_GROUPS: FaqGroup[] = [
       {
         id: "international",
         q: "Do you work with international clients?",
-        a: `Yes. International packages are priced in US dollars: Starter ${INTL_PRICES.Starter}, Standard ${INTL_PRICES.Standard}, Premium ${INTL_PRICES.Premium} and Pro ${INTL_PRICES.Pro}, once-off. The optional retainer is ${INTL_RETAINER}/month. Use the switch at the top of the page to see every price in dollars.`,
+        a: `Yes. International packages are priced in US dollars: Starter ${INTL_PRICES.Starter}, Standard ${INTL_PRICES.Standard}, Premium ${INTL_PRICES.Premium} and Pro ${INTL_PRICES.Pro}, once-off. Care is ${INTL_RETAINER}/month. Use the switch at the top of the page to see every price in dollars.`,
       },
       {
         id: "pro-monthly",
         q: "Does Pro have monthly fees?",
-        a: "No. Your lead system runs on free Google tools that you own. Every enquiry lands in your inbox and your own Sheet.",
+        a: "Not for the lead system. It runs on free Google tools that you own, so every enquiry lands in your inbox and your own Sheet whether or not you stay on care. Like every new site, Pro starts on care at {retainer}/month for hosting and small edits.",
       },
     ],
   },
@@ -102,12 +102,12 @@ export const FAQ_GROUPS: FaqGroup[] = [
       {
         id: "domain",
         q: "How does my domain name work?",
-        a: "Every site goes live on its own domain, like yourbusiness.co.za. We register it in your name, so you are the owner, and set it up. You pay the domain fee on top of your package: a .co.za is about R100 to R150 a year, and we tell you the cost before anything is bought. After the first year, we renew it for you if you're on the retainer (you pay the renewal at cost). If not, you renew it yourself, on time, or the site goes offline.",
+        a: "Every site goes live on its own domain, like yourbusiness.co.za. We register it in your name, so you are the owner, and set it up. You pay the domain fee on top of your package: a .co.za is about R100 to R150 a year, and we tell you the cost before anything is bought. After the first year, we renew it for you if you're on care (you pay the renewal at cost). If not, you renew it yourself, on time, or the site goes offline.",
       },
       {
         id: "hosting",
         q: "Who looks after my hosting, and what does it cost?",
-        a: "We set up and look after your hosting. Today that is R0 a month, on a free plan. Free plans have limits set by the host, which can change, and no uptime guarantee. If a site ever outgrows the free plan, we tell you the cost before anything changes.",
+        a: "Every new site starts on care, {retainer}/month from launch, month to month: we host your site and keep it running, renew your domain and make small edits. The hosting itself is on a free plan. Free plans have limits set by the host, which can change, and no uptime guarantee. If a site ever outgrows the free plan, we tell you the cost before anything changes. Rather look after it yourself? We hand the site over to your own hosting account.",
       },
       {
         id: "email",
@@ -134,7 +134,7 @@ export const FAQ_GROUPS: FaqGroup[] = [
       {
         id: "changes-later",
         q: "What if I need changes later?",
-        a: "That's what the {retainer}/month retainer is for. Small edits, big peace of mind.",
+        a: "That's what care is for: {retainer}/month covers small edits like menu and schedule changes. Bigger changes are quoted in writing first.",
       },
     ],
   },

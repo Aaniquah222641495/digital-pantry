@@ -32,7 +32,7 @@ Last updated: 2026-10-27. Source page: https://digitalpantry.co.za/pricing
 - No monthly fees: runs on free Google tools the client owns
 
 ## Your domain (every site needs one)
-Every site goes live on its own domain, like yourbusiness.co.za. We register it in your name, so it's yours, and connect it in every package. You pay the domain fee on top of the package: about R100 to R150 a year. After the first year we renew it for you if you're on the retainer (renewal at cost); otherwise you renew it yourself.
+Every site goes live on its own domain, like yourbusiness.co.za. We register it in your name, so it's yours, and connect it in every package. You pay the domain fee on top of the package: about R100 to R150 a year. After the first year we renew it for you if you're on care (renewal at cost); otherwise you renew it yourself.
 
 ## Extras (not in the package prices, only if you want them)
 Package prices cover the site build only, once-off. These are billed separately, and we quote the cost before anything is bought:
@@ -40,13 +40,14 @@ Package prices cover the site build only, once-off. These are billed separately,
 - Email on your own domain, if you want it (a mail plan from your domain provider).
 - Copywriting, if you want us to write your text.
 - Online shops and payments (e-commerce), which are quoted separately.
-- Changes beyond 2 rounds of revisions, and edits beyond the retainer's small updates. We quote these in writing before we start.
+- Changes beyond 2 rounds of revisions, and edits beyond the small edits in care. We quote these in writing before we start.
 
 ## Turnaround
 Starter, Standard and Premium sites take 5 to 7 business days, counted from when the deposit is paid and all content is in. Feedback within 2 business days keeps the date; slower feedback moves it by the same amount. Domain registrar waits are not counted. Pro, e-commerce and custom builds get an estimate in the quote.
 
-## Retainer: R150 per month (optional)
-- Menu updates, schedule changes and small edits
+## Care: R150 per month (every new site starts on it)
+- We host your site and keep it running, renew your domain (renewal at cost) and make small edits like menu and schedule changes
+- Month to month, cancel any time. Rather look after it yourself? We hand the site over to your own hosting account.
 - International clients: $90 per month. Larger businesses: quoted with the build.
 
 ## Free mock-up

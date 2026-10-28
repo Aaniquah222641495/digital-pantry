@@ -41,20 +41,21 @@ export const EXTRAS = [
   { name: "Branding design", cost: "quoted", note: "A logo, colours and fonts made for your business." },
   { name: "Writing your text", cost: "quoted", note: "Rather not write it yourself? We can." },
   { name: "Online shop and payments", cost: "quoted", note: "Priced to your products." },
-  { name: "Extra changes", cost: "quoted", note: "After the 2 revision rounds, or bigger than the retainer's small edits." },
+  { name: "Extra changes", cost: "quoted", note: "After the 2 revision rounds, or bigger than the small edits in care." },
 ] as const;
 // Every site goes live on its own domain (founder 2026-10-27: a must, it looks professional).
 // Package prices exclude the domain (founder 2026-10-27): we register it in the client's name, they pay the fee.
-// After year one: on the retainer we renew it (at cost); otherwise the client renews it.
+// After year one: on care we renew it (at cost); otherwise the client renews it.
 export const DOMAIN_FEE = "R100 to R150 a year";
 export const BILLED_SEPARATELY = EXTRAS.map((e) => `${e.name} (${e.cost}): ${e.note}`);
 export const BILLED_SEPARATELY_SUMMARY =
-  "Package prices cover the site build only. Every site needs its own domain: we register it in your name and you pay its fee, about R100 to R150 a year. Extras, only if you want them: branding design, email on your own domain, copywriting, online shops and payments, and changes beyond 2 rounds of revisions or beyond the retainer's small updates. We quote any extra work in writing first.";
+  "Package prices cover the site build only. Every site needs its own domain: we register it in your name and you pay its fee, about R100 to R150 a year. Extras, only if you want them: branding design, email on your own domain, copywriting, online shops and payments, and changes beyond 2 rounds of revisions or beyond the small edits in care. We quote any extra work in writing first.";
 
 export const SMALL_BUSINESS_LIMIT = "up to 10 staff";
 export const LARGER_FROM = "R8 000";
 
-// Monthly retainer. USD keeps the same premium as the international packages (founder: "you choose",
+// Monthly care (ADR-0032 proposed: the default from launch, month to month; or we hand the site over).
+// USD keeps the same premium as the international packages (founder: "you choose",
 // 2026-10-24). Larger businesses get theirs quoted with the build.
 export const RETAINER = "R150";
 export const INTL_RETAINER = "$90";

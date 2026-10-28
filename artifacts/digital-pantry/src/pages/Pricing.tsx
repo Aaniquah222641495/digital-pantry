@@ -167,7 +167,7 @@ export default function Pricing() {
                   <p className="text-[15px] font-semibold tabular-nums">{DOMAIN_FEE}</p>
                 </div>
                 <p className="mt-2 max-w-[46ch] text-[14px] leading-relaxed text-dp-muted">
-                  Like yourbusiness.co.za. We register it in your name and set it up. After year one, we renew it for you on the retainer, or you renew it yourself.
+                  Like yourbusiness.co.za. We register it in your name and set it up. After year one, we renew it for you on care, or you renew it yourself.
                 </p>
               </div>
             </div>
@@ -192,7 +192,7 @@ export default function Pricing() {
             </figure>
           </Reveal>
 
-        {/* Retainer */}
+        {/* Care: the default from launch, with handover as the alternative (ADR-0032) */}
         <Reveal className="mt-8 grid items-center gap-8 rounded-[28px] border border-dp-line bg-dp-soft/60 p-8 sm:p-10 md:grid-cols-[auto_1fr_auto]">
           <img src="/images/art/sprinkle-jar.webp" alt="" width={600} height={600} loading="lazy" className="h-24 w-24 object-contain md:h-28 md:w-28" />
           <div>
@@ -200,7 +200,11 @@ export default function Pricing() {
               Keep your pantry stocked <span aria-hidden="true" className="text-dp-accent">★</span>
             </h2>
             <p className="mt-2 max-w-[52ch] leading-relaxed text-dp-muted">
-              Menu updates, schedule changes and small edits after launch.
+              Every new site starts on care: we host it and keep it running, renew your domain for you (renewal at cost) and
+              make small edits like menu and schedule changes. Month to month, cancel any time.
+            </p>
+            <p className="mt-2 max-w-[52ch] text-[14px] leading-relaxed text-dp-muted">
+              Rather look after it yourself? We hand the site over to your own hosting account.
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-5">
@@ -213,7 +217,7 @@ export default function Pricing() {
               data-testid="button-retainer-cta"
               className="dp-outline-btn inline-flex h-12 items-center rounded-full border border-dp-line px-6 text-[15px] font-medium text-dp-ink transition-colors hover:border-dp-ink/40"
             >
-              Add the retainer
+              Ask about care
             </a>
           </div>
         </Reveal>
