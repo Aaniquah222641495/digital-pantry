@@ -298,7 +298,7 @@ function Chefs() {
               Women-led. Made from <CutoutWord word="SCRATCH" tone="on-yellow" />
             </h3>
             <p data-no-sprinkle className="max-w-[40ch] text-[17px] leading-relaxed text-[#3A3328] dark:text-[var(--im-muted)]">
-              Every site starts from your brand and your customers, never a template. Girl power is kind of the whole point here. <span aria-hidden="true" className="dark:text-[#FFD43B]">★</span>
+              Every site starts from your brand and your customers, never a template, whether you sell cupcakes or fix geysers. <span aria-hidden="true" className="dark:text-[#FFD43B]">★</span>
             </p>
           </div>
         </Reveal>
