@@ -28,7 +28,8 @@ NODE_ENV=production PORT=3000 BASE_PATH=/ pnpm --filter @workspace/digital-pantr
 ## Checks
 
 - `pnpm run typecheck` checks the whole workspace.
-- GitHub Actions (`.github/workflows/ci.yml`) runs typecheck, build and a dependency audit on every pull request.
+- GitHub Actions (`.github/workflows/ci.yml`) runs typecheck, build, the analytics egress test, a browser check and a dependency audit on every pull request.
+- Browser check (`pnpm --filter @workspace/digital-pantry run test:browser`, after a build): every sitemap page, the 404 page and each `/concepts/` site at 393 and 1440 px in Night and Day, under the real CSP. Fails on console, CSP or page errors, failed requests, sideways scroll, broken images or any axe (WCAG 2.1 A/AA) violation.
 - Dependabot opens weekly update PRs.
 
 ## Lead form
