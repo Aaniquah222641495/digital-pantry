@@ -407,7 +407,7 @@ function Recipe() {
         </ol>
         <p className="mt-6 max-w-[70ch] text-[13px] leading-relaxed text-dp-muted">
           * {TURNAROUND_NOTE}{" "}
-          <Link href="/pricing" className="text-dp-accent underline decoration-dp-line underline-offset-4 hover:decoration-dp-accent">Full terms on Pricing</Link>.
+          <Link href="/pricing#turnaround" className="text-dp-accent underline decoration-dp-line underline-offset-4 hover:decoration-dp-accent">Full terms on Pricing</Link>.
         </p>
       </div>
     </section>

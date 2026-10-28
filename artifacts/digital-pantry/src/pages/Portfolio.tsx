@@ -119,7 +119,7 @@ export default function Portfolio() {
             </dl>
             <p className="dp-rise mt-3 max-w-[460px] text-[13px] leading-relaxed text-dp-muted" style={{ "--d": "0.3s" } as CSSProperties}>
               * {TURNAROUND_NOTE}{" "}
-              <Link href="/pricing" className="text-dp-accent underline decoration-dp-line underline-offset-4 hover:decoration-dp-accent">Full terms on Pricing</Link>.
+              <Link href="/pricing#turnaround" className="text-dp-accent underline decoration-dp-line underline-offset-4 hover:decoration-dp-accent">Full terms on Pricing</Link>.
             </p>
           </div>
           <div className="dp-rise pt-16 md:pt-24" style={{ "--d": "0.15s" } as CSSProperties}>

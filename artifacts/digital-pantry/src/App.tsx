@@ -49,10 +49,13 @@ function App({ ssrPath }: { ssrPath?: string } = {}) {
       <MarketProvider>
       <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")} ssrPath={ssrPath}>
         <div className="dp-grain flex min-h-[100dvh] flex-col bg-dp-bg text-dp-ink">
+          <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-dp-cta focus:px-5 focus:py-3 focus:text-[15px] focus:font-medium focus:text-dp-cta-fg">
+            Skip to content
+          </a>
           <Navbar />
           <SmoothScroll />
           <RouteMeta />
-          <div className="flex-1">
+          <div id="main" tabIndex={-1} className="flex-1 outline-none">
             <Router />
           </div>
           <Footer />

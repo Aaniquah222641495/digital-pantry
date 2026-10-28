@@ -7,7 +7,7 @@ import { PantryShelf } from "../components/PantryShelf";
 import { MarketSwitch } from "../components/MarketSwitch";
 import { BusinessPicker } from "../components/BusinessPicker";
 import { Sticker, DAY, NIGHT } from "../components/Stickers";
-import { DOMAIN_FEE, EXTRAS, INCLUDED_ALWAYS, INTL_PRICES, PLAN_PRICES, SMALL_BUSINESS_LIMIT, retainerFor } from "../lib/plans";
+import { DOMAIN_FEE, EXTRAS, INCLUDED_ALWAYS, INTL_PRICES, PLAN_PRICES, SMALL_BUSINESS_LIMIT, TURNAROUND_DAYS, TURNAROUND_TERMS, retainerFor } from "../lib/plans";
 import { useRef } from "react";
 import { useMarket } from "../lib/MarketContext";
 import { track, useTrackOnView, type Package } from "../lib/analytics";
@@ -50,7 +50,12 @@ function PlanCard({ p }: { p: (typeof PLANS)[number] }) {
       <p className={`text-[15px] ${p.popular ? "opacity-75" : "text-dp-muted"}`}>{p.name}</p>
       <p className="mt-1 text-[clamp(2.6rem,4vw,3.25rem)] font-semibold tracking-[-0.05em]">{intl ? p.usd : p.price}</p>
       <p className={`text-[13px] ${p.popular ? "opacity-70" : "text-dp-muted"}`}>once-off</p>
+      {/* Care is the default from launch (ADR-0032), so it sits under the price, not three blocks down */}
+      <p className={`mt-1 text-[13px] ${p.popular ? "opacity-70" : "text-dp-muted"}`}>+ {retainerFor(market)}/month care, or free handover</p>
       <p className={`mt-5 leading-relaxed ${p.popular ? "opacity-85" : "text-dp-muted"}`}>{p.line}</p>
+      <p className="mt-4 text-[14px] font-medium">
+        Ready in {TURNAROUND_DAYS[p.name]} business days<a href="#turnaround" aria-label="Turnaround terms" className="no-underline">*</a>
+      </p>
       <ul className="mt-6 flex flex-1 flex-col gap-2.5">
         {p.features.map((f) => (
           <li key={f} className="flex items-start gap-2.5 text-[15px]">
@@ -59,16 +64,6 @@ function PlanCard({ p }: { p: (typeof PLANS)[number] }) {
           </li>
         ))}
       </ul>
-      {/* Our own contact form runs on the same Apps Script lead system (apps-script/Code.gs), so it doubles as a demo */}
-      {p.name === "Pro" && (
-        <p className="mt-6 rounded-[16px] bg-dp-soft/70 p-4 text-[14px] leading-relaxed text-dp-muted">
-          Our own enquiry form runs on this system.{" "}
-          <Link href="/contact" className="font-medium text-dp-ink underline decoration-dp-line underline-offset-4 hover:decoration-dp-accent">
-            Send us a message
-          </Link>{" "}
-          and you'll get the same instant reply your customers would.
-        </p>
-      )}
       <div className="mt-8">
         {p.popular ? (
           <a
@@ -152,13 +147,24 @@ export default function Pricing() {
             </Reveal>
           ))}
         </div>
+        <div className="mt-6 grid gap-4 text-[14px] leading-relaxed text-dp-muted lg:grid-cols-2 lg:gap-10">
+          <p id="turnaround" className="scroll-mt-32">* {TURNAROUND_TERMS}</p>
+          {/* Our own contact form runs on the same Apps Script lead system (apps-script/Code.gs), so it doubles as a Pro demo */}
+          <p>
+            <span className="font-medium text-dp-ink">Pro, live:</span> our own enquiry form runs on the same system.{" "}
+            <Link href="/contact" className="font-medium text-dp-ink underline decoration-dp-line underline-offset-4 hover:decoration-dp-accent">
+              Send us a message
+            </Link>{" "}
+            and you'll get the same instant reply your customers would.
+          </p>
+        </div>
 
         {/* What every package includes, and the extras on their own slip (plain words, no registrar names) */}
         <Reveal className="mt-8 grid items-start gap-10 rounded-[28px] border border-dp-line bg-dp-surface p-5 sm:p-10 lg:grid-cols-[1fr_1.15fr] lg:gap-14">
             <div data-testid="pricing-billed-separately">
               <h2 className="text-[clamp(1.6rem,2.6vw,2.2rem)] font-semibold tracking-[-0.035em]">What the price covers</h2>
               <p className="mt-3 max-w-[44ch] leading-relaxed text-dp-muted">
-                One price for your site, plus your domain. You pay 50% to start and the rest when your site goes live. Extras only if you want them, quoted first.
+                {intl ? "The once-off price for your site, your domain, and care" : `The once-off price for your site, your domain (about ${DOMAIN_FEE}), and care`} at {retainerFor(market)}/month from launch, or a free handover if you'd rather look after it yourself. You pay 50% to start and the rest when your site goes live. Extras only if you want them, quoted first.
               </p>
               <p className="mt-8 font-mono text-[13px] text-dp-accent">In every package</p>
               <ul className="mt-4 flex flex-col gap-3">

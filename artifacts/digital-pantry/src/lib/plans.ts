@@ -4,18 +4,19 @@
 // Founder decisions 2026-10-23 (ops/research/2026-10-23-pricing-tiers-and-international.md):
 // ZAR packages are for small businesses with up to 10 staff; larger businesses are quoted from
 // R8 000; international clients have their own USD packages.
+// Thousands use a no-break space (\u00a0) so a price never wraps across two lines.
 export const PLAN_PRICES = {
   Starter: "R600",
-  Standard: "R1 000",
-  Premium: "R1 600",
-  Pro: "R2 500",
+  Standard: "R1\u00a0000",
+  Premium: "R1\u00a0600",
+  Pro: "R2\u00a0500",
 } as const;
 
 export const INTL_PRICES = {
   Starter: "$450",
   Standard: "$750",
-  Premium: "$1 200",
-  Pro: "$1 800",
+  Premium: "$1\u00a0200",
+  Pro: "$1\u00a0800",
 } as const;
 
 // Turnaround, with the conditions from ADR-0025 (founder, 2026-10-26; per-package times amended
@@ -24,6 +25,8 @@ export const INTL_PRICES = {
 // Meta descriptions and JSON-LD are too short for the conditions, so they leave the number out.
 export const TURNAROUND_TERMS =
   "When your deposit is paid, we plan your pages and send a content checklist (photos, menu, text). Build time starts once everything on it is in: Starter 5 to 7 business days, Standard 7 to 10, Premium 10 to 15 and Pro 15 to 20. Feedback within 2 business days keeps the date; slower feedback moves it by the same amount. Waiting on a domain registrar or on Google is not counted. Online shops and custom builds get an estimate in the quote.";
+// Build time per package, shown on each Pricing card with TURNAROUND_TERMS underneath.
+export const TURNAROUND_DAYS = { Starter: "5 to 7", Standard: "7 to 10", Premium: "10 to 15", Pro: "15 to 20" } as const;
 export const TURNAROUND_NOTE =
   "Starter 5 to 7 business days, Standard 7 to 10, Premium 10 to 15, Pro 15 to 20, counted from when your deposit is paid and all your content is in. Online shops and custom builds are estimated in the quote.";
 

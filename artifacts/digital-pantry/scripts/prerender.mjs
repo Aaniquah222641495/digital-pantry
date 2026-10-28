@@ -48,7 +48,7 @@ for (const page of [...PAGES, NOT_FOUND]) {
     "/faq": ["R8 000", "$450", "$750", "$1 200", "$1 800", "$90"],
   }[page.path];
   for (const price of mustShow ?? []) {
-    if (!body.includes(price)) throw new Error(`${page.path} no longer shows ${price}: update src/seo.ts and public/pricing.md`);
+    if (!body.replace(/\u00a0/g, " ").includes(price)) throw new Error(`${page.path} no longer shows ${price}: update src/seo.ts and public/pricing.md`);
   }
   const html = template
     .replace(/<!--seo-->[\s\S]*?<!--\/seo-->/, `${preloads}\n    ${headHtml(page)}`)

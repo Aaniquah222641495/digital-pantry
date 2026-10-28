@@ -37,6 +37,20 @@ export function Navbar() {
   }, []);
 
   useEffect(() => setMenuOpen(false), [location]);
+  // Mobile menu: focus moves into it on open, Escape closes it and focus returns to the toggle.
+  const toggle = useRef<HTMLButtonElement>(null);
+  const menu = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!menuOpen) return;
+    menu.current?.querySelector<HTMLElement>("a")?.focus();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      setMenuOpen(false);
+      toggle.current?.focus();
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [menuOpen]);
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
     // Lets the floating WhatsApp button step aside while the mobile menu is open.
@@ -93,8 +107,9 @@ export function Navbar() {
           <div className="flex items-center gap-2 lg:hidden">
             <FounderSwitch compact />
             <button
+              ref={toggle}
               type="button"
-              className="grid h-10 w-10 place-items-center rounded-full border border-dp-line text-dp-ink"
+              className="grid h-11 w-11 place-items-center rounded-full border border-dp-line text-dp-ink"
               onClick={() => setMenuOpen((v) => !v)}
               aria-label={menuOpen ? "Close menu" : "Open menu"}
               aria-expanded={menuOpen}
@@ -108,6 +123,7 @@ export function Navbar() {
 
       {menuOpen && (
           <div
+            ref={menu}
             className="dp-menu-in fixed inset-0 z-40 flex flex-col bg-dp-bg px-6 pb-10 pt-28 lg:hidden"
           >
             <nav aria-label="Mobile navigation" className="flex flex-col">
