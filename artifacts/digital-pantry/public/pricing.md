@@ -47,7 +47,7 @@ Starter, Standard and Premium sites take 5 to 7 business days, counted from when
 
 ## Care: R150 per month (every new site starts on it)
 - We host your site and keep it running, renew your domain (renewal at cost) and make small edits like menu and schedule changes
-- Month to month, cancel any time. Rather look after it yourself? We hand the site over to your own hosting account.
+- Month to month: cancel with one month's notice. Rather look after it yourself? We hand the site over to your own hosting account, free of charge.
 - International clients: $90 per month. Larger businesses: quoted with the build.
 
 ## Free mock-up

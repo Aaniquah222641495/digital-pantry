@@ -107,7 +107,7 @@ export const FAQ_GROUPS: FaqGroup[] = [
       {
         id: "hosting",
         q: "Who looks after my hosting, and what does it cost?",
-        a: "Every new site starts on care, {retainer}/month from launch, month to month: we host your site and keep it running, renew your domain and make small edits. The hosting itself is on a free plan. Free plans have limits set by the host, which can change, and no uptime guarantee. If a site ever outgrows the free plan, we tell you the cost before anything changes. Rather look after it yourself? We hand the site over to your own hosting account.",
+        a: "Every new site starts on care, {retainer}/month from launch, month to month (cancel with one month's notice): we host your site and keep it running, renew your domain and make small edits. The hosting itself is on a free plan. Free plans have limits set by the host, which can change, and no uptime guarantee. If a site ever outgrows the free plan, we tell you the cost before anything changes. Rather look after it yourself? We hand the site over to your own hosting account, free of charge.",
       },
       {
         id: "email",

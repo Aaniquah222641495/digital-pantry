@@ -201,10 +201,10 @@ export default function Pricing() {
             </h2>
             <p className="mt-2 max-w-[52ch] leading-relaxed text-dp-muted">
               Every new site starts on care: we host it and keep it running, renew your domain for you (renewal at cost) and
-              make small edits like menu and schedule changes. Month to month, cancel any time.
+              make small edits like menu and schedule changes. Month to month: cancel with one month's notice.
             </p>
             <p className="mt-2 max-w-[52ch] text-[14px] leading-relaxed text-dp-muted">
-              Rather look after it yourself? We hand the site over to your own hosting account.
+              Rather look after it yourself? We hand the site over to your own hosting account, free of charge.
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-5">
