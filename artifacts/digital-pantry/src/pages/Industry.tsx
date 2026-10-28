@@ -107,7 +107,7 @@ function IndustryPage({ page }: { page: Industry }) {
               </dl>
               {proof.href && (
               <a href={proof.href} target="_blank" rel="noopener noreferrer" className="group mt-8 inline-flex min-h-11 items-center gap-1.5 text-[15px] font-medium text-dp-ink underline decoration-dp-line underline-offset-[6px] transition-colors hover:decoration-dp-accent">
-                Visit the live site
+                {proof.concept ? "Try the concept" : "Visit the live site"}
                 <ArrowUpRight size={16} aria-hidden="true" className="transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
               </a>
               )}

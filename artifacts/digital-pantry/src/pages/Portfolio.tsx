@@ -18,8 +18,9 @@ type Case = {
   name: string;
   caseKey: NonNullable<EventProps["case"]>;
   kind: string;
-  /** Only live client sites have these; the concept has none, so no link and no "Live" badge. */
+  /** Only live client sites have a url; the concept has none, so no "Live" badge. */
   url?: string;
+  /** The live site, or for the concept its clickable build under /concepts/. */
   href?: string;
   testId?: string;
   concept?: boolean;
@@ -66,6 +67,8 @@ const CASES: readonly Case[] = [
     caseKey: "concept_beauty",
     kind: "Beauty studio, Cape Town (concept)",
     concept: true,
+    href: "/concepts/saltbush-linen/",
+    testId: "link-concept-beauty",
     desktop: "/images/work/concept-beauty-desktop.webp",
     phone: "/images/work/concept-beauty-phone.webp",
     rows: [
@@ -159,7 +162,7 @@ export default function Portfolio() {
                   data-testid={c.testId}
                   className="group mt-7 inline-flex min-h-11 items-center gap-1.5 text-[15px] font-medium text-dp-ink underline decoration-dp-line underline-offset-[6px] transition-colors hover:decoration-dp-accent"
                 >
-                  Visit the live site
+                  {c.concept ? "Try the concept" : "Visit the live site"}
                   <ArrowUpRight size={16} className="transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                 </a>
                 )}
