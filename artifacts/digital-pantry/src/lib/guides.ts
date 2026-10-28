@@ -60,8 +60,8 @@ export const FOOD: Industry = {
     kind: "Food pop-up, Cape Town",
     url: "stuffdbagels.netlify.app",
     href: "https://stuffdbagels.netlify.app",
-    desktop: "/images/work/stuffd-desktop.webp",
-    phone: "/images/work/stuffd-phone.webp",
+    desktop: "/images/work/stuffd-desktop-v2.webp",
+    phone: "/images/work/stuffd-phone-v2.webp",
     rows: [
       ["The need", "Customers had to hunt for a WhatsApp number and scroll social media to place an order."],
       ["What we built", "One mobile-first page with the menu, this week's pickup spots and an order form that sends the order to WhatsApp."],

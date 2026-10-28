@@ -37,8 +37,8 @@ const CASES: readonly Case[] = [
     url: "stuffdbagels.netlify.app",
     href: "https://stuffdbagels.netlify.app",
     testId: "link-stuffd-case-live",
-    desktop: "/images/work/stuffd-desktop.webp",
-    phone: "/images/work/stuffd-phone.webp",
+    desktop: "/images/work/stuffd-desktop-v2.webp",
+    phone: "/images/work/stuffd-phone-v2.webp",
     rows: [
       ["The client", "A stuffed-bagel pop-up selling at markets and events across Cape Town."],
       ["The need", "Customers had to hunt for a WhatsApp number and scroll social media to place an order."],
