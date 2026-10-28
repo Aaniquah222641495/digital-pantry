@@ -35,7 +35,8 @@ const CASES: readonly Case[] = [
     caseKey: "stuffd_bagels",
     kind: "Food pop-up, Cape Town",
     url: "stuffdbagels.netlify.app",
-    href: "https://stuffdbagels.netlify.app",
+    // Our copy of the final, client-approved version, until stuffdbagels.co.za exists (founder 2026-10-28; public/work/).
+    href: "/work/stuffd-bagels/",
     testId: "link-stuffd-case-live",
     desktop: "/images/work/stuffd-desktop-v2.webp",
     phone: "/images/work/stuffd-phone-v2.webp",
@@ -162,7 +163,7 @@ export default function Portfolio() {
                   data-testid={c.testId}
                   className="group mt-7 inline-flex min-h-11 items-center gap-1.5 text-[15px] font-medium text-dp-ink underline decoration-dp-line underline-offset-[6px] transition-colors hover:decoration-dp-accent"
                 >
-                  {c.concept ? "Try the concept" : "Visit the live site"}
+                  {c.concept ? "Try the concept" : c.href.startsWith("/work/") ? "See the site" : "Visit the live site"}
                   <ArrowUpRight size={16} className="transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                 </a>
                 )}

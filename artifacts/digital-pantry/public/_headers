@@ -24,6 +24,10 @@
 /concepts/*
   X-Robots-Tag: noindex, nofollow
 
+# Copies of client sites (scripts/import-work.mjs): the client's own site is the one to index.
+/work/*
+  X-Robots-Tag: noindex, nofollow
+
 /llms.txt
   Content-Type: text/plain; charset=utf-8
 

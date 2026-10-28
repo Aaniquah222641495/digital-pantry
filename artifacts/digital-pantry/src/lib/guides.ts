@@ -59,7 +59,8 @@ export const FOOD: Industry = {
     name: "Stuff'd Bagels",
     kind: "Food pop-up, Cape Town",
     url: "stuffdbagels.netlify.app",
-    href: "https://stuffdbagels.netlify.app",
+    // Our copy of the final, client-approved version, until stuffdbagels.co.za exists (founder 2026-10-28; public/work/).
+    href: "/work/stuffd-bagels/",
     desktop: "/images/work/stuffd-desktop-v2.webp",
     phone: "/images/work/stuffd-phone-v2.webp",
     rows: [
