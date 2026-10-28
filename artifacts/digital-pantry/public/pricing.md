@@ -43,7 +43,7 @@ Package prices cover the site build only, once-off. These are billed separately,
 - Changes beyond 2 rounds of revisions, and edits beyond the small edits in care. We quote these in writing before we start.
 
 ## Turnaround
-Starter, Standard and Premium sites take 5 to 7 business days, counted from when the deposit is paid and all content is in. Feedback within 2 business days keeps the date; slower feedback moves it by the same amount. Domain registrar waits are not counted. Pro, e-commerce and custom builds get an estimate in the quote.
+When the deposit is paid, we plan the pages and send a content checklist (photos, menu, text). Build time starts once everything on it is in: Starter 5 to 7 business days, Standard 7 to 10, Premium 10 to 15 and Pro 15 to 20. Feedback within 2 business days keeps the date; slower feedback moves it by the same amount. Waiting on a domain registrar or on Google is not counted. Online shops and custom builds get an estimate in the quote.
 
 ## Care: R150 per month (every new site starts on it)
 - We host your site and keep it running, renew your domain (renewal at cost) and make small edits like menu and schedule changes

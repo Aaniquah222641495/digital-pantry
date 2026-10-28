@@ -109,7 +109,7 @@ export default function Portfolio() {
             <dl className="dp-rise mt-10 grid max-w-[460px] grid-cols-2 overflow-hidden rounded-[18px] border border-dp-line bg-dp-surface text-center" style={{ "--d": "0.24s" } as CSSProperties}>
               {[
                 ["Kitchen", "Cape Town"],
-                ["Turnaround", "5 to 7 business days*"],
+                ["Turnaround", "From 5 business days*"],
               ].map(([k, v], i) => (
                 <div key={k} className={`px-3 py-4 ${i > 0 ? "border-l border-dashed border-dp-line" : ""}`}>
                   <dt className="font-mono text-[11px] text-dp-accent">{k}</dt>

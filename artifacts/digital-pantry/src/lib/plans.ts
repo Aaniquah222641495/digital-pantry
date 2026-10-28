@@ -18,13 +18,14 @@ export const INTL_PRICES = {
   Pro: "$1 800",
 } as const;
 
-// Turnaround, with the conditions from ADR-0025 (founder, 2026-10-26). Every "5 to 7 business days"
-// on the site uses TURNAROUND_TERMS or the short note below, so the promise is never unconditional.
+// Turnaround, with the conditions from ADR-0025 (founder, 2026-10-26; per-package times amended
+// 2026-10-28). Every "from 5 business days" on the site uses TURNAROUND_TERMS or the short note below,
+// so the promise is never unconditional.
 // Meta descriptions and JSON-LD are too short for the conditions, so they leave the number out.
 export const TURNAROUND_TERMS =
-  "Starter, Standard and Premium sites take 5 to 7 business days, counted from when your deposit is paid and all your content is in. Feedback within 2 business days keeps the date; slower feedback moves it by the same amount. Waiting on a domain registrar is not counted. Pro, e-commerce and custom builds get an estimate in the quote.";
+  "When your deposit is paid, we plan your pages and send a content checklist (photos, menu, text). Build time starts once everything on it is in: Starter 5 to 7 business days, Standard 7 to 10, Premium 10 to 15 and Pro 15 to 20. Feedback within 2 business days keeps the date; slower feedback moves it by the same amount. Waiting on a domain registrar or on Google is not counted. Online shops and custom builds get an estimate in the quote.";
 export const TURNAROUND_NOTE =
-  "Starter, Standard and Premium sites, counted from when your deposit is paid and all your content is in. Pro, e-commerce and custom builds are estimated in the quote.";
+  "Starter 5 to 7 business days, Standard 7 to 10, Premium 10 to 15, Pro 15 to 20, counted from when your deposit is paid and all your content is in. Online shops and custom builds are estimated in the quote.";
 
 // What a package price does not cover (DPW-4; founder-settled S4/S6, 2026-10-26). Hosting is left out
 // on purpose: it is stated only after web-finance confirms. Pricing.tsx, the FAQ (seo.ts) and
