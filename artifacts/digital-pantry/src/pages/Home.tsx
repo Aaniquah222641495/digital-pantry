@@ -83,7 +83,7 @@ const WORK = [
 const RECIPE = [
   { img: "/images/art/aaniquah-reading.webp", imgNight: "/images/art/imaan-reading.webp", title: "Read the recipe", body: "We learn your business, your customers and how you sell, then send one free mock-up pack within 5 business days of your brief, for qualified enquiries." },
   { img: "/images/art/aaniquah-chef.webp", imgNight: "/images/art/imaan-chef.webp", title: "Cook from scratch", body: "Clean code, mobile first and fast. No templates, nothing you don't need." },
-  { img: "/images/art/aaniquah-serving.webp", imgNight: "/images/art/imaan-serving.webp", title: "Served fresh", body: "Live on your own domain and ready for orders. Sites take 5 to 7 business days.*" },
+  { img: "/images/art/aaniquah-serving.webp", imgNight: "/images/art/imaan-serving.webp", title: "Served fresh", body: "Live on your own domain and ready for orders. Sites take from 5 business days.*" },
 ] as const;
 
 
@@ -407,7 +407,7 @@ function Recipe() {
         </ol>
         <p className="mt-6 max-w-[70ch] text-[13px] leading-relaxed text-dp-muted">
           * {TURNAROUND_NOTE}{" "}
-          <Link href="/pricing" className="text-dp-accent underline decoration-dp-line underline-offset-4 hover:decoration-dp-accent">Full terms on Pricing</Link>.
+          <Link href="/pricing#turnaround" className="text-dp-accent underline decoration-dp-line underline-offset-4 hover:decoration-dp-accent">Full terms on Pricing</Link>.
         </p>
       </div>
     </section>

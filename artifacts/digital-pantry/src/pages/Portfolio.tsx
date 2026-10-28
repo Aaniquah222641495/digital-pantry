@@ -109,7 +109,7 @@ export default function Portfolio() {
             <dl className="dp-rise mt-10 grid max-w-[460px] grid-cols-2 overflow-hidden rounded-[18px] border border-dp-line bg-dp-surface text-center" style={{ "--d": "0.24s" } as CSSProperties}>
               {[
                 ["Kitchen", "Cape Town"],
-                ["Turnaround", "5 to 7 business days*"],
+                ["Turnaround", "From 5 business days*"],
               ].map(([k, v], i) => (
                 <div key={k} className={`px-3 py-4 ${i > 0 ? "border-l border-dashed border-dp-line" : ""}`}>
                   <dt className="font-mono text-[11px] text-dp-accent">{k}</dt>
@@ -119,7 +119,7 @@ export default function Portfolio() {
             </dl>
             <p className="dp-rise mt-3 max-w-[460px] text-[13px] leading-relaxed text-dp-muted" style={{ "--d": "0.3s" } as CSSProperties}>
               * {TURNAROUND_NOTE}{" "}
-              <Link href="/pricing" className="text-dp-accent underline decoration-dp-line underline-offset-4 hover:decoration-dp-accent">Full terms on Pricing</Link>.
+              <Link href="/pricing#turnaround" className="text-dp-accent underline decoration-dp-line underline-offset-4 hover:decoration-dp-accent">Full terms on Pricing</Link>.
             </p>
           </div>
           <div className="dp-rise pt-16 md:pt-24" style={{ "--d": "0.15s" } as CSSProperties}>

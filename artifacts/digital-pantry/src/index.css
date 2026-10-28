@@ -682,6 +682,8 @@ html.dark body {
 /* ── Dark polish (2026-10-27) ─────────────────────────────────────────── */
 /* Form fields: a visible edge (3:1 against the card, WCAG 1.4.11). Focus keeps the accent border above. */
 .dark .dp-field:not([aria-invalid="true"]) { border-color: #8F7A82; }
+/* ...and an invalid field keeps its error edge (the rule above used to win over Tailwind's dark:aria-invalid). */
+.dark .dp-field[aria-invalid="true"] { border-color: #FF7AB2; }
 .dark .dp-field { background-color: #12050A; }
 /* Outline buttons: the faint hairline is fine for cards, not for a button edge. */
 .dark .dp-outline-btn { border-color: #9C818B; }

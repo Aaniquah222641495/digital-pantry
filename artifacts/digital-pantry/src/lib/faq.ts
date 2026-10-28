@@ -7,6 +7,7 @@
 // as plain text, so they are also in the server HTML (scripts/prerender.mjs checks them).
 // Sources: plans.ts terms, ADR-0024 amendment (2026-10-26), ADR-0025, PROJECT.md S4/S6, finance check 2026-10-26.
 import {
+  DOMAIN_FEE,
   BILLED_SEPARATELY_SUMMARY,
   LARGER_FROM,
   INTL_PRICES,
@@ -41,8 +42,8 @@ export const FAQ_GROUPS: FaqGroup[] = [
       {
         id: "how-much",
         q: "How much does a website cost?",
-        a: `Our packages are once-off and in rand: Starter {Starter}, Standard {Standard}, Premium {Premium} and Pro {Pro}, for South African businesses with ${SMALL_BUSINESS_LIMIT}. Each price covers the build of your site.`,
-        aIntl: "Our packages are once-off and in US dollars: Starter {Starter}, Standard {Standard}, Premium {Premium} and Pro {Pro}. Each price covers the build of your site.",
+        a: `Our packages are once-off and in rand: Starter {Starter}, Standard {Standard}, Premium {Premium} and Pro {Pro}, for South African businesses with ${SMALL_BUSINESS_LIMIT}. Each price covers the build of your site. Your domain is about ${DOMAIN_FEE}, and every new site starts on care at {retainer}/month (hosting, domain renewals, small edits), or we hand it over to you free of charge.`,
+        aIntl: "Our packages are once-off and in US dollars: Starter {Starter}, Standard {Standard}, Premium {Premium} and Pro {Pro}. Each price covers the build of your site. Every new site starts on care at {retainer}/month, or we hand it over to you free of charge.",
       },
       {
         id: "deposit",
