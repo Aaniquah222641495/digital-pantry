@@ -327,7 +327,7 @@ function Work() {
             return (
               <article key={w.name} aria-labelledby={`work-${i}`} className="grid items-center gap-12 md:grid-cols-12 md:gap-10">
                 <Reveal className={`md:col-span-7 ${flip ? "md:order-2" : ""}`}>
-                  <DeviceFrames desktop={w.desktop} phone={w.phone} alt={`The ${w.name} website`} url={w.url} flip={flip} />
+                  <DeviceFrames desktop={w.desktop} phone={w.phone} alt={`The ${w.name} website`} url={w.url} href={w.href} flip={flip} />
                 </Reveal>
                 <Reveal delay={0.1} className={`md:col-span-5 ${flip ? "md:order-1 md:pr-6" : "md:pl-6"}`}>
                   <p className="text-[14px] text-dp-muted">

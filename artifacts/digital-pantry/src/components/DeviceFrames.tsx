@@ -70,16 +70,20 @@ export function DeviceFrames({
   phone,
   alt,
   url,
+  href,
   flip = false,
 }: {
   desktop: string;
   phone: string;
   alt: string;
   url: string;
+  /** Opens the site when the laptop or phone is clicked (founder 2026-10-28). Out of the tab order:
+      the text link next to the devices is the keyboard route. */
+  href?: string;
   flip?: boolean;
 }) {
-  return (
-    <div className={`dp-par relative pb-8 ${flip ? "pl-8 sm:pl-12" : "pr-8 sm:pr-12"}`}>
+  const devices = (
+    <>
       {/* A laptop (founder 2026-10-26: "make the desktop one an actual laptop"): dark lid with a
           camera, a slim browser bar on the screen, and an aluminium base with the opening notch. */}
       <figure className="dp-par-browser relative [container-type:inline-size]">
@@ -112,6 +116,17 @@ export function DeviceFrames({
       <figure className={`dp-par-phone absolute bottom-0 w-[26%] max-w-[200px] ${flip ? "left-0" : "right-0"}`}>
         <Phone src={phone} alt={`${alt} on a phone`} />
       </figure>
+    </>
+  );
+  return (
+    <div className={`dp-par relative pb-8 ${flip ? "pl-8 sm:pl-12" : "pr-8 sm:pr-12"}`}>
+      {href ? (
+        <a href={href} target="_blank" rel="noopener noreferrer" tabIndex={-1} className="block cursor-pointer [&_img]:transition-[filter] [&_img]:duration-300 hover:[&_img]:brightness-[1.04]">
+          {devices}
+        </a>
+      ) : (
+        devices
+      )}
     </div>
   );
 }

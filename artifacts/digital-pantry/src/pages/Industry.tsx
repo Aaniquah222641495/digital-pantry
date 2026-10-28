@@ -90,7 +90,7 @@ function IndustryPage({ page }: { page: Industry }) {
         <section aria-labelledby="proof-heading" className="bg-dp-soft/60 dark:bg-[var(--im-soft)]">
           <div className="mx-auto grid max-w-[1320px] items-center gap-12 px-5 py-24 sm:px-8 md:grid-cols-12 md:py-32">
             <Reveal className="md:col-span-7">
-              <DeviceFrames desktop={proof.desktop} phone={proof.phone} alt={proof.concept ? `A concept design for ${proof.name}` : `The ${proof.name} website`} url={proof.url} />
+              <DeviceFrames desktop={proof.desktop} phone={proof.phone} alt={proof.concept ? `A concept design for ${proof.name}` : `The ${proof.name} website`} href={proof.href} url={proof.url} />
             </Reveal>
             <Reveal delay={0.1} className="md:col-span-5">
               <p className="text-[14px] text-dp-muted">{proof.concept ? "Our concept design" : "Fresh out the kitchen"} · {proof.kind}</p>
