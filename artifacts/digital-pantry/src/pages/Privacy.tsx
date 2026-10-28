@@ -22,7 +22,7 @@ export default function Privacy() {
               Digital Pantry Web Studio · digitalpantry.co.za
             </p>
             <p className="font-mono text-[12px] text-dp-muted mb-10 pb-10 border-b border-dp-line">
-              Last updated: 26 October 2026
+              Last updated: 29 October 2026
             </p>
             <p className={pCls}>
               This explains how we look after your personal information under the Protection of Personal Information Act (POPIA).
@@ -39,8 +39,8 @@ export default function Privacy() {
             </p>
 
             <h2 className={`${h2Cls} mt-8`}>1. When you contact us through this website</h2>
-            <p className={pCls}><span className={strongCls}>What we collect:</span> the name, phone number, email address, business name, what you are interested in (a package, a free mock-up, or "not sure yet") and the optional message you type into the contact form. The form also records the date and time you sent it and which page you sent it from. If you email or WhatsApp us directly, we also see your email address or phone number.</p>
-            <p className={pCls}><span className={strongCls}>How it works:</span> when you press "Send", the form sends your details to a small script in our Google account (Google Apps Script). It saves them as a new row in a private Google Sheet, emails us an alert, and emails you one automatic confirmation that we received your enquiry. If the form cannot send, it shows buttons to send the same details to us by WhatsApp or email instead, and nothing is sent until you press one.</p>
+            <p className={pCls}><span className={strongCls}>What we collect:</span> the name, phone number, email address (optional), business name, what you are interested in (a package, a free mock-up, or "not sure yet") and the optional message you type into the contact form. The form also records the date and time you sent it and which page you sent it from. If you email or WhatsApp us directly, we also see your email address or phone number.</p>
+            <p className={pCls}><span className={strongCls}>How it works:</span> when you press "Send", the form sends your details to a small script in our Google account (Google Apps Script). It saves them as a new row in a private Google Sheet, emails us an alert, and, if you gave an email address, emails you one automatic confirmation that we received your enquiry. If the form cannot send, it shows buttons to send the same details to us by WhatsApp or email instead, and nothing is sent until you press one.</p>
             <p className={pCls}><span className={strongCls}>Why:</span> to reply to your enquiry and, if you go ahead, to quote and build your website. The confirmation email is not marketing. We do not add you to a mailing list and we do not send newsletters.</p>
             <p className={pCls}><span className={strongCls}>Who sees it:</span> only us. Your details sit in our Google account (Sheets, Apps Script and Gmail). We do not sell your information or use it for anything else.</p>
             <p className={pCls}><span className={strongCls}>How long:</span> If your enquiry does not become a project, we delete it after 12 months.</p>

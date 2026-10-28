@@ -89,7 +89,7 @@ function Jar({ j, i, link, intl, surface, toCards }: { j: (typeof JARS)[number];
           <span className="sr-only"> See what is in this package.</span>
         </a>
       ) : link ? (
-        <Link href={intl ? "/contact?interest=international" : `/contact?interest=${j.name.toLowerCase()}`} className="block rounded-[20px] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-dp-accent"
+        <Link href={`/contact?interest=${j.name.toLowerCase()}`} className="block rounded-[20px] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-dp-accent"
           onClick={() => track("package_cta_click", { package: pkg, market, surface })}
         >
           {tag}
