@@ -36,7 +36,7 @@ const INTL_PLANS = [
 ];
 
 const PLANS = [
-  { name: "Starter", price: 600, includes: "Single page, menu section, WhatsApp button, mobile responsive, your own domain connected (domain billed separately)." },
+  { name: "Starter", price: 600, includes: "Single page, menu or services section, WhatsApp button, mobile responsive, your own domain connected (domain billed separately)." },
   { name: "Standard", price: 1000, includes: "Everything in Starter plus locations, about section and social links." },
   { name: "Premium", price: 1600, includes: "Everything in Standard plus Google Business setup, basic SEO setup and 1 month of updates." },
   { name: "Pro", price: 2500, includes: "Everything in Premium plus a lead capture form with instant alerts, leads saved to your Google Sheet, an auto-reply to every enquiry and a WhatsApp follow-up button, tested before handover." },
