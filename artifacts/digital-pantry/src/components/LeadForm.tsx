@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ChevronDown, Mail, MessageCircle } from "lucide-react";
+import { Mail, MessageCircle } from "lucide-react";
 import { Link, useSearch } from "wouter";
 import {
   INTEREST_OPTIONS,
   LIMITS,
   interestFromQuery,
+  interestPhrase,
   leadSchema,
   mailtoUrl,
   submitLead,
@@ -50,13 +51,13 @@ export function LeadForm({
   messagePlaceholder = "Tell us about your business and what you need.",
 }: {
   source?: string;
-  /** Preselected option when the URL has no ?interest= (e.g. "Larger business") */
+  /** Preselected package when the URL has none (e.g. "Larger business"). Otherwise "Not sure yet". */
   defaultInterest?: LeadFormValues["interest"];
   messagePlaceholder?: string;
 }) {
   const [phase, setPhase] = useState<Phase>({ name: "form" });
   const search = useSearch();
-  const { money } = useMarket();
+  const { money, market } = useMarket();
   const headingRef = useRef<HTMLHeadingElement>(null);
   const started = useRef(false);
   // Analytics gets the page name only, from a fixed list (ADR-0026).
@@ -70,20 +71,22 @@ export function LeadForm({
     formState: { errors, isSubmitting },
   } = useForm<LeadFormValues>({
     resolver: zodResolver(leadSchema),
-    defaultValues: { name: "", phone: "", email: "", businessName: "", message: "", companySite: "" },
+    defaultValues: { name: "", phone: "", email: "", businessName: "", interest: "Not sure yet", mockup: false, message: "", companySite: "" },
   });
 
-  // Preselect from ?interest=mockup. Done after mount so the prerendered HTML matches the first render.
+  // Preselect from ?interest=standard or ?interest=mockup. Done after mount so the prerendered HTML matches the first render.
   useEffect(() => {
-    const wanted = interestFromQuery(search) ?? defaultInterest;
+    const q = interestFromQuery(search);
+    const wanted = q?.interest ?? defaultInterest;
     if (wanted) setValue("interest", wanted);
+    if (q?.mockup) setValue("mockup", true);
   }, [search, setValue]);
 
   useEffect(() => {
     if (phase.name !== "form") headingRef.current?.focus();
   }, [phase.name]);
 
-  const interest = watch("interest");
+  const mockup = watch("mockup");
 
   const onSubmit = async (values: LeadFormValues) => {
     // A filled honeypot means a bot. Pretend it worked and send nothing.
@@ -91,10 +94,10 @@ export function LeadForm({
       setPhase({ name: "sent", values });
       return;
     }
-    const result = await submitLead(values, source);
+    const result = await submitLead(values, source, market);
     if (result.status === "sent") {
       track("enquiry_form_success", { source: sourceProp, interest: interestValue(values.interest) });
-      if (values.interest === "Free mock-up") track("free_mockup_request", { source: sourceProp });
+      if (values.mockup) track("free_mockup_request", { source: sourceProp });
     } else {
       track("enquiry_form_error", { source: sourceProp, reason: result.reason });
     }
@@ -114,10 +117,10 @@ export function LeadForm({
           Thanks, {values.name.split(" ")[0]}. It's in the pantry!
         </h3>
         <p data-no-sprinkle className="text-dp-muted text-base mb-2">
-          Your enquiry about {values.interest === "Free mock-up" ? "a free mock-up" : values.interest === "Not sure yet" ? "our websites" : `the ${values.interest} package`} has been sent. We'll reply to {values.email} or on {values.phone}.
+          We've got your enquiry about {interestPhrase(values, "studio")}. We'll reply on {values.phone}{values.email ? ` or to ${values.email}` : ""}.
         </p>
         <p data-no-sprinkle className="text-dp-muted text-sm mb-7">
-          A short confirmation email is on its way. If you can't see it, check your spam folder.
+          {values.email ? "A short confirmation email is on its way. If you can't see it, check your spam folder." : "Keep your phone close: we reply on WhatsApp or by call."}
         </p>
         <a
           data-no-sprinkle
@@ -149,7 +152,7 @@ export function LeadForm({
         </p>
         <div className="flex flex-col sm:flex-row gap-3 my-6">
           <a
-            href={whatsappUrl(values, "fallback", [values.message.trim(), `Phone: ${values.phone}`, `Email: ${values.email}`].filter(Boolean).join("\n"))}
+            href={whatsappUrl(values, "fallback", [values.message.trim(), `Phone: ${values.phone}`, values.email && `Email: ${values.email}`].filter(Boolean).join("\n"))}
             target="_blank"
             rel="noopener noreferrer"
             className={waBtnCls}
@@ -211,26 +214,40 @@ export function LeadForm({
           <FieldError id="phone-error" message={err("phone")} />
         </div>
         <div>
-          <label htmlFor="lead-email" className={labelCls}>Email</label>
+          <label htmlFor="lead-email" className={labelCls}>
+            Email <span className="font-normal text-dp-muted">(optional)</span>
+          </label>
           <input id="lead-email" type="email" inputMode="email" autoComplete="email" maxLength={LIMITS.email} placeholder="you@yourbusiness.co.za" className={inputCls} data-testid="input-email" {...aria("email")} {...register("email")} />
           <FieldError id="email-error" message={err("email")} />
         </div>
       </div>
 
-      <div>
-        <label htmlFor="lead-interest" className={labelCls}>I'm interested in</label>
-        <div className="relative">
-          <select id="lead-interest" defaultValue="" className={`${inputCls} appearance-none pr-11 cursor-pointer`} data-testid="select-interest" {...aria("interest")} {...register("interest")}>
-            <option value="" disabled>Choose one</option>
-            {INTEREST_OPTIONS.map((o) => (
-              <option key={o.value} value={o.value}>{money(o.label)}</option>
-            ))}
-          </select>
-          <ChevronDown size={18} aria-hidden="true" className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-dp-muted" />
+      <fieldset>
+        <legend className={labelCls}>I'm interested in</legend>
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+          {INTEREST_OPTIONS.map((o) => (
+            <label
+              key={o.value}
+              className="relative flex min-h-[64px] cursor-pointer flex-col justify-center rounded-[14px] border border-dp-line bg-dp-bg px-3.5 py-2.5 transition-colors hover:border-dp-ink/40 has-[:checked]:border-dp-accent has-[:checked]:bg-dp-accent/10 has-[:checked]:ring-1 has-[:checked]:ring-inset has-[:checked]:ring-dp-accent has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-dp-accent"
+            >
+              <input type="radio" value={o.value} className="sr-only" data-testid={`radio-interest-${o.value.toLowerCase().replace(/\s+/g, "-")}`} {...register("interest")} />
+              <span className="text-[15px] font-medium text-dp-ink">{"name" in o ? o.name : o.value}</span>
+              <span className="text-[13px] leading-snug text-dp-muted">{money(o.detail)}</span>
+            </label>
+          ))}
         </div>
         <FieldError id="interest-error" message={err("interest")} />
-        {interest === "Free mock-up" && (
-          <p className="text-dp-muted text-sm mt-2" data-testid="mockup-note">
+      </fieldset>
+
+      <div>
+        <label className="flex cursor-pointer items-start gap-3 text-[15px] text-dp-ink">
+          <input type="checkbox" className="mt-0.5 h-5 w-5 shrink-0 cursor-pointer accent-dp-accent" data-testid="checkbox-mockup" {...register("mockup")} />
+          <span>
+            Send me a free mock-up first <span className="text-dp-muted">(no obligation)</span>
+          </span>
+        </label>
+        {mockup && (
+          <p className="text-dp-muted text-sm mt-2 pl-8" data-testid="mockup-note">
             {MOCKUP_FORM_NOTE}
           </p>
         )}
@@ -261,8 +278,8 @@ export function LeadForm({
 
       <p className="text-dp-muted text-xs leading-relaxed" data-testid="popia-notice">
         <strong className="font-semibold text-dp-ink">How we use your details.</strong>{" "}
-        Digital Pantry (Aaniquah Dicks) asks for your name, phone, email, business name, what you're interested in and your message so we can reply to this enquiry.
-        They are saved in a private Google Sheet and emailed to us, and you get one automatic confirmation email. Only Aaniquah and Imaan can see them.
+        Digital Pantry (Aaniquah Dicks) asks for your name, phone, email (if you want to give it), business name, what you're interested in and your message so we can reply to this enquiry.
+        They are saved in a private Google Sheet and emailed to us, and if you gave an email you get one automatic confirmation email. Only Aaniquah and Imaan can see them.
         Nothing is ticked for marketing and we don't add you to any mailing list.
         Read the full <Link href="/privacy" className="text-dp-accent underline underline-offset-2">Privacy Notice</Link>.
       </p>

@@ -8,38 +8,42 @@ export const CONTACT_EMAIL = "thedigitalpantryza@gmail.com";
 
 export const LIMITS = { name: 80, businessName: 100, email: 254, message: 1000 } as const;
 
+// The package choices. The free mock-up is a separate tick box, and USD comes from the Local /
+// International switch (sent as `market`), so neither is a choice here any more (2026-10-29).
 export const INTEREST_OPTIONS = [
-  // Labels carry price tokens; LeadForm fills them for the Local / International switch.
-  { value: "Starter", label: "Starter ({Starter})" },
-  { value: "Standard", label: "Standard ({Standard})" },
-  { value: "Premium", label: "Premium ({Premium})" },
-  { value: "Pro", label: "Pro ({Pro}, with lead automation)" },
-  { value: "Larger business", label: "A larger business (custom quote)" },
-  { value: "International", label: "International client (USD packages)" },
-  { value: "Free mock-up", label: "A free mock-up of my site" },
-  { value: "Not sure yet", label: "Not sure yet" },
+  // Details carry price tokens; LeadForm fills them for the Local / International switch.
+  { value: "Starter", detail: "{Starter}" },
+  { value: "Standard", detail: "{Standard}" },
+  { value: "Premium", detail: "{Premium}" },
+  { value: "Pro", detail: "{Pro}, with lead automation" },
+  { value: "Larger business", name: "Bigger or custom", detail: "Custom quote" },
+  { value: "Not sure yet", detail: "We'll help you choose" },
 ] as const;
 
 export type Interest = (typeof INTEREST_OPTIONS)[number]["value"];
 const INTEREST_VALUES = INTEREST_OPTIONS.map((o) => o.value) as [Interest, ...Interest[]];
 
-// ?interest=mockup on the URL preselects the free mock-up option.
-const INTEREST_ALIASES: Record<string, Interest> = {
-  mockup: "Free mock-up",
-  "mock-up": "Free mock-up",
-  starter: "Starter",
-  standard: "Standard",
-  premium: "Premium",
-  pro: "Pro",
-  unsure: "Not sure yet",
-  larger: "Larger business",
-  international: "International",
-  intl: "International",
+// ?interest=standard preselects a package; ?interest=mockup ticks the free mock-up box.
+// ?interest=international is still accepted: the Local / International switch already says it.
+const INTEREST_ALIASES: Record<string, { interest?: Interest; mockup?: true }> = {
+  mockup: { mockup: true },
+  "mock-up": { mockup: true },
+  starter: { interest: "Starter" },
+  standard: { interest: "Standard" },
+  premium: { interest: "Premium" },
+  pro: { interest: "Pro" },
+  unsure: { interest: "Not sure yet" },
+  larger: { interest: "Larger business" },
+  international: {},
+  intl: {},
 };
-export function interestFromQuery(search: string): Interest | undefined {
+export function interestFromQuery(search: string): { interest?: Interest; mockup?: true } | undefined {
   const raw = new URLSearchParams(search).get("interest")?.toLowerCase().trim();
   return raw ? INTEREST_ALIASES[raw] : undefined;
 }
+
+// Same check as validate_ in apps-script/Code.gs.
+const EMAIL_RE = /^[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$/;
 
 /**
  * South African numbers: 0XX XXX XXXX, +27 XX XXX XXXX or 27XXXXXXXXX. Returns +27XXXXXXXXX.
@@ -61,13 +65,14 @@ export const leadSchema = z.object({
     .trim()
     .min(1, "Please enter your phone number")
     .refine((v) => normalisePhone(v) !== null, "Use a South African number like 0XX XXX XXXX, or your country code (+44...) from abroad"),
+  // Optional: the phone number is enough for us to reply.
   email: z
     .string()
     .trim()
-    .min(1, "Please enter your email")
     .max(LIMITS.email, "That email is too long")
-    .email("That email doesn't look right"),
+    .refine((v) => v === "" || EMAIL_RE.test(v), "That email doesn't look right"),
   interest: z.enum(INTEREST_VALUES, { error: "Pick what you're interested in" }),
+  mockup: z.boolean(),
   businessName: z
     .string()
     .trim()
@@ -102,7 +107,7 @@ export type SubmitResult =
  * If the request fails for ANY reason we cannot be sure the lead was saved, so the caller shows
  * the WhatsApp / email fallback. The server ignores a repeat of the same lead (duplicate guard).
  */
-export async function submitLead(values: LeadFormValues, source: string): Promise<SubmitResult> {
+export async function submitLead(values: LeadFormValues, source: string, market: "za" | "intl"): Promise<SubmitResult> {
   if (!LEADS_ENDPOINT) {
     if (import.meta.env.DEV) console.warn("VITE_LEADS_ENDPOINT is not set: the lead form will use the WhatsApp / email fallback.");
     return { status: "failed", reason: "no-endpoint" };
@@ -121,6 +126,8 @@ export async function submitLead(values: LeadFormValues, source: string): Promis
         phone,
         email: values.email,
         interest: values.interest,
+        mockup: values.mockup,
+        market,
         businessName: values.businessName,
         message: values.message,
         companySite: values.companySite,
@@ -139,15 +146,24 @@ export async function submitLead(values: LeadFormValues, source: string): Promis
   }
 }
 
-const interestPhrase = (i: string) => (i === "Free mock-up" ? "a free mock-up of my site" : i === "Not sure yet" ? "your websites (not sure which package yet)" : `the ${i} package`);
+/** What the lead asked about, in the visitor's words (WhatsApp, email) or ours (thank-you screen). */
+export function interestPhrase(v: Pick<LeadFormValues, "interest" | "mockup">, voice: "visitor" | "studio" = "visitor"): string {
+  const what =
+    v.interest === "Not sure yet"
+      ? voice === "visitor" ? "your websites (not sure which package yet)" : "our websites"
+      : v.interest === "Larger business"
+        ? `a custom website for ${voice === "visitor" ? "my" : "your"} business`
+        : `the ${v.interest} package`;
+  return v.mockup ? `${what}, with a free mock-up first` : what;
+}
 
 /** wa.me link with a message that names the person and what they asked about. */
-export function whatsappUrl(v: Pick<LeadFormValues, "name" | "businessName" | "interest">, kind: "after-send" | "fallback", extra?: string): string {
+export function whatsappUrl(v: Pick<LeadFormValues, "name" | "businessName" | "interest" | "mockup">, kind: "after-send" | "fallback", extra?: string): string {
   const intro = `Hi Aaniquah, it's ${v.name} from ${v.businessName}.`;
   const body =
     kind === "after-send"
-      ? `${intro} I just sent an enquiry on your website about ${interestPhrase(v.interest)}.`
-      : `${intro} I'm interested in ${interestPhrase(v.interest)}.${extra ? `\n\n${extra}` : ""}`;
+      ? `${intro} I just sent an enquiry on your website about ${interestPhrase(v)}.`
+      : `${intro} I'm interested in ${interestPhrase(v)}.${extra ? `\n\n${extra}` : ""}`;
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(body)}`;
 }
 
@@ -159,8 +175,8 @@ export function mailtoUrl(v: LeadFormValues): string {
     `Name: ${v.name}`,
     `Business: ${v.businessName}`,
     `Phone: ${v.phone}`,
-    `Email: ${v.email}`,
-    `Interested in: ${v.interest}`,
+    ...(v.email ? [`Email: ${v.email}`] : []),
+    `Interested in: ${v.interest}${v.mockup ? " + free mock-up" : ""}`,
     "",
     v.message.trim() ? `Message:\n${v.message.trim()}` : "",
   ].join("\n");

@@ -143,7 +143,7 @@ await settle();
 await page.getByTestId("input-business-name").fill(VISITOR.business);
 await page.getByTestId("input-phone").fill(VISITOR.phone);
 await page.getByTestId("input-email").fill(VISITOR.email);
-await page.getByTestId("select-interest").selectOption("Free mock-up");
+await page.getByTestId("checkbox-mockup").check();
 await page.getByTestId("textarea-message").fill(VISITOR.message);
 await page.getByTestId("button-submit").click();
 await page.getByTestId("lead-fallback").waitFor();

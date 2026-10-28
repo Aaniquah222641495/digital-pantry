@@ -5,7 +5,7 @@
  *   1. checks the data again on the server (the browser check is not enough, this URL is public)
  *   2. adds a row to the "Leads" tab of this Google Sheet
  *   3. emails an instant alert to the owner
- *   4. sends the visitor one plain confirmation email (no marketing)
+ *   4. sends the visitor one plain confirmation email (no marketing), if they gave an email
  *
  * Deploy steps are in README.md next to this file. Paste this whole file into the Sheet's
  * Apps Script editor (Extensions > Apps Script) and change only the CONFIG block if needed.
@@ -25,13 +25,15 @@ const CONFIG = {
   TIMEZONE: 'Africa/Johannesburg',
   MAX_BODY_CHARS: 8000,          // anything bigger is rejected before it is parsed
   DUPLICATE_WINDOW_SECONDS: 600, // the same lead sent again within 10 minutes is ignored
-  MAX_PER_EMAIL_PER_HOUR: 3,     // one email address can send 3 enquiries an hour
+  MAX_PER_EMAIL_PER_HOUR: 3,     // one email address (or phone, when no email is given) can send 3 enquiries an hour
   MAX_LEADS_PER_HOUR: 40,        // whole form: protects the Sheet and the email quota from floods
   MIN_QUOTA_FOR_AUTOREPLY: 3     // keep spare daily emails for the owner alert
 };
 
 const LIMITS = { name: 80, businessName: 100, email: 254, message: 1000 };
 
+// 'International' and 'Free mock-up' are the form's older choices; since 2026-10-29 the form sends a package
+// plus `mockup` and `market` instead. Both stay valid so a page cached in a browser still works.
 const INTERESTS = ['Starter', 'Standard', 'Premium', 'Pro', 'Larger business', 'International', 'Free mock-up', 'Not sure yet'];
 
 const HEADERS = [
@@ -95,7 +97,7 @@ function processLead_(data) {
     const dupeKey = 'dupe_' + hash_([lead.email, lead.interest, lead.name, lead.message].join('|'));
     if (cache.get(dupeKey)) return { ok: true, duplicate: true };
 
-    const emailKey = 'rl_e_' + hash_(lead.email);
+    const emailKey = 'rl_e_' + hash_(lead.email || lead.phone);
     const perEmail = Number(cache.get(emailKey) || 0);
     const allLeads = Number(cache.get('rl_all') || 0);
     if (perEmail >= CONFIG.MAX_PER_EMAIL_PER_HOUR || allLeads >= CONFIG.MAX_LEADS_PER_HOUR) {
@@ -129,7 +131,9 @@ function processLead_(data) {
 
   let autoReply = 'sent';
   try {
-    if (MailApp.getRemainingDailyQuota() < CONFIG.MIN_QUOTA_FOR_AUTOREPLY) {
+    if (!lead.email) {
+      autoReply = 'no email given';
+    } else if (MailApp.getRemainingDailyQuota() < CONFIG.MIN_QUOTA_FOR_AUTOREPLY) {
       autoReply = 'skipped (daily email limit)';
     } else {
       sendAutoReply_(lead);
@@ -165,7 +169,7 @@ function validate_(d) {
   const businessName = clean_(d.businessName, LIMITS.businessName, true);
   const email = clean_(d.email, LIMITS.email, true);
   const message = clean_(d.message, LIMITS.message, false);
-  const interest = clean_(d.interest, 40, true);
+  const choice = clean_(d.interest, 40, true);
   const source = /^[a-z0-9-]{1,40}$/.test(String(d.source || '')) ? String(d.source) : 'unknown';
 
   const digits = clean_(d.phone, 40, true).replace(/[\s\-().]/g, '');
@@ -178,12 +182,17 @@ function validate_(d) {
   const ok =
     name.length >= 2 && name.length <= LIMITS.name &&
     businessName.length >= 1 && businessName.length <= LIMITS.businessName &&
-    email.length <= LIMITS.email && /^[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$/.test(email) &&
+    (email === '' || (email.length <= LIMITS.email && /^[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$/.test(email))) &&
     phone !== '' &&
-    INTERESTS.indexOf(interest) !== -1 &&
+    INTERESTS.indexOf(choice) !== -1 &&
     message.length <= LIMITS.message;
 
-  return { ok: ok, lead: { name: name, businessName: businessName, email: email, phone: phone, interest: interest, message: message, source: source } };
+  // One readable "Interested in" value for the Sheet and emails, e.g. "Standard (international) + free mock-up".
+  const mockup = d.mockup === true || choice === 'Free mock-up';
+  const abroad = d.market === 'intl' && choice !== 'International';
+  const interest = choice + (abroad ? ' (international)' : '') + (mockup && choice !== 'Free mock-up' ? ' + free mock-up' : '');
+
+  return { ok: ok, lead: { name: name, businessName: businessName, email: email, phone: phone, choice: choice, mockup: mockup, interest: interest, message: message, source: source } };
 }
 
 function hash_(text) {
@@ -218,12 +227,15 @@ function getSheet_() {
 /* Emails                                                              */
 /* ------------------------------------------------------------------ */
 
-function interestPhrase_(interest) {
-  if (interest === 'Free mock-up') return 'a free mock-up of your website';
-  if (interest === 'Not sure yet') return 'our websites';
-  if (interest === 'Larger business') return 'a custom website for your business';
-  if (interest === 'International') return 'our international website packages';
-  return 'the ' + interest + ' package';
+function interestPhrase_(lead) {
+  const c = lead.choice;
+  const what =
+    c === 'Free mock-up' ? 'a free mock-up of your website' :
+    c === 'Not sure yet' ? 'our websites' :
+    c === 'Larger business' ? 'a custom website for your business' :
+    c === 'International' ? 'our international website packages' :
+    'the ' + c + ' package';
+  return lead.mockup && c !== 'Free mock-up' ? what + ', with a free mock-up first' : what;
 }
 
 function esc_(s) {
@@ -239,7 +251,7 @@ function sendAlert_(lead, sheetUrl) {
     'Name: ' + lead.name,
     'Business: ' + lead.businessName,
     'Phone: ' + lead.phone,
-    'Email: ' + lead.email,
+    'Email: ' + (lead.email || '(not given)'),
     'Interested in: ' + lead.interest,
     'From page: ' + lead.source,
     '',
@@ -247,25 +259,26 @@ function sendAlert_(lead, sheetUrl) {
     lead.message || '(none)',
     '',
     'Reply on WhatsApp: ' + waLink,
-    'Or just reply to this email: it goes to ' + lead.email + '.',
+    lead.email ? 'Or just reply to this email: it goes to ' + lead.email + '.' : 'No email given: reply on WhatsApp or call.',
     '',
     'All leads: ' + sheetUrl
   ].join('\n');
 
-  MailApp.sendEmail({
+  const alert = {
     to: CONFIG.OWNER_EMAIL,
     subject: 'New lead: ' + lead.name + ' (' + lead.interest + ')',
     body: body,
-    replyTo: lead.email,
     name: 'Digital Pantry website'
-  });
+  };
+  if (lead.email) alert.replyTo = lead.email;
+  MailApp.sendEmail(alert);
 }
 
 /** One plain confirmation to the visitor. Not marketing: no offers, no links except the privacy notice and WhatsApp. */
 function sendAutoReply_(lead) {
   const first = lead.name.split(' ')[0].slice(0, 40);
-  const what = interestPhrase_(lead.interest);
-  const mockupLine = lead.interest === 'Free mock-up'
+  const what = interestPhrase_(lead);
+  const mockupLine = lead.mockup
     ? "You asked for a free mock-up. It's a free preview of your site, with no obligation to go ahead."
     : '';
   const waUrl = 'https://wa.me/' + CONFIG.WHATSAPP_NUMBER;
@@ -339,7 +352,8 @@ function testLead() {
     businessName: 'Test Business',
     email: CONFIG.OWNER_EMAIL,
     phone: '0724111011',
-    interest: 'Free mock-up',
+    interest: 'Standard',
+    mockup: true,
     message: 'This is a test from the Apps Script editor. ' + new Date().toISOString(),
     source: 'script-test',
     companySite: ''

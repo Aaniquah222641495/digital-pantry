@@ -67,7 +67,7 @@ function PlanCard({ p }: { p: (typeof PLANS)[number] }) {
       <div className="mt-8">
         {p.popular ? (
           <a
-            href={intl ? "/contact?interest=international" : `/contact?interest=${p.name.toLowerCase()}`}
+            href={`/contact?interest=${p.name.toLowerCase()}`}
             data-testid={`button-pricing-${p.name.toLowerCase()}`}
             onClick={() => track("package_cta_click", { package: pkg, market, surface: "pricing" })}
             className="inline-flex h-12 w-full items-center justify-center rounded-full bg-dp-bg text-[15px] font-medium text-dp-ink transition-transform active:scale-[0.98]"
@@ -76,7 +76,7 @@ function PlanCard({ p }: { p: (typeof PLANS)[number] }) {
           </a>
         ) : (
           <a
-            href={intl ? "/contact?interest=international" : `/contact?interest=${p.name.toLowerCase()}`}
+            href={`/contact?interest=${p.name.toLowerCase()}`}
             data-testid={`button-pricing-${p.name.toLowerCase()}`}
             onClick={() => track("package_cta_click", { package: pkg, market, surface: "pricing" })}
             className="dp-outline-btn inline-flex h-12 w-full items-center justify-center rounded-full border border-dp-line text-[15px] font-medium text-dp-ink transition-colors hover:border-dp-ink/40 active:scale-[0.98]"

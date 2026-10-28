@@ -2,17 +2,18 @@ import { Moon, Sun } from "lucide-react";
 import { useTheme } from "../lib/ThemeContext";
 
 // The light/dark switch is the founders switch: Day is Aaniquah's side, Night is Imaan's.
+// It also picks whose WhatsApp the site links to (lib/contact.ts), so the label says so (2026-10-29).
 export function FounderSwitch({ compact = false }: { compact?: boolean }) {
   const { theme, toggle } = useTheme();
   const sides = [
-    { key: "light", name: "Aaniquah", Icon: Sun, label: "Day: Aaniquah's side" },
-    { key: "dark", name: "Imaan", Icon: Moon, label: "Night: Imaan's side" },
+    { key: "light", name: "Aaniquah", Icon: Sun, label: "Day: chat with Aaniquah" },
+    { key: "dark", name: "Imaan", Icon: Moon, label: "Night: chat with Imaan" },
   ] as const;
 
-  return (
+  const group = (
     <div
       role="radiogroup"
-      aria-label="Choose a side of the studio"
+      aria-label="Day or Night: also picks who you chat with on WhatsApp"
       className="relative inline-flex items-center rounded-full border border-dp-line bg-dp-surface/60 p-1 backdrop-blur"
     >
       {sides.map(({ key, name, Icon, label }) => {
@@ -37,5 +38,14 @@ export function FounderSwitch({ compact = false }: { compact?: boolean }) {
         );
       })}
     </div>
+  );
+
+  return compact ? (
+    group
+  ) : (
+    <span className="inline-flex items-center gap-2">
+      <span aria-hidden="true" className="text-[13px] text-dp-muted">Chat with</span>
+      {group}
+    </span>
   );
 }
