@@ -5,6 +5,7 @@ import { Reveal } from "./Reveal";
 import { H2 } from "../lib/style";
 import { priceFor, retainerFor, type Market } from "../lib/plans";
 import { useMarket } from "../lib/MarketContext";
+import { OfferArt, type OfferArtKind } from "./OfferArt";
 
 // The studio's full range, straight after the hero (PRD 1, 4.2, 4.8): small-business sites are one
 // offer, not the whole studio. A menu board of mixed sizes, each offer with its own look, so it
@@ -19,6 +20,7 @@ type Offer = {
   tone: "pink" | "ink" | "plain" | "soft";
   art?: { src: string; w: number; h: number; cls: string };
   big?: string;
+  vignette?: OfferArtKind;
 };
 
 // Five offers: packages, custom work, and the three services we already run for clients (founder
@@ -47,6 +49,7 @@ const offers = (market: Market): Offer[] => [
   },
   {
     title: "SEO and Google setup",
+    vignette: "google",
     body: "We set up your SEO and your Google Business Profile, so locals can find your business on Google and Maps.",
     price: `From Premium, ${priceFor("Premium", market)}`,
     href: "/pricing",
@@ -55,6 +58,7 @@ const offers = (market: Market): Offer[] => [
   },
   {
     title: "Lead automation",
+    vignette: "leads",
     body: "Every enquiry lands in your Google Sheet, gets an instant reply and pings you, with a WhatsApp button to follow up. Tested before handover.",
     price: `Included in Pro, ${priceFor("Pro", market)}`,
     href: "/pricing",
@@ -63,6 +67,7 @@ const offers = (market: Market): Offer[] => [
   },
   {
     title: "Care and domains",
+    vignette: "care",
     body: "We host your site, renew your domain (at cost) and make small edits like menu changes. Month to month.",
     price: `${retainerFor(market)}/month`,
     href: "/pricing",
@@ -101,6 +106,7 @@ export function WhatWeCook() {
               >
                 <span className={`relative z-10 block max-w-[17ch] text-[clamp(1.9rem,3vw,2.7rem)] font-semibold leading-[1.02] tracking-[-0.045em] ${o.art ? "sm:max-w-[13ch]" : ""}`}>{o.title}</span>
                 <span className={`relative z-10 mt-4 block max-w-[34ch] text-[15.5px] leading-relaxed opacity-75 ${o.art ? "sm:max-w-[27ch]" : ""}`}>{o.body}</span>
+                {o.vignette && <OfferArt kind={o.vignette} />}
                 {o.big && (
                   <span aria-hidden="true" className="dp-cut-bebas relative z-10 mt-6 block text-[clamp(4.5rem,9vw,8rem)] leading-[0.85] tracking-[0.02em] text-dp-accent">
                     {o.big}
