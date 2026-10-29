@@ -60,7 +60,7 @@ export const FAQ_GROUPS: FaqGroup[] = [
       {
         id: "international",
         q: "Do you work with international clients?",
-        a: `Yes. International packages are priced in US dollars: Starter ${INTL_PRICES.Starter}, Standard ${INTL_PRICES.Standard}, Premium ${INTL_PRICES.Premium} and Pro ${INTL_PRICES.Pro}, once-off. Care is ${INTL_RETAINER}/month. Use the switch at the top of the page to see every price in dollars.`,
+        a: `Yes. International packages are priced in US dollars: Starter ${INTL_PRICES.Starter}, Standard ${INTL_PRICES.Standard}, Premium ${INTL_PRICES.Premium} and Pro ${INTL_PRICES.Pro}, once-off. Care is ${INTL_RETAINER}/month. Visitors outside South Africa see dollar prices automatically, and you can switch at the bottom of any page or on Pricing.`,
       },
       {
         id: "pro-monthly",

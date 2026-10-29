@@ -112,7 +112,7 @@ await scrollThrough();
 await page.goto(`${base}/pricing`, { waitUntil: "load" });
 await settle();
 await scrollThrough();
-// International prices now come from the header's Local / International switch (no Pricing tab).
+// International prices: the switch on Pricing (auto-detected by time zone otherwise).
 await page.locator('[data-testid="market-intl"]:visible').first().click();
 // Scroll back up with the wheel: the smooth-scroll library ignores window.scrollTo.
 {

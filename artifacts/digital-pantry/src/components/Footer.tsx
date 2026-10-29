@@ -1,5 +1,6 @@
 import { Link, useLocation } from "wouter";
 import { Logo } from "./Navbar";
+import { MarketSwitch } from "./MarketSwitch";
 import { MagneticButton } from "./MagneticButton";
 import { Reveal } from "./Reveal";
 import { useSideContact } from "../lib/contact";
@@ -46,6 +47,11 @@ export function Footer() {
             <p className="max-w-xs text-[15px] leading-relaxed text-dp-muted">
               A Cape Town web studio by Aaniquah Dicks and Imaan Cooper. Every site built from scratch.
             </p>
+            {/* Prices pick rand or dollars from the visitor's time zone; this is the manual override */}
+            <div className="flex flex-col gap-2">
+              <span className="text-[13px] text-dp-muted">Show prices in</span>
+              <MarketSwitch />
+            </div>
           </div>
 
           <nav aria-label="Footer navigation" className="flex flex-col">

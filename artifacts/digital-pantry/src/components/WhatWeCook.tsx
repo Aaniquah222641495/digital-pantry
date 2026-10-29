@@ -25,7 +25,7 @@ type Offer = {
 // 2026-10-29): SEO and Google setup (Premium and up), the lead system that comes with Pro (ADR-0019) and care, which covers domains.
 // Domains are only looked after as part of care, so there is no domain-only card.
 // Two offers were: ready-made packages, and custom work quoted after a chat. The agencies and the
-// USD cards were cut (founder 2026-10-27): the header switch now shows dollar prices everywhere.
+// USD cards were cut (founder 2026-10-27): dollar prices now show automatically outside South Africa (MarketContext).
 const offers = (market: Market): Offer[] => [
   {
     title: "Small business websites",

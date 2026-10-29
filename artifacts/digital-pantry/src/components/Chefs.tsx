@@ -19,7 +19,7 @@ const CHEFS = [
     name: "Aaniquah Dicks",
     role: "Founder, engineering",
     owns: "Owns the build",
-    body: "Aaniquah turns the design into a fast, solid site and keeps it that way after launch. She writes every line of code, connects your domain and makes sure Google can find you.",
+    body: "Aaniquah builds your site fast and solid, then looks after it once it's live. She writes every line of code, connects your domain and makes sure Google can find you.",
     proof: "Winner, GirlCode Pan-African Hackathon 2026",
     light: true,
   },
@@ -28,7 +28,7 @@ const CHEFS = [
     name: "Imaan Cooper",
     role: "Co-founder, creative direction",
     owns: "Owns the look",
-    body: "Imaan turns your brief into a look that feels like your brand: layout, colour, type and the small details customers notice. She shapes how your site feels before a line of code is written.",
+    body: "Imaan turns your brief into a look that feels like you: layout, colour, type and the small details customers notice. She shapes how your site feels before a line of code is written.",
     proof: "Creative direction for local and international clients since 2023",
     light: false,
   },
@@ -75,10 +75,10 @@ export function Chefs() {
             Meet the <CutoutWord word="CHEFS" />
           </h2>
           <p className="mt-5 max-w-[48ch] text-lg leading-relaxed text-dp-muted">
-            One of us codes in pink, the other designs in the dark, and you work with both of us directly.
+            One of us codes in pink, the other designs in the dark. You get both of us, directly.
           </p>
         </div>
-        <p className="text-[14px] text-dp-muted">Flip the switch at the top to see the studio through either of our eyes.</p>
+        <p className="text-[14px] text-dp-muted">Flip the switch at the top to see the studio our way, day or night.</p>
       </Reveal>
 
       {/* The two halves. On desktop the half you hover gently takes more of the counter. */}
@@ -139,7 +139,7 @@ export function Chefs() {
           <div className="relative">
             <h3 className="text-[clamp(1.8rem,3vw,2.6rem)] font-semibold leading-[1] tracking-[-0.04em]">You talk to the chefs.</h3>
             <p className="mt-4 max-w-[34ch] leading-relaxed text-[#463E44]">
-              The two people on your calls are the two people making your site, from the first chat to launch day.
+              The two people on your calls are the two people building your site, from first hello to launch day.
             </p>
             <a
               href={contact.waLink}
@@ -162,7 +162,7 @@ export function Chefs() {
               <img src="/images/aaniquah.webp" alt="" width={600} height={600} loading="lazy" className="h-9 w-9 shrink-0 rounded-full border-2 border-white bg-[#FFF7FA] object-cover" />
               <p className="max-w-[78%] rounded-[18px] rounded-bl-md bg-[#FFA7D2] px-4 py-2.5 text-[14px] leading-snug">
                 <span className="block text-[11px] font-semibold text-[#7A1F45]">Aaniquah</span>
-                Yes! Tell us how you take orders and I'll handle the build.
+                Yes! Tell us how your customers order and I'll handle the build.
               </p>
             </li>
             <li className="dp-chat-msg flex items-end gap-2.5" style={{ "--i": 2 } as CSSProperties}>
@@ -189,7 +189,7 @@ export function Chefs() {
               Women-led. Made from <CutoutWord word="SCRATCH" tone="on-yellow" />
             </h3>
             <p data-no-sprinkle className="max-w-[40ch] text-[17px] leading-relaxed text-[#3A3328] dark:text-[var(--im-muted)]">
-              Every site starts from your brand and your customers, never a template, whether you sell cupcakes or fix geysers. <span aria-hidden="true" className="dark:text-[#FFD43B]">★</span>
+              Every site starts from your brand and your customers, never a template. Cupcakes or geysers, we start with you. <span aria-hidden="true" className="dark:text-[#FFD43B]">★</span>
             </p>
           </div>
         </Reveal>
