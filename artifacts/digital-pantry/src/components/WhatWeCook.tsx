@@ -3,7 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import { CutoutWord } from "./CutoutWord";
 import { Reveal } from "./Reveal";
 import { H2 } from "../lib/style";
-import { priceFor, type Market } from "../lib/plans";
+import { priceFor, retainerFor, type Market } from "../lib/plans";
 import { useMarket } from "../lib/MarketContext";
 
 // The studio's full range, straight after the hero (PRD 1, 4.2, 4.8): small-business sites are one
@@ -21,7 +21,10 @@ type Offer = {
   big?: string;
 };
 
-// Two offers: ready-made packages, and custom work quoted after a chat. The agencies and the
+// Five offers: packages, custom work, and the three services we already run for clients (founder
+// 2026-10-29): SEO and Google setup (Premium and up), the lead system that comes with Pro (ADR-0019) and care, which covers domains.
+// Domains are only looked after as part of care, so there is no domain-only card.
+// Two offers were: ready-made packages, and custom work quoted after a chat. The agencies and the
 // USD cards were cut (founder 2026-10-27): the header switch now shows dollar prices everywhere.
 const offers = (market: Market): Offer[] => [
   {
@@ -41,6 +44,30 @@ const offers = (market: Market): Offer[] => [
     span: "lg:col-span-5",
     tone: "soft",
     art: { src: "/images/art/imaan-serving.webp", w: 600, h: 600, cls: "w-[34%] max-w-[170px]" },
+  },
+  {
+    title: "SEO and Google setup",
+    body: "We set up your SEO and your Google Business Profile, so locals can find your business on Google and Maps.",
+    price: `From Premium, ${priceFor("Premium", market)}`,
+    href: "/pricing",
+    span: "lg:col-span-4",
+    tone: "plain",
+  },
+  {
+    title: "Lead automation",
+    body: "Every enquiry lands in your Google Sheet, gets an instant reply and pings you, with a WhatsApp button to follow up. Tested before handover.",
+    price: `Included in Pro, ${priceFor("Pro", market)}`,
+    href: "/pricing",
+    span: "lg:col-span-4",
+    tone: "plain",
+  },
+  {
+    title: "Care and domains",
+    body: "We host your site, renew your domain (at cost) and make small edits like menu changes. Month to month.",
+    price: `${retainerFor(market)}/month`,
+    href: "/pricing",
+    span: "lg:col-span-4",
+    tone: "plain",
   },
 ];
 
@@ -62,7 +89,7 @@ export function WhatWeCook() {
             What we <CutoutWord word="COOK" />
           </h2>
           <p className="max-w-[44ch] text-lg leading-relaxed text-dp-muted md:col-span-5">
-            Websites for small businesses, designed and coded from scratch.
+            Websites for small businesses, designed and coded from scratch, then looked after.
           </p>
         </Reveal>
         <ul className="mt-14 grid gap-4 lg:grid-cols-12">
@@ -70,7 +97,7 @@ export function WhatWeCook() {
             <Reveal as="li" key={o.title} delay={(i % 2) * 0.06} className={o.span}>
               <Link
                 href={o.href}
-                className={`group relative flex h-full min-h-[340px] flex-col overflow-hidden rounded-[32px] p-8 transition-transform duration-500 hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-dp-accent sm:p-10 ${TONE[o.tone]}`}
+                className={`group relative flex h-full min-h-[300px] flex-col overflow-hidden rounded-[32px] p-8 transition-transform duration-500 hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-dp-accent sm:p-10 ${TONE[o.tone]}`}
               >
                 <span className={`relative z-10 block max-w-[17ch] text-[clamp(1.9rem,3vw,2.7rem)] font-semibold leading-[1.02] tracking-[-0.045em] ${o.art ? "sm:max-w-[13ch]" : ""}`}>{o.title}</span>
                 <span className={`relative z-10 mt-4 block max-w-[34ch] text-[15.5px] leading-relaxed opacity-75 ${o.art ? "sm:max-w-[27ch]" : ""}`}>{o.body}</span>

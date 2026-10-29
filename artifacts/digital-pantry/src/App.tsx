@@ -14,6 +14,7 @@ import Pricing from "./pages/Pricing";
 import Contact from "./pages/Contact";
 import Privacy from "./pages/Privacy";
 import Faq from "./pages/Faq";
+import About from "./pages/About";
 import { BeautyBusinesses, FoodBusinesses, ProductBrands, TradesAndLocalServices } from "./pages/Industry";
 import NotFound from "./pages/not-found";
 
@@ -29,6 +30,7 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/about" component={About} />
       <Route path="/portfolio" component={Portfolio} />
       <Route path="/pricing" component={Pricing} />
       <Route path="/faq" component={Faq} />

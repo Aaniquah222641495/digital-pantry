@@ -6,6 +6,7 @@ import { MarketSwitch } from "./MarketSwitch";
 import { MagneticButton } from "./MagneticButton";
 
 const NAV_LINKS = [
+  { label: "About", href: "/about" },
   { label: "Portfolio", href: "/portfolio" },
   { label: "Pricing", href: "/pricing" },
   { label: "FAQ", href: "/faq" },
