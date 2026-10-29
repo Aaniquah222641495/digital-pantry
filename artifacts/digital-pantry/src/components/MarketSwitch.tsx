@@ -2,6 +2,7 @@ import { useMarket } from "../lib/MarketContext";
 import type { Market } from "../lib/plans";
 
 // Local / International: same pill as the Day / Night switch. Every price on the site follows it.
+// Lives in the footer and on Pricing; the default comes from guessMarket() in MarketContext.
 // `compact` shows the currency (R / $) so it fits beside the other controls at laptop width.
 export function MarketSwitch({ compact = false }: { compact?: boolean }) {
   const { market, setMarket } = useMarket();

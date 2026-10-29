@@ -105,8 +105,8 @@ export default function Pricing() {
           <p className="dp-rise mt-6 max-w-[40ch] text-[clamp(1.05rem,1.5vw,1.25rem)] leading-relaxed text-dp-muted" style={{ "--d": "0.12s" } as React.CSSProperties}>
             Website prices for small businesses, from {intl ? INTL_PRICES.Starter : PLAN_PRICES.Starter} once-off. Pick your jar.
           </p>
-          {/* The header's Local / International switch is hidden below lg, so phones get it here */}
-          <div className="dp-rise mt-6 lg:hidden" style={{ "--d": "0.16s" } as React.CSSProperties}>
+          {/* Prices follow the visitor's time zone automatically; this lets them change it (founder 2026-10-29) */}
+          <div className="dp-rise mt-6" style={{ "--d": "0.16s" } as React.CSSProperties}>
             <MarketSwitch />
           </div>
 

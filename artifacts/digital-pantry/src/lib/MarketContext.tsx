@@ -5,6 +5,20 @@ import { priced, type Market } from "./plans";
 // Stored in localStorage as "dp-market" ("za" / "intl"), on the visitor's device only, like the theme.
 // Prerendered HTML is always Local, so the first client render is Local too and the saved choice is
 // applied right after mount (hydration must match).
+// No saved choice? We guess from the device's time zone (founder 2026-10-29: show the right prices
+// without a switch in the header). It is read on the device only, never stored or sent. South Africa
+// has one time zone, Africa/Johannesburg. Search engines always get Local so the indexed page matches
+// the structured data. A guess is not saved, so the visitor's own pick (footer, Pricing) always wins.
+const BOT = /bot|crawl|spider|slurp|lighthouse|headless|google|bing/i;
+export function guessMarket(): Market {
+  try {
+    if (BOT.test(navigator.userAgent)) return "za";
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    return !tz || tz === "Africa/Johannesburg" ? "za" : "intl";
+  } catch {
+    return "za";
+  }
+}
 interface MarketContextValue {
   market: Market;
   intl: boolean;
@@ -22,7 +36,9 @@ export function MarketProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     try {
-      if (localStorage.getItem(KEY) === "intl") startTransition(() => setMarketState("intl"));
+      const saved = localStorage.getItem(KEY);
+      const m: Market = saved === "intl" || saved === "za" ? saved : guessMarket();
+      if (m === "intl") startTransition(() => setMarketState("intl"));
     } catch {}
   }, []);
 

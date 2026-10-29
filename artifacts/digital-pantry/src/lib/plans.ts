@@ -73,7 +73,7 @@ export const MOCKUP_FORM_NOTE =
 export const MOCKUP_TERMS =
   "One free mock-up per business, for qualified enquiries: a real business, with the decision-maker, open to a paid build. You get a mock-up pack (phone and desktop videos and a quote PDF), not a working site, within 5 business days of your brief. Development, a live link, source files and revisions start once the deposit is paid, and the concept and files stay ours until the agreed fee is paid.";
 
-// Local / International switch (header). Copy that carries a price writes a token such as {Starter} or
+// Local / International choice (auto from time zone, switch in footer and on Pricing). Copy that carries a price writes a token such as {Starter} or
 // {retainer}; priced() fills it for the visitor's market. The prerendered HTML and the structured data
 // always use "za", so what crawlers read matches what a first-time local visitor sees.
 export type Market = "za" | "intl";

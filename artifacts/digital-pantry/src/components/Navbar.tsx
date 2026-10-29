@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "wouter";
 import { Menu, X } from "lucide-react";
 import { FounderSwitch } from "./FounderSwitch";
-import { MarketSwitch } from "./MarketSwitch";
 import { MagneticButton } from "./MagneticButton";
 
 const NAV_LINKS = [
@@ -96,8 +95,6 @@ export function Navbar() {
 
           <div className="hidden items-center gap-3 lg:flex">
             {/* Compact switches keep the CTA on screen at laptop width */}
-            <span className="xl:hidden"><MarketSwitch compact /></span>
-            <span className="hidden xl:block"><MarketSwitch /></span>
             <span className="xl:hidden"><FounderSwitch compact /></span>
             <span className="hidden xl:block"><FounderSwitch /></span>
             <MagneticButton href="/contact" data-testid="nav-cta" size="sm">
@@ -141,7 +138,6 @@ export function Navbar() {
             </nav>
             <div className="mt-auto flex flex-col gap-4">
               <div className="flex flex-wrap items-center gap-3">
-                <MarketSwitch />
                 <FounderSwitch />
               </div>
               <MagneticButton href="/contact">Let's Get Cooking</MagneticButton>
