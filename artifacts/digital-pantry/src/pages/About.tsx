@@ -32,7 +32,7 @@ export default function About() {
           </h2>
           <div className="space-y-5 text-lg leading-relaxed text-dp-muted md:col-span-7">
             <p>
-              We were tired of the stereotypes that come with being a woman. We want little girls and young women to see that it's okay to be multifaceted, and that <span className="text-dp-ink">we can be baddies in tech</span>.
+              We were tired of the stereotypes that come with being a woman in STEM. We want little girls and young women to see that it's okay to be multifaceted, and that <span className="text-dp-ink">we can be baddies in tech</span>.
             </p>
           </div>
         </Reveal>
