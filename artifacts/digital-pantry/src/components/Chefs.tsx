@@ -1,0 +1,199 @@
+import type { CSSProperties } from "react";
+import { Reveal } from "./Reveal";
+import { CutoutWord } from "./CutoutWord";
+import { Sprinkles } from "./Sprinkles";
+import { H2 } from "../lib/style";
+import { useSideContact } from "../lib/contact";
+import { track } from "../lib/analytics";
+
+// Meet the chefs: moved from Home to /about (founder 2026-10-29) so the home page stays short.
+// Imaan's pixel avatar is being made; until then her cards show a monogram.
+const IMAAN_AVATAR: string | null = "/images/imaan-cut.webp";
+
+
+// Founders framed the way premium studios do it: two halves of one practice, what each
+// one owns for the client, and a single proof point each (not a CV).
+const CHEFS = [
+  {
+    side: "Day",
+    name: "Aaniquah Dicks",
+    role: "Founder, engineering",
+    owns: "Owns the build",
+    body: "Aaniquah turns the design into a fast, solid site and keeps it that way after launch. She writes every line of code, connects your domain and makes sure Google can find you.",
+    proof: "Winner, GirlCode Pan-African Hackathon 2026",
+    light: true,
+  },
+  {
+    side: "Night",
+    name: "Imaan Cooper",
+    role: "Co-founder, creative direction",
+    owns: "Owns the look",
+    body: "Imaan turns your brief into a look that feels like your brand: layout, colour, type and the small details customers notice. She shapes how your site feels before a line of code is written.",
+    proof: "Creative direction for local and international clients since 2023",
+    light: false,
+  },
+] as const;
+
+
+function Monogram({ className = "" }: { className?: string }) {
+  return (
+    <div
+      role="img"
+      aria-label="Imaan Cooper"
+      className={`grid place-items-center bg-[var(--im-bg)] font-mono font-medium tracking-[-0.06em] text-[var(--im-accent)] ${className}`}
+    >
+      IC
+    </div>
+  );
+}
+
+// Rotating badge that sits on the seam between the two chefs (static for reduced motion).
+function SeamBadge() {
+  return (
+    <div aria-hidden="true" className="pointer-events-none absolute bottom-14 left-1/2 z-20 hidden h-36 w-36 -translate-x-1/2 md:block">
+      <div className="absolute inset-0 rounded-full bg-[#FFD43B] shadow-[0_20px_50px_-15px_rgba(12,11,13,0.55)]" />
+      <svg viewBox="0 0 144 144" className="dp-spin absolute inset-0 h-full w-full">
+        <defs>
+          <path id="seam-circle" d="M72,72 m-52,0 a52,52 0 1,1 104,0 a52,52 0 1,1 -104,0" />
+        </defs>
+        <text className="dp-cut-bebas" fontSize="17" letterSpacing="2.6" fill="#161214">
+          <textPath href="#seam-circle">TWO CHEFS ★ ONE KITCHEN ★ TWO CHEFS ★ ONE KITCHEN ★</textPath>
+        </text>
+      </svg>
+      <span className="absolute inset-0 grid place-items-center text-3xl text-[#161214]">★</span>
+    </div>
+  );
+}
+
+export function Chefs() {
+  const contact = useSideContact();
+  return (
+    <section aria-labelledby="chefs-heading" className="mx-auto max-w-[1320px] px-5 py-24 sm:px-8 md:py-32">
+      <Reveal className="flex flex-wrap items-end justify-between gap-8">
+        <div>
+          <h2 id="chefs-heading" className={H2}>
+            Meet the <CutoutWord word="CHEFS" />
+          </h2>
+          <p className="mt-5 max-w-[48ch] text-lg leading-relaxed text-dp-muted">
+            One of us codes in pink, the other designs in the dark, and you work with both of us directly.
+          </p>
+        </div>
+        <p className="text-[14px] text-dp-muted">Flip the switch at the top to see the studio through either of our eyes.</p>
+      </Reveal>
+
+      {/* The two halves. On desktop the half you hover gently takes more of the counter. */}
+      <div className="relative mt-14 flex flex-col overflow-hidden rounded-[36px] md:h-[620px] md:flex-row">
+        {CHEFS.map((c, i) => {
+          const t = c.light
+            ? { bg: "bg-[#FCE8F0]", ink: "text-[#161214]", muted: "text-[#463E44]", label: "border-[#161214]/15 text-[#463E44]", accent: "text-[#B32F68]", glow: "bg-[radial-gradient(closest-side,#FFA7D2,transparent)]" }
+            : { bg: "bg-[var(--im-bg)]", ink: "text-[var(--im-text)]", muted: "text-[var(--im-muted)]", label: "border-white/15 text-[var(--im-muted)]", accent: "text-[var(--im-accent)]", glow: "bg-[radial-gradient(closest-side,var(--im-glow),transparent)]" };
+          return (
+            <Reveal
+              as="article"
+              key={c.name}
+              delay={i * 0.1}
+              className={`group relative isolate flex min-h-[560px] flex-1 flex-col overflow-hidden p-8 transition-[flex-grow] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] sm:p-12 md:hover:flex-[1.22] ${c.light ? "md:pr-24" : "md:pl-24"} ${t.bg} ${t.ink}`}
+            >
+              <div aria-hidden="true" className={`absolute -bottom-1/4 ${c.light ? "-right-1/4" : "-left-1/4"} -z-10 h-[90%] w-[90%] rounded-full ${t.glow}`} />
+              <span className={`inline-flex w-fit items-center gap-2 rounded-full border px-3.5 py-1.5 text-[13px] ${t.label} ${c.light ? "" : "lowercase tracking-[0.32em]"}`}>
+                <span aria-hidden="true">{c.light ? "☀" : "☾"}</span> {c.side}
+              </span>
+
+              <p className={`mt-8 max-w-[9ch] pr-28 text-[clamp(2.6rem,5vw,4.5rem)] sm:pr-0 sm:max-w-[calc(100%-10rem)] md:max-w-[calc(100%-12rem)] font-semibold leading-[0.95] tracking-[-0.05em] ${t.accent}`}>{c.owns}.</p>
+              {/* Pixel portrait, tucked into the top corner beside the headline */}
+              <div className={`pointer-events-none absolute right-8 top-8 w-24 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-1.5 sm:right-12 sm:top-12 sm:w-36 md:w-44 ${c.light ? "rotate-[-4deg] md:right-24 group-hover:rotate-0" : "rotate-[4deg] group-hover:rotate-0"}`}>
+                {c.light ? (
+                  <img src="/images/aaniquah.webp" alt="" width={600} height={600} loading="lazy" className="aspect-square w-full rounded-[22px] border-[3px] border-white bg-[#FFF7FA] object-contain shadow-[0_24px_50px_-24px_rgba(179,47,104,0.55)]" />
+                ) : IMAAN_AVATAR ? (
+                  <img src={IMAAN_AVATAR} alt="" width={600} height={600} loading="lazy" className="aspect-square w-full rounded-[22px] border-[3px] border-[var(--im-border)] bg-[var(--im-soft)] object-contain" />
+                ) : (
+                  <Monogram className="aspect-square w-full rounded-[22px] border-[3px] border-[var(--im-border)] !bg-[var(--im-soft)] text-[clamp(1.8rem,3.4vw,3rem)]" />
+                )}
+              </div>
+
+              <div className="relative z-10 mt-auto pt-10">
+                <div className="min-w-0 flex-1">
+                  <h3 className="text-[1.5rem] font-semibold tracking-[-0.03em]">{c.name}</h3>
+                  <p className={`text-[14px] ${c.light ? "text-[#61575E]" : "text-[var(--im-label)]"}`}>{c.role}</p>
+                  <p className={`mt-4 max-w-[40ch] leading-relaxed ${t.muted}`}>{c.body}</p>
+                  <p
+                    className={`mt-7 inline-flex w-fit items-center gap-2 rounded-full px-4 py-2 text-[13px] font-medium ${
+                      c.light ? "bg-[#FFD43B] text-[#161214] shadow-[0_10px_24px_-12px_rgba(224,176,0,0.8)]" : "border border-white/15 bg-white/[0.04] text-[var(--im-text)]"
+                    }`}
+                  >
+                    <span aria-hidden="true" className={c.light ? "" : "text-[var(--im-accent)]"}>★</span> {c.proof}
+                  </p>
+                </div>
+              </div>
+            </Reveal>
+          );
+        })}
+        <SeamBadge />
+      </div>
+
+      {/* Promises as colour blocks: blush, ink, butter. */}
+      <div className="mt-5 grid gap-5 md:grid-cols-6">
+        {/* You talk to the chefs: an illustrative chat thread (not a real client conversation). */}
+        <Reveal className="dp-chat relative grid gap-8 overflow-hidden rounded-[32px] bg-[#FDD2DE] p-8 text-[#161214] sm:p-10 md:col-span-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+          <div aria-hidden="true" className="pointer-events-none absolute -bottom-24 -left-16 h-64 w-64 rounded-full bg-[radial-gradient(closest-side,#FFA7D2,transparent)]" />
+          <div className="relative">
+            <h3 className="text-[clamp(1.8rem,3vw,2.6rem)] font-semibold leading-[1] tracking-[-0.04em]">You talk to the chefs.</h3>
+            <p className="mt-4 max-w-[34ch] leading-relaxed text-[#463E44]">
+              The two people on your calls are the two people making your site, from the first chat to launch day.
+            </p>
+            <a
+              href={contact.waLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => track("whatsapp_click", { surface: "home_chefs" })}
+              className="mt-7 inline-flex h-11 items-center gap-2 rounded-full bg-[#161214] px-5 text-[14px] font-medium text-[#FFF7FA] transition-transform active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#161214]"
+            >
+              <span aria-hidden="true" className="h-2 w-2 rounded-full bg-[#25D366]" /> WhatsApp {contact.name}
+            </a>
+          </div>
+
+          <ol aria-label="Example of how a chat with us goes" className="relative flex flex-col gap-3 rounded-[24px] bg-white/70 p-4 shadow-[0_24px_50px_-30px_rgba(179,47,104,0.6)] backdrop-blur sm:p-5">
+            <li className="dp-chat-msg flex justify-end" style={{ "--i": 0 } as CSSProperties}>
+              <p className="max-w-[80%] rounded-[18px] rounded-br-md bg-[#161214] px-4 py-2.5 text-[14px] leading-snug text-[#FFF7FA]">
+                Hi! Can you help with a website for my bakery?
+              </p>
+            </li>
+            <li className="dp-chat-msg flex items-end gap-2.5" style={{ "--i": 1 } as CSSProperties}>
+              <img src="/images/aaniquah.webp" alt="" width={600} height={600} loading="lazy" className="h-9 w-9 shrink-0 rounded-full border-2 border-white bg-[#FFF7FA] object-cover" />
+              <p className="max-w-[78%] rounded-[18px] rounded-bl-md bg-[#FFA7D2] px-4 py-2.5 text-[14px] leading-snug">
+                <span className="block text-[11px] font-semibold text-[#7A1F45]">Aaniquah</span>
+                Yes! Tell us how you take orders and I'll handle the build.
+              </p>
+            </li>
+            <li className="dp-chat-msg flex items-end gap-2.5" style={{ "--i": 2 } as CSSProperties}>
+              <img src={IMAAN_AVATAR ?? "/images/imaan-cut.webp"} alt="" width={600} height={600} loading="lazy" className="h-9 w-9 shrink-0 rounded-full border-2 border-[var(--im-border)] bg-[var(--im-soft)] object-cover" />
+              <p className="max-w-[78%] rounded-[18px] rounded-bl-md bg-[var(--im-surface)] px-4 py-2.5 text-[14px] leading-snug text-[var(--im-text)]">
+                <span className="block text-[11px] font-semibold text-[var(--im-accent)]">Imaan</span>
+                And I'll make it look as good as your cakes.
+              </p>
+            </li>
+            <li className="dp-chat-msg flex items-center gap-1.5 pl-12 text-[#61575E]" style={{ "--i": 3 } as CSSProperties} aria-label="typing">
+              <span className="dp-typing h-1.5 w-1.5 rounded-full bg-current" />
+              <span className="dp-typing h-1.5 w-1.5 rounded-full bg-current [animation-delay:0.15s]" />
+              <span className="dp-typing h-1.5 w-1.5 rounded-full bg-current [animation-delay:0.3s]" />
+            </li>
+          </ol>
+        </Reveal>
+
+        <Reveal delay={0.12} className="relative overflow-hidden rounded-[32px] bg-[#FFD43B] p-8 text-[#161214] sm:p-12 md:col-span-6 dark:bg-[#2A2008] dark:text-[var(--im-text)] dark:ring-1 dark:ring-[rgba(255,212,59,0.3)]">
+          {/* Night: a deep gold-brown band with a warm glow, so yellow stays an accent and not a floodlight. */}
+          <div aria-hidden="true" className="pointer-events-none absolute -right-20 -top-24 hidden h-72 w-72 rounded-full bg-[radial-gradient(closest-side,rgba(255,212,59,0.28),transparent)] dark:block" />
+          <Sprinkles count={20} className="opacity-90 dark:opacity-70" />
+          <div className="relative grid items-end gap-6 md:grid-cols-[1.4fr_1fr]">
+            <h3 data-no-sprinkle className="text-[clamp(2.2rem,4.6vw,4rem)] font-semibold leading-[0.98] tracking-[-0.05em]">
+              Women-led. Made from <CutoutWord word="SCRATCH" tone="on-yellow" />
+            </h3>
+            <p data-no-sprinkle className="max-w-[40ch] text-[17px] leading-relaxed text-[#3A3328] dark:text-[var(--im-muted)]">
+              Every site starts from your brand and your customers, never a template, whether you sell cupcakes or fix geysers. <span aria-hidden="true" className="dark:text-[#FFD43B]">★</span>
+            </p>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}

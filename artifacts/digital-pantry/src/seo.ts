@@ -9,7 +9,7 @@ import { priced } from "./lib/plans";
 
 export const SITE_URL = "https://digitalpantry.co.za";
 export const SITE_NAME = "The Digital Pantry";
-export const LAST_UPDATED = "2026-10-27";
+export const LAST_UPDATED = "2026-10-29";
 const OG_IMAGE = `${SITE_URL}/og-card.jpg`; // 1200x630 link-preview card (WhatsApp, LinkedIn, X)
 // Email is the contact we publish to search engines and AI assistants (founder, 2026-10-24).
 // The founders' WhatsApp numbers stay on the pages for visitors but are left out of this data.
@@ -209,6 +209,20 @@ export const PAGES: PageMeta[] = [
         { "@type": "WebPage", "@id": `${SITE_URL}/faq#page`, url: `${SITE_URL}/faq`, name: "Website questions answered", about: { "@id": ORG_ID }, inLanguage: "en-ZA" },
         faqPage(ALL_FAQ),
         crumbs("FAQ", "/faq"),
+      ),
+    ],
+  },
+  {
+    path: "/about",
+    title: "About Us: Two Women Building Websites in Cape Town | Digital Pantry",
+    description:
+      "Digital Pantry is a women-led web studio in Cape Town run by Aaniquah Dicks and Imaan Cooper. Affordable websites so small businesses can grow and focus on the business.",
+    jsonLd: [
+      graph(
+        { "@type": "AboutPage", "@id": `${SITE_URL}/about#page`, url: `${SITE_URL}/about`, name: "About Digital Pantry", about: { "@id": ORG_ID }, inLanguage: "en-ZA" },
+        person,
+        imaan,
+        crumbs("About", "/about"),
       ),
     ],
   },
