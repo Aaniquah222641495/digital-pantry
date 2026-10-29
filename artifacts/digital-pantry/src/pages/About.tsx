@@ -4,6 +4,7 @@ import { FreeTaste } from "../components/FreeTaste";
 import { Reveal } from "../components/Reveal";
 import { Chefs } from "../components/Chefs";
 import { Sprinkles } from "../components/Sprinkles";
+import { PaperBalls } from "../components/PaperBalls";
 
 // About (founder 2026-10-29). The story is in the founder's own words; keep her phrasing.
 // Hero: the two of us holding the blank pink board from the marketing pack, with the page title
@@ -62,18 +63,22 @@ export default function About() {
       {/* Why we started: one statement, set big, on a blush band */}
       <section aria-labelledby="why-heading" className="relative overflow-hidden bg-[#FCE8F0] text-[#161214] dark:bg-[var(--im-surface)] dark:text-[var(--im-text)]">
         <div aria-hidden="true" className="pointer-events-none absolute -bottom-40 -right-24 h-96 w-96 rounded-full bg-[radial-gradient(closest-side,#FFA7D2,transparent)] opacity-70 dark:bg-[radial-gradient(closest-side,var(--im-glow),transparent)]" />
-        <Reveal className="relative mx-auto max-w-[1320px] px-5 py-24 sm:px-8 md:py-32">
+        <div className="relative mx-auto grid max-w-[1320px] gap-12 px-5 py-24 sm:px-8 md:py-32 lg:grid-cols-12 lg:items-center">
+        <Reveal className="lg:col-span-7">
           <h2 id="why-heading" className="text-[13px] font-semibold uppercase tracking-[0.24em] text-[#B32F68] dark:text-[var(--im-accent)]">
             Why we started
           </h2>
           <p className="mt-8 max-w-[22ch] text-[clamp(2rem,4.6vw,4rem)] font-semibold leading-[1.04] tracking-[-0.045em]">
             We got tired of the stereotypes that come with being a woman in STEM.
           </p>
-          <p className="mt-10 max-w-[40ch] text-[clamp(1.2rem,2vw,1.6rem)] leading-[1.45] tracking-[-0.015em] text-[#463E44] md:ml-[18%] dark:text-[var(--im-muted)]">
+          <p className="mt-10 max-w-[40ch] text-[clamp(1.2rem,2vw,1.6rem)] leading-[1.45] tracking-[-0.015em] text-[#463E44] md:ml-[12%] lg:ml-[10%] dark:text-[var(--im-muted)]">
             So we're showing little girls and young women that it's okay to be multifaceted, and yes, we can be{" "}
             <CutoutWord word="BADDIES" /> <span className="text-[#161214] dark:text-[var(--im-text)]">in tech.</span>
           </p>
         </Reveal>
+        {/* What we got tired of: the stereotypes, crumpled up and binned */}
+        <PaperBalls className="-mt-4 h-[360px] w-full sm:h-[420px] lg:col-span-5 lg:mt-0 lg:h-[520px]" />
+        </div>
       </section>
 
       <Chefs />
