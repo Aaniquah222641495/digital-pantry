@@ -1,28 +1,28 @@
 # Pricing: The Digital Pantry (Cape Town, South Africa)
 
 Custom small business websites, built from scratch. The rand packages below are for South African small businesses with up to 10 staff. Larger businesses get a custom quote from R8 000. International clients have their own packages in US dollars (see the end of this file). All prices in South African rand (ZAR), once-off unless stated.
-Last updated: 2026-10-27. Source page: https://digitalpantry.co.za/pricing
+Last updated: 2026-11-01. Source page: https://digitalpantry.co.za/pricing
 
-## Starter: R600
+## Starter: R750
 - Single page
 - Menu or services section
 - WhatsApp button
 - Mobile responsive
-- Your own domain connected (domain billed separately)
+- Your own domain, first year included
 
-## Standard: R1 000 (most popular)
+## Standard: R1 150 (most popular)
 - Everything in Starter
 - Locations section
 - About section
 - Social links
 
-## Premium: R1 600
+## Premium: R1 750
 - Everything in Standard
 - Google Business setup
 - Basic SEO setup
 - 1 month of updates
 
-## Pro: R2 500
+## Pro: R2 650
 - Everything in Premium
 - Lead capture form with instant alerts
 - Leads saved to your own Google Sheet
@@ -32,10 +32,10 @@ Last updated: 2026-10-27. Source page: https://digitalpantry.co.za/pricing
 - No monthly fees: runs on free Google tools the client owns
 
 ## Your domain (every site needs one)
-Every site goes live on its own domain, like yourbusiness.co.za. We register it in your name, so it's yours, and connect it in every package. You pay the domain fee on top of the package: about R100 to R150 a year. After the first year we renew it for you if you're on care (renewal at cost); otherwise you renew it yourself.
+Every site goes live on its own domain, like yourbusiness.co.za. We register it in your name, so it's yours, and connect it in every package. The first year is included in every package price, on us. From year two it is about R100 to R150 a year, and we email a reminder before it is due. On care we renew it for you (renewal at cost); otherwise you renew it yourself. Already own a domain? We connect it and take the domain amount off the price.
 
 ## Extras (not in the package prices, only if you want them)
-Package prices cover the site build only, once-off. These are billed separately, and we quote the cost before anything is bought:
+Package prices cover the site build and the domain's first year, once-off. These are billed separately, and we quote the cost before anything is bought:
 - Branding design: a logo, colours and fonts made for your business (quoted).
 - Email on your own domain, if you want it (a mail plan from your domain provider).
 - Copywriting, if you want us to write your text.

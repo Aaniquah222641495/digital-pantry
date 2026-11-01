@@ -42,13 +42,13 @@ export const FAQ_GROUPS: FaqGroup[] = [
       {
         id: "how-much",
         q: "How much does a website cost?",
-        a: `Our packages are once-off and in rand: Starter {Starter}, Standard {Standard}, Premium {Premium} and Pro {Pro}, for South African businesses with ${SMALL_BUSINESS_LIMIT}. Each price covers the build of your site. Your domain is about ${DOMAIN_FEE}, and every new site starts on care at {retainer}/month (hosting, domain renewals, small edits), or we hand it over to you free of charge.`,
+        a: `Our packages are once-off and in rand: Starter {Starter}, Standard {Standard}, Premium {Premium} and Pro {Pro}, for South African businesses with ${SMALL_BUSINESS_LIMIT}. Each price covers the build of your site and your domain's first year, on us. From year two the domain is about ${DOMAIN_FEE}, and every new site starts on care at {retainer}/month (hosting, domain renewals, small edits), or we hand it over to you free of charge.`,
         aIntl: "Our packages are once-off and in US dollars: Starter {Starter}, Standard {Standard}, Premium {Premium} and Pro {Pro}. Each price covers the build of your site. Every new site starts on care at {retainer}/month, or we hand it over to you free of charge.",
       },
       {
         id: "deposit",
         q: "How do I pay?",
-        a: "Every package starts with a 50% deposit, plus your domain registration fee if you need a new domain. The other 50% is due when your site goes live. We send an invoice for each.",
+        a: "Every package starts with a 50% deposit, and your domain's first year is already in the price. The other 50% is due when your site goes live. We send an invoice for each.",
       },
       { id: "not-included", q: "What is not included in the price?", a: BILLED_SEPARATELY_SUMMARY },
       {
@@ -103,7 +103,7 @@ export const FAQ_GROUPS: FaqGroup[] = [
       {
         id: "domain",
         q: "How does my domain name work?",
-        a: "Every site goes live on its own domain, like yourbusiness.co.za. We register it in your name, so you are the owner, and set it up. You pay the domain fee on top of your package: a .co.za is about R100 to R150 a year, and we tell you the cost before anything is bought. After the first year, we renew it for you if you're on care (you pay the renewal at cost). If not, you renew it yourself, on time, or the site goes offline.",
+        a: "Every site goes live on its own domain, like yourbusiness.co.za. We register it in your name, so you are the owner, and set it up. The first year is on us: it's already in your package price. After that, a .co.za is about R100 to R150 a year, and we email you a reminder before it's due. If you're on care, we renew it for you (you pay the renewal at cost). If not, you renew it yourself, on time, or the site goes offline. Already own a domain? We connect it and take the domain amount off your price.",
       },
       {
         id: "hosting",

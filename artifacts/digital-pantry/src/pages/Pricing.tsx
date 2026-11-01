@@ -7,7 +7,7 @@ import { PantryShelf } from "../components/PantryShelf";
 import { MarketSwitch } from "../components/MarketSwitch";
 import { BusinessPicker } from "../components/BusinessPicker";
 import { Sticker, DAY, NIGHT } from "../components/Stickers";
-import { DOMAIN_FEE, EXTRAS, INCLUDED_ALWAYS, INTL_PRICES, PLAN_PRICES, SMALL_BUSINESS_LIMIT, TURNAROUND_DAYS, TURNAROUND_TERMS, retainerFor } from "../lib/plans";
+import { DOMAIN_RENEWAL, EXTRAS, INCLUDED_ALWAYS, INTL_PRICES, PLAN_PRICES, SMALL_BUSINESS_LIMIT, TURNAROUND_DAYS, TURNAROUND_TERMS, retainerFor } from "../lib/plans";
 import { useRef } from "react";
 import { useMarket } from "../lib/MarketContext";
 import { track, useTrackOnView, type Package } from "../lib/analytics";
@@ -18,7 +18,7 @@ const PLANS = [
   {
     name: "Starter", price: PLAN_PRICES.Starter, usd: INTL_PRICES.Starter, popular: false, img: "/images/starter.webp",
     line: "A one-page site that gets you found.",
-    features: ["Single page", "Menu or services section", "WhatsApp button", "Mobile responsive", "Your own domain connected"],
+    features: ["Single page", "Menu or services section", "WhatsApp button", "Mobile responsive", "Your own domain, first year on us"],
   },
   {
     name: "Standard", price: PLAN_PRICES.Standard, usd: INTL_PRICES.Standard, popular: true, img: "/images/standard.webp",
@@ -164,7 +164,7 @@ export default function Pricing() {
             <div data-testid="pricing-billed-separately">
               <h2 className="text-[clamp(1.6rem,2.6vw,2.2rem)] font-semibold tracking-[-0.035em]">What the price covers</h2>
               <p className="mt-3 max-w-[44ch] leading-relaxed text-dp-muted">
-                {intl ? "The once-off price for your site, your domain, and care" : `The once-off price for your site, your domain (about ${DOMAIN_FEE}), and care`} at {retainerFor(market)}/month from launch, or a free handover if you'd rather look after it yourself. You pay 50% to start and the rest when your site goes live. Extras only if you want them, quoted first.
+                {intl ? "The once-off price for your site, your domain, and care" : "The once-off price for your site and your domain's first year (on us), and care"} at {retainerFor(market)}/month from launch, or a free handover if you'd rather look after it yourself. You pay 50% to start and the rest when your site goes live. Extras only if you want them, quoted first.
               </p>
               <p className="mt-8 font-mono text-[13px] text-dp-accent">In every package</p>
               <ul className="mt-4 flex flex-col gap-3">
@@ -177,13 +177,13 @@ export default function Pricing() {
               </ul>
               {/* The domain is not optional: every site gets its own (founder 2026-10-27) */}
               <div className="mt-8 rounded-[20px] bg-dp-soft/70 p-5 sm:p-6">
-                <p className="font-mono text-[13px] text-dp-accent">Every site needs</p>
+                <p className="font-mono text-[13px] text-dp-accent">Included in every package</p>
                 <div className="mt-2 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                   <p className="text-[17px] font-semibold tracking-[-0.01em]">Your own domain</p>
-                  <p className="text-[15px] font-semibold tabular-nums">{DOMAIN_FEE}</p>
+                  <p className="text-[15px] font-semibold">First year on us</p>
                 </div>
                 <p className="mt-2 max-w-[46ch] text-[14px] leading-relaxed text-dp-muted">
-                  Like yourbusiness.co.za. We register it in your name and set it up. After year one, we renew it for you on care, or you renew it yourself.
+                  Like yourbusiness.co.za. We register it in your name and set it up, and the first year is in your package price. From year two it's {DOMAIN_RENEWAL}: we email you before it's due, and on care we renew it for you.
                 </p>
               </div>
             </div>

@@ -21,7 +21,7 @@ Every site is built from scratch by one developer, Aaniquah, a Cape Town softwar
 - React site hosted on Netlify. Live at https://digitalpantry.co.za.
 
 ## Capabilities and Constraints
-- Packages (once-off, ZAR): Starter R600, Standard R1 000, Premium R1 600, Pro R2 500. Retainer R120/month for small edits. Prices are read from `artifacts/digital-pantry/src/pages/Pricing.tsx`; that file is the source of truth and prices are never hard-coded elsewhere from memory.
+- Packages (once-off, ZAR): Starter R750, Standard R1 150, Premium R1 750, Pro R2 650 (domain's first year included, ADR-0036). Retainer R120/month for small edits. Prices are read from `artifacts/digital-pantry/src/pages/Pricing.tsx`; that file is the source of truth and prices are never hard-coded elsewhere from memory.
 - Pro includes a lead capture form with instant alerts and leads saved to the client's own Google Sheet.
 - Contact form collects personal details, so POPIA applies. The Privacy page must stay accurate.
 
