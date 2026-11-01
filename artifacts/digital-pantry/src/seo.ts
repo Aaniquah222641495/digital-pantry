@@ -178,14 +178,14 @@ export const PAGES: PageMeta[] = [
               {
                 "@type": "Offer",
                 name: "Monthly care",
-                description: "Hosting run for you, domain renewals handled (at cost, plus R50 handling) and small edits. Month to month.",
+                description: "Hosting run for you, domain renewals handled (renewal at cost) and small edits. Month to month.",
                 priceSpecification: { "@type": "UnitPriceSpecification", price: 150, priceCurrency: "ZAR", unitText: "MONTH" },
                 url: `${SITE_URL}/pricing`,
               },
               {
                 "@type": "Offer",
                 name: "Monthly care (international)",
-                description: "Hosting run for you, domain renewals handled (at cost, plus R50 handling) and small edits. Month to month.",
+                description: "Hosting run for you, domain renewals handled (renewal at cost) and small edits. Month to month.",
                 priceSpecification: { "@type": "UnitPriceSpecification", price: 90, priceCurrency: "USD", unitText: "MONTH" },
                 eligibleRegion: { "@type": "Place", name: "Outside South Africa" },
                 url: `${SITE_URL}/pricing`,

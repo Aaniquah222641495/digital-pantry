@@ -68,7 +68,7 @@ const offers = (market: Market): Offer[] => [
   {
     title: "Care and domains",
     vignette: "care",
-    body: "We host your site, renew your domain (at cost, plus R50 handling) and make small edits like menu changes. Month to month.",
+    body: "We host your site, renew your domain (at cost) and make small edits like menu changes. Month to month.",
     price: `${retainerFor(market)}/month`,
     href: "/pricing",
     span: "lg:col-span-4",

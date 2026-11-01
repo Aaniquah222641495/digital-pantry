@@ -50,8 +50,8 @@ export const EXTRAS = [
 ] as const;
 // Every site goes live on its own domain (founder 2026-10-27: a must, it looks professional).
 // ZAR package prices include the domain's first year (ADR-0036, 2026-11-01; replaces "domain billed separately").
-// We register it in the client's name. After year one: we renew it at cost plus a R50 handling fee (founder 2026-11-01),
-// for care clients and anyone else who asks; otherwise the client renews it.
+// We register it in the client's name. After year one: on care we renew it at cost, no handling fee; a client not on care
+// renews it themselves or asks us to, at cost plus a R50 handling fee (founder 2026-11-01).
 export const DOMAIN_FEE = "R100 to R150 a year";
 export const DOMAIN_RENEWAL = "about R100 to R150 a year";
 export const RENEWAL_FEE = "R50";
