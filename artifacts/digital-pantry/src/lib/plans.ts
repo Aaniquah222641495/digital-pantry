@@ -50,9 +50,11 @@ export const EXTRAS = [
 ] as const;
 // Every site goes live on its own domain (founder 2026-10-27: a must, it looks professional).
 // ZAR package prices include the domain's first year (ADR-0036, 2026-11-01; replaces "domain billed separately").
-// We register it in the client's name. After year one: on care we renew it (at cost); otherwise the client renews it.
+// We register it in the client's name. After year one: we renew it at cost plus a R50 handling fee (founder 2026-11-01),
+// for care clients and anyone else who asks; otherwise the client renews it.
 export const DOMAIN_FEE = "R100 to R150 a year";
 export const DOMAIN_RENEWAL = "about R100 to R150 a year";
+export const RENEWAL_FEE = "R50";
 export const BILLED_SEPARATELY = EXTRAS.map((e) => `${e.name} (${e.cost}): ${e.note}`);
 export const BILLED_SEPARATELY_SUMMARY =
   "Package prices cover the site build and your domain's first year, on us: we register it in your name. From year two the domain renews at about R100 to R150 a year, and we email you before it is due. Extras, only if you want them: branding design, email on your own domain, copywriting, online shops and payments, and changes beyond 2 rounds of revisions or beyond the small edits in care. We quote any extra work in writing first.";

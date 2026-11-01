@@ -183,7 +183,7 @@ export default function Pricing() {
                   <p className="text-[15px] font-semibold">First year on us</p>
                 </div>
                 <p className="mt-2 max-w-[46ch] text-[14px] leading-relaxed text-dp-muted">
-                  Like yourbusiness.co.za. We register it in your name and set it up, and the first year is in your package price. From year two it's {DOMAIN_RENEWAL}: we email you before it's due, and on care we renew it for you.
+                  Like yourbusiness.co.za. We register it in your name and set it up, and the first year is in your package price. From year two it's {DOMAIN_RENEWAL}: we email you before it's due, and on care we renew it for you (at cost, plus a R50 handling fee).
                 </p>
               </div>
             </div>
@@ -216,7 +216,7 @@ export default function Pricing() {
               Keep your pantry stocked <span aria-hidden="true" className="text-dp-accent">★</span>
             </h2>
             <p className="mt-2 max-w-[52ch] leading-relaxed text-dp-muted">
-              Every new site starts on care: we host it and keep it running, renew your domain for you (renewal at cost) and
+              Every new site starts on care: we host it and keep it running, renew your domain for you (renewal at cost, plus a R50 handling fee) and
               make small edits like menu and schedule changes. Month to month: cancel with one month's notice.
             </p>
             <p className="mt-2 max-w-[52ch] text-[14px] leading-relaxed text-dp-muted">
