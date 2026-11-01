@@ -4,12 +4,13 @@
 // Founder decisions 2026-10-23 (ops/research/2026-10-23-pricing-tiers-and-international.md):
 // ZAR packages are for small businesses with up to 10 staff; larger businesses are quoted from
 // R8 000; international clients have their own USD packages.
+// ZAR prices include the first year of the domain, "on us" (ADR-0036, founder 2026-11-01): build + R150.
 // Thousands use a no-break space (\u00a0) so a price never wraps across two lines.
 export const PLAN_PRICES = {
-  Starter: "R600",
-  Standard: "R1\u00a0000",
-  Premium: "R1\u00a0600",
-  Pro: "R2\u00a0500",
+  Starter: "R750",
+  Standard: "R1\u00a0150",
+  Premium: "R1\u00a0750",
+  Pro: "R2\u00a0650",
 } as const;
 
 export const INTL_PRICES = {
@@ -37,7 +38,7 @@ export const TURNAROUND_NOTE =
 export const INCLUDED_ALWAYS = [
   "Your site, designed and built from scratch",
   "Looks right on phones, tablets and laptops",
-  "Your own domain connected",
+  "Your own domain, first year included",
   "2 rounds of revisions",
 ] as const;
 export const EXTRAS = [
@@ -48,12 +49,15 @@ export const EXTRAS = [
   { name: "Extra changes", cost: "quoted", note: "After the 2 revision rounds, or bigger than the small edits in care." },
 ] as const;
 // Every site goes live on its own domain (founder 2026-10-27: a must, it looks professional).
-// Package prices exclude the domain (founder 2026-10-27): we register it in the client's name, they pay the fee.
-// After year one: on care we renew it (at cost); otherwise the client renews it.
+// ZAR package prices include the domain's first year (ADR-0036, 2026-11-01; replaces "domain billed separately").
+// We register it in the client's name. After year one: on care we renew it at cost, no handling fee; a client not on care
+// renews it themselves or asks us to, at cost plus a R50 handling fee (founder 2026-11-01).
 export const DOMAIN_FEE = "R100 to R150 a year";
+export const DOMAIN_RENEWAL = "about R100 to R150 a year";
+export const RENEWAL_FEE = "R50";
 export const BILLED_SEPARATELY = EXTRAS.map((e) => `${e.name} (${e.cost}): ${e.note}`);
 export const BILLED_SEPARATELY_SUMMARY =
-  "Package prices cover the site build only. Every site needs its own domain: we register it in your name and you pay its fee, about R100 to R150 a year. Extras, only if you want them: branding design, email on your own domain, copywriting, online shops and payments, and changes beyond 2 rounds of revisions or beyond the small edits in care. We quote any extra work in writing first.";
+  "Package prices cover the site build and your domain's first year, on us: we register it in your name. From year two the domain renews at about R100 to R150 a year, and we email you before it is due. Extras, only if you want them: branding design, email on your own domain, copywriting, online shops and payments, and changes beyond 2 rounds of revisions or beyond the small edits in care. We quote any extra work in writing first.";
 
 export const SMALL_BUSINESS_LIMIT = "up to 10 staff";
 export const LARGER_FROM = "R8 000";

@@ -36,10 +36,10 @@ const INTL_PLANS = [
 ];
 
 const PLANS = [
-  { name: "Starter", price: 600, includes: "Single page, menu or services section, WhatsApp button, mobile responsive, your own domain connected (domain billed separately)." },
-  { name: "Standard", price: 1000, includes: "Everything in Starter plus locations, about section and social links." },
-  { name: "Premium", price: 1600, includes: "Everything in Standard plus Google Business setup, basic SEO setup and 1 month of updates." },
-  { name: "Pro", price: 2500, includes: "Everything in Premium plus a lead capture form with instant alerts, leads saved to your Google Sheet, an auto-reply to every enquiry and a WhatsApp follow-up button, tested before handover." },
+  { name: "Starter", price: 750, includes: "Single page, menu or services section, WhatsApp button, mobile responsive, your own domain (first year included)." },
+  { name: "Standard", price: 1150, includes: "Everything in Starter plus locations, about section and social links." },
+  { name: "Premium", price: 1750, includes: "Everything in Standard plus Google Business setup, basic SEO setup and 1 month of updates." },
+  { name: "Pro", price: 2650, includes: "Everything in Premium plus a lead capture form with instant alerts, leads saved to your Google Sheet, an auto-reply to every enquiry and a WhatsApp follow-up button, tested before handover." },
 ];
 
 const business = {
@@ -49,12 +49,12 @@ const business = {
   alternateName: "Digital Pantry Web Studio",
   slogan: "Coded in Pink. Built to Perform.",
   description:
-    "Cape Town web studio building custom websites from scratch for South African small businesses. Packages from R600 to R2 500.",
+    "Cape Town web studio building custom websites from scratch for South African small businesses. Packages from R750 to R2 650, domain included.",
   url: `${SITE_URL}/`,
   logo: `${SITE_URL}/images/logo-wordmark.webp`,
   image: OG_IMAGE,
   email: EMAIL,
-  priceRange: "R600 - R2 500",
+  priceRange: "R750 - R2 650",
   currenciesAccepted: "ZAR",
   address: { "@type": "PostalAddress", addressLocality: "Cape Town", addressRegion: "Western Cape", addressCountry: "ZA" },
   areaServed: [{ "@type": "City", name: "Cape Town" }, { "@type": "Country", name: "South Africa" }],
@@ -117,7 +117,7 @@ const industryPage = (p: Industry, title: string, description: string): PageMeta
         description: p.intro,
         provider: { "@id": ORG_ID },
         areaServed: [{ "@type": "City", name: "Cape Town" }, { "@type": "Country", name: "South Africa" }],
-        offers: { "@type": "AggregateOffer", lowPrice: 600, highPrice: 2500, priceCurrency: "ZAR", url: `${SITE_URL}/pricing` },
+        offers: { "@type": "AggregateOffer", lowPrice: 750, highPrice: 2650, priceCurrency: "ZAR", url: `${SITE_URL}/pricing` },
         url: `${SITE_URL}${p.path}`,
       },
       faqPage(p.faq.map((f) => ({ q: f.q, a: priced(f.a, "za") }))),
@@ -131,7 +131,7 @@ export const PAGES: PageMeta[] = [
     path: "/",
     title: "Web Developer in Cape Town | The Digital Pantry",
     description:
-      "Custom websites for South African small businesses, built from scratch by Aaniquah and Imaan in Cape Town. From R600.",
+      "Custom websites for South African small businesses, built from scratch by Aaniquah and Imaan in Cape Town. From R750.",
     jsonLd: [
       graph(
         { "@type": "WebSite", "@id": `${SITE_URL}/#website`, url: `${SITE_URL}/`, name: SITE_NAME, publisher: { "@id": ORG_ID }, inLanguage: "en-ZA" },
@@ -143,9 +143,9 @@ export const PAGES: PageMeta[] = [
   },
   {
     path: "/pricing",
-    title: "Website Prices in South Africa from R600 | Digital Pantry",
+    title: "Website Prices in South Africa from R750 | Digital Pantry",
     description:
-      "Small business website packages: Starter R600, Standard R1 000, Premium R1 600, Pro R2 500 with lead automation. Care R150/month from launch ($90/month internationally), or we hand the site over to you.",
+      "Small business website packages: Starter R750, Standard R1 150, Premium R1 750, Pro R2 650 with lead automation, domain's first year included. Care R150/month from launch ($90/month internationally), or we hand the site over to you.",
     jsonLd: [
       graph(
         {
@@ -276,22 +276,22 @@ export const PAGES: PageMeta[] = [
   industryPage(
     FOOD,
     "Websites for Food Businesses in Cape Town | Digital Pantry",
-    "Websites for bakeries, pop-ups, home kitchens and takeaways in Cape Town: your menu, where to find you and one-tap WhatsApp ordering. From R600.",
+    "Websites for bakeries, pop-ups, home kitchens and takeaways in Cape Town: your menu, where to find you and one-tap WhatsApp ordering. From R750.",
   ),
   industryPage(
     BEAUTY,
     "Websites for Nail Techs and Beauty Businesses in Cape Town | Digital Pantry",
-    "Websites for nail techs, lash and brow studios and salons in Cape Town: services and prices, a gallery of your work and one clear way to book. From R600.",
+    "Websites for nail techs, lash and brow studios and salons in Cape Town: services and prices, a gallery of your work and one clear way to book. From R750.",
   ),
   industryPage(
     PRODUCT_BRANDS,
     "Websites for Small Product Brands in South Africa | Digital Pantry",
-    "Websites for small product brands: a catalogue of your products, your story and a clear way to buy, from WhatsApp orders to an online shop. From R600.",
+    "Websites for small product brands: a catalogue of your products, your story and a clear way to buy, from WhatsApp orders to an online shop. From R750.",
   ),
   industryPage(
     TRADES,
     "Websites for Trades and Local Services in Cape Town | Digital Pantry",
-    "Websites for plumbers, electricians, detailers, cleaners and other local services: your services, your area and quick quote requests. From R600.",
+    "Websites for plumbers, electricians, detailers, cleaners and other local services: your services, your area and quick quote requests. From R750.",
   ),
 ];
 
