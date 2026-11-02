@@ -27,6 +27,8 @@ type Case = {
   desktop: string;
   phone: string;
   rows: readonly (readonly [string, string])[];
+  /** The client's own words, used with her permission. Never invent or tidy these. */
+  quote?: { text: string; by: string };
 };
 
 const CASES: readonly Case[] = [
@@ -54,8 +56,9 @@ const CASES: readonly Case[] = [
     url: "beginnersmadrasah.co.za",
     href: "https://beginnersmadrasah.co.za/",
     testId: "link-madrasah-live",
-    desktop: "/images/work/madrasah-desktop.webp",
-    phone: "/images/work/madrasah-phone.webp",
+    desktop: "/images/work/madrasah-desktop-v2.webp",
+    phone: "/images/work/madrasah-phone-v2.webp",
+    quote: { text: "I'm super amazed, the forms and the way people can register is exactly what I wanted.", by: "Mualimah Rukeya, Beginners Madrasah" },
     rows: [
       ["The client", "Beginner-friendly Islamic classes for women and children, online and in person."],
       ["The need", "Parents and students needed one clear place for programmes, registration and answers, easy to read on a phone."],
@@ -155,6 +158,12 @@ export default function Portfolio() {
                     </div>
                   ))}
                 </dl>
+                {c.quote && (
+                  <figure className="mt-8 border-l-2 border-dp-accent pl-4">
+                    <blockquote className="text-[17px] leading-relaxed text-dp-ink">&ldquo;{c.quote.text}&rdquo;</blockquote>
+                    <figcaption className="mt-2 text-[13px] text-dp-muted">{c.quote.by}</figcaption>
+                  </figure>
+                )}
                 {c.href && (
                 <a
                   href={c.href}

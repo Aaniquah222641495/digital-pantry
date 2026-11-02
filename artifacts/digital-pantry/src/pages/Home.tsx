@@ -19,7 +19,7 @@ import { HeroTickets } from "../components/OfferArt";
 
 // Case studies (PRD 4.4, full version on Portfolio; Home shows the need and what we built): client and context, the business need, what we built, and the technical
 // side next to the screenshots, with a live link. Every line checked against the live site and the
-// project records on 2026-10-26. No results or testimonials we can't verify.
+// project records on 2026-10-26. No results we can't verify. Testimonials are the client's own words, with her permission (Mualimah Rukeya said yes 2026-11-02).
 const WORK = [
   {
     name: "Stuff'd Bagels",
@@ -41,8 +41,9 @@ const WORK = [
     kind: "Islamic learning for women and children",
     url: "beginnersmadrasah.co.za",
     href: "https://beginnersmadrasah.co.za/",
-    desktop: "/images/work/madrasah-desktop.webp",
-    phone: "/images/work/madrasah-phone.webp",
+    desktop: "/images/work/madrasah-desktop-v2.webp",
+    phone: "/images/work/madrasah-phone-v2.webp",
+    quote: { text: "I'm super amazed, the forms and the way people can register is exactly what I wanted.", by: "Mualimah Rukeya, Beginners Madrasah" },
     facts: [
       ["The client", "Beginner-friendly Islamic classes for women and children, online and in person."],
       ["The need", "Parents and students needed one clear place for programmes, registration and answers, easy to read on a phone."],
@@ -157,6 +158,12 @@ function Work() {
                       </div>
                     ))}
                   </dl>
+                  {"quote" in w && (
+                    <figure className="mt-7 border-l-2 border-dp-accent pl-4">
+                      <blockquote className="text-[17px] leading-relaxed text-dp-ink">&ldquo;{w.quote.text}&rdquo;</blockquote>
+                      <figcaption className="mt-2 text-[13px] text-dp-muted">{w.quote.by}</figcaption>
+                    </figure>
+                  )}
                   <a
                     href={w.href}
                     target="_blank"

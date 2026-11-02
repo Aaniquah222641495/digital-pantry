@@ -33,7 +33,7 @@ Every site is built from scratch by one developer, Aaniquah, a Cape Town softwar
 
 ## Evidence on Hand
 - Two live client sites in the portfolio: Stuff'd Bagels (https://stuffdbagels.netlify.app) and Beginners Madrasah (https://beginnersmadrasah.co.za).
-- No client testimonials about the studio on file. Do not invent testimonials, client counts, reviews or results.
+- One client testimonial on file: Mualimah Rukeya, Beginners Madrasah (permission given 2026-11-02), used word for word. Do not invent testimonials, client counts, reviews or results.
 
 ## Product Principles
 1. Show the work and let the quality speak. Confident, not salesy.
