@@ -7,7 +7,7 @@ import { Sprinkles } from "./Sprinkles";
 // and a gentle tilt toward the pointer on desktop. Static for reduced motion.
 const PLATES = [
   { src: "/images/work/stuffd-phone-v2.webp", alt: "Stuff'd Bagels on a phone", x: "-170%", y: "-190%", r: "-9deg", left: "27%", top: "-17%", d: "0.5s" },
-  { src: "/images/work/madrasah-phone.webp", alt: "Beginners Madrasah on a phone", x: "60%", y: "-205%", r: "7deg", left: "51%", top: "-23%", d: "0.75s" },
+  { src: "/images/work/madrasah-phone-v2.webp", alt: "Beginners Madrasah on a phone", x: "60%", y: "-205%", r: "7deg", left: "51%", top: "-23%", d: "0.75s" },
 ] as const;
 
 export function OrderUp() {

@@ -41,8 +41,8 @@ const WORK = [
     kind: "Islamic learning for women and children",
     url: "beginnersmadrasah.co.za",
     href: "https://beginnersmadrasah.co.za/",
-    desktop: "/images/work/madrasah-desktop.webp",
-    phone: "/images/work/madrasah-phone.webp",
+    desktop: "/images/work/madrasah-desktop-v2.webp",
+    phone: "/images/work/madrasah-phone-v2.webp",
     facts: [
       ["The client", "Beginner-friendly Islamic classes for women and children, online and in person."],
       ["The need", "Parents and students needed one clear place for programmes, registration and answers, easy to read on a phone."],
