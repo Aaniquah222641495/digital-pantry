@@ -1,4 +1,4 @@
-# The Digital Pantry: everyone is welcome to read this site, including search engines
+# Digital Pantry: everyone is welcome to read this site, including search engines
 # and AI assistants, so people can find us in Google, Bing, ChatGPT, Claude, Perplexity and Gemini.
 
 User-agent: *

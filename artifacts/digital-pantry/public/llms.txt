@@ -1,6 +1,6 @@
-# The Digital Pantry
+# Digital Pantry
 
-> Women-led Cape Town web studio run by co-founders Aaniquah Dicks (software engineer) and Imaan Cooper (creative director). Builds custom websites from scratch (React, TypeScript, Tailwind, hosted on Netlify) for South African small businesses. Packages from R750 to R2 650 once-off, domain included.
+> Women-led Cape Town web studio run by co-founders Aaniquah Dicks (software engineer) and Imaan Cooper (creative director). Builds custom websites from scratch (React, TypeScript, Tailwind, hosted on Cloudflare) for South African small businesses. Packages from R750 to R2 650 once-off, domain included.
 
 Brand line: "Coded in Pink. Built to Perform." Based in Cape Town, Western Cape, South Africa. Works with small businesses across South Africa.
 

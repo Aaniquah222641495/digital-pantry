@@ -36,8 +36,8 @@ const CASES: readonly Case[] = [
     name: "Stuff'd Bagels",
     caseKey: "stuffd_bagels",
     kind: "Food pop-up, Cape Town",
-    url: "stuffdbagels.netlify.app",
-    // Our copy of the final, client-approved version, until stuffdbagels.co.za exists (founder 2026-10-28; public/work/).
+    url: "stuffdbagels.co.za",
+    // Our copy of the final, client-approved version, (founder 2026-10-28; public/work/).
     href: "/work/stuffd-bagels/",
     testId: "link-stuffd-case-live",
     desktop: "/images/work/stuffd-desktop-v2.webp",

@@ -8,7 +8,7 @@ import { BEAUTY, FOOD, PRODUCT_BRANDS, TRADES, type Industry } from "./lib/guide
 import { priced } from "./lib/plans";
 
 export const SITE_URL = "https://digitalpantry.co.za";
-export const SITE_NAME = "The Digital Pantry";
+export const SITE_NAME = "Digital Pantry";
 export const LAST_UPDATED = "2026-10-29";
 const OG_IMAGE = `${SITE_URL}/og-card.jpg`; // 1200x630 link-preview card (WhatsApp, LinkedIn, X)
 // Email is the contact we publish to search engines and AI assistants (founder, 2026-10-24).
@@ -46,7 +46,7 @@ const business = {
   "@type": "ProfessionalService",
   "@id": ORG_ID,
   name: SITE_NAME,
-  alternateName: "Digital Pantry Web Studio",
+  alternateName: ["The Digital Pantry", "Digital Pantry Web Studio"],
   slogan: "Coded in Pink. Built to Perform.",
   description:
     "Cape Town web studio building custom websites from scratch for South African small businesses. Packages from R750 to R2 650, domain included.",
@@ -129,7 +129,7 @@ const industryPage = (p: Industry, title: string, description: string): PageMeta
 export const PAGES: PageMeta[] = [
   {
     path: "/",
-    title: "Web Developer in Cape Town | The Digital Pantry",
+    title: "Web Developer in Cape Town | Digital Pantry",
     description:
       "Custom websites for South African small businesses, built from scratch by Aaniquah and Imaan in Cape Town. From R750.",
     jsonLd: [
@@ -228,20 +228,20 @@ export const PAGES: PageMeta[] = [
   },
   {
     path: "/portfolio",
-    title: "Portfolio: Websites Built in Cape Town | The Digital Pantry",
+    title: "Portfolio: Websites Built in Cape Town | Digital Pantry",
     description:
       "Live websites built from scratch for South African small businesses, including STUFF'D Bagels (WhatsApp ordering) and Beginners Madrasah.",
     jsonLd: [
       graph(
         {
           "@type": "CollectionPage",
-          name: "The Digital Pantry portfolio",
+          name: "Digital Pantry portfolio",
           url: `${SITE_URL}/portfolio`,
           about: { "@id": ORG_ID },
           mainEntity: {
             "@type": "ItemList",
             itemListElement: [
-              { "@type": "ListItem", position: 1, item: { "@type": "WebSite", name: "STUFF'D Bagels", url: "https://stuffdbagels.netlify.app", creator: { "@id": ORG_ID } } },
+              { "@type": "ListItem", position: 1, item: { "@type": "WebSite", name: "STUFF'D Bagels", url: "https://stuffdbagels.co.za", creator: { "@id": ORG_ID } } },
               { "@type": "ListItem", position: 2, item: { "@type": "WebSite", name: "Beginners Madrasah", url: "https://beginnersmadrasah.co.za/", creator: { "@id": ORG_ID } } },
             ],
           },
@@ -252,12 +252,12 @@ export const PAGES: PageMeta[] = [
   },
   {
     path: "/contact",
-    title: "Contact: Get a Website Quote | The Digital Pantry",
+    title: "Contact: Get a Website Quote | Digital Pantry",
     description:
       "Email thedigitalpantryza@gmail.com for a quote or a free mock-up of your website, or use the enquiry form. Cape Town, South Africa.",
     jsonLd: [
       graph(
-        { "@type": "ContactPage", name: "Contact The Digital Pantry", url: `${SITE_URL}/contact`, about: { "@id": ORG_ID } },
+        { "@type": "ContactPage", name: "Contact Digital Pantry", url: `${SITE_URL}/contact`, about: { "@id": ORG_ID } },
         {
           ...business,
           contactPoint: { "@type": "ContactPoint", contactType: "sales", email: EMAIL, availableLanguage: "English", areaServed: "ZA" },
@@ -268,9 +268,9 @@ export const PAGES: PageMeta[] = [
   },
   {
     path: "/privacy",
-    title: "Privacy Notice (POPIA) | The Digital Pantry",
+    title: "Privacy Notice (POPIA) | Digital Pantry",
     description:
-      "How The Digital Pantry collects, uses and protects personal information under South Africa's POPIA, and how to contact us about your rights.",
+      "How Digital Pantry collects, uses and protects personal information under South Africa's POPIA, and how to contact us about your rights.",
     jsonLd: [graph(crumbs("Privacy Notice", "/privacy"))],
   },
   industryPage(
@@ -297,7 +297,7 @@ export const PAGES: PageMeta[] = [
 
 export const NOT_FOUND: PageMeta = {
   path: "/404",
-  title: "Page not found | The Digital Pantry",
+  title: "Page not found | Digital Pantry",
   description: "This page isn't in the pantry. Head back to the home page or get in touch.",
   noindex: true,
   jsonLd: [],

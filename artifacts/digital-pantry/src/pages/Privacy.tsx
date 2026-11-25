@@ -64,18 +64,18 @@ export default function Privacy() {
             </p>
             <p className={pCls}>The site saves your light/dark choice and your Local / International price choice in your browser's local storage (settings called "dp-theme" and "dp-market"). They stay on your device and we do not receive them. If you haven't chosen, the site reads your device's time zone to pick rand or dollar prices. That also stays on your device and is not stored or sent to us.</p>
             <p className={pCls}>
-              The site's fonts are stored with the site itself, so loading a page does not send a request to Google or any other font service. Our host, Netlify, keeps standard technical logs (such as your IP address) to run and secure the site, under{" "}
-              <a className={linkCls} href="https://www.netlify.com/privacy/" target="_blank" rel="noopener noreferrer">Netlify's own privacy policy</a>.
+              The site's fonts are stored with the site itself, so loading a page does not send a request to Google or any other font service. Our host, Cloudflare, keeps standard technical logs (such as your IP address) to run and secure the site, under{" "}
+              <a className={linkCls} href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer">Cloudflare's own privacy policy</a>.
             </p>
 
             <h2 className={`${h2Cls} mt-8`}>4. Other companies that handle information for us</h2>
             <ul className={ulCls}>
-              <li><span className={strongCls}>Netlify</span> hosts this website.</li>
+              <li><span className={strongCls}>Cloudflare</span> hosts this website.</li>
               <li><span className={strongCls}>Umami</span> (Umami Software, Inc., USA) provides our visit counts, as described in section 3, under a data processing agreement that binds it to protect the information and use it only for us. Our account stores this data in Umami's EU region.</li>
               <li><span className={strongCls}>Google</span> (Gmail, Google Sheets, Google Apps Script and Drive) holds our emails, the contact-form Sheet that receives your enquiry and our outreach Sheet, and sends the alert and confirmation emails. Your browser only contacts Google when you send the contact form.</li>
               <li><span className={strongCls}>WhatsApp (Meta)</span> if you message us there, or we message you.</li>
             </ul>
-            <p className={pCls}>Some of these providers (Google, Netlify, Meta/WhatsApp, Umami) may store or process information outside South Africa, including in the United States and Europe. We use only established providers, and where we send them information we rely on their data protection commitments and written agreements.</p>
+            <p className={pCls}>Some of these providers (Google, Cloudflare, Meta/WhatsApp, Umami) may store or process information outside South Africa, including in the United States and Europe. We use only established providers, and where we send them information we rely on their data protection commitments and written agreements.</p>
 
             <h2 className={`${h2Cls} mt-8`}>5. Keeping it safe</h2>
             <p className={pCls}>Our Google account and Sheets are private and limited to us. We do not put your details in public places. If your information is ever compromised in a way that puts you at risk, we will tell you and the Information Regulator as soon as reasonably possible.</p>

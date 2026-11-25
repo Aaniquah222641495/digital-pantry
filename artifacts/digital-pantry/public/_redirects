@@ -1,5 +1,5 @@
-# Cloudflare Pages (ADR-0029). Pages serves each prerendered page (pricing.html) at its clean URL
-# (/pricing) and the top-level 404.html with a real 404 status by itself, so no rules are needed
+# Cloudflare Workers static assets (ADR-0029). Each prerendered page (pricing.html) is served at its clean URL
+# (/pricing) and 404.html with a real 404 status by itself (see wrangler.jsonc), so no rules are needed
 # for those. The old thedigitalpantry.netlify.app address keeps redirecting from Netlify's side.
 
 # Browsers and crawlers ask for /favicon.ico by default.

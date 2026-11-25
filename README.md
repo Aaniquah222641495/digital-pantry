@@ -1,10 +1,10 @@
-# The Digital Pantry website
+# Digital Pantry website
 
 Studio site for Digital Pantry Web Studio: portfolio, pricing and contact. Live at https://digitalpantry.co.za.
 
 ## What runs where
 
-- **The live site** is `artifacts/digital-pantry`: React + Vite + Tailwind, built to static files and hosted on Netlify.
+- **The live site** is `artifacts/digital-pantry`: React + Vite + Tailwind, built to static files and hosted on Cloudflare (Workers static assets, `wrangler.jsonc`).
 - It has no server of its own. The contact form posts to a small Google Apps Script (`apps-script/`) that saves each lead to a Google Sheet and emails alerts (see "Lead form" below). If that is not set up or fails, the form falls back to WhatsApp and email. No cookies, no analytics.
 - `.replit` is kept so the site can still be opened in Replit. The unused Replit scaffolding (API server, database, codegen, mockup sandbox) was removed on 2026-10-22.
 
@@ -49,7 +49,7 @@ NODE_ENV=production PORT=3000 BASE_PATH=/ pnpm --filter @workspace/digital-pantr
 - `public/llms.txt` (summary for AI assistants), `public/pricing.md` (prices as plain text), `public/robots.txt` (all crawlers allowed, AI bots named).
 - Bump `LAST_UPDATED` in `src/seo.ts` when content changes (it feeds the sitemap).
 
-## Netlify files (in `artifacts/digital-pantry/public/`)
+## Headers and redirects (Netlify-style files, read by Cloudflare, in `artifacts/digital-pantry/public/`)
 
 - `_headers`: security headers (CSP and friends) and caching. If you add a new outside service (fonts, embeds, scripts), add its domain to the Content-Security-Policy or the browser will block it.
 - `_redirects`: clean URLs (`/pricing`) serve the prerendered `pricing.html`; anything else serves `404.html` with a real 404 status.
@@ -57,4 +57,4 @@ NODE_ENV=production PORT=3000 BASE_PATH=/ pnpm --filter @workspace/digital-pantr
 
 ## Releasing
 
-Branch, open a PR, let CI pass, then merge to `main` (founder's yes). Netlify then deploys it (the build settings live in the Netlify dashboard, not this repo). To undo a bad deploy: Netlify > Deploys > pick the last good one > "Publish deploy".
+Branch, open a PR, let CI pass, then merge to `main` (founder's yes). Cloudflare then builds and deploys it (Workers Builds, config in `wrangler.jsonc` and the Cloudflare dashboard). To undo a bad deploy: roll back to the last good version from the Cloudflare dashboard.

@@ -81,7 +81,7 @@ export function Footer() {
           </div>
         </div>
 
-        <p className="mt-14 text-[13px] text-dp-muted">© {new Date().getFullYear()} The Digital Pantry. Built from scratch.</p>
+        <p className="mt-14 text-[13px] text-dp-muted">© {new Date().getFullYear()} Digital Pantry. Built from scratch.</p>
       </div>
     </footer>
   );
