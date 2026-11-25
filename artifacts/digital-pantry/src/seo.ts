@@ -241,7 +241,7 @@ export const PAGES: PageMeta[] = [
           mainEntity: {
             "@type": "ItemList",
             itemListElement: [
-              { "@type": "ListItem", position: 1, item: { "@type": "WebSite", name: "STUFF'D Bagels", url: "https://stuffdbagels.netlify.app", creator: { "@id": ORG_ID } } },
+              { "@type": "ListItem", position: 1, item: { "@type": "WebSite", name: "STUFF'D Bagels", url: "https://stuffdbagels.co.za", creator: { "@id": ORG_ID } } },
               { "@type": "ListItem", position: 2, item: { "@type": "WebSite", name: "Beginners Madrasah", url: "https://beginnersmadrasah.co.za/", creator: { "@id": ORG_ID } } },
             ],
           },
