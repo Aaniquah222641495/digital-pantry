@@ -1,4 +1,4 @@
-# The Digital Pantry website
+# Digital Pantry website
 
 Studio site for Digital Pantry Web Studio: portfolio, pricing and contact. Live at https://digitalpantry.co.za.
 

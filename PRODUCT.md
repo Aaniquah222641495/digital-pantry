@@ -10,7 +10,7 @@ web
 Cape Town small business owners who need a first website or a better one and do not code. They are busy running the business, often take orders by WhatsApp or social media, and want a clear price and a quick turnaround.
 
 ## Product Purpose
-The Digital Pantry Web Studio's own site. It shows the portfolio and the packages, and turns visitors into enquiries through the contact form. Success means qualified enquiries that become signed projects.
+Digital Pantry Web Studio's own site. It shows the portfolio and the packages, and turns visitors into enquiries through the contact form. Success means qualified enquiries that become signed projects.
 
 ## Positioning
 Every site is built from scratch by one developer, Aaniquah, a Cape Town software engineer. No templates. Starter, Standard and Premium sites take 5 to 7 business days from deposit and full content, with conditions (ADR-0025); Pro and custom builds are estimated in the quote.

@@ -67,7 +67,7 @@ export function BuildTicket() {
             <div className="dp-ticket-clip -mt-2 px-3">
               <figure className="dp-ticket relative rotate-[-0.6deg] px-5 pb-10 pt-9 sm:rotate-[-1.5deg] sm:px-7 text-[#211A1E] shadow-[0_30px_60px_-30px_rgba(179,47,104,0.6)]">
                 <figcaption className="text-center">
-                  <span className="dp-cut-bebas block text-[2.2rem] leading-none tracking-[0.08em]">The Digital Pantry</span>
+                  <span className="dp-cut-bebas block text-[2.2rem] leading-none tracking-[0.08em]">Digital Pantry</span>
                   <span className="mt-2 block font-mono text-[12px] text-[#5E5258]">Order: digitalpantry.co.za</span>
                   <span className="block font-mono text-[12px] text-[#5E5258]">Checked {MEASURED} · Lighthouse</span>
                 </figcaption>

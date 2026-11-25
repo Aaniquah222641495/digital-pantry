@@ -1,4 +1,4 @@
-# Pricing: The Digital Pantry (Cape Town, South Africa)
+# Pricing: Digital Pantry (Cape Town, South Africa)
 
 Custom small business websites, built from scratch. The rand packages below are for South African small businesses with up to 10 staff. Larger businesses get a custom quote from R8 000. International clients have their own packages in US dollars (see the end of this file). All prices in South African rand (ZAR), once-off unless stated.
 Last updated: 2026-11-01. Source page: https://digitalpantry.co.za/pricing
